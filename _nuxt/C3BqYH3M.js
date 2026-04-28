@@ -1,0 +1,1 @@
+import{o,m as s,s as n,V as f,U as p}from"./k2PysErJ.js";const u={__name:"ProseA",props:{href:{type:String,default:""},target:{type:String,default:void 0,required:!1}},setup(e){const t=e;return(r,_)=>{const a=p;return o(),s(a,{href:t.href,target:t.target},{default:n(()=>[f(r.$slots,"default")]),_:3},8,["href","target"])}}};export{u as default};

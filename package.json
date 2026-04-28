@@ -1,0 +1,28 @@
+{
+  "name": "carlos3",
+  "version": "1.0.0",
+  "description": "Local mirror and static snapshot for carlosprado.dev.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node local-mirror-server.js",
+    "check:visual": "node scripts/visual-check.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ardigital221-cloud/carlos3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ardigital221-cloud/carlos3/issues"
+  },
+  "homepage": "https://github.com/ardigital221-cloud/carlos3#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "http-proxy-middleware": "^3.0.5",
+    "pixelmatch": "^5.3.0",
+    "playwright": "^1.54.2",
+    "pngjs": "^7.0.0"
+  }
+}
