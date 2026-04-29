@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shared Element Transition - GSAP Flip</title>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: #efefef;
+      color: #111;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 32px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .item {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .item__image-wrap {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #ddd;
+    }
+
+    .project-page {
+      display: none;
+      min-height: 100vh;
+      background: #efefef;
+      padding-bottom: 40px;
+    }
+
+    .project-hero {
+      width: 100%;
+      height: 60vh;
+      min-height: 360px;
+      overflow: hidden;
+      border-radius: 0;
+      background: #ddd;
+    }
+
+    .img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-content {
+      opacity: 0;
+      transform: translateY(24px);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 32px 0;
+    }
+
+    .title {
+      font-size: clamp(30px, 5vw, 64px);
+      line-height: 1;
+      margin: 0 0 18px;
+    }
+
+    .back {
+      margin-top: 16px;
+      padding: 10px 14px;
+      border: 1px solid #111;
+      border-radius: 6px;
+      background: transparent;
+      color: #111;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main class="page" id="listPage">
+    <div class="gallery">
+      <div class="item" id="card-1">
+        <div class="item__image-wrap" data-flip-id="img-1">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop" alt="911" class="img" />
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="project-page" id="projectPage">
+    <div class="project-hero" data-flip-id="img-1"></div>
+    <div class="project-content">
+      <h1 class="title">The soul of the 911</h1>
+      <p>Shared Element Transition via GSAP Flip.</p>
+      <button class="back" id="backBtn" type="button">Back</button>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+  <script>
+    gsap.registerPlugin(Flip);
+
+    const cardWrap = document.querySelector('.item__image-wrap');
+    const image = cardWrap.querySelector('img');
+    const heroContainer = document.querySelector('.project-hero');
+    const projectPage = document.getElementById('projectPage');
+    const listPage = document.getElementById('listPage');
+    const projectContent = document.querySelector('.project-content');
+    const backBtn = document.getElementById('backBtn');
+
+    function animateToProject() {
+      const state = Flip.getState(image);
+
+      heroContainer.appendChild(image);
+      projectPage.style.display = 'block';
+      listPage.style.display = 'none';
+
+      Flip.from(state, {
+        duration: 0.8,
+        ease: 'expo.out',
+        absolute: true,
+        onComplete: () => {
+          gsap.to(projectContent, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' });
+        }
+      });
+    }
+
+    function animateBackToList() {
+      const state = Flip.getState(image);
+
+      cardWrap.appendChild(image);
+      listPage.style.display = 'block';
+      projectPage.style.display = 'block';
+
+      gsap.set(projectContent, { opacity: 0, y: 24 });
+
+      Flip.from(state, {
+        duration: 0.7,
+        ease: 'expo.out',
+        absolute: true,
+        onComplete: () => {
+          projectPage.style.display = 'none';
+        }
+      });
+    }
+
+    cardWrap.addEventListener('click', animateToProject);
+    backBtn.addEventListener('click', animateBackToList);
+  </script>
+</body>
+</html>

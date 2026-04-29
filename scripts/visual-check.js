@@ -18,7 +18,7 @@ async function shot(page, url, file, viewport) {
   });
 
   await page.setViewportSize(viewport);
-  await page.goto(url, { waitUntil: "networkidle" });
+  await page.goto(url, { waitUntil: "load" });
   await page.waitForTimeout(3000);
   await page.screenshot({ path: file, fullPage: false });
   return errors;
@@ -38,32 +38,44 @@ function compare(a, b, d) {
 
 async function run() {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
 
   const pairs = [
     {
       name: "home-desktop",
       remote: "https://carlosprado.dev/",
-      local: "http://localhost:4173/",
+      local: "http://localhost:4190/",
       viewport: { width: 1440, height: 900 },
     },
     {
       name: "about-mobile",
       remote: "https://carlosprado.dev/about",
-      local: "http://localhost:4173/about",
+      local: "http://localhost:4190/about",
       viewport: { width: 390, height: 844 },
     },
   ];
 
   const report = [];
   for (const p of pairs) {
+    const remoteContext = await browser.newContext({
+      viewport: p.viewport,
+      javaScriptEnabled: false,
+    });
+    const localContext = await browser.newContext({
+      viewport: p.viewport,
+      javaScriptEnabled: false,
+    });
+    const remotePage = await remoteContext.newPage();
+    const localPage = await localContext.newPage();
+
     const remoteFile = path.join(outDir, `remote-${p.name}.png`);
     const localFile = path.join(outDir, `local-${p.name}.png`);
     const diffFile = path.join(outDir, `diff-${p.name}.png`);
 
-    const remoteErrors = await shot(page, p.remote, remoteFile, p.viewport);
-    const localErrors = await shot(page, p.local, localFile, p.viewport);
+    const remoteErrors = await shot(remotePage, p.remote, remoteFile, p.viewport);
+    const localErrors = await shot(localPage, p.local, localFile, p.viewport);
     const cmp = compare(remoteFile, localFile, diffFile);
+    await remoteContext.close();
+    await localContext.close();
 
     report.push({
       name: p.name,
