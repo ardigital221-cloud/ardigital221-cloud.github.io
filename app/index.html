@@ -540,6 +540,103 @@
       cursor: wait;
     }
 
+    
+    /* ЖУРНАЛ ЯВОК IIKO */
+    .shift-roster-box {
+      background: #FFF;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+
+    .roster-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .roster-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .roster-badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #F1F5F9;
+      color: var(--text-muted);
+    }
+
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+
+    .roster-person-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 10px;
+      transition: all 0.2s;
+    }
+
+    .roster-person-card.fined {
+      background: #FEF2F2;
+      border-color: #FECACA;
+    }
+
+    .roster-person-card.fined-sous {
+      background: #FFFBEB;
+      border-color: #FDE68A;
+    }
+
+    .person-role {
+      color: var(--text-muted);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      font-weight: 700;
+    }
+
+    .person-name {
+      font-weight: 700;
+      color: #0F172A;
+      font-size: 11px;
+      margin: 1px 0;
+    }
+
+    .person-time {
+      color: var(--text-dim);
+      font-size: 9px;
+    }
+
+    .person-fine-tag {
+      margin-top: 3px;
+      font-weight: 700;
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+
+    .person-fine-tag.sous {
+      color: #D97706;
+    }
+
+    .person-fine-tag.shift {
+      color: var(--danger);
+    }
+
     /* ПУСТОЕ СОСТОЯНИЕ */
     .empty-placeholder {
       text-align: center;
@@ -1392,6 +1489,44 @@
               </div>
             </div>
 
+            
+            <!-- ЖУРНАЛ ЯВОК IIKO ЗА ДАТУ СМЕНЫ -->
+            <div class="shift-roster-box" id="shift-roster-box">
+              <div class="roster-head">
+                <div class="roster-title">
+                  <span>👥</span>
+                  <span>Журнал явок iiko • Смена за 01.09</span>
+                </div>
+                <span class="roster-badge" id="roster-store-tag">В-2 (4 на смене)</span>
+              </div>
+              <div class="roster-grid">
+                <div class="roster-person-card" id="card-roster-sous">
+                  <div class="person-role">Су-шеф кухни</div>
+                  <div class="person-name" id="roster-sous-name">Ахметов Б. К.</div>
+                  <div class="person-time">08:00 – 22:00 • Смена закрыта</div>
+                  <div class="person-fine-tag" id="tag-roster-sous">Штрафы до 1 000 ₸</div>
+                </div>
+                <div class="roster-person-card" id="card-roster-hot">
+                  <div class="person-role">Повар горячего цеха</div>
+                  <div class="person-name" id="roster-hot-name">Серикбаев А. М.</div>
+                  <div class="person-time">09:00 – 22:30 • Фритюр/мясо</div>
+                  <div class="person-fine-tag" id="tag-roster-hot">Штрафы > 1 000 ₸</div>
+                </div>
+                <div class="roster-person-card" id="card-roster-cold">
+                  <div class="person-role">Пиццмейкер / сыр</div>
+                  <div class="person-name" id="roster-cold-name">Нурланов Д. Т.</div>
+                  <div class="person-time">09:00 – 22:00 • Заготовки</div>
+                  <div class="person-fine-tag" id="tag-roster-cold">Норма (без штрафов)</div>
+                </div>
+                <div class="roster-person-card" id="card-roster-cashier">
+                  <div class="person-role">Старший кассир</div>
+                  <div class="person-name" id="roster-cashier-name">Ибраева А. С.</div>
+                  <div class="person-time">08:30 – 22:30 • Касса/сборка</div>
+                  <div class="person-fine-tag" id="tag-roster-cashier">Штучный товар</div>
+                </div>
+              </div>
+            </div>
+
             <button class="btn-reconcile-all" id="btn-reconcile-all" onclick="openBulkReconcileModal()">
               <span>⚡</span>
               <span id="btn-reconcile-label">Свести позиции с найденными излишками</span>
@@ -1675,12 +1810,14 @@
         remDiff: -0.445,
         remCost: -340,
         bookAfter: 8.245,
+        responsible: 'Су-шеф (Ахметов Б. К.)',
+        isUnder1000: true,
         movements: [
           { date: '01.09', type: 'Инвентаризация вечер', qty: '-3.290 кг', cls: 'minus' },
           { date: '02.09', type: 'Инвентаризация смены (Излишек)', qty: '+2.845 кг', cls: 'plus' },
           { date: '03-10.09', type: 'Расход на котлеты', qty: '-14.200 кг', cls: 'minus' }
         ],
-        explain: 'Недостача: 3.290 кг. Излишек 02.09: 2.845 кг. Зачёт: остаток 0.445 кг (340 ₸ < 1 000 ₸ ➔ ✓ Штраф с су-шефа снят).'
+        explain: 'Недостача: 3.290 кг. Излишек 02.09: 2.845 кг. Зачёт: остаток 0.445 кг (340 ₸ ≤ 1 000 ₸) ➔ Штраф ложится на сотрудника: СУ-ШЕФ (Ахметов Б. К.).'
       },
       {
         id: 'w2',
@@ -1697,12 +1834,14 @@
         remDiff: -5.500,
         remCost: -4950,
         bookAfter: 18.500,
+        responsible: 'Повар горячего цеха (Серикбаев А. М.)',
+        isUnder1000: false,
         movements: [
           { date: '01.09', type: 'Инвентаризация вечер', qty: '-5.500 кг', cls: 'minus' },
           { date: '02.09', type: 'Расход на заказы', qty: '-24.000 кг', cls: 'minus' },
           { date: '03-10.09', type: 'Проверено до 10.09', qty: 'Излишков НЕТ', cls: 'minus' }
         ],
-        explain: '⚠️ ВНИМАНИЕ: С 02.09 по 10.09 излишков нет! Позиция НЕ сводится. Сумма 4 950 ₸ (≥ 1 000 ₸) ➔ ШТРАФ ЛОЖИТСЯ НА СОТРУДНИКА «СУ-ШЕФ».'
+        explain: '⚠️ ВНИМАНИЕ: С 02.09 по 10.09 излишков нет! Позиция НЕ сводится. Сумма 4 950 ₸ (> 1 000 ₸) ➔ Штраф ложится на сотрудника на смене по Журналу явок: Повар горячего цеха (Серикбаев А. М.).'
       },
       {
         id: 'w3',
@@ -1719,12 +1858,14 @@
         remDiff: -0.200,
         remCost: -480,
         bookAfter: 12.300,
+        responsible: 'Су-шеф (Ахметов Б. К.)',
+        isUnder1000: true,
         movements: [
           { date: '01.09', type: 'Инвентаризация вечер', qty: '-1.700 кг', cls: 'minus' },
           { date: '02.09', type: 'Инвентаризация утро (Излишек)', qty: '+1.500 кг', cls: 'plus' },
           { date: '03-10.09', type: 'Расход на пиццы', qty: '-18.500 кг', cls: 'minus' }
         ],
-        explain: 'Недостача: 1.700 кг. Излишек 02.09: 1.500 кг. Зачёт: остаток 0.200 кг (480 ₸ < 1 000 ₸ ➔ ✓ Штраф с су-шефа снят).'
+        explain: 'Недостача: 1.700 кг. Излишек 02.09: 1.500 кг. Зачёт: остаток 0.200 кг (480 ₸ ≤ 1 000 ₸) ➔ Штраф ложится на сотрудника: СУ-ШЕФ (Ахметов Б. К.).'
       }
     ];
 
@@ -1813,7 +1954,7 @@
       } else {
         document.getElementById('btn-surplus-weight').classList.add('active');
         document.getElementById('btn-surplus-piece').classList.remove('active');
-        hint.innerHTML = '<strong>Правило штрафа для весового товара:</strong> Если сумма недостачи составляет от 1 000 ₸, штраф ложится на сотрудника <strong>Су-шеф</strong> 👨‍🍳 (если сумма менее 1 000 ₸ — штраф с су-шефа аннулируется).';
+        hint.innerHTML = '<strong>Регламент штрафов:</strong> До 1 000 ₸ штраф закрепляется за сотрудником <strong>Су-шеф</strong> 👨‍🍳. После 1 000 ₸ штраф ложится на <strong>сотрудника на смене</strong> (по Журналу явок iiko).';
         showToast('Счёт: Излишки — весовой товар');
       }
       resetResults();
@@ -1858,31 +1999,77 @@
       const subNote = document.getElementById('total-diff-sub');
       const recAllBtn = document.getElementById('btn-reconcile-all');
       const recLabel = document.getElementById('btn-reconcile-label');
+      document.getElementById('roster-store-tag').textContent = store + ' (4 на смене)';
+
+      const cardSous = document.getElementById('card-roster-sous');
+      const cardHot = document.getElementById('card-roster-hot');
+      const cardCashier = document.getElementById('card-roster-cashier');
+      const tagSous = document.getElementById('tag-roster-sous');
+      const tagHot = document.getElementById('tag-roster-hot');
+      const tagCashier = document.getElementById('tag-roster-cashier');
 
       if (!isReconciled) {
-        penaltyBadge.textContent = isPiece ? 'Не всё сойдётся' : 'Порог: 1 000 ₸ (Су-шеф)';
+        penaltyBadge.textContent = 'До 1000 ₸: Су-шеф | > 1000 ₸: Смена';
         penaltyBadge.className = 'penalty-pill';
         sumVal.textContent = isPiece ? '-3 990 ₸' : '-11 550 ₸';
         sumVal.className = 'inv-sum-val';
-        subNote.textContent = isPiece 
-          ? 'Позиции без последующих излишков останутся к удержанию со смены!'
-          : 'Если недостача составляет от 1 000 ₸, штраф ложится на сотрудника «Су-шеф»';
+        subNote.textContent = 'До 1 000 ₸ штраф закрепляется за Су-шефом, после 1 000 ₸ — за сотрудником смены';
         recAllBtn.classList.remove('done');
         recLabel.textContent = '⚡ Свести позиции с найденными излишками';
         document.getElementById('reconciled-bar').style.display = 'none';
         document.getElementById('btn-save-doc').disabled = true;
+
+        tagSous.textContent = 'Штрафы до 1 000 ₸';
+        tagSous.className = 'person-fine-tag';
+        tagHot.textContent = 'Штрафы > 1 000 ₸';
+        tagHot.className = 'person-fine-tag';
+        tagCashier.textContent = 'Штучные штрафы';
+        tagCashier.className = 'person-fine-tag';
+        cardSous.className = 'roster-person-card';
+        cardHot.className = 'roster-person-card';
+        cardCashier.className = 'roster-person-card';
       } else {
-        // РЕАЛЬНАЯ КАРТИНА: СУ-ШЕФ (ВЕСОВОЙ) ИЛИ СМЕНА (ШТУЧНЫЙ)
-        const remTotal = isPiece ? '-1 590 ₸' : '-4 950 ₸';
-        penaltyBadge.textContent = isPiece ? 'Смена: 1 590 ₸' : '👨‍🍳 Су-шеф: 4 950 ₸';
-        penaltyBadge.className = 'penalty-pill ' + (isPiece ? 'warning' : 'danger');
-        sumVal.textContent = remTotal;
-        sumVal.className = 'inv-sum-val partial';
-        subNote.textContent = isPiece 
-          ? '⚠️ Удержание со смены кассиров (соус без излишков + остаток булочек)'
-          : '👨‍🍳 Штраф ложится на сотрудника: Су-шеф (картофель ≥ 1 000 ₸; по фаршу и сыру снят)';
+        // РАСПРЕДЕЛЕНИЕ ШТРАФОВ ПО РЕГЛАМЕНТУ
+        if (!isPiece) {
+          // ВЕСОВОЙ: Су-шеф: 340 + 480 = 820 ₸ (до 1000 ₸); Повар горячего цеха: 4 950 ₸ (> 1000 ₸)
+          sumVal.textContent = '-5 770 ₸';
+          penaltyBadge.textContent = 'Су-шеф: 820 ₸ • Смена: 4 950 ₸';
+          penaltyBadge.className = 'penalty-pill danger';
+          subNote.textContent = '👨‍🍳 Су-шеф: 820 ₸ (до 1000 ₸) | 👤 Серикбаев А. (повар смены): 4 950 ₸ (> 1000 ₸)';
+
+          tagSous.textContent = '⚠️ Штраф: 820 ₸ (до 1 000 ₸)';
+          tagSous.className = 'person-fine-tag sous';
+          cardSous.className = 'roster-person-card fined-sous';
+
+          tagHot.textContent = '🚨 Штраф: 4 950 ₸ (> 1 000 ₸, картофель)';
+          tagHot.className = 'person-fine-tag shift';
+          cardHot.className = 'roster-person-card fined';
+
+          tagCashier.textContent = '✓ Без замечаний по кухне';
+          tagCashier.className = 'person-fine-tag';
+          cardCashier.className = 'roster-person-card';
+        } else {
+          // ШТУЧНЫЙ: Су-шеф: 270 ₸ (до 1000 ₸); Кассир: 1 320 ₸ (> 1000 ₸)
+          sumVal.textContent = '-1 590 ₸';
+          penaltyBadge.textContent = 'Су-шеф: 270 ₸ • Кассир: 1 320 ₸';
+          penaltyBadge.className = 'penalty-pill warning';
+          subNote.textContent = '👨‍🍳 Су-шеф: 270 ₸ (до 1000 ₸) | 👤 Ибраева А. (кассир): 1 320 ₸ (> 1000 ₸)';
+
+          tagSous.textContent = '⚠️ Штраф: 270 ₸ (булочки ≤ 1 000 ₸)';
+          tagSous.className = 'person-fine-tag sous';
+          cardSous.className = 'roster-person-card fined-sous';
+
+          tagCashier.textContent = '🚨 Штраф: 1 320 ₸ (соус сырный > 1 000 ₸)';
+          tagCashier.className = 'person-fine-tag shift';
+          cardCashier.className = 'roster-person-card fined';
+
+          tagHot.textContent = '✓ Без замечаний по залу';
+          tagHot.className = 'person-fine-tag';
+          cardHot.className = 'roster-person-card';
+        }
+
         recAllBtn.classList.add('done');
-        recLabel.textContent = '✓ Излишки зачтены (штраф зафиксирован)';
+        recLabel.textContent = '✓ Излишки зачтены (штрафы распределены)';
         document.getElementById('reconciled-bar').style.display = 'flex';
         document.getElementById('btn-save-doc').disabled = false;
       }
@@ -2008,16 +2195,19 @@
 
       document.getElementById('modal-formula-text').innerHTML = 
         isPiece 
-          ? 'Зачёт по позициям с найденными излишками:<br>' +
-            '• Булочки: 18 − 15 = <strong>3 шт остатка (270 ₸)</strong><br>' +
-            '• Стаканы: 35 − 35 = <strong>0 шт (полный зачёт)</strong><br>' +
-            '<span style="color: var(--danger);">• Соус сырный: излишков нет ➔ недостача 22 шт (1 320 ₸)</span><br><br>' +
-            '👥 <strong>Итог к удержанию со смены / кассира: 1 590 ₸</strong>'
-          : 'Зачёт по весовым позициям:<br>' +
-            '• Фарш: дельта 340 ₸ (< 1 000 ₸) ➔ <strong>✓ Штраф с су-шефа снят (0 ₸)</strong><br>' +
-            '• Сыр: дельта 480 ₸ (< 1 000 ₸) ➔ <strong>✓ Штраф с су-шефа снят (0 ₸)</strong><br>' +
-            '<span style="color: var(--danger);">• Картофель фри: излишков нет до 10.09, сумма 4 950 ₸ (≥ 1 000 ₸)</span><br><br>' +
-            '👨‍🍳 <strong>ШТРАФ ЛОЖИТСЯ НА СОТРУДНИКА: СУ-ШЕФ (-4 950 ₸)</strong>';
+          ? '<strong>Распределение штрафов по Журналу явок iiko:</strong><br>' +
+            '• Булочки: остаток 270 ₸ (≤ 1 000 ₸) ➔ 👨‍🍳 <strong>Су-шеф: 270 ₸</strong><br>' +
+            '• Соус сырный: 1 320 ₸ (> 1 000 ₸) ➔ 👤 <strong>Кассир (Ибраева А. С.): 1 320 ₸</strong><br>' +
+            '• Стаканы: 0 шт ➔ <strong>✓ 0 ₸ (полный зачёт)</strong><br><br>' +
+            '<strong>Всего к удержанию: 1 590 ₸</strong>'
+          : '<strong>Распределение штрафов по Журналу явок iiko:</strong><br>' +
+            '1️⃣ <strong>Недостачи до 1 000 ₸ (Су-шеф — Ахметов Б. К.):</strong><br>' +
+            '• Фарш говяжий: остаток 340 ₸ (≤ 1 000 ₸) ➔ <strong>340 ₸</strong><br>' +
+            '• Сыр Моцарелла: остаток 480 ₸ (≤ 1 000 ₸) ➔ <strong>480 ₸</strong><br>' +
+            '👉 <em>Итого на Су-шефа: 820 ₸</em><br><br>' +
+            '2️⃣ <strong>Недостачи после 1 000 ₸ (Сотрудник на смене):</strong><br>' +
+            '• Картофель фри: 4 950 ₸ (> 1 000 ₸, излишков нет) ➔ 🚨 <strong>Повар горячего цеха (Серикбаев А. М.): 4 950 ₸</strong><br><br>' +
+            '<strong>Общая сумма штрафов к удержанию: 5 770 ₸</strong>';
 
       document.getElementById('modal-warning').style.display = 'flex';
     }
@@ -2058,12 +2248,14 @@
       const exemptRow = document.getElementById('rep-exempt-row');
       if (isPiece) {
         if (exemptRow) exemptRow.style.display = 'none';
+        document.getElementById('rep-responsible-val').textContent = 'Су-шеф (270 ₸) + Кассир (1 320 ₸)';
         document.getElementById('rep-delta-val').textContent = '-1 590 ₸';
-        document.getElementById('rep-verdict-pill').innerHTML = '⚠️ К УДЕРЖАНИЮ СО СМЕНЫ: 1 590 ₸ (Соус: 1 320 ₸ + Булочки: 270 ₸)';
+        document.getElementById('rep-verdict-pill').innerHTML = '👨‍🍳 Су-шеф (до 1000 ₸): 270 ₸ | 👤 Кассир Ибраева А. (> 1000 ₸): 1 320 ₸';
       } else {
-        if (exemptRow) exemptRow.style.display = 'flex';
-        document.getElementById('rep-delta-val').textContent = '-4 950 ₸';
-        document.getElementById('rep-verdict-pill').innerHTML = '👨‍🍳 ШТРАФ ЛОЖИТСЯ НА СОТРУДНИКА «СУ-ШЕФ»: 4 950 ₸ (Картофель фри: излишков нет, сумма ≥ 1 000 ₸; по фаршу и сыру штрафы сняты)';
+        if (exemptRow) exemptRow.style.display = 'none';
+        document.getElementById('rep-responsible-val').textContent = 'Су-шеф (820 ₸) + Повар цеха (4 950 ₸)';
+        document.getElementById('rep-delta-val').textContent = '-5 770 ₸';
+        document.getElementById('rep-verdict-pill').innerHTML = '👨‍🍳 Су-шеф (до 1000 ₸): 820 ₸ | 👤 Серикбаев А. (> 1000 ₸): 4 950 ₸';
       }
 
       const tbody = document.getElementById('rep-table-body');
@@ -2072,16 +2264,12 @@
       items.forEach(function(item) {
         const tr = document.createElement('tr');
         let statusText = '';
-        if (isPiece) {
-          statusText = item.hasSurplus 
-            ? (item.remCost === 0 
-                ? '<span style="color: var(--iiko-green); font-weight: 700;">✓ Сведено (0 ₸)</span>' 
-                : '<span style="color: var(--warning); font-weight: 700;">Остаток: ' + item.remDiff + ' ' + item.unit + ' (' + item.remCost + ' ₸)</span>')
-            : '<span style="color: var(--danger); font-weight: 700;">НЕ СВЕДЕНО (' + item.costBefore + ' ₸)</span>';
+        if (item.remCost === 0) {
+          statusText = '<span style="color: var(--iiko-green); font-weight: 700;">✓ Сведено (0 ₸)</span>';
+        } else if (item.isUnder1000) {
+          statusText = '<span style="color: #D97706; font-weight: 700;">👨‍🍳 Су-шеф: ' + Math.abs(item.remCost) + ' ₸ (до 1000 ₸)</span>';
         } else {
-          statusText = item.hasSurplus 
-            ? '<span style="color: var(--iiko-green); font-weight: 700;">✓ Остаток ' + Math.abs(item.remCost) + ' ₸ < 1 000 ₸ (Штраф снят)</span>'
-            : '<span style="color: var(--danger); font-weight: 700;">ШТРАФ: СУ-ШЕФ (' + item.costBefore + ' ₸)</span>';
+          statusText = '<span style="color: var(--danger); font-weight: 700;">🚨 Смена: ' + Math.abs(item.remCost) + ' ₸ (> 1000 ₸)</span>';
         }
         
         tr.innerHTML = 
