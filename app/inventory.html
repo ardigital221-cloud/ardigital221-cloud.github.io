@@ -901,6 +901,29 @@
       gap: 6px;
     }
 
+    
+    .btn-revert-quick {
+      height: 42px;
+      padding: 0 12px;
+      background: #FFF1F2;
+      color: #E11D48;
+      border: 1px solid #FECDD3;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: background 0.15s;
+    }
+
+    .btn-revert-quick:active {
+      background: #FFE4E6;
+    }
+
     .btn-copy-quick {
       height: 42px;
       padding: 0 14px;
@@ -1280,6 +1303,10 @@
               <button type="button" class="btn-copy-quick" onclick="copyReportForWhatsApp()" title="Скопировать для WhatsApp">
                 <span>📲</span>
                 <span>В WhatsApp</span>
+              </button>
+              <button type="button" class="btn-revert-quick" onclick="revertReconciliation()" title="Откатить назад к исходным данным">
+                <span>↩️</span>
+                <span>Откатить</span>
               </button>
             </div>
 
@@ -1768,6 +1795,17 @@
 
     // Применение сведения (кнопка "Да")
     
+    
+    function revertReconciliation() {
+      isReconciled = false;
+      renderDiscrepancies();
+      document.getElementById('reconciled-bar').style.display = 'none';
+      const saveBtn = document.getElementById('btn-save-doc');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Сохранить сведение в iikoChain';
+      showToast('↩️ Сведение отменено. Данные возвращены назад');
+    }
+
     function openReportModal() {
       const store = document.getElementById('select-store').value;
       const isWeight = activeSurplus === 'weight';
