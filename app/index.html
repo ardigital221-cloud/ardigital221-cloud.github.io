@@ -1692,14 +1692,21 @@
           errBox.style.display = 'block';
           showToast('Недостаточно прав доступа');
         } else {
-          document.getElementById('view-auth').style.display = 'none';
+                    document.getElementById('view-auth').style.display = 'none';
           document.getElementById('view-main').style.display = 'flex';
-          showToast('Вход выполнен: В-2');
+          // Сохраняем сессию, чтобы при обновлении страницы вход НЕ сбрасывался
+          localStorage.setItem('burzhui_user_session', JSON.stringify({
+            loggedIn: true,
+            login: login,
+            timestamp: Date.now()
+          }));
+          showToast('Вход выполнен');
         }
       }, 400);
     }
 
     function handleLogout() {
+      localStorage.removeItem('burzhui_user_session');
       document.getElementById('input-login').value = '';
       document.getElementById('input-pin').value = '';
       resetResults();
