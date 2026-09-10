@@ -2,34 +2,30 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>BURЖУЙ — Мобильный оперхаб: Инвентаризация</title>
+  <title>iikoWeb — Инвентаризация BURЖУЙ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#090D14">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#FFFFFF">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090D14;
-      --card-bg: #121824;
-      --card-border: rgba(255, 255, 255, 0.08);
-      --card-border-active: rgba(255, 184, 0, 0.4);
-      --primary: #FFB800;
-      --primary-hover: #E5A600;
-      --primary-light: rgba(255, 184, 0, 0.12);
-      --danger: #FF453A;
-      --danger-bg: rgba(255, 69, 58, 0.12);
-      --danger-border: rgba(255, 69, 58, 0.35);
-      --success: #30D158;
-      --success-bg: rgba(48, 209, 88, 0.12);
-      --success-border: rgba(48, 209, 88, 0.35);
-      --text: #F2F5F8;
-      --text-muted: #8A96A6;
-      --text-dim: #5C6777;
-      --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --bg: #F4F6F9;
+      --white: #FFFFFF;
+      --border: #DCE2E6;
+      --border-light: #EDF1F4;
+      --text-main: #1C2530;
+      --text-secondary: #5A6A7E;
+      --text-muted: #8E9BAE;
+      --iiko-green: #2E7D32;
+      --iiko-green-light: #E8F5E9;
+      --iiko-blue: #1976D2;
+      --danger: #D32F2F;
+      --danger-light: #FFEBEE;
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+      --mono: 'Roboto Mono', monospace;
     }
 
     * {
@@ -41,8 +37,8 @@
 
     html, body {
       background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--font-main);
+      color: var(--text-main);
+      font-family: var(--font);
       touch-action: pan-x pan-y;
       user-select: none;
       -webkit-user-select: none;
@@ -52,1169 +48,1052 @@
       overflow-x: hidden;
     }
 
-    .app-shell {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      height: 100dvh;
+    .app-container {
       max-width: 480px;
       margin: 0 auto;
-      background: var(--bg);
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
       position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
     }
 
-    /* Status Bar / Top Navigation */
-    .app-header {
-      padding: 14px 16px 10px;
-      background: rgba(18, 24, 36, 0.95);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--card-border);
-      z-index: 50;
-      flex-shrink: 0;
-    }
-
-    .brand-row {
+    /* ---------------------------------------------------- */
+    /* ЭКРАН 1: АВТОРИЗАЦИЯ IIKOWEB                         */
+    /* ---------------------------------------------------- */
+    .auth-screen {
+      padding: 32px 24px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
+      flex-direction: column;
+      flex: 1;
+      justify-content: center;
+      background: var(--white);
     }
 
-    .logo-badge {
+    .iiko-logo-wrap {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      margin-bottom: 24px;
     }
 
-    .logo-badge .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 3px;
-      background: var(--primary);
-      box-shadow: 0 0 10px var(--primary);
-    }
-
-    .logo-text {
+    .iiko-badge {
+      background: #E53935;
+      color: #FFF;
       font-weight: 800;
-      font-size: 17px;
-      letter-spacing: 0.5px;
-      color: #FFF;
-    }
-
-    .hub-tag {
-      font-size: 10px;
-      background: var(--primary-light);
-      color: var(--primary);
-      padding: 2px 7px;
+      font-size: 16px;
+      padding: 4px 8px;
       border-radius: 4px;
-      font-weight: 700;
       letter-spacing: 0.5px;
     }
 
-    .user-pill {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      color: var(--text-muted);
-      cursor: pointer;
+    .iiko-logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
     }
 
-    .user-pill.active {
-      border-color: rgba(48, 209, 88, 0.4);
-      color: var(--success);
+    .auth-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-main);
     }
 
-    .user-pill span.role-icon {
+    .auth-subtitle {
       font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      line-height: 1.4;
     }
 
-    /* Point selector row */
-    .point-select-bar {
-      display: flex;
-      gap: 8px;
-      align-items: center;
+    .form-group {
+      margin-bottom: 16px;
     }
 
-    .select-wrap {
-      flex: 1;
-      position: relative;
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .select-wrap select {
+    .form-input {
       width: 100%;
-      background: #0D121B;
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 8px 12px;
-      color: #FFF;
-      font-size: 13px;
-      font-weight: 700;
-      font-family: var(--font-main);
-      appearance: none;
+      height: 44px;
+      padding: 0 14px;
+      font-size: 14px;
+      font-family: var(--font);
+      border: 1px solid var(--border);
+      border-radius: 6px;
       outline: none;
+      background: #FAFAFA;
+      color: var(--text-main);
+      transition: border-color 0.2s;
     }
 
-    .select-wrap::after {
-      content: '▾';
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      pointer-events: none;
-      font-size: 12px;
+    .form-input:focus {
+      border-color: var(--iiko-blue);
+      background: #FFF;
     }
 
-    .btn-refresh {
-      background: #0D121B;
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      color: var(--primary);
-      padding: 8px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    .btn-refresh.loading span.icon {
-      display: inline-block;
-      animation: spin 1s infinite linear;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* App Tab Navigation */
-    .tab-bar {
-      display: flex;
-      background: #0B1017;
-      border-bottom: 1px solid var(--card-border);
-      padding: 4px;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-
-    .tab-btn {
-      flex: 1;
-      padding: 10px;
-      text-align: center;
-      background: transparent;
+    .btn-login {
+      width: 100%;
+      height: 44px;
+      background: var(--iiko-blue);
+      color: #FFF;
       border: none;
-      border-radius: 8px;
-      color: var(--text-muted);
-      font-size: 12px;
-      font-weight: 700;
-      font-family: var(--font-main);
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--font);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      position: relative;
+      gap: 8px;
+      margin-top: 8px;
     }
 
-    .tab-btn.active {
-      background: var(--card-bg);
-      color: #FFF;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    }
-
-    .tab-btn.disabled {
-      opacity: 0.55;
+    .btn-login:disabled {
+      opacity: 0.6;
       cursor: not-allowed;
     }
 
-    .badge-dev {
-      font-size: 9px;
-      background: rgba(255, 255, 255, 0.1);
+    .auth-error {
+      background: var(--danger-light);
+      border: 1px solid rgba(211, 47, 47, 0.3);
+      color: var(--danger);
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      line-height: 1.4;
+      margin-top: 14px;
+      display: none;
+    }
+
+    .quick-logins {
+      margin-top: 28px;
+      border-top: 1px solid var(--border-light);
+      padding-top: 20px;
+    }
+
+    .quick-title {
+      font-size: 11px;
       color: var(--text-muted);
-      padding: 1px 5px;
-      border-radius: 4px;
       text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
     }
 
-    /* Scrollable Container */
-    .app-content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 14px 16px 90px;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* iiko Parameters Card */
-    .filter-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 12px;
+    .quick-btn {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: #FAFAFA;
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .quick-btn:hover {
+      background: #F0F4F8;
+    }
+
+    .qb-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .qb-role {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .qb-status {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .qb-status.ok {
+      background: var(--iiko-green-light);
+      color: var(--iiko-green);
+    }
+
+    .qb-status.no {
+      background: var(--danger-light);
+      color: var(--danger);
+    }
+
+    /* ---------------------------------------------------- */
+    /* ЭКРАН 2: РАБОЧИЙ ИНТЕРФЕЙС IIKOWEB                    */
+    /* ---------------------------------------------------- */
+    .main-screen {
+      display: none;
       flex-direction: column;
+      flex: 1;
+    }
+
+    /* Top Bar iikoWeb */
+    .top-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .store-badge {
+      display: flex;
+      align-items: center;
       gap: 8px;
     }
 
-    .filter-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
+    .store-icon {
+      font-size: 16px;
     }
 
-    .filter-label {
-      color: var(--text-muted);
-    }
-
-    .filter-val {
-      font-weight: 600;
-      color: #FFF;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .filter-val.badge {
-      background: rgba(255, 184, 0, 0.15);
-      color: var(--primary);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 11px;
-    }
-
-    /* Metrics Overview Banner */
-    .kpi-banner {
-      background: linear-gradient(135deg, rgba(255,69,58,0.12) 0%, rgba(18,24,36,0.95) 100%);
-      border: 1px solid var(--danger-border);
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 14px;
-      transition: all 0.3s;
-    }
-
-    .kpi-banner.resolved {
-      background: linear-gradient(135deg, rgba(48,209,88,0.12) 0%, rgba(18,24,36,0.95) 100%);
-      border-color: var(--success-border);
-    }
-
-    .kpi-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .kpi-title {
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--danger);
-    }
-
-    .kpi-banner.resolved .kpi-title {
-      color: var(--success);
-    }
-
-    .kpi-status-badge {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-weight: 700;
-      background: var(--danger-bg);
-      color: var(--danger);
-    }
-
-    .kpi-banner.resolved .kpi-status-badge {
-      background: var(--success-bg);
-      color: var(--success);
-    }
-
-    .kpi-nums {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-
-    .kpi-sum {
-      font-family: var(--font-mono);
-      font-size: 26px;
-      font-weight: 800;
-      color: #FFF;
-      line-height: 1;
-    }
-
-    .kpi-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* Auto-reconcile Big CTA */
-    .cta-btn {
-      width: 100%;
-      background: linear-gradient(180deg, #FFC72C 0%, #FFB800 100%);
-      border: none;
-      border-radius: 12px;
-      color: #000;
-      padding: 14px;
-      font-weight: 800;
+    .store-select {
       font-size: 14px;
-      letter-spacing: 0.3px;
+      font-weight: 700;
+      color: var(--text-main);
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: var(--font);
+      cursor: pointer;
+    }
+
+    .user-profile-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .user-name {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .btn-logout {
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      text-decoration: underline;
+    }
+
+    /* Sub Tabs iikoWeb */
+    .tabs-nav {
+      display: flex;
+      background: #F4F6F9;
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+    }
+
+    .t-nav-btn {
+      padding: 12px 14px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: var(--font);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .t-nav-btn.active {
+      color: var(--iiko-green);
+      border-bottom-color: var(--iiko-green);
+      background: var(--white);
+    }
+
+    .t-nav-btn.disabled {
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+
+    .tag-soon {
+      font-size: 9px;
+      background: #E0E0E0;
+      color: #616161;
+      padding: 1px 5px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* Content Area */
+    .content-area {
+      flex: 1;
+      padding: 14px 16px 80px;
+      overflow-y: auto;
+    }
+
+    /* Filter Strip */
+    .filter-bar {
+      background: #FAFAFA;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .f-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .f-label { color: var(--text-secondary); }
+    .f-val { font-weight: 600; color: var(--text-main); }
+
+    /* Summary Bar */
+    .summary-box {
+      background: #FFF;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+
+    .sum-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .sum-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    .sum-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .sum-badge.red {
+      background: var(--danger-light);
+      color: var(--danger);
+    }
+
+    .sum-badge.green {
+      background: var(--iiko-green-light);
+      color: var(--iiko-green);
+    }
+
+    .sum-nums {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .sum-amount {
+      font-family: var(--mono);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--danger);
+    }
+
+    .sum-amount.green {
+      color: var(--iiko-green);
+    }
+
+    .sum-desc {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    /* Main Action Button */
+    .btn-auto-rec {
+      width: 100%;
+      height: 42px;
+      background: var(--iiko-green);
+      color: #FFF;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font);
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      cursor: pointer;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 16px rgba(255, 184, 0, 0.3);
-      transition: all 0.2s;
+      margin-bottom: 14px;
+      transition: background 0.2s;
     }
 
-    .cta-btn:active {
-      transform: scale(0.98);
-      box-shadow: 0 2px 8px rgba(255, 184, 0, 0.2);
+    .btn-auto-rec:hover {
+      background: #256628;
     }
 
-    .cta-btn.done {
-      background: rgba(48, 209, 88, 0.2);
-      color: var(--success);
-      border: 1px solid var(--success-border);
-      box-shadow: none;
+    .btn-auto-rec.done {
+      background: #E8F5E9;
+      color: var(--iiko-green);
+      border: 1px solid rgba(46, 125, 50, 0.4);
+      cursor: default;
     }
 
-    /* Items Section */
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
+    /* Minimalist Items Table */
+    .table-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #FFF;
     }
 
-    .section-title {
-      font-size: 13px;
-      font-weight: 800;
+    .t-header {
+      background: #FAFAFA;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
     }
 
-    .rule-pill {
-      font-size: 11px;
-      color: var(--primary);
-      background: var(--primary-light);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-weight: 600;
+    .row-item {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-light);
     }
 
-    /* Inventory Items List */
-    .item-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 10px;
-      transition: all 0.3s ease;
+    .row-item:last-child {
+      border-bottom: none;
     }
 
-    .item-card.alert-item {
-      border-color: var(--danger-border);
+    .row-item.resolved {
+      background: #FAFCFA;
     }
 
-    .item-card.resolved-item {
-      border-color: var(--success-border);
-      background: linear-gradient(180deg, rgba(48,209,88,0.04) 0%, rgba(18,24,36,1) 100%);
-    }
-
-    .item-card.normal-item {
-      opacity: 0.85;
-    }
-
-    .item-top {
+    .r-title-line {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
-    .item-name {
+    .r-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .r-price {
+      font-size: 12px;
       font-weight: 700;
-      font-size: 14px;
-      color: #FFF;
-      line-height: 1.3;
-    }
-
-    .item-type {
-      font-size: 11px;
-      color: var(--text-dim);
-      margin-top: 2px;
-    }
-
-    .item-badge {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 4px;
-      white-space: nowrap;
-    }
-
-    .item-badge.red {
-      background: var(--danger-bg);
+      font-family: var(--mono);
       color: var(--danger);
     }
 
-    .item-badge.green {
-      background: var(--success-bg);
-      color: var(--success);
+    .r-price.green {
+      color: var(--iiko-green);
     }
 
-    .item-badge.gray {
-      background: rgba(255,255,255,0.08);
-      color: var(--text-muted);
-    }
-
-    /* Item Numbers Grid */
-    .item-grid {
+    .r-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      background: rgba(0, 0, 0, 0.25);
-      border-radius: 8px;
-      padding: 8px 10px;
-      margin-bottom: 10px;
-      gap: 6px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
     }
 
-    .grid-cell {
-      text-align: center;
+    .rg-val {
+      font-family: var(--mono);
+      font-weight: 600;
+      color: var(--text-main);
+      margin-top: 1px;
     }
 
-    .cell-lbl {
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-bottom: 2px;
-      text-transform: uppercase;
-    }
-
-    .cell-val {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 700;
-      color: #FFF;
-    }
-
-    .cell-val.danger { color: var(--danger); }
-    .cell-val.success { color: var(--success); }
-
-    /* Reconciliation Box */
-    .reconcile-box {
-      background: rgba(255, 184, 0, 0.06);
-      border: 1px dashed rgba(255, 184, 0, 0.35);
-      border-radius: 8px;
-      padding: 10px;
-      font-size: 12px;
-      margin-top: 8px;
+    .r-rec-block {
+      background: #F4F6F9;
+      border-left: 3px solid var(--iiko-green);
+      padding: 6px 10px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      border-radius: 0 4px 4px 0;
       display: none;
-      animation: fadeIn 0.25s ease-out;
     }
 
-    .item-card.resolved-item .reconcile-box {
+    .row-item.resolved .r-rec-block {
       display: block;
-      background: rgba(48, 209, 88, 0.06);
-      border: 1px dashed rgba(48, 209, 88, 0.35);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .rec-row {
+    .r-rec-line {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 4px;
-      color: var(--text-muted);
+      margin-bottom: 2px;
     }
 
-    .rec-row strong {
-      color: #FFF;
+    .r-rec-line strong {
+      color: var(--text-main);
     }
 
-    .rec-highlight {
-      font-weight: 700;
-      color: var(--success);
-      font-size: 12px;
-      margin-top: 6px;
-      padding-top: 6px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* Fixed Bottom Action Bar */
-    .bottom-bar {
-      position: absolute;
+    /* Fixed Bottom Save Button */
+    .save-bar {
+      position: fixed;
       bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 12px 16px;
-      background: rgba(18, 24, 36, 0.95);
-      backdrop-filter: blur(16px);
-      border-top: 1px solid var(--card-border);
-      display: flex;
-      gap: 10px;
-      z-index: 60;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      padding: 10px 16px;
+      background: #FFF;
+      border-top: 1px solid var(--border);
+      z-index: 100;
     }
 
-    .btn-save {
-      flex: 1;
-      background: var(--success);
+    .btn-save-iiko {
+      width: 100%;
+      height: 42px;
+      background: var(--iiko-blue);
+      color: #FFF;
       border: none;
-      border-radius: 10px;
-      color: #000;
+      border-radius: 6px;
       font-size: 14px;
-      font-weight: 800;
-      font-family: var(--font-main);
-      padding: 12px;
+      font-weight: 600;
+      font-family: var(--font);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.2s;
     }
 
-    .btn-save:disabled {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text-dim);
+    .btn-save-iiko:disabled {
+      background: #E0E4E8;
+      color: #9EABB8;
       cursor: not-allowed;
     }
 
-    /* Inactive Tab Placeholder */
-    .placeholder-view {
-      display: none;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .placeholder-icon {
-      font-size: 48px;
-      margin-bottom: 16px;
-      opacity: 0.8;
-    }
-
-    .placeholder-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: #FFF;
-      margin-bottom: 8px;
-    }
-
-    .placeholder-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    /* Modal Dialog (iiko warning mimic) */
-    .modal-backdrop {
+    /* Standard iiko Warning Modal */
+    .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.4);
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 20px;
       z-index: 1000;
-      animation: fadeIn 0.2s ease-out;
     }
 
-    .modal-box {
-      background: #151C28;
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 20px;
+    .modal-dialog {
+      background: #FFF;
+      border-radius: 6px;
       width: 100%;
       max-width: 360px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--border);
     }
 
-    .modal-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-      color: var(--primary);
-    }
-
-    .modal-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: #FFF;
-      margin-bottom: 8px;
-    }
-
-    .modal-text {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.4;
-      margin-bottom: 18px;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn-modal {
-      flex: 1;
-      padding: 10px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-modal.primary {
-      background: var(--primary);
-      color: #000;
-    }
-
-    .btn-modal.secondary {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text);
-    }
-
-    /* Toast Notification */
-    .toast {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%) translateY(-100px);
-      background: #1A2433;
-      border: 1px solid var(--success-border);
-      color: #FFF;
-      padding: 10px 18px;
-      border-radius: 24px;
-      font-size: 13px;
-      font-weight: 600;
+    .m-head {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-light);
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .m-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .m-body {
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--text-secondary);
+    }
+
+    .m-body strong {
+      color: var(--text-main);
+    }
+
+    .m-foot {
+      padding: 10px 16px;
+      background: #FAFAFA;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      border-radius: 0 0 6px 6px;
+    }
+
+    .m-btn {
+      padding: 8px 14px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font);
+      cursor: pointer;
+      border: 1px solid var(--border);
+    }
+
+    .m-btn.primary {
+      background: var(--iiko-blue);
+      color: #FFF;
+      border-color: var(--iiko-blue);
+    }
+
+    .m-btn.secondary {
+      background: #FFF;
+      color: var(--text-main);
+    }
+
+    /* Toast */
+    .toast-msg {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-80px);
+      background: #263238;
+      color: #FFF;
+      padding: 9px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.25s ease;
       z-index: 2000;
     }
 
-    .toast.show {
+    .toast-msg.visible {
       transform: translateX(-50%) translateY(0);
     }
   </style>
 </head>
 <body>
 
-  <div class="app-shell">
+  <div class="app-container">
     
-    <!-- HEADER -->
-    <header class="app-header">
-      <div class="brand-row">
-        <div class="logo-badge">
-          <div class="dot"></div>
-          <span class="logo-text">BURЖУЙ</span>
-          <span class="hub-tag">ОПЕРХАБ</span>
-        </div>
-        
-        <div class="user-pill active" id="user-role-toggle" onclick="toggleRole()" title="Нажмите для переключения роли">
-          <span class="role-icon">👤</span>
-          <span id="role-label">Управляющий (Редактор)</span>
-        </div>
+    <!-- ---------------------------------------------------- -->
+    <!-- ЭКРАН 1: АВТОРИЗАЦИЯ СОТРУДНИКА В IIKOWEB           -->
+    <!-- ---------------------------------------------------- -->
+    <div class="auth-screen" id="screen-auth">
+      <div class="iiko-logo-wrap">
+        <span class="iiko-badge">iiko</span>
+        <span class="iiko-logo-text">iikoWeb</span>
       </div>
 
-      <!-- Point Selector & Refresh -->
-      <div class="point-select-bar">
-        <div class="select-wrap">
-          <select id="point-select" onchange="changePoint()">
-            <option value="P2" selected>Точка продаж: P2 (ул. Катаева)</option>
-            <option value="B5">Б5: ул. Толстого, 90А (ТОП-1)</option>
-            <option value="B1">Б1: ул. Лермонтова, 100 (ТОП-3)</option>
-            <option value="B12">Б12: пр. Назарбаева, 283 (ТОП-2)</option>
-            <option value="B19">Б19: ТРЦ Батыр Молл, Камзина 67/1</option>
-            <option value="B16">В-16: г. Экибастуз, ул. Ауэзова</option>
-          </select>
+      <h1 class="auth-title">Вход в систему</h1>
+      <p class="auth-subtitle">Для работы с инвентаризацией войдите под учетной записью сотрудника сети BURЖУЙ.</p>
+
+      <form id="auth-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Логин / Email сотрудника</label>
+          <input type="text" id="login-input" class="form-input" placeholder="например, manager_p2@burzhui.kz" value="asylbek.manager@burzhui.kz" required>
         </div>
-        <button class="btn-refresh" id="btn-refresh" onclick="refreshData()">
-          <span class="icon">🔄</span> iiko
+
+        <div class="form-group">
+          <label class="form-label">Пароль или PIN-код</label>
+          <input type="password" id="pass-input" class="form-input" placeholder="••••••••" value="7788" required>
+        </div>
+
+        <button type="submit" class="btn-login" id="btn-login-submit">
+          Войти в iiko
+        </button>
+      </form>
+
+      <!-- Блок ошибки доступа -->
+      <div class="auth-error" id="auth-error-box">
+        <strong>Ошибка доступа:</strong> У данной учетной записи нет права <code>EDIT_INVENTORY</code> (Редактирование инвентаризаций) в iikoChain.
+      </div>
+
+      <!-- Быстрый выбор для демонстрации проверки прав -->
+      <div class="quick-logins">
+        <div class="quick-title">Быстрый выбор сотрудника для проверки:</div>
+        
+        <button type="button" class="quick-btn" onclick="setPreset('asylbek.manager@burzhui.kz', '7788', 'Управляющий', true)">
+          <div>
+            <div class="qb-name">Асылбек Т. (Управляющий P2)</div>
+            <div class="qb-role">Права iiko: Редактирование инвентов</div>
+          </div>
+          <span class="qb-status ok">Есть право ✅</span>
+        </button>
+
+        <button type="button" class="quick-btn" onclick="setPreset('erbol.cook@burzhui.kz', '1122', 'Повар-бригадир', false)">
+          <div>
+            <div class="qb-name">Ербол К. (Повар смены)</div>
+            <div class="qb-role">Права iiko: Только ввод факта веса</div>
+          </div>
+          <span class="qb-status no">Нет права 🚫</span>
         </button>
       </div>
-    </header>
+    </div>
 
-    <!-- TAB NAVIGATION -->
-    <nav class="tab-bar">
-      <button class="tab-btn active" id="tab-inv" onclick="switchTab('inv')">
-        <span>📊 Сведение инвентов</span>
-      </button>
-      <button class="tab-btn disabled" id="tab-ord" onclick="switchTab('ord')">
-        <span>📦 Вечерняя заявка</span>
-        <span class="badge-dev">Скоро</span>
-      </button>
-    </nav>
 
-    <!-- CONTENT 1: ИНВЕНТАРИЗАЦИЯ -->
-    <main class="app-content" id="view-inventory">
+    <!-- ---------------------------------------------------- -->
+    <!-- ЭКРАН 2: ЧИСТЫЙ РАБОЧИЙ ИНТЕРФЕЙС IIKOWEB            -->
+    <!-- ---------------------------------------------------- -->
+    <div class="main-screen" id="screen-main">
       
-      <!-- iiko Config Card -->
-      <div class="filter-card">
-        <div class="filter-row">
-          <span class="filter-label">Период анализа:</span>
-          <span class="filter-val" id="filter-period">01.09.2026 — 10.09.2026</span>
+      <!-- Top Bar -->
+      <header class="top-header">
+        <div class="store-badge">
+          <span class="store-icon">🏪</span>
+          <select class="store-select" id="store-select">
+            <option value="P2">BURЖУЙ — Точка P2 (ул. Катаева)</option>
+            <option value="B5">BURЖУЙ — Б5 (ул. Толстого, 90А)</option>
+            <option value="B1">BURЖУЙ — Б1 (ул. Лермонтова, 100)</option>
+            <option value="B12">BURЖУЙ — Б12 (пр. Назарбаева, 283)</option>
+            <option value="B19">BURЖУЙ — Б19 (Батыр Молл, Камзина)</option>
+            <option value="B16">BURЖУЙ — В-16 (г. Экибастуз)</option>
+          </select>
         </div>
-        <div class="filter-row">
-          <span class="filter-label">Счёт излишков:</span>
-          <span class="filter-val badge">Излишки — весовой товар</span>
+
+        <div class="user-profile-badge">
+          <span class="user-name" id="user-display-name">Асылбек Т.</span>
+          <button class="btn-logout" onclick="logout()">Выйти</button>
         </div>
-        <div class="filter-row">
-          <span class="filter-label">Инвентаризация:</span>
-          <span class="filter-val">01 сентября (смена закрыта)</span>
+      </header>
+
+      <!-- Tabs Navigation -->
+      <nav class="tabs-nav">
+        <button class="t-nav-btn active" id="tab-btn-inv" onclick="switchView('inv')">
+          Инвентаризация
+        </button>
+        <button class="t-nav-btn disabled" id="tab-btn-ord" onclick="switchView('ord')">
+          Вечерняя заявка
+          <span class="tag-soon">В разработке</span>
+        </button>
+      </nav>
+
+      <!-- Main Content Area: Инвентаризация -->
+      <div class="content-area" id="view-inv-content">
+        
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <div class="f-row">
+            <span class="f-label">Склад / Счет:</span>
+            <span class="f-val">Излишки — весовой товар</span>
+          </div>
+          <div class="f-row">
+            <span class="f-label">Период движения:</span>
+            <span class="f-val">01.09.2026 — 10.09.2026</span>
+          </div>
+          <div class="f-row">
+            <span class="f-label">Документ:</span>
+            <span class="f-val">Инвентаризация от 01.09</span>
+          </div>
         </div>
+
+        <!-- Summary KPI -->
+        <div class="summary-box" id="sum-box">
+          <div class="sum-top">
+            <span class="sum-title">Недостачи весового товара (> 1 000 ₸)</span>
+            <span class="sum-badge red" id="sum-badge">Требует сопоставления</span>
+          </div>
+          <div class="sum-nums">
+            <div class="sum-amount" id="sum-amount">8 450 ₸</div>
+            <div class="sum-desc" id="sum-desc">3 критические позиции с риском штрафа</div>
+          </div>
+        </div>
+
+        <!-- Main Auto-reconcile Button -->
+        <button class="btn-auto-rec" id="btn-reconcile" onclick="triggerReconciliationModal()">
+          Свести инвентаризацию (Найти встречные излишки)
+        </button>
+
+        <!-- Minimalist Table of Items -->
+        <div class="table-card">
+          <div class="t-header">Весовые позиции с расхождениями</div>
+
+          <!-- Row 1: Фарш -->
+          <div class="row-item" id="row-1">
+            <div class="r-title-line">
+              <span class="r-name">Фарш говяжий фирменный</span>
+              <span class="r-price" id="price-1">-2 500 ₸</span>
+            </div>
+            <div class="r-grid">
+              <div>Книга: <span class="rg-val" id="book-1">8.690 кг</span></div>
+              <div>Факт 01.09: <span class="rg-val">5.400 кг</span></div>
+              <div>Разница: <span class="rg-val" style="color: var(--danger);" id="diff-1">-3.290 кг</span></div>
+            </div>
+            <div class="r-rec-block" id="rec-1">
+              <div class="r-rec-line">Найдено в движении: <strong>02.09 излишек +2.845 кг</strong></div>
+              <div class="r-rec-line">Реальная дельта: <strong>0.445 кг (340 ₸)</strong></div>
+              <div class="r-rec-line">Скорректированная книга: <strong>8.245 кг</strong></div>
+              <div style="color: var(--iiko-green); font-weight: 600; margin-top: 2px;">✓ Излишек закрыт, штраф снят (< 1 000 ₸)</div>
+            </div>
+          </div>
+
+          <!-- Row 2: Капуста пекинская -->
+          <div class="row-item" id="row-2">
+            <div class="r-title-line">
+              <span class="r-name">Капуста пекинская зачищенная</span>
+              <span class="r-price" id="price-2">-1 850 ₸</span>
+            </div>
+            <div class="r-grid">
+              <div>Книга: <span class="rg-val" id="book-2">7.480 кг</span></div>
+              <div>Факт 01.09: <span class="rg-val">5.300 кг</span></div>
+              <div>Разница: <span class="rg-val" style="color: var(--danger);" id="diff-2">-2.180 кг</span></div>
+            </div>
+            <div class="r-rec-block" id="rec-2">
+              <div class="r-rec-line">Найдено в движении: <strong>03.09 излишек +1.880 кг</strong></div>
+              <div class="r-rec-line">Реальная дельта: <strong>0.300 кг (255 ₸)</strong></div>
+              <div class="r-rec-line">Скорректированная книга: <strong>7.180 кг</strong></div>
+              <div style="color: var(--iiko-green); font-weight: 600; margin-top: 2px;">✓ Излишек закрыт, штраф снят (< 1 000 ₸)</div>
+            </div>
+          </div>
+
+          <!-- Row 3: Сыр Моцарелла -->
+          <div class="row-item" id="row-3">
+            <div class="r-title-line">
+              <span class="r-name">Сыр Моцарелла тертый</span>
+              <span class="r-price" id="price-3">-4 100 ₸</span>
+            </div>
+            <div class="r-grid">
+              <div>Книга: <span class="rg-val" id="book-3">12.500 кг</span></div>
+              <div>Факт 01.09: <span class="rg-val">10.800 кг</span></div>
+              <div>Разница: <span class="rg-val" style="color: var(--danger);" id="diff-3">-1.700 кг</span></div>
+            </div>
+            <div class="r-rec-block" id="rec-3">
+              <div class="r-rec-line">Найдено в движении: <strong>02.09 излишек +1.500 кг</strong></div>
+              <div class="r-rec-line">Реальная дельта: <strong>0.200 кг (480 ₸)</strong></div>
+              <div class="r-rec-line">Скорректированная книга: <strong>12.300 кг</strong></div>
+              <div style="color: var(--iiko-green); font-weight: 600; margin-top: 2px;">✓ Излишек закрыт, штраф снят (< 1 000 ₸)</div>
+            </div>
+          </div>
+
+          <!-- Row 4: Картофель фри (Излишков нет) -->
+          <div class="row-item" id="row-4">
+            <div class="r-title-line">
+              <span class="r-name">Картофель фри 9мм</span>
+              <span class="r-price" style="color: var(--text-secondary);">-720 ₸</span>
+            </div>
+            <div class="r-grid">
+              <div>Книга: <span class="rg-val">15.000 кг</span></div>
+              <div>Факт 01.09: <span class="rg-val">14.200 кг</span></div>
+              <div>Разница: <span class="rg-val" style="color: var(--text-secondary);">-0.800 кг</span></div>
+            </div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
+              Порог 1 000 ₸ не превышен. Последующих излишков нет.
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
-      <!-- KPI Banner -->
-      <div class="kpi-banner" id="kpi-banner">
-        <div class="kpi-head">
-          <span class="kpi-title" id="kpi-status-title">⚠️ Внимание: Есть недостачи свыше 1 000 ₸</span>
-          <span class="kpi-status-badge" id="kpi-status-badge">Риск штрафа</span>
-        </div>
-        <div class="kpi-nums">
-          <div>
-            <div class="kpi-sum" id="kpi-penalty-sum">8 450 ₸</div>
-            <div class="kpi-sub" id="kpi-sub-text">Общая сумма штрафов на смену</div>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-size: 14px; font-weight: 700; color: #FFF;" id="kpi-crit-count">3 позиции</div>
-            <div style="font-size: 11px; color: var(--text-muted);">влияют на штраф</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Big CTA Auto-reconcile Button -->
-      <button class="cta-btn" id="cta-reconcile" onclick="performAutoReconciliation()">
-        <span>⚡</span> ВЫПОЛНИТЬ АВТО-СВЕДЕНИЕ В 1 КЛИК
-      </button>
-
-      <!-- Section Header -->
-      <div class="section-head">
-        <span class="section-title">Позиции к сопоставлению</span>
-        <span class="rule-pill">Порог штрафа: >1 000 ₸</span>
-      </div>
-
-      <!-- Items List -->
-      <div id="items-list">
-        <!-- Item 1: Фарш говяжий -->
-        <div class="item-card alert-item" id="card-item-1">
-          <div class="item-top">
-            <div>
-              <div class="item-name">Фарш говяжий фирменный</div>
-              <div class="item-type">Весовой товар | Фабрика-кухня</div>
-            </div>
-            <span class="item-badge red" id="badge-1">Штраф: 2 500 ₸</span>
-          </div>
-
-          <div class="item-grid">
-            <div class="grid-cell">
-              <div class="cell-lbl">Книга 01.09</div>
-              <div class="cell-val" id="book-1">8.690 кг</div>
-            </div>
-            <div class="grid-cell">
-              <div class="cell-lbl">Факт 01.09</div>
-              <div class="cell-val">5.400 кг</div>
-            </div>
-            <div class="grid-cell">
-              <div class="cell-lbl">Недостача</div>
-              <div class="cell-val danger" id="diff-1">-3.290 кг</div>
-            </div>
-          </div>
-
-          <div class="reconcile-box" id="rec-box-1">
-            <div class="rec-row">
-              <span>Движение товара:</span>
-              <strong>02.09 обнаружен излишек +2.845 кг</strong>
-            </div>
-            <div class="rec-row">
-              <span>Расчет остатка (3.290 - 2.845):</span>
-              <strong>Реальная дельта: 0.445 кг</strong>
-            </div>
-            <div class="rec-row">
-              <span>Новый книжный остаток:</span>
-              <strong style="color: var(--primary);">8.245 кг</strong>
-            </div>
-            <div class="rec-highlight">
-              <span>✅</span> Излишек 02.09 закрыт. Недостача снижена до 340 ₸. Штраф отменен!
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 2: Пекинская капуста -->
-        <div class="item-card alert-item" id="card-item-2">
-          <div class="item-top">
-            <div>
-              <div class="item-name">Капуста пекинская зачищенная</div>
-              <div class="item-type">Весовой товар | Овощной цех</div>
-            </div>
-            <span class="item-badge red" id="badge-2">Штраф: 1 850 ₸</span>
-          </div>
-
-          <div class="item-grid">
-            <div class="grid-cell">
-              <div class="cell-lbl">Книга 01.09</div>
-              <div class="cell-val" id="book-2">7.480 кг</div>
-            </div>
-            <div class="grid-cell">
-              <div class="cell-lbl">Факт 01.09</div>
-              <div class="cell-val">5.300 кг</div>
-            </div>
-            <div class="grid-cell">
-              <div class="cell-lbl">Недостача</div>
-              <div class="cell-val danger" id="diff-2">-2.180 кг</div>
-            </div>
-          </div>
-
-          <div class="reconcile-box" id="rec-box-2">
-            <div class="rec-row">
-              <span>Движение товара:</span>
-              <strong>03.09 обнаружен излишек +1.880 кг</strong>
-            </div>
-            <div class="rec-row">
-              <span>Расчет остатка (2.180 - 1.880):</span>
-              <strong>Реальная дельта: 0.300 кг</strong>
-            </div>
-            <div class="rec-row">
-              <span>Новый книжный остаток:</span>
-              <strong style="color: var(--primary);">7.180 кг</strong>
-            </div>
-            <div class="rec-highlight">
-              <span>✅</span> Излишек 03.09 закрыт. Недостача снижена до 255 ₸. Штраф отменен!
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 3: Сыр Моцарелла -->
-        <div class="item-card alert-item" id="card-item-3">
-          <div class="item-top">
-            <div>
-              <div class="item-name">Сыр Моцарелла тертый (Буржуй)</div>
-              <div class="item-type">Весовой товар | Молочный склад</div>
-            </div>
-            <span class="item-badge red" id="badge-3">Штраф: 4 100 ₸</span>
-          </div>
-
-          <div class="item-grid">
-            <div class="grid-cell">
-              <div class="cell-lbl">Книга 01.09</div>
-              <div class="cell-val" id="book-3">12.500 кг</div>
-            </div>
-            <div class="grid-cell">
-              <div class="cell-lbl">Факт 01.09</div>
-              <div class="cell-val">10.800 кг</div>
-            </div>
-            <div class="grid-cell">
-              <div class="cell-lbl">Недостача</div>
-              <div class="cell-val danger" id="diff-3">-1.700 кг</div>
-            </div>
-          </div>
-
-          <div class="reconcile-box" id="rec-box-3">
-            <div class="rec-row">
-              <span>Движение товара:</span>
-              <strong>02.09 обнаружен излишек +1.500 кг</strong>
-            </div>
-            <div class="rec-row">
-              <span>Расчет остатка (1.700 - 1.500):</span>
-              <strong>Реальная дельта: 0.200 кг</strong>
-            </div>
-            <div class="rec-row">
-              <span>Новый книжный остаток:</span>
-              <strong style="color: var(--primary);">12.300 кг</strong>
-            </div>
-            <div class="rec-highlight">
-              <span>✅</span> Излишек 02.09 закрыт. Недостача снижена до 480 ₸. Штраф отменен!
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 4: Картофель фри (Излишков нет) -->
-        <div class="item-card normal-item" id="card-item-4">
-          <div class="item-top">
-            <div>
-              <div class="item-name">Картофель фри заморозка</div>
-              <div class="item-type">Весовой товар | Заморозка</div>
-            </div>
-            <span class="item-badge gray">Норма (<1 000 ₸)</span>
-          </div>
-
-          <div class="item-grid">
-            <div class="grid-cell">
-              <div class="cell-lbl">Книга 01.09</div>
-              <div class="cell-val">15.000 кг</div>
-            </div>
-            <div class="grid-cell">
-              <div class="cell-lbl">Факт 01.09</div>
-              <div class="cell-val">14.200 кг</div>
-            </div>
-            <div class="grid-cell">
-              <div class="cell-lbl">Недостача</div>
-              <div class="cell-val danger">-0.800 кг</div>
-            </div>
-          </div>
-          <div style="font-size: 11px; color: var(--text-dim); text-align: center;">
-            Сумма 720 ₸ (ниже порога 1 000 ₸, штраф не начисляется)
-          </div>
-        </div>
-      </div>
-
-    </main>
-
-    <!-- CONTENT 2: ВЕЧЕРНЯЯ ЗАЯВКА (НЕАКТИВНО / В РАЗРАБОТКЕ) -->
-    <div class="app-content placeholder-view" id="view-orders">
-      <div class="placeholder-icon">📦</div>
-      <h2 class="placeholder-title">Вечерняя заявка на цех</h2>
-      <p class="placeholder-desc">
-        Модуль автоматического расчета сырья на заготовочный цех находится в разработке.<br><br>
-        После запуска управляющий сможет в 1 клик подтверждать автозаявку на основе текущих остатков и темпа вечерних продаж.
-      </p>
-      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 16px; text-align: left;">
-        <div style="font-size: 11px; color: var(--primary); font-weight: 700; margin-bottom: 6px; text-transform: uppercase;">План запуска функционала:</div>
-        <div style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
-          • Синхронизация с нормативами iiko в 21:00<br>
-          • Авторасчет минимальных и максимальных запасов<br>
-          • Подтверждение в 1 клик со смартфона
-        </div>
-      </div>
-    </div>
-
-    <!-- BOTTOM ACTION BAR -->
-    <footer class="bottom-bar">
-      <button class="btn-save" id="btn-save-iiko" disabled onclick="saveToIiko()">
-        <span>💾</span> Сохранить и передать в iiko
-      </button>
-    </footer>
-
-    <!-- IIKO WARNING MODAL -->
-    <div class="modal-backdrop" id="modal-warning">
-      <div class="modal-box">
-        <div class="modal-icon">⚠️</div>
-        <h3 class="modal-title">Предупреждение iikoChain</h3>
-        <p class="modal-text">
-          Операция создаёт расход с образованием отрицательных остатков задним числом для закрытия встречных излишков.<br><br>
-          <strong>Применить автоматическую корректировку книги?</strong>
+      <!-- Inactive Orders Tab -->
+      <div class="content-area" id="view-ord-content" style="display: none; text-align: center; padding-top: 40px;">
+        <div style="font-size: 36px; margin-bottom: 12px; color: var(--text-secondary);">📦</div>
+        <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">Вечерняя заявка на цех</h3>
+        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; max-width: 320px; margin: 0 auto 20px;">
+          Модуль находится в разработке.<br>
+          Автоматический расчет потребности сырья на заготовочный цех в 1 клик будет доступен в следующем обновлении.
         </p>
-        <div class="modal-actions">
-          <button class="btn-modal secondary" onclick="closeModal()">Отмена</button>
-          <button class="btn-modal primary" onclick="confirmRecalculation()">Да, применить</button>
+      </div>
+
+      <!-- Bottom Action Bar -->
+      <div class="save-bar">
+        <button class="btn-save-iiko" id="btn-save-iiko" disabled onclick="saveToIiko()">
+          Сохранить документ в iikoChain
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- IIKO SYSTEM MODAL WARNING                            -->
+    <!-- ---------------------------------------------------- -->
+    <div class="modal-overlay" id="iiko-modal">
+      <div class="modal-dialog">
+        <div class="m-head">
+          <span style="color: #F57C00; font-size: 18px;">⚠️</span>
+          <span class="m-title">Предупреждение iikoChain</span>
+        </div>
+        <div class="m-body">
+          Операция создаёт расход с образованием отрицательных остатков задним числом для закрытия встречных излишков.<br><br>
+          <strong>Применить корректировку книжного количества?</strong>
+        </div>
+        <div class="m-foot">
+          <button class="m-btn secondary" onclick="closeModal()">Отмена</button>
+          <button class="m-btn primary" onclick="confirmReconciliation()">Да</button>
         </div>
       </div>
     </div>
 
-    <!-- TOAST NOTIFICATION -->
-    <div class="toast" id="toast">
-      <span id="toast-icon">✅</span>
-      <span id="toast-text">Данные успешно сохранены в iiko!</span>
-    </div>
+    <!-- Toast -->
+    <div class="toast-msg" id="toast-msg"></div>
 
   </div>
 
   <script>
+    let currentUser = null;
     let isReconciled = false;
-    let currentRole = 'manager'; // 'manager' | 'staff'
 
-    // Prevent accidental zoom on mobile
+    // Static mobile viewport (no double tap zoom)
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('dblclick', (e) => e.preventDefault());
 
-    function toggleRole() {
-      const label = document.getElementById('role-label');
-      const toggle = document.getElementById('user-role-toggle');
-      const cta = document.getElementById('cta-reconcile');
-      const saveBtn = document.getElementById('btn-save-iiko');
-
-      if (currentRole === 'manager') {
-        currentRole = 'staff';
-        label.textContent = 'Повар (Только просмотр)';
-        toggle.classList.remove('active');
-        cta.disabled = true;
-        cta.style.opacity = '0.4';
-        cta.style.cursor = 'not-allowed';
-        saveBtn.disabled = true;
-        showToast('🔒 Режим сотрудника: права редактирования отключены', 'ℹ️');
-      } else {
-        currentRole = 'manager';
-        label.textContent = 'Управляющий (Редактор)';
-        toggle.classList.add('active');
-        cta.disabled = false;
-        cta.style.opacity = '1';
-        cta.style.cursor = 'pointer';
-        if (isReconciled) saveBtn.disabled = false;
-        showToast('🔓 Режим управляющего: полный доступ к пересчету', '✅');
-      }
+    function setPreset(login, pass, role, hasPermission) {
+      document.getElementById('login-input').value = login;
+      document.getElementById('pass-input').value = pass;
+      document.getElementById('auth-error-box').style.display = 'none';
     }
 
-    function switchTab(tab) {
-      if (tab === 'ord') {
-        document.getElementById('tab-inv').classList.remove('active');
-        document.getElementById('tab-ord').classList.add('active');
-        document.getElementById('view-inventory').style.display = 'none';
-        document.getElementById('view-orders').style.display = 'block';
+    function handleLogin(e) {
+      e.preventDefault();
+      const login = document.getElementById('login-input').value.trim();
+      const btn = document.getElementById('btn-login-submit');
+      const errBox = document.getElementById('auth-error-box');
+
+      btn.disabled = true;
+      btn.textContent = 'Проверка прав в iiko API...';
+      errBox.style.display = 'none';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = 'Войти в iiko';
+
+        // Check permissions in iiko: Only manager has EDIT_INVENTORY
+        if (login.includes('cook') || login.includes('erbol')) {
+          errBox.innerHTML = '<strong>Доступ ограничен:</strong> У сотрудника <b>Ербол К.</b> нет права <code>EDIT_INVENTORY</code> (Редактирование инвентаризаций) в iikoChain. Обратитесь к управляющему.';
+          errBox.style.display = 'block';
+          showToast('Ошибка прав доступа в iiko');
+        } else {
+          // Success login
+          currentUser = {
+            name: 'Асылбек Т. (Управляющий)',
+            role: 'manager',
+            hasEditPermission: true
+          };
+          document.getElementById('user-display-name').textContent = currentUser.name;
+          document.getElementById('screen-auth').style.display = 'none';
+          document.getElementById('screen-main').style.display = 'flex';
+          showToast('Успешная авторизация в iikoWeb');
+        }
+      }, 600);
+    }
+
+    function logout() {
+      currentUser = null;
+      document.getElementById('screen-main').style.display = 'none';
+      document.getElementById('screen-auth').style.display = 'flex';
+      showToast('Вы вышли из системы');
+    }
+
+    function switchView(view) {
+      if (view === 'ord') {
+        document.getElementById('tab-btn-inv').classList.remove('active');
+        document.getElementById('tab-btn-ord').classList.add('active');
+        document.getElementById('view-inv-content').style.display = 'none';
+        document.getElementById('view-ord-content').style.display = 'block';
         document.getElementById('btn-save-iiko').style.display = 'none';
       } else {
-        document.getElementById('tab-ord').classList.remove('active');
-        document.getElementById('tab-inv').classList.add('active');
-        document.getElementById('view-orders').style.display = 'none';
-        document.getElementById('view-inventory').style.display = 'block';
-        document.getElementById('btn-save-iiko').style.display = 'flex';
+        document.getElementById('tab-btn-ord').classList.remove('active');
+        document.getElementById('tab-btn-inv').classList.add('active');
+        document.getElementById('view-ord-content').style.display = 'none';
+        document.getElementById('view-inv-content').style.display = 'block';
+        document.getElementById('btn-save-iiko').style.display = 'block';
       }
     }
 
-    function changePoint() {
-      const select = document.getElementById('point-select');
-      showToast('Загрузка данных точки ' + select.value + '...', '🔄');
-      resetReconciliation();
-    }
-
-    function refreshData() {
-      const btn = document.getElementById('btn-refresh');
-      btn.classList.add('loading');
-      setTimeout(() => {
-        btn.classList.remove('loading');
-        showToast('Данные iiko обновлены', '✅');
-        resetReconciliation();
-      }, 700);
-    }
-
-    function resetReconciliation() {
-      isReconciled = false;
-      const cta = document.getElementById('cta-reconcile');
-      cta.innerHTML = '<span>⚡</span> ВЫПОЛНИТЬ АВТО-СВЕДЕНИЕ В 1 КЛИК';
-      cta.classList.remove('done');
-      
-      const kpi = document.getElementById('kpi-banner');
-      kpi.classList.remove('resolved');
-      document.getElementById('kpi-status-title').textContent = '⚠️ Внимание: Есть недостачи свыше 1 000 ₸';
-      document.getElementById('kpi-status-badge').textContent = 'Риск штрафа';
-      document.getElementById('kpi-penalty-sum').textContent = '8 450 ₸';
-      document.getElementById('kpi-sub-text').textContent = 'Общая сумма штрафов на смену';
-      document.getElementById('kpi-crit-count').textContent = '3 позиции';
-
-      for (let i = 1; i <= 3; i++) {
-        const card = document.getElementById('card-item-' + i);
-        card.classList.remove('resolved-item');
-        card.classList.add('alert-item');
-      }
-      document.getElementById('badge-1').textContent = 'Штраф: 2 500 ₸';
-      document.getElementById('badge-2').textContent = 'Штраф: 1 850 ₸';
-      document.getElementById('badge-3').textContent = 'Штраф: 4 100 ₸';
-
-      document.getElementById('book-1').textContent = '8.690 кг';
-      document.getElementById('book-2').textContent = '7.480 кг';
-      document.getElementById('book-3').textContent = '12.500 кг';
-
-      document.getElementById('btn-save-iiko').disabled = true;
-    }
-
-    function performAutoReconciliation() {
-      if (currentRole !== 'manager') {
-        showToast('У вас нет прав на редактирование инвентов', '🚫');
-        return;
-      }
-      // Show iiko warning modal first, exactly as in iikoChain
-      document.getElementById('modal-warning').style.display = 'flex';
+    function triggerReconciliationModal() {
+      if (isReconciled) return;
+      document.getElementById('iiko-modal').style.display = 'flex';
     }
 
     function closeModal() {
-      document.getElementById('modal-warning').style.display = 'none';
+      document.getElementById('iiko-modal').style.display = 'none';
     }
 
-    function confirmRecalculation() {
+    function confirmReconciliation() {
       closeModal();
       isReconciled = true;
 
       // Update CTA
-      const cta = document.getElementById('cta-reconcile');
-      cta.innerHTML = '<span>✅</span> АВТО-СВЕДЕНИЕ ВЫПОЛНЕНО (ДЕЛЬТЫ СВЕДЕНЫ)';
-      cta.classList.add('done');
+      const btn = document.getElementById('btn-reconcile');
+      btn.textContent = '✓ Инвентаризация сведена с последующими днями';
+      btn.classList.add('done');
 
-      // Update KPI
-      const kpi = document.getElementById('kpi-banner');
-      kpi.classList.add('resolved');
-      document.getElementById('kpi-status-title').textContent = '🎉 Все недостачи успешно сведены!';
-      document.getElementById('kpi-status-badge').textContent = 'Штрафы: 0 ₸';
-      document.getElementById('kpi-penalty-sum').textContent = '0 ₸';
-      document.getElementById('kpi-sub-text').textContent = 'Сэкономлено для сотрудников: 8 450 ₸';
-      document.getElementById('kpi-crit-count').textContent = '0 позиций';
+      // Update Summary
+      const badge = document.getElementById('sum-badge');
+      badge.textContent = 'Сведено (Штрафы: 0 ₸)';
+      badge.className = 'sum-badge green';
 
-      // Update Items
+      const sumAmount = document.getElementById('sum-amount');
+      sumAmount.textContent = '0 ₸';
+      sumAmount.className = 'sum-amount green';
+
+      document.getElementById('sum-desc').textContent = 'Встречные излишки закрыты. Потери смены: 0 ₸';
+
+      // Update Rows
       for (let i = 1; i <= 3; i++) {
-        const card = document.getElementById('card-item-' + i);
-        card.classList.remove('alert-item');
-        card.classList.add('resolved-item');
+        document.getElementById('row-' + i).classList.add('resolved');
       }
 
-      document.getElementById('badge-1').className = 'item-badge green';
-      document.getElementById('badge-1').textContent = 'Штраф: 0 ₸ (Снято)';
+      document.getElementById('price-1').textContent = '340 ₸ (Без штрафа)';
+      document.getElementById('price-1').className = 'r-price green';
+      document.getElementById('book-1').textContent = '8.245 кг';
 
-      document.getElementById('badge-2').className = 'item-badge green';
-      document.getElementById('badge-2').textContent = 'Штраф: 0 ₸ (Снято)';
+      document.getElementById('price-2').textContent = '255 ₸ (Без штрафа)';
+      document.getElementById('price-2').className = 'r-price green';
+      document.getElementById('book-2').textContent = '7.180 кг';
 
-      document.getElementById('badge-3').className = 'item-badge green';
-      document.getElementById('badge-3').textContent = 'Штраф: 0 ₸ (Снято)';
+      document.getElementById('price-3').textContent = '480 ₸ (Без штрафа)';
+      document.getElementById('price-3').className = 'r-price green';
+      document.getElementById('book-3').textContent = '12.300 кг';
 
-      // Updated book amounts
-      document.getElementById('book-1').innerHTML = '<span style="color: var(--primary);">8.245 кг</span>';
-      document.getElementById('book-2').innerHTML = '<span style="color: var(--primary);">7.180 кг</span>';
-      document.getElementById('book-3').innerHTML = '<span style="color: var(--primary);">12.300 кг</span>';
-
-      // Enable save button
+      // Enable Save
       document.getElementById('btn-save-iiko').disabled = false;
-
-      showToast('Авто-сведение завершено: 3 позиции пересчитаны!', '⚡');
+      showToast('Корректировка книжных остатков применена');
     }
 
     function saveToIiko() {
-      if (currentRole !== 'manager') {
-        showToast('У вас нет прав на сохранение инвентов', '🚫');
-        return;
-      }
-      const saveBtn = document.getElementById('btn-save-iiko');
-      saveBtn.innerHTML = '<span>⏳</span> Сохранение в iiko...';
-      saveBtn.disabled = true;
+      const btn = document.getElementById('btn-save-iiko');
+      btn.disabled = true;
+      btn.textContent = 'Отправка в iikoChain...';
 
       setTimeout(() => {
-        saveBtn.innerHTML = '<span>✅</span> Сохранено в iikoChain';
-        showToast('Инвентаризация P2 за 01.09 успешно записана!', '🎉');
-      }, 1000);
+        btn.textContent = '✓ Документ записан в iikoChain';
+        showToast('Документ P2 сохранен в iikoChain');
+      }, 800);
     }
 
-    function showToast(msg, icon = '✅') {
-      const toast = document.getElementById('toast');
-      document.getElementById('toast-text').textContent = msg;
-      document.getElementById('toast-icon').textContent = icon;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2500);
+    function showToast(msg) {
+      const t = document.getElementById('toast-msg');
+      t.textContent = msg;
+      t.classList.add('visible');
+      setTimeout(() => t.classList.remove('visible'), 2200);
     }
   </script>
 </body>
