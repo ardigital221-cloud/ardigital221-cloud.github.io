@@ -98,8 +98,12 @@
     .brand-title {
       font-size: 13px;
       color: var(--text-muted);
-      border-left: 1px solid var(--card-border);
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
       padding-left: 14px;
+    }
+
+    .brand-title strong {
+      color: #FFF;
     }
 
     .top-controls {
@@ -111,12 +115,16 @@
     .slide-badge {
       font-family: var(--font-mono);
       font-size: 12px;
-      font-weight: 600;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+    }
+
+    .slide-badge span {
       color: var(--primary);
-      background: rgba(255, 184, 0, 0.1);
-      padding: 4px 12px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 184, 0, 0.2);
+      font-weight: 700;
     }
 
     .btn-action {
@@ -188,13 +196,13 @@
     .slide-tag.success {
       background: var(--success-bg);
       color: var(--success);
-      border-color: rgba(48, 209, 88, 0.25);
+      border-color: var(--success-border);
     }
 
     .slide-tag.info {
       background: rgba(10, 132, 255, 0.12);
       color: var(--info);
-      border-color: rgba(10, 132, 255, 0.25);
+      border-color: rgba(10, 132, 255, 0.3);
     }
 
     .slide-title {
@@ -470,7 +478,7 @@
           </div>
           <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px; border-left: 3px solid var(--danger);">
             <h4 style="font-size: 14px; margin-bottom: 6px; color: #FFF;">2. Проблема системного маркетинга</h4>
-            <p style="font-size: 13px; color: var(--text-muted);">Попытки масштабирования в другие города (Усть-Каменогорск, Астана, Караганда) приводили к закрытию точек из-за отсутствия воронки и локального маркетинга с нуля.</p>
+            <p style="font-size: 13px; color: var(--text-muted);">Попытки масштабирования в другие города (опыт Усть-Каменогорска) приводили к закрытию точек из-за отсутствия воронки и локального маркетинга с нуля.</p>
           </div>
           <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px; border-left: 3px solid var(--warning);">
             <h4 style="font-size: 14px; margin-bottom: 6px; color: #FFF;">3. Резервы доставки и рутина управляющих</h4>
@@ -485,40 +493,34 @@
       <div class="slide-header">
         <span class="slide-tag danger">Анализ экспансии</span>
         <h2 class="slide-title">Опыт региональной экспансии: ошибки и системные выводы</h2>
-        <p class="slide-subtitle">Разбор попыток масштабирования в Усть-Каменогорск, Астану и Караганду. Почему «павлодарский маркетинг» не работает в других городах.</p>
+        <p class="slide-subtitle">Разбор опыта масштабирования в Усть-Каменогорск и филиала в Аксу. Почему «павлодарский маркетинг» не работает в других городах.</p>
       </div>
 
-      <div class="grid-4" style="margin-bottom: 20px;">
-        <div style="background: rgba(255,69,58,0.06); padding: 16px; border-radius: 12px; border: 1px solid var(--danger-border);">
-          <div style="font-weight: 800; color: #FFF; font-size: 15px; margin-bottom: 4px;">Усть-Каменогорск</div>
-          <div style="font-size: 11px; color: var(--danger); font-weight: 700;">B-27, B-28, В-29, В-30</div>
-          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
-            Открыли сразу 4 точки без аудитории. 4 аренды и 4 ФОТ без локального маркетинга привели к кассовому разрыву и закрытию всех точек.
+      <div class="grid-2" style="margin-bottom: 20px;">
+        <div style="background: rgba(255,69,58,0.06); padding: 18px; border-radius: 12px; border: 1px solid var(--danger-border);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+            <div>
+              <div style="font-weight: 800; color: #FFF; font-size: 16px;">г. Усть-Каменогорск</div>
+              <div style="font-size: 12px; color: var(--danger); font-weight: 700;">B-27, B-28, В-29, В-30 (Все 4 точки закрыты)</div>
+            </div>
+            <span class="badge red">Кассовый разрыв</span>
           </div>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+            <strong>Критическая ошибка:</strong> открытие сразу 4 точек в незнакомом регионе без предварительного знания бренда. 4 аренды и 4 ФОТ без локального маркетинга и воронки привлечения привели к быстрому кассовому разрыву и закрытию всех объектов.
+          </p>
         </div>
 
-        <div style="background: rgba(255,69,58,0.06); padding: 16px; border-radius: 12px; border: 1px solid var(--danger-border);">
-          <div style="font-weight: 800; color: #FFF; font-size: 15px; margin-bottom: 4px;">Астана</div>
-          <div style="font-size: 11px; color: var(--danger); font-weight: 700;">А-1, А-2, А-3, А-4, А-5, А-6</div>
-          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
-            Попытка зайти сетью точек в столицу на жесткий конкурентный рынок без прогрева, воронки и позиционирования. Все точки закрыты.
+        <div style="background: rgba(255,184,0,0.06); padding: 18px; border-radius: 12px; border: 1px solid rgba(255,184,0,0.3);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+            <div>
+              <div style="font-weight: 800; color: #FFF; font-size: 16px;">г. Аксу</div>
+              <div style="font-size: 12px; color: var(--primary); font-weight: 700;">1 действующая точка</div>
+            </div>
+            <span class="badge green">Действует</span>
           </div>
-        </div>
-
-        <div style="background: rgba(255,69,58,0.06); padding: 16px; border-radius: 12px; border: 1px solid var(--danger-border);">
-          <div style="font-weight: 800; color: #FFF; font-size: 15px; margin-bottom: 4px;">Караганда</div>
-          <div style="font-size: 11px; color: var(--danger); font-weight: 700;">K-1, K-2, K-3, K-4</div>
-          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
-            Аналогичный сценарий: открытие точек без знания бренда местными жителями, тихий запуск, отсутствие воронки и рекламы. Закрыты.
-          </div>
-        </div>
-
-        <div style="background: rgba(255,184,0,0.06); padding: 16px; border-radius: 12px; border: 1px solid rgba(255,184,0,0.3);">
-          <div style="font-weight: 800; color: #FFF; font-size: 15px; margin-bottom: 4px;">Аксу</div>
-          <div style="font-size: 11px; color: var(--primary); font-weight: 700;">1 действующая точка</div>
-          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
-            Работает 1 локальная точка рядом с Павлодаром в стабильном моноформате.
-          </div>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+            <strong>Стабильный моноформат:</strong> работает 1 локальная точка рядом с домашним рынком. Устойчивая операционная деятельность, контролируемый Opex и отсутствие рисков распыления ресурсов на несколько точек.
+          </p>
         </div>
       </div>
 
@@ -541,7 +543,7 @@
           </ul>
         </div>
         <div style="margin-top: 12px; padding: 10px 14px; background: rgba(255,69,58,0.12); border-radius: 8px; font-size: 13px; color: #FFF; font-weight: 700; border-left: 4px solid var(--danger);">
-          Следствие: Каждая попытка открыться в новом месте заканчивалась банкротством точки.
+          Следствие: Любая попытка открыться в новом месте без системного маркетинга заканчивалась банкротством точки.
         </div>
       </div>
     </section>
@@ -591,15 +593,15 @@
       </div>
     </section>
 
-    <!-- SLIDE 4: AGGREGATORS AUDIT -->
+    <!-- SLIDE 4: AGGREGATORS AUDIT & ПЕРЕМАНИВАНИЕ В СВОЮ ДОСТАВКУ -->
     <section class="slide" id="slide-4">
       <div class="slide-header">
         <span class="slide-tag info">Аудит доставки</span>
         <h2 class="slide-title">Аудит агрегаторов: Яндекс Еда, Wolt и Glovo</h2>
-        <p class="slide-subtitle">Реальная картина работы сервисов: скрытые резервы выручки, паузы планшетов и точки роста.</p>
+        <p class="slide-subtitle">Реальная картина работы сервисов: скрытые резервы выручки, паузы планшетов и экономика комиссий.</p>
       </div>
 
-      <div class="grid-3" style="margin-bottom: 24px;">
+      <div class="grid-3" style="margin-bottom: 18px;">
         <!-- YANDEX -->
         <div class="card alert">
           <div class="card-title" style="color: var(--yandex);">
@@ -676,13 +678,44 @@
         </div>
       </div>
 
-      <div class="card highlight">
+      <!-- СКОЛЬКО МЫ ПЛАТИМ АГРЕГАТОРАМ И КАК ПЕРЕМАНИТЬ КЛИЕНТОВ НА СВОЮ ДОСТАВКУ -->
+      <div class="card highlight" style="margin-bottom: 16px;">
+        <div class="card-title" style="color: var(--primary); font-size: 15px;">
+          <i>💸</i> Сколько мы платим агрегаторам & Стратегия переманивания в приложение «BURЖУЙ»
+        </div>
+        <div class="grid-2" style="gap: 16px; margin-top: 10px;">
+          <!-- Левая колонка: Комиссии агрегаторов -->
+          <div style="background: rgba(255, 69, 58, 0.08); padding: 14px; border-radius: 10px; border-left: 4px solid var(--danger);">
+            <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Потери на комиссиях агрегаторам:</div>
+            <div style="font-size: 24px; font-weight: 800; font-family: var(--font-mono); color: var(--danger); margin: 4px 0;">
+              ~1 500 000 – 1 800 000 ₸ / мес
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4;">
+              Агрегаторы забирают <strong>20–25% с каждого чека</strong>. При общем обороте доставки ~7.35 млн ₸ сеть ежегодно выплачивает <strong>более 18 000 000 ₸</strong> чистых комиссий чужим платформам!
+            </p>
+          </div>
+
+          <!-- Правая колонка: Стратегия 20% -->
+          <div style="background: rgba(48, 209, 88, 0.08); padding: 14px; border-radius: 10px; border-left: 4px solid var(--success);">
+            <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Переманивание: Скидка 20% на 1-й заказ:</div>
+            <div style="font-size: 24px; font-weight: 800; font-family: var(--font-mono); color: var(--success); margin: 4px 0;">
+              0 ₸ потерь → +20% маржи
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4;">
+              <strong>Идеальная юнит-экономика:</strong> Скидка 20% гостю <strong>в точности равна 20% комиссии агрегатора</strong>! На 1-м заказе компания ничего не теряет (отдали бы эти 20% агрегатору). А со 2-го заказа клиент заказывает в нашем приложении напрямую, поднимая маржу сети на +20–25%!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Быстрый резерв агрегаторов -->
+      <div class="card" style="background: rgba(255,255,255,0.02);">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div>
-            <h4 style="font-size: 15px; font-weight: 800; color: #FFF;">Резерв роста в агрегаторах без капитальных вложений:</h4>
-            <p style="font-size: 13px; color: var(--text-muted);">Запуск Б19 (Батыр Молл) в Glovo, разбор тикетов Яндекса, акции в Glovo и контроль планшетов в часы пик</p>
+            <h4 style="font-size: 14px; font-weight: 700; color: #FFF;">Резерв роста в доставке (порядок в агрегаторах + запуск молла):</h4>
+            <p style="font-size: 12px; color: var(--text-muted);">Запуск Б19 (Батыр Молл) в Glovo, разбор тикетов Яндекса, акции в Glovo и контроль планшетов в часы пик</p>
           </div>
-          <div style="font-size: 24px; font-weight: 800; font-family: var(--font-mono); color: var(--primary);">
+          <div style="font-size: 22px; font-weight: 800; font-family: var(--font-mono); color: var(--primary);">
             +1 200 000 – 1 600 000 ₸ / месяц
           </div>
         </div>
@@ -849,8 +882,8 @@
             <tr>
               <td style="font-weight: 800; color: var(--primary); text-align: center;">5</td>
               <td><strong>Внедрение Своей доставки (4 хаба)</strong></td>
-              <td>Прошлый запуск сразу на весь город привел к простоям курьеров и холодным блюдам. Потеря ~1.9 млн ₸/мес на комиссиях агрегаторам.</td>
-              <td><strong>Готовое приложение «BURЖУЙ» уже есть:</strong> внедряем и разворачиваем его по 3 зонам вокруг фабрик-кухонь: <strong>Б5 (Толстого 90А)</strong>, <strong>Б1 (Лермонтова 100)</strong>, <strong>Б12 (Назарбаева 283)</strong> и <strong>Б19 (Батыр Молл)</strong>. Скорость до 35 мин + промокод -20% во всех агрегаторах.</td>
+              <td>Потери ~1.5–1.8 млн ₸/мес на комиссиях агрегаторам (20–25% с каждого чека). Прошлый запуск курьеров на весь город привел к хаосу и холодным блюдам.</td>
+              <td><strong>Готовое приложение «BURЖУЙ» уже есть:</strong> запускаем по 4 хабам: <strong>Б5 (Толстого 90А)</strong>, <strong>Б1 (Лермонтова 100)</strong>, <strong>Б12 (Назарбаева 283)</strong> и <strong>Б19 (Батыр Молл)</strong>. Переманиваем базу флаером «-20% на 1-й заказ»: на 1-м заказе <strong>сеть ничего не теряет</strong> (скидка 20% = комиссии агрегатора), а повторные заказы дают чистую маржу без комиссий!</td>
               <td style="text-align: center;"><span class="badge yellow">15–20 дней</span></td>
             </tr>
             <tr>
@@ -897,7 +930,7 @@
           <div class="card-title"><i>📱</i> 2. Маркетинг & Доставка</div>
           <ul class="split-list" style="margin-top: 8px;">
             <li><strong>Шаг 1:</strong> Внедрение и запуск готового приложения «BURЖУЙ» с привязкой к 4 ключевым хабам (Б5, Б1, Б12, Б19).</li>
-            <li><strong>Шаг 2:</strong> Печать вкладышей со скидкой 20% на первый заказ в приложении во все пакеты агрегаторов.</li>
+            <li><strong>Шаг 2:</strong> Печать вкладышей «Скидка 20% на 1-й заказ в приложении BURЖУЙ» в пакеты агрегаторов (0 ₸ потерь на входе, +20% маржи со 2-го заказа).</li>
             <li><strong>Шаг 3:</strong> Запуск баннеров и комбо-наборов в Glovo для поднятия узнаваемости бренда.</li>
           </ul>
           <div class="badge green" style="margin-top: 10px;">Фокус: Перелив базы в своё приложение</div>
