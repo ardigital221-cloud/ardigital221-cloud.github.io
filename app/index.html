@@ -26,6 +26,8 @@
       --iiko-green-bg: #DCFCE7;
       --danger: #DC2626;
       --danger-bg: #FEE2E2;
+      --warning: #D97706;
+      --warning-bg: #FEF3C7;
       --font: 'Inter', system-ui, -apple-system, sans-serif;
       --mono: 'Roboto Mono', monospace;
     }
@@ -63,9 +65,7 @@
       border-right: 1px solid var(--border-light);
     }
 
-    /* ---------------------------------------------------- */
-    /* ЭКРАН 1: АВТОРИЗАЦИЯ СОТРУДНИКА                     */
-    /* ---------------------------------------------------- */
+    /* АВТОРИЗАЦИЯ */
     .auth-view {
       padding: 40px 24px;
       display: flex;
@@ -198,9 +198,7 @@
       display: none;
     }
 
-    /* ---------------------------------------------------- */
-    /* ЭКРАН 2: РАБОЧИЙ ИНТЕРФЕЙС                           */
-    /* ---------------------------------------------------- */
+    /* РАБОЧИЙ ЭКРАН */
     .app-main {
       display: none;
       flex-direction: column;
@@ -278,7 +276,7 @@
       overflow-y: auto;
     }
 
-    /* Золотое правило корректировки (баннер) */
+    /* Золотое правило */
     .golden-rule-card {
       background: #EFF6FF;
       border: 1px solid #BFDBFE;
@@ -301,7 +299,7 @@
       gap: 6px;
     }
 
-    /* ПОШАГОВЫЙ БЛОК НАСТРОЙКИ (1 - 2 - 3) */
+    /* 3 ШАГА */
     .workflow-card {
       background: #FFF;
       border: 1px solid var(--border);
@@ -408,7 +406,7 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 0 34px 0 12px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: #0F172A;
       font-family: var(--font);
@@ -615,6 +613,11 @@
       color: var(--danger);
     }
 
+    .penalty-pill.warning {
+      background: var(--warning-bg);
+      color: var(--warning);
+    }
+
     .penalty-pill.cleared {
       background: var(--iiko-green-bg);
       color: var(--iiko-green);
@@ -633,8 +636,8 @@
       color: var(--danger);
     }
 
-    .inv-sum-val.cleared {
-      color: var(--iiko-green);
+    .inv-sum-val.partial {
+      color: var(--warning);
     }
 
     .inv-rule-note {
@@ -721,7 +724,7 @@
       gap: 4px;
     }
 
-    /* КАРТОЧКИ ПОЗИЦИЙ С ДВИЖЕНИЕМ ТОВАРА */
+    /* КАРТОЧКИ ПОЗИЦИЙ */
     .item-card {
       background: #FFF;
       border: 1px solid var(--border);
@@ -729,6 +732,10 @@
       margin-bottom: 10px;
       overflow: hidden;
       box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .item-card.unreconciled-card {
+      border-left: 3px solid var(--danger);
     }
 
     .item-card-main {
@@ -757,6 +764,10 @@
 
     .item-cost-badge.ok {
       color: var(--iiko-green);
+    }
+
+    .item-cost-badge.warning {
+      color: var(--warning);
     }
 
     .item-metrics-3col {
@@ -822,7 +833,16 @@
       cursor: default;
     }
 
-    /* БЛОК ДВИЖЕНИЯ ТОВАРА В IIKO */
+    .badge-no-surplus {
+      font-size: 11px;
+      font-weight: 700;
+      color: #DC2626;
+      background: #FEE2E2;
+      padding: 5px 8px;
+      border-radius: 6px;
+    }
+
+    /* ДВИЖЕНИЕ ТОВАРА */
     .movement-card {
       display: none;
       background: #FAFAFA;
@@ -861,7 +881,7 @@
     .move-date {
       font-weight: 700;
       color: #0F172A;
-      width: 48px;
+      width: 60px;
     }
 
     .move-type {
@@ -885,6 +905,12 @@
       color: #92400E;
       line-height: 1.4;
       font-size: 11px;
+    }
+
+    .calc-explain-box.danger-note {
+      background: #FEF2F2;
+      border-color: #FECDD3;
+      color: #991B1B;
     }
 
     /* Сохранение */
@@ -922,7 +948,7 @@
       cursor: not-allowed;
     }
 
-    /* Модалка предупреждения iiko */
+    /* МОДАЛЬНЫЕ ОКНА */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -1095,14 +1121,15 @@
     }
 
     .finance-total-pill {
-      background: #DCFCE7;
-      color: #166534;
+      background: #FEF2F2;
+      color: #991B1B;
       font-weight: 800;
       padding: 6px 8px;
       border-radius: 6px;
       text-align: center;
       margin-top: 6px;
       font-size: 12px;
+      border: 1px solid #FECDD3;
     }
 
     .report-items-table {
@@ -1223,7 +1250,7 @@
       </div>
     </div>
 
-    <!-- РАБОЧИЙ ИНТЕРФЕЙС -->
+    <!-- РАБОЧИЙ ЭКРАН -->
     <div class="app-main" id="view-main">
       
       <header class="header-bar">
@@ -1239,13 +1266,13 @@
 
       <div class="content-scroll">
         
-        <!-- Золотое правило корректировки -->
+        <!-- Золотое правило -->
         <div class="golden-rule-card">
           <div class="golden-rule-title">
             <span>⚖️</span>
             <span>Регламент сведения iikoChain:</span>
           </div>
-          <div>Недостача уменьшается на количество выявленного излишка. Излишек последующей инвентаризации засчитывается в счёт недостачи предыдущей инвентаризации.</div>
+          <div>Недостача уменьшается на количество выявленного излишка. <strong>Если встречного излишка в последующих инвентаризациях нет — позиция не корректируется и остаётся реальной недостачей.</strong></div>
         </div>
 
         <!-- 3 ШАГА -->
@@ -1292,7 +1319,7 @@
                 <option value="В-9">В-9</option>
                 <option value="В-11">В-11</option>
                 <option value="В-16">В-16</option>
-                <option value="В-2">В-2</option>
+                <option value="В-2">В-2 (Точка P2)</option>
                 <option value="В-21">В-21</option>
                 <option value="В-14">В-14</option>
                 <option value="В-12">В-12</option>
@@ -1323,12 +1350,10 @@
               </button>
             </div>
 
-            <!-- Подсказка по правилу штрафа -->
             <div class="penalty-rule-hint" id="penalty-rule-hint">
               <strong>Правило штрафа для штучного товара:</strong> Штраф начисляется на стоимостную сумму выявленных излишков (так как излишек в штучном товаре означает непробитый чек или недовложение).
             </div>
 
-            <!-- Период и кнопка Обновить -->
             <div class="period-action-wrap">
               <div class="period-fields">
                 <span class="period-label">Период инвентаризации:</span>
@@ -1350,7 +1375,7 @@
             <div class="placeholder-icon">📋</div>
             <div class="placeholder-title">Данные не сформированы</div>
             <div class="placeholder-sub">
-              Нажмите синюю кнопку <strong>«Обновить данные iiko»</strong>, чтобы загрузить инвентаризацию за 01.09 для точки <strong>В-2</strong>.
+              Выберите торговую точку в шаге 2 и нажмите <strong>«Обновить данные iiko»</strong> для загрузки инвентаризации за 01.09.
             </div>
           </div>
 
@@ -1358,18 +1383,18 @@
             
             <div class="inventory-header-card">
               <div class="inv-top-info">
-                <span class="inv-date-tag" id="inv-current-title">Инвентаризация: 01.09 (В-2, Штучный)</span>
-                <span class="penalty-pill" id="penalty-badge">Штраф на излишки</span>
+                <span class="inv-date-tag" id="inv-current-title">Инвентаризация: 01.09</span>
+                <span class="penalty-pill" id="penalty-badge">Не всё сводится</span>
               </div>
               <div class="inv-sum-row">
                 <div class="inv-sum-val" id="total-diff-val">-3 990 ₸</div>
-                <div class="inv-rule-note" id="total-diff-sub">В первую очередь: наибольшая сумма недостачи</div>
+                <div class="inv-rule-note" id="total-diff-sub">Позиции без излишков останутся к удержанию</div>
               </div>
             </div>
 
             <button class="btn-reconcile-all" id="btn-reconcile-all" onclick="openBulkReconcileModal()">
               <span>⚡</span>
-              <span id="btn-reconcile-label">Свести все позиции (зачесть излишки)</span>
+              <span id="btn-reconcile-label">Свести позиции с найденными излишками</span>
             </button>
 
             <!-- Панель отчета и отката -->
@@ -1389,9 +1414,7 @@
             </div>
 
             <!-- Список карточек с "Движением товара" -->
-            <div id="items-cards-container">
-              <!-- Заполняется динамически JS -->
-            </div>
+            <div id="items-cards-container"></div>
 
           </div>
 
@@ -1428,10 +1451,8 @@
         </div>
         <div class="modal-content">
           <div>Операция создаёт расход с образованием отрицательных остатков задним числом.</div>
-          <div class="modal-formula-callout" id="modal-formula-text">
-            Книга = Книга - Дельта недостачи
-          </div>
-          <strong>Применить корректировку книжного количества и зачесть излишек?</strong>
+          <div class="modal-formula-callout" id="modal-formula-text"></div>
+          <strong>Применить корректировку книжного количества и зачесть встречные излишки?</strong>
         </div>
         <div class="modal-actions">
           <button class="modal-btn secondary" onclick="closeWarningModal()">Отмена</button>
@@ -1440,7 +1461,7 @@
       </div>
     </div>
 
-    <!-- МОДАЛКА ОТЧЕТА (АКТА) -->
+    <!-- МОДАЛКА АКТА СВЕДЕНИЯ -->
     <div class="modal-backdrop" id="modal-report">
       <div class="report-card-modal">
         <div class="report-modal-head">
@@ -1479,19 +1500,19 @@
             </div>
             <div class="finance-row">
               <span style="color: var(--text-muted);">Зачтено последующих излишков:</span>
-              <strong style="color: var(--iiko-green); font-family: var(--mono);" id="rep-covered-val">+3 450 ₸</strong>
+              <strong style="color: var(--iiko-green); font-family: var(--mono);" id="rep-covered-val">+2 400 ₸</strong>
             </div>
             <div class="finance-row divider">
-              <span style="color: var(--text-muted);" id="rep-rule-label">Остаточный штраф на излишки:</span>
-              <strong style="font-family: var(--mono); color: var(--iiko-green);" id="rep-delta-val">0 ₸</strong>
+              <span style="color: var(--danger); font-weight: 700;">Реальный остаток к удержанию:</span>
+              <strong style="font-family: var(--mono); color: var(--danger); font-size: 14px;" id="rep-delta-val">-1 590 ₸</strong>
             </div>
-            <div class="finance-total-pill">
-              ✓ К УДЕРЖАНИЮ С СОТРУДНИКОВ: 0 ₸
+            <div class="finance-total-pill" id="rep-verdict-pill">
+              ⚠️ К УДЕРЖАНИЮ: 1 590 ₸ (излишков до 10.09 не найдено)
             </div>
           </div>
 
           <div style="font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">
-            Детализация зачёта излишков (01.09 ➔ последующие):
+            Детализация по каждой позиции (01.09 ➔ 10.09):
           </div>
           <table class="report-items-table">
             <thead>
@@ -1499,14 +1520,14 @@
                 <th>Позиция</th>
                 <th>01.09</th>
                 <th>Излишек</th>
-                <th>Остаток</th>
+                <th>Итог смены</th>
               </tr>
             </thead>
             <tbody id="rep-table-body"></tbody>
           </table>
 
-          <div style="font-size: 10px; color: var(--text-dim); margin-top: 10px; text-align: center;" id="rep-foot-note">
-            Все последующие излишки зачтены в счёт предыдущей недостачи по формуле: 10 − 7 = 3 шт.
+          <div style="font-size: 10px; color: var(--text-dim); margin-top: 10px; text-align: center;">
+            Сведено строго по фактическому наличию излишков. Позиции без встречных излишков остаются на удержании.
           </div>
         </div>
 
@@ -1526,8 +1547,24 @@
   </div>
 
   <script>
+    // 1. АВТО-ВОССТАНОВЛЕНИЕ СЕССИИ ПРИ ПЕРЕЗАГРУЗКЕ СТРАНИЦЫ
+    (function checkStoredSession() {
+      try {
+        const stored = localStorage.getItem('burzhui_user_session');
+        if (stored) {
+          const sess = JSON.parse(stored);
+          if (sess && sess.loggedIn) {
+            document.getElementById('view-auth').style.display = 'none';
+            document.getElementById('view-main').style.display = 'flex';
+          }
+        }
+      } catch (e) {
+        console.error('Session restore error:', e);
+      }
+    })();
+
     let activeSection = 'inv';
-    let activeSurplus = 'piece'; // по умолчанию штучный товар, как просил пользователь!
+    let activeSurplus = 'piece';
     let isDataLoaded = false;
     let isReconciled = false;
     let pendingAction = null;
@@ -1535,8 +1572,10 @@
     document.addEventListener('gesturestart', function(e) { e.preventDefault(); });
     document.addEventListener('dblclick', function(e) { e.preventDefault(); });
 
-    // ДАННЫЕ ДЛЯ ШТУЧНОГО ТОВАРА (ТОЧКА В-2)
-    // Формула: недостача 10, излишек 7 => остаточная недостача 10 - 7 = 3 шт.
+    // ДАННЫЕ ДЛЯ ШТУЧНОГО ТОВАРА:
+    // Позиция 1: Сводится частично (булочки)
+    // Позиция 2: НЕ СВОДИТСЯ ВООБЩЕ (соус) - излишков нет до 10 числа!
+    // Позиция 3: Сводится полностью (стаканы)
     const pieceData = [
       {
         id: 'p1',
@@ -1569,7 +1608,7 @@
         fact: 158,
         diffBefore: -22,
         costBefore: -1320,
-        hasSurplus: false, // НЕТ ИЗЛИШКА! НЕ СВОДИТСЯ!
+        hasSurplus: false, // НЕТ ИЗЛИШКОВ ДО 10 ЧИСЛА!
         surplusDate: '—',
         surplusQty: 0,
         surplusCost: 0,
@@ -1608,8 +1647,10 @@
       }
     ];
 
-    // ДАННЫЕ ДЛЯ ВЕСОВОГО ТОВАРА (ТОЧКА В-2)
-    // Правило: недостача 3,290 кг, излишек 2,845 кг => остаточная недостача 0,445 кг.
+    // ДАННЫЕ ДЛЯ ВЕСОВОГО ТОВАРА:
+    // Позиция 1: Сводится (фарш)
+    // Позиция 2: НЕ СВОДИТСЯ (картофель фри) - излишков нет до 10 числа!
+    // Позиция 3: Сводится (сыр)
     const weightData = [
       {
         id: 'w1',
@@ -1641,7 +1682,7 @@
         fact: 13.000,
         diffBefore: -5.500,
         costBefore: -4950,
-        hasSurplus: false, // НЕТ ИЗЛИШКА!
+        hasSurplus: false, // НЕТ ИЗЛИШКОВ!
         surplusDate: '—',
         surplusQty: 0,
         surplusCost: 0,
@@ -1699,9 +1740,8 @@
           errBox.style.display = 'block';
           showToast('Недостаточно прав доступа');
         } else {
-                    document.getElementById('view-auth').style.display = 'none';
+          document.getElementById('view-auth').style.display = 'none';
           document.getElementById('view-main').style.display = 'flex';
-          // Сохраняем сессию, чтобы при обновлении страницы вход НЕ сбрасывался
           localStorage.setItem('burzhui_user_session', JSON.stringify({
             loggedIn: true,
             login: login,
@@ -1774,7 +1814,7 @@
     function handleRefreshData() {
       const store = document.getElementById('select-store').value;
       if (!store) {
-        showToast('⚠️ Выберите торговую точку в шаге 2');
+        showToast('⚠️ Сначала выберите торговую точку в шаге 2');
         document.getElementById('select-store').focus();
         return;
       }
@@ -1799,16 +1839,213 @@
 
     function renderItemsCards() {
       const store = document.getElementById('select-store').value;
-            const isPiece = activeSurplus === 'piece';
+      const isPiece = activeSurplus === 'piece';
+      const items = isPiece ? pieceData : weightData;
+
+      document.getElementById('inv-current-title').textContent = 
+        'Инвентаризация: 01.09 (' + store + ', ' + (isPiece ? 'Штучный' : 'Весовой') + ')';
+
+      const penaltyBadge = document.getElementById('penalty-badge');
+      const sumVal = document.getElementById('total-diff-val');
+      const subNote = document.getElementById('total-diff-sub');
+      const recAllBtn = document.getElementById('btn-reconcile-all');
+      const recLabel = document.getElementById('btn-reconcile-label');
+
+      if (!isReconciled) {
+        penaltyBadge.textContent = 'Не всё сойдётся';
+        penaltyBadge.className = 'penalty-pill';
+        sumVal.textContent = isPiece ? '-3 990 ₸' : '-11 550 ₸';
+        sumVal.className = 'inv-sum-val';
+        subNote.textContent = 'Позиции без последующих излишков останутся к удержанию!';
+        recAllBtn.classList.remove('done');
+        recLabel.textContent = '⚡ Свести позиции с найденными излишками';
+        document.getElementById('reconciled-bar').style.display = 'none';
+        document.getElementById('btn-save-doc').disabled = true;
+      } else {
+        // РЕАЛЬНАЯ КАРТИНА: НЕ ВСЁ В НОЛЬ!
+        const remTotal = isPiece ? '-1 590 ₸' : '-5 770 ₸';
+        penaltyBadge.textContent = 'Частично сведено';
+        penaltyBadge.className = 'penalty-pill warning';
+        sumVal.textContent = remTotal;
+        sumVal.className = 'inv-sum-val partial';
+        subNote.textContent = '⚠️ Внимание: Соус/Картофель не имели излишков до 10.09 и остались к удержанию!';
+        recAllBtn.classList.add('done');
+        recLabel.textContent = '✓ Излишки зачтены (остаток зафиксирован)';
+        document.getElementById('reconciled-bar').style.display = 'flex';
+        document.getElementById('btn-save-doc').disabled = false;
+      }
+
+      const container = document.getElementById('items-cards-container');
+      container.innerHTML = '';
+
+      items.forEach(function(item) {
+        const card = document.createElement('div');
+        card.className = 'item-card' + (!item.hasSurplus ? ' unreconciled-card' : '');
+        card.id = 'card-' + item.id;
+
+        const isCurrentResolved = isReconciled && item.hasSurplus;
+        let displayDiff = item.diffBefore + ' ' + item.unit;
+        let displayCost = item.costBefore + ' ₸';
+        let displayBook = item.bookBefore + ' ' + item.unit;
+        let badgeCls = '';
+
+        if (isReconciled) {
+          if (item.hasSurplus) {
+            displayDiff = item.remDiff + ' ' + item.unit;
+            displayCost = item.remCost + ' ₸';
+            displayBook = item.bookAfter + ' ' + item.unit;
+            badgeCls = item.remCost === 0 ? 'ok' : 'warning';
+          } else {
+            // Без излишка - остаётся чистый минус!
+            displayDiff = item.diffBefore + ' ' + item.unit;
+            displayCost = item.costBefore + ' ₸';
+            badgeCls = '';
+          }
+        }
+
+        let moveHtml = '';
+        item.movements.forEach(function(m) {
+          moveHtml += 
+            '<div class="move-item">' +
+              '<span class="move-date">' + m.date + '</span>' +
+              '<span class="move-type">' + m.type + '</span>' +
+              '<span class="move-qty ' + m.cls + '">' + m.qty + '</span>' +
+            '</div>';
+        });
+
+        const actionRightButton = item.hasSurplus 
+          ? ('<button type="button" class="btn-item-reconcile ' + (isCurrentResolved ? 'done' : '') + '" onclick="triggerSingleReconcile(\'' + item.id + '\')"><span>' + (isCurrentResolved ? '✓ Зачтено' : '⚡ Зачесть излишек') + '</span></button>')
+          : ('<span class="badge-no-surplus">✕ Излишков до 10.09 нет</span>');
+
+        card.innerHTML = 
+          '<div class="item-card-main">' +
+            '<div class="item-row-top">' +
+              '<span class="item-title">' + item.title + '</span>' +
+              '<span class="item-cost-badge ' + badgeCls + '">' +
+                displayCost +
+              '</span>' +
+            '</div>' +
+            '<div class="item-metrics-3col">' +
+              '<div>Книга: <div class="item-metric-val">' + displayBook + '</div></div>' +
+              '<div>Факт 01.09: <div class="item-metric-val">' + item.fact + ' ' + item.unit + '</div></div>' +
+              '<div>Недостача: <div class="item-metric-val" style="color: ' + (isCurrentResolved ? (item.remCost === 0 ? 'var(--iiko-green)' : 'var(--warning)') : 'var(--danger)') + ';">' + displayDiff + '</div></div>' +
+            '</div>' +
+            '<div class="item-actions-row">' +
+              '<button type="button" class="btn-movement-toggle" onclick="toggleMovement(\'' + item.id + '\')">' +
+                '<span>📊</span>' +
+                '<span>Движение товара</span>' +
+                '<span id="arrow-' + item.id + '">▾</span>' +
+              '</button>' +
+              actionRightButton +
+            '</div>' +
+          '</div>' +
+          '<div class="movement-card" id="move-' + item.id + '">' +
+            '<div class="movement-header">' +
+              '<span>Аудит движения: 01.09 — 10.09</span>' +
+              '<span style="color: ' + (item.hasSurplus ? 'var(--iiko-green)' : 'var(--danger)') + ';">' + (item.hasSurplus ? ('Найден излишек: +' + item.surplusQty + ' ' + item.unit) : 'Излишков не обнаружено!') + '</span>' +
+            '</div>' +
+            '<div class="movement-timeline">' +
+              moveHtml +
+            '</div>' +
+            '<div class="calc-explain-box ' + (!item.hasSurplus ? 'danger-note' : '') + '">' +
+              '<strong>Статус iiko:</strong> ' + item.explain +
+            '</div>' +
+          '</div>';
+
+        container.appendChild(card);
+      });
+    }
+
+    function toggleMovement(id) {
+      const moveBox = document.getElementById('move-' + id);
+      const arrow = document.getElementById('arrow-' + id);
+      if (moveBox.style.display === 'block') {
+        moveBox.style.display = 'none';
+        arrow.textContent = '▾';
+      } else {
+        moveBox.style.display = 'block';
+        arrow.textContent = '▴';
+      }
+    }
+
+    function triggerSingleReconcile(id) {
+      if (isReconciled) return;
+      const isPiece = activeSurplus === 'piece';
+      const items = isPiece ? pieceData : weightData;
+      const item = items.find(x => x.id === id);
+
+      if (!item.hasSurplus) {
+        showToast('По этой позиции нет встречных излишков до 10.09');
+        return;
+      }
+
+      pendingAction = { type: 'single', item: item };
+      document.getElementById('modal-formula-text').innerHTML = 
+        'Позиция: <strong>' + item.title + '</strong><br>' +
+        'Недостача 01.09: <strong>' + Math.abs(item.diffBefore) + ' ' + item.unit + '</strong><br>' +
+        'Последующий излишек ' + item.surplusDate + ': <strong>+' + item.surplusQty + ' ' + item.unit + '</strong><br>' +
+        'Формула зачёта: ' + Math.abs(item.diffBefore) + ' − ' + item.surplusQty + ' = <strong>' + Math.abs(item.remDiff) + ' ' + item.unit + '</strong> (остаточная недостача)';
+
+      document.getElementById('modal-warning').style.display = 'flex';
+    }
+
+    function openBulkReconcileModal() {
+      if (isReconciled) return;
+      const isPiece = activeSurplus === 'piece';
+      pendingAction = { type: 'bulk' };
+
+      document.getElementById('modal-formula-text').innerHTML = 
+        isPiece 
+          ? 'Зачёт по позициям с найденными излишками:<br>' +
+            '• Булочки: 18 − 15 = <strong>3 шт остатка (270 ₸)</strong><br>' +
+            '• Стаканы: 35 − 35 = <strong>0 шт (полный зачёт)</strong><br>' +
+            '<span style="color: var(--danger);">• Соус сырный: излишков нет ➔ остаётся недостача 22 шт (1 320 ₸)</span><br>' +
+            '<strong>Итог к удержанию: 1 590 ₸</strong>'
+          : 'Зачёт по весовым позициям с излишками:<br>' +
+            '• Фарш: 3.290 − 2.845 = <strong>0.445 кг (340 ₸ < 1 000 ₸)</strong><br>' +
+            '• Сыр: 1.700 − 1.500 = <strong>0.200 кг (480 ₸ < 1 000 ₸)</strong><br>' +
+            '<span style="color: var(--danger);">• Картофель фри: излишков нет ➔ остаётся недостача 5.5 кг (4 950 ₸)</span><br>' +
+            '<strong>Итог к удержанию: 5 770 ₸</strong>';
+
+      document.getElementById('modal-warning').style.display = 'flex';
+    }
+
+    function closeWarningModal() {
+      document.getElementById('modal-warning').style.display = 'none';
+      pendingAction = null;
+    }
+
+    function confirmModalAction() {
+      closeWarningModal();
+      isReconciled = true;
+      renderItemsCards();
+      showToast('✓ Сведено то, по чему найдены излишки');
+    }
+
+    function revertReconciliation() {
+      isReconciled = false;
+      renderItemsCards();
+      document.getElementById('reconciled-bar').style.display = 'none';
+      const saveBtn = document.getElementById('btn-save-doc');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Сохранить сведение в iikoChain';
+      showToast('↩️ Сведение отменено. Исходные данные возвращены');
+    }
+
+    function openReportModal() {
+      const store = document.getElementById('select-store').value;
+      const isPiece = activeSurplus === 'piece';
       const items = isPiece ? pieceData : weightData;
 
       document.getElementById('rep-store-val').textContent = store;
       document.getElementById('rep-surplus-val').textContent = isPiece ? 'Штучный товар' : 'Весовой товар';
       document.getElementById('rep-before-val').textContent = isPiece ? '-3 990 ₸' : '-11 550 ₸';
       document.getElementById('rep-covered-val').textContent = isPiece ? '+2 400 ₸' : '+5 780 ₸';
-      document.getElementById('rep-rule-label').textContent = 'Реальный остаток к удержанию:';
-      document.getElementById('rep-delta-val').textContent = isPiece ? '1 590 ₸' : '5 770 ₸';
-      document.getElementById('rep-delta-val').style.color = '#DC2626';
+      document.getElementById('rep-delta-val').textContent = isPiece ? '-1 590 ₸' : '-5 770 ₸';
+
+      document.getElementById('rep-verdict-pill').innerHTML = isPiece 
+        ? '⚠️ К УДЕРЖАНИЮ: 1 590 ₸ (Соус: 1 320 ₸ + Булочки: 270 ₸)'
+        : '⚠️ К УДЕРЖАНИЮ: 5 770 ₸ (Картофель фри: 4 950 ₸ + остатки)';
 
       const tbody = document.getElementById('rep-table-body');
       tbody.innerHTML = '';
@@ -1816,8 +2053,10 @@
       items.forEach(function(item) {
         const tr = document.createElement('tr');
         const statusText = item.hasSurplus 
-          ? ('<span style="color: var(--iiko-green); font-weight: 700;">' + item.remDiff + ' ' + item.unit + ' (' + item.remCost + ' ₸)</span>')
-          : ('<span style="color: var(--danger); font-weight: 700;">НЕ СВЕДЕНО (' + item.diffBefore + ' ' + item.unit + ')</span>');
+          ? (item.remCost === 0 
+              ? '<span style="color: var(--iiko-green); font-weight: 700;">✓ Сведено (0 ₸)</span>' 
+              : '<span style="color: var(--warning); font-weight: 700;">Остаток: ' + item.remDiff + ' ' + item.unit + ' (' + item.remCost + ' ₸)</span>')
+          : '<span style="color: var(--danger); font-weight: 700;">НЕ СВЕДЕНО (' + item.costBefore + ' ₸)</span>';
         
         tr.innerHTML = 
           '<td style="font-weight: 600;">' + item.title + '</td>' +
@@ -1845,22 +2084,25 @@
       text += '📦 *Счёт:* ' + (isPiece ? 'Излишки — штучный товар' : 'Излишки — весовой товар') + '\n';
       text += '🔍 *Период проверки:* 01.09 — 10.09\n';
       text += '--------------------------------\n';
-      text += '📌 *Правило зачёта:* Недостача уменьшена на количество выявленного излишка.\n';
-      text += '• Сумма недостач 01.09: ' + (isPiece ? '-3 990 ₸' : '-8 450 ₸') + '\n';
-      text += '• Зачтено последующих излишков: ' + (isPiece ? '+3 450 ₸' : '+7 375 ₸') + '\n';
+      text += '• Недостача 01.09: ' + (isPiece ? '-3 990 ₸' : '-11 550 ₸') + '\n';
+      text += '• Зачтено последующих излишков: ' + (isPiece ? '+2 400 ₸' : '+5 780 ₸') + '\n';
+      text += '• *РЕАЛЬНЫЙ УБЫТОК К УДЕРЖАНИЮ:* ' + (isPiece ? '-1 590 ₸' : '-5 770 ₸') + '\n';
       text += '--------------------------------\n';
-      text += '*ПОЗИЦИИ (ДВИЖЕНИЕ И ЗАЧЁТ):*\n';
+      text += '*ДЕТАЛИЗАЦИЯ ПО ПОЗИЦИЯМ:*\n';
 
       items.forEach(function(item) {
-        text += '• ' + item.title + ': ' + item.diffBefore + ' ' + item.unit + ' ➔ излишек ' + item.surplusDate + ' (+' + item.surplusQty + ' ' + item.unit + ') | остаточная недостача: ' + item.remDiff + ' ' + item.unit + ' (' + item.remCost + ' ₸)\n';
+        if (item.hasSurplus) {
+          text += '• ' + item.title + ': ' + item.diffBefore + ' ' + item.unit + ' ➔ излишек ' + item.surplusDate + ' (+' + item.surplusQty + ' ' + item.unit + ') | ' + (item.remCost === 0 ? '✓ Сведено в 0' : ('остаток ' + item.remDiff + ' ' + item.unit + ' (' + item.remCost + ' ₸)')) + '\n';
+        } else {
+          text += '• ' + item.title + ': ' + item.diffBefore + ' ' + item.unit + ' ➔ ИЗЛИШКОВ ДО 10.09 НЕТ! ⚠️ К удержанию: ' + item.costBefore + ' ₸\n';
+        }
       });
 
       text += '--------------------------------\n';
-      text += '✅ *ИТОГОВЫЙ ШТРАФ: 0 ₸*\n';
       text += (isPiece 
-        ? '💡 Основание: излишки по штучному товару обоснованы и зачтены в счёт предыдущей смены.' 
-        : '💡 Основание: все остаточные суммы недостач < 1 000 ₸ по регламенту сети.') + '\n';
-      text += '📌 *Статус:* Сведено и проведено в iikoChain';
+        ? '⚠️ *ИТОГ:* 1 590 ₸ удержать со смены (соус не найден до 10.09, булочки частично).' 
+        : '⚠️ *ИТОГ:* 4 950 ₸ удержать за картофель фри (излишков нет), по фаршу и сыру штрафы сняты (< 1 000 ₸).') + '\n';
+      text += '📌 *Статус:* Документ скорректирован и проведён в iikoChain';
 
       navigator.clipboard.writeText(text).then(function() {
         showToast('✓ Текст скопирован для WhatsApp');
@@ -1876,7 +2118,7 @@
       
       setTimeout(function() {
         btn.textContent = '✓ Документ успешно проведен в iiko';
-        showToast('Инвентаризация точки В-2 проведена в iiko');
+        showToast('Инвентаризация проведена в iiko');
       }, 700);
     }
 
