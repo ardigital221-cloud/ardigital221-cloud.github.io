@@ -1232,7 +1232,7 @@
           <div class="logo-text">BURЖУЙ</div>
         </div>
         <div class="header-user-actions">
-          <span class="user-pill" id="user-role-label">В-2 • Управляющий</span>
+          <span class="user-pill" id="user-role-label">Управляющий</span>
           <button class="btn-logout" onclick="handleLogout()">Выйти</button>
         </div>
       </header>
@@ -1276,7 +1276,7 @@
             </div>
             <div class="store-dropdown-wrap">
               <select class="store-dropdown" id="select-store" onchange="onStoreChange()">
-                <option value="В-2" selected>В-2 (Точка P2)</option>
+                <option value="" disabled selected>-- Выберите торговую точку (19 точек) --</option>
                 <option value="В-3">В-3</option>
                 <option value="В-4">В-4</option>
                 <option value="В-20">В-20</option>
@@ -1292,6 +1292,7 @@
                 <option value="В-9">В-9</option>
                 <option value="В-11">В-11</option>
                 <option value="В-16">В-16</option>
+                <option value="В-2">В-2</option>
                 <option value="В-21">В-21</option>
                 <option value="В-14">В-14</option>
                 <option value="В-12">В-12</option>
@@ -1757,6 +1758,12 @@
     }
 
     function handleRefreshData() {
+      const store = document.getElementById('select-store').value;
+      if (!store) {
+        showToast('⚠️ Выберите торговую точку в шаге 2');
+        document.getElementById('select-store').focus();
+        return;
+      }
       const btn = document.getElementById('btn-update');
       const text = document.getElementById('btn-update-text');
       btn.classList.add('loading');
