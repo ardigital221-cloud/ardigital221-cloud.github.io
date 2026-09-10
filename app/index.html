@@ -7,6 +7,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="theme-color" content="#0F172A">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1400,8 +1403,7 @@
             </div>
             <div class="store-dropdown-wrap">
               <select class="store-dropdown" id="select-store" onchange="onStoreChange()">
-                <option value="" disabled selected>-- Выберите торговую точку (19 точек) --</option>
-                <option value="В-3">В-3</option>
+                <option value="В-3" selected>В-3</option>
                 <option value="В-4">В-4</option>
                 <option value="В-20">В-20</option>
                 <option value="В-10">В-10</option>
@@ -1670,14 +1672,8 @@
     // АВТО-ВОССТАНОВЛЕНИЕ СЕССИИ ПРИ ПЕРЕЗАГРУЗКЕ СТРАНИЦЫ
     (function checkStoredSession() {
       try {
-        const stored = localStorage.getItem('burzhui_user_session');
-        if (stored) {
-          const sess = JSON.parse(stored);
-          if (sess && sess.loggedIn) {
-            document.getElementById('view-auth').style.display = 'none';
-            document.getElementById('view-main').style.display = 'flex';
-          }
-        }
+        document.getElementById('view-auth').style.display = 'none';
+        document.getElementById('view-main').style.display = 'flex';
       } catch (e) {
         console.error('Session restore error:', e);
       }
@@ -1793,9 +1789,15 @@
 
     function onStoreChange() {
       const store = document.getElementById('select-store').value;
+      if (!store) return;
       document.getElementById('user-role-label').textContent = store + ' • Управляющий';
+      isDataLoaded = true;
+      isReconciled = false;
+      renderItemsCards();
+      document.getElementById('placeholder-box').style.display = 'none';
+      document.getElementById('results-box').style.display = 'block';
+      document.getElementById('save-dock').style.display = 'block';
       showToast('Выбрана точка: ' + store);
-      resetResults();
     }
 
     function selectSurplusType(type) {
@@ -1813,7 +1815,10 @@
         hint.innerHTML = '<strong>Регламент штрафов:</strong> До 1 000 ₸ штраф закрепляется за сотрудником <strong>Су-шеф</strong> 👨‍🍳. После 1 000 ₸ штраф ложится на <strong>сотрудника на смене</strong> (повар цеха по Журналу явок iiko).';
         showToast('Счёт: Излишки — весовой товар');
       }
-      resetResults();
+      isReconciled = false;
+      if (document.getElementById('select-store').value) {
+        renderItemsCards();
+      }
     }
 
     function handleRefreshData() {
@@ -2292,6 +2297,18 @@
         toast.classList.remove('show');
       }, 2500);
     }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      try {
+        const storeSelect = document.getElementById('select-store');
+        if (storeSelect) {
+          storeSelect.value = 'В-3';
+          onStoreChange();
+        }
+      } catch (err) {
+        console.error('Init error:', err);
+      }
+    });
 </script>
 </body>
 </html>
