@@ -1546,19 +1546,20 @@
         fact: 222,
         diffBefore: -18,
         costBefore: -1620,
+        hasSurplus: true,
         surplusDate: '03.09',
         surplusQty: 15,
         surplusCost: 1350,
         remDiff: -3,
         remCost: -270,
-        bookAfter: 225, // Книга 240 - 15 = 225. Факт 222. Недостача 3 шт!
+        bookAfter: 225,
         movements: [
           { date: '01.09', type: 'Инвентаризация вечер', qty: '-18 шт', cls: 'minus' },
           { date: '02.09', type: 'Продажи по чекам', qty: '-180 шт', cls: 'minus' },
           { date: '03.09', type: 'Инвентаризация вечер (Излишек)', qty: '+15 шт', cls: 'plus' },
-          { date: '04.09', type: 'Приход с цеха', qty: '+300 шт', cls: 'plus' }
+          { date: '04-10.09', type: 'Дальнейший расход', qty: '-540 шт', cls: 'minus' }
         ],
-        explain: '01.09 недостача: 18 шт. В инвентаризации 03.09 обнаружен излишек: 15 шт. Зачёт излишка: 18 − 15 = 3 шт остаточной недостачи (270 ₸).'
+        explain: '01.09 недостача: 18 шт. В инвентаризации 03.09 обнаружен встречный излишек: 15 шт. Зачёт: 18 − 15 = 3 шт остаточной недостачи (270 ₸).'
       },
       {
         id: 'p2',
@@ -1568,18 +1569,20 @@
         fact: 158,
         diffBefore: -22,
         costBefore: -1320,
-        surplusDate: '02.09',
-        surplusQty: 20,
-        surplusCost: 1200,
-        remDiff: -2,
-        remCost: -120,
-        bookAfter: 160,
+        hasSurplus: false, // НЕТ ИЗЛИШКА! НЕ СВОДИТСЯ!
+        surplusDate: '—',
+        surplusQty: 0,
+        surplusCost: 0,
+        remDiff: -22,
+        remCost: -1320,
+        bookAfter: 180,
         movements: [
           { date: '01.09', type: 'Инвентаризация вечер', qty: '-22 шт', cls: 'minus' },
-          { date: '02.09', type: 'Инвентаризация вечер (Излишек)', qty: '+20 шт', cls: 'plus' },
-          { date: '03.09', type: 'Продажи по чекам', qty: '-95 шт', cls: 'minus' }
+          { date: '02.09', type: 'Продажи по чекам', qty: '-45 шт', cls: 'minus' },
+          { date: '03.09', type: 'Инвентаризация вечер', qty: '0 шт (норма)', cls: '' },
+          { date: '04-10.09', type: 'Проверено до 10.09', qty: 'Излишков НЕТ', cls: 'minus' }
         ],
-        explain: '01.09 недостача: 22 шт. 02.09 обнаружен излишек: 20 шт. Зачёт: 22 − 20 = 2 шт остаточной недостачи (120 ₸).'
+        explain: '⚠️ ВНИМАНИЕ: С 02.09 по 10.09 встречных излишков НЕ обнаружено. Корректировка не производится! Это реальная недостача смены (-1 320 ₸ к удержанию).'
       },
       {
         id: 'p3',
@@ -1589,18 +1592,19 @@
         fact: 315,
         diffBefore: -35,
         costBefore: -1050,
-        surplusDate: '03.09',
-        surplusQty: 30,
-        surplusCost: 900,
-        remDiff: -5,
-        remCost: -150,
-        bookAfter: 320,
+        hasSurplus: true,
+        surplusDate: '02.09',
+        surplusQty: 35,
+        surplusCost: 1050,
+        remDiff: 0,
+        remCost: 0,
+        bookAfter: 315,
         movements: [
-          { date: '01.09', type: 'Инвентаризация вечер', qty: '-35 шт', cls: 'minus' },
-          { date: '02.09', type: 'Расход бара', qty: '-120 шт', cls: 'minus' },
-          { date: '03.09', type: 'Инвентаризация вечер (Излишек)', qty: '+30 шт', cls: 'plus' }
+          { date: '01.09', type: 'Инвентаризация вечер (Не посчитали)', qty: '-35 шт', cls: 'minus' },
+          { date: '02.09', type: 'Инвентаризация утро (Найдена коробка)', qty: '+35 шт', cls: 'plus' },
+          { date: '03-10.09', type: 'Расход по чекам', qty: '-420 шт', cls: 'minus' }
         ],
-        explain: '01.09 недостача: 35 шт. 03.09 излишек: 30 шт. Зачёт: 35 − 30 = 5 шт остаточной недостачи (150 ₸).'
+        explain: '01.09 недостача: 35 шт. 02.09 утром найдена неоткрытая коробка: +35 шт. Зачёт: 35 − 35 = 0 шт. Сведено полностью!'
       }
     ];
 
@@ -1609,33 +1613,13 @@
     const weightData = [
       {
         id: 'w1',
-        title: 'Сыр Моцарелла тертый',
-        unit: 'кг',
-        bookBefore: 12.500,
-        fact: 10.800,
-        diffBefore: -1.700,
-        costBefore: -4100,
-        surplusDate: '02.09',
-        surplusQty: 1.500,
-        surplusCost: 3620,
-        remDiff: -0.200,
-        remCost: -480,
-        bookAfter: 12.300,
-        movements: [
-          { date: '01.09', type: 'Инвентаризация смены', qty: '-1.700 кг', cls: 'minus' },
-          { date: '02.09', type: 'Инвентаризация смены (Излишек)', qty: '+1.500 кг', cls: 'plus' },
-          { date: '03.09', type: 'Расход на пиццы/бургеры', qty: '-8.200 кг', cls: 'minus' }
-        ],
-        explain: 'Недостача: 1.700 кг. Излишек 02.09: 1.500 кг. Уменьшаем недостачу на 1.500 кг ➔ остаточная недостача 0.200 кг (480 ₸ < 1 000 ₸, штраф снят).'
-      },
-      {
-        id: 'w2',
         title: 'Фарш говяжий фирменный',
         unit: 'кг',
         bookBefore: 8.690,
         fact: 5.400,
         diffBefore: -3.290,
         costBefore: -2500,
+        hasSurplus: true,
         surplusDate: '02.09',
         surplusQty: 2.845,
         surplusCost: 2160,
@@ -1643,32 +1627,55 @@
         remCost: -340,
         bookAfter: 8.245,
         movements: [
-          { date: '01.09', type: 'Инвентаризация смены', qty: '-3.290 кг', cls: 'minus' },
+          { date: '01.09', type: 'Инвентаризация вечер', qty: '-3.290 кг', cls: 'minus' },
           { date: '02.09', type: 'Инвентаризация смены (Излишек)', qty: '+2.845 кг', cls: 'plus' },
-          { date: '03.09', type: 'Расход на котлеты', qty: '-4.100 кг', cls: 'minus' }
+          { date: '03-10.09', type: 'Расход на котлеты', qty: '-14.200 кг', cls: 'minus' }
         ],
-        explain: 'Недостача: 3.290 кг. Излишек 02.09: 2.845 кг. Уменьшаем недостачу на 2.845 кг ➔ остаточная недостача 0.445 кг (340 ₸ < 1 000 ₸, штраф снят).'
+        explain: 'Недостача: 3.290 кг. Излишек 02.09: 2.845 кг. Зачёт: остаточная недостача 0.445 кг (340 ₸ < 1 000 ₸, штраф снят).'
+      },
+      {
+        id: 'w2',
+        title: 'Картофель фри заморозка (10/10)',
+        unit: 'кг',
+        bookBefore: 18.500,
+        fact: 13.000,
+        diffBefore: -5.500,
+        costBefore: -4950,
+        hasSurplus: false, // НЕТ ИЗЛИШКА!
+        surplusDate: '—',
+        surplusQty: 0,
+        surplusCost: 0,
+        remDiff: -5.500,
+        remCost: -4950,
+        bookAfter: 18.500,
+        movements: [
+          { date: '01.09', type: 'Инвентаризация вечер', qty: '-5.500 кг', cls: 'minus' },
+          { date: '02.09', type: 'Расход на заказы', qty: '-24.000 кг', cls: 'minus' },
+          { date: '03-10.09', type: 'Проверено до 10.09', qty: 'Излишков НЕТ', cls: 'minus' }
+        ],
+        explain: '⚠️ ВНИМАНИЕ: С 02.09 по 10.09 излишков картофеля фри нет! Позиция НЕ сводится. Реальная утрата/перерасход фритюра (-4 950 ₸ к удержанию).'
       },
       {
         id: 'w3',
-        title: 'Капуста пекинская зачищенная',
+        title: 'Сыр Моцарелла тертый',
         unit: 'кг',
-        bookBefore: 7.480,
-        fact: 5.300,
-        diffBefore: -2.180,
-        costBefore: -1850,
-        surplusDate: '03.09',
-        surplusQty: 1.880,
-        surplusCost: 1595,
-        remDiff: -0.300,
-        remCost: -255,
-        bookAfter: 7.180,
+        bookBefore: 12.500,
+        fact: 10.800,
+        diffBefore: -1.700,
+        costBefore: -4100,
+        hasSurplus: true,
+        surplusDate: '02.09',
+        surplusQty: 1.500,
+        surplusCost: 3620,
+        remDiff: -0.200,
+        remCost: -480,
+        bookAfter: 12.300,
         movements: [
-          { date: '01.09', type: 'Инвентаризация смены', qty: '-2.180 кг', cls: 'minus' },
-          { date: '02.09', type: 'Расход на салаты', qty: '-3.100 кг', cls: 'minus' },
-          { date: '03.09', type: 'Инвентаризация смены (Излишек)', qty: '+1.880 кг', cls: 'plus' }
+          { date: '01.09', type: 'Инвентаризация вечер', qty: '-1.700 кг', cls: 'minus' },
+          { date: '02.09', type: 'Инвентаризация утро (Излишек)', qty: '+1.500 кг', cls: 'plus' },
+          { date: '03-10.09', type: 'Расход на пиццы', qty: '-18.500 кг', cls: 'minus' }
         ],
-        explain: 'Недостача: 2.180 кг. Излишек 03.09: 1.880 кг. Уменьшаем недостачу на 1.880 кг ➔ остаточная недостача 0.300 кг (255 ₸ < 1 000 ₸, штраф снят).'
+        explain: 'Недостача: 1.700 кг. Излишек 02.09: 1.500 кг. Зачёт: остаточная дельта 0.200 кг (480 ₸ < 1 000 ₸, штраф снят).'
       }
     ];
 
@@ -1792,191 +1799,31 @@
 
     function renderItemsCards() {
       const store = document.getElementById('select-store').value;
-      const isPiece = activeSurplus === 'piece';
-      const items = isPiece ? pieceData : weightData;
-
-      document.getElementById('inv-current-title').textContent = 
-        'Инвентаризация: 01.09 (' + store + ', ' + (isPiece ? 'Штучный' : 'Весовой') + ')';
-
-      const penaltyBadge = document.getElementById('penalty-badge');
-      const sumVal = document.getElementById('total-diff-val');
-      const subNote = document.getElementById('total-diff-sub');
-      const recAllBtn = document.getElementById('btn-reconcile-all');
-      const recLabel = document.getElementById('btn-reconcile-label');
-
-      if (!isReconciled) {
-        penaltyBadge.textContent = isPiece ? 'Штраф на излишки: 3 450 ₸' : 'Штраф: > 1 000 ₸';
-        penaltyBadge.className = 'penalty-pill';
-        sumVal.textContent = isPiece ? '-3 990 ₸' : '-8 450 ₸';
-        sumVal.className = 'inv-sum-val';
-        subNote.textContent = isPiece 
-          ? 'В первую очередь: наибольшая сумма недостачи (булочки, соусы)' 
-          : '3 весовые позиции с суммой недостачи > 1 000 ₸';
-        recAllBtn.classList.remove('done');
-        recLabel.textContent = 'Свести все позиции (зачесть излишки)';
-        document.getElementById('reconciled-bar').style.display = 'none';
-        document.getElementById('btn-save-doc').disabled = true;
-      } else {
-        penaltyBadge.textContent = isPiece ? '✓ Излишки зачтены (Штраф: 0 ₸)' : '✓ Штраф снят (0 ₸)';
-        penaltyBadge.className = 'penalty-pill cleared';
-        sumVal.textContent = '0 ₸';
-        sumVal.className = 'inv-sum-val cleared';
-        subNote.textContent = 'Все последующие излишки зачтены в счёт предыдущей недостачи';
-        recAllBtn.classList.add('done');
-        recLabel.textContent = '✓ Все позиции сведены по алгоритму';
-        document.getElementById('reconciled-bar').style.display = 'flex';
-        document.getElementById('btn-save-doc').disabled = false;
-      }
-
-      const container = document.getElementById('items-cards-container');
-      container.innerHTML = '';
-
-      items.forEach(function(item) {
-        const card = document.createElement('div');
-        card.className = 'item-card';
-        card.id = 'card-' + item.id;
-
-        const isCurrentResolved = isReconciled;
-        const displayDiff = isCurrentResolved ? (item.remDiff + ' ' + item.unit) : (item.diffBefore + ' ' + item.unit);
-        const displayCost = isCurrentResolved ? (item.remCost + ' ₸') : (item.costBefore + ' ₸');
-        const displayBook = isCurrentResolved ? (item.bookAfter + ' ' + item.unit) : (item.bookBefore + ' ' + item.unit);
-
-        let moveHtml = '';
-        item.movements.forEach(function(m) {
-          moveHtml += 
-            '<div class="move-item">' +
-              '<span class="move-date">' + m.date + '</span>' +
-              '<span class="move-type">' + m.type + '</span>' +
-              '<span class="move-qty ' + m.cls + '">' + m.qty + '</span>' +
-            '</div>';
-        });
-
-        card.innerHTML = 
-          '<div class="item-card-main">' +
-            '<div class="item-row-top">' +
-              '<span class="item-title">' + item.title + '</span>' +
-              '<span class="item-cost-badge ' + (isCurrentResolved ? 'ok' : '') + '">' +
-                displayCost +
-              '</span>' +
-            '</div>' +
-            '<div class="item-metrics-3col">' +
-              '<div>Книга: <div class="item-metric-val">' + displayBook + '</div></div>' +
-              '<div>Факт 01.09: <div class="item-metric-val">' + item.fact + ' ' + item.unit + '</div></div>' +
-              '<div>Недостача: <div class="item-metric-val" style="color: ' + (isCurrentResolved ? 'var(--iiko-green)' : 'var(--danger)') + ';">' + displayDiff + '</div></div>' +
-            '</div>' +
-            '<div class="item-actions-row">' +
-              '<button type="button" class="btn-movement-toggle" onclick="toggleMovement(\'' + item.id + '\')">' +
-                '<span>📊</span>' +
-                '<span>Движение товара</span>' +
-                '<span id="arrow-' + item.id + '">▾</span>' +
-              '</button>' +
-              '<button type="button" class="btn-item-reconcile ' + (isCurrentResolved ? 'done' : '') + '" onclick="triggerSingleReconcile(\'' + item.id + '\')">' +
-                '<span>' + (isCurrentResolved ? '✓ Зачтено' : '⚡ Зачесть излишек') + '</span>' +
-              '</button>' +
-            '</div>' +
-          '</div>' +
-          '<div class="movement-card" id="move-' + item.id + '">' +
-            '<div class="movement-header">' +
-              '<span>Аудит движения: с 01.09 по 10.09</span>' +
-              '<span style="color: var(--iiko-green);">Найден излишек: +' + item.surplusQty + ' ' + item.unit + '</span>' +
-            '</div>' +
-            '<div class="movement-timeline">' +
-              moveHtml +
-            '</div>' +
-            '<div class="calc-explain-box">' +
-              '<strong>Расчёт iiko:</strong> ' + item.explain +
-            '</div>' +
-          '</div>';
-
-        container.appendChild(card);
-      });
-    }
-
-    function toggleMovement(id) {
-      const moveBox = document.getElementById('move-' + id);
-      const arrow = document.getElementById('arrow-' + id);
-      if (moveBox.style.display === 'block') {
-        moveBox.style.display = 'none';
-        arrow.textContent = '▾';
-      } else {
-        moveBox.style.display = 'block';
-        arrow.textContent = '▴';
-      }
-    }
-
-    function triggerSingleReconcile(id) {
-      if (isReconciled) return;
-      const isPiece = activeSurplus === 'piece';
-      const items = isPiece ? pieceData : weightData;
-      const item = items.find(x => x.id === id);
-
-      pendingAction = { type: 'single', item: item };
-      document.getElementById('modal-formula-text').innerHTML = 
-        'Позиция: <strong>' + item.title + '</strong><br>' +
-        'Недостача 01.09: <strong>' + Math.abs(item.diffBefore) + ' ' + item.unit + '</strong><br>' +
-        'Последующий излишек ' + item.surplusDate + ': <strong>' + item.surplusQty + ' ' + item.unit + '</strong><br>' +
-        'Формула зачёта: ' + Math.abs(item.diffBefore) + ' − ' + item.surplusQty + ' = <strong>' + Math.abs(item.remDiff) + ' ' + item.unit + '</strong> (остаточная недостача)';
-
-      document.getElementById('modal-warning').style.display = 'flex';
-    }
-
-    function openBulkReconcileModal() {
-      if (isReconciled) return;
-      const isPiece = activeSurplus === 'piece';
-      pendingAction = { type: 'bulk' };
-
-      document.getElementById('modal-formula-text').innerHTML = 
-        isPiece 
-          ? 'Зачёт излишков по всем штучным позициям:<br>• Булочки: 18 − 15 = 3 шт остатка<br>• Соус сырный: 22 − 20 = 2 шт остатка<br>• Стаканы 0.5л: 35 − 30 = 5 шт остатка<br><strong>Штраф на излишки списывается в 0 ₸</strong>'
-          : 'Зачёт по всем весовым позициям:<br>• Фарш: 3.290 − 2.845 = 0.445 кг<br>• Сыр: 1.700 − 1.500 = 0.200 кг<br>• Капуста: 2.180 − 1.880 = 0.300 кг<br><strong>Все остатки < 1 000 ₸ ➔ Штраф снят</strong>';
-
-      document.getElementById('modal-warning').style.display = 'flex';
-    }
-
-    function closeWarningModal() {
-      document.getElementById('modal-warning').style.display = 'none';
-      pendingAction = null;
-    }
-
-    function confirmModalAction() {
-      closeWarningModal();
-      isReconciled = true;
-      renderItemsCards();
-      showToast('✓ Корректировка книжных остатков проведена');
-    }
-
-    function revertReconciliation() {
-      isReconciled = false;
-      renderItemsCards();
-      document.getElementById('reconciled-bar').style.display = 'none';
-      const saveBtn = document.getElementById('btn-save-doc');
-      saveBtn.disabled = true;
-      saveBtn.textContent = 'Сохранить сведение в iikoChain';
-      showToast('↩️ Сведение отменено. Исходные данные возвращены');
-    }
-
-    function openReportModal() {
-      const store = document.getElementById('select-store').value;
-      const isPiece = activeSurplus === 'piece';
+            const isPiece = activeSurplus === 'piece';
       const items = isPiece ? pieceData : weightData;
 
       document.getElementById('rep-store-val').textContent = store;
       document.getElementById('rep-surplus-val').textContent = isPiece ? 'Штучный товар' : 'Весовой товар';
-      document.getElementById('rep-before-val').textContent = isPiece ? '-3 990 ₸' : '-8 450 ₸';
-      document.getElementById('rep-covered-val').textContent = isPiece ? '+3 450 ₸' : '+7 375 ₸';
-      document.getElementById('rep-rule-label').textContent = isPiece ? 'Штраф на излишки штучного товара:' : 'Штраф на недостачи весового товара:';
-      document.getElementById('rep-delta-val').textContent = '0 ₸';
+      document.getElementById('rep-before-val').textContent = isPiece ? '-3 990 ₸' : '-11 550 ₸';
+      document.getElementById('rep-covered-val').textContent = isPiece ? '+2 400 ₸' : '+5 780 ₸';
+      document.getElementById('rep-rule-label').textContent = 'Реальный остаток к удержанию:';
+      document.getElementById('rep-delta-val').textContent = isPiece ? '1 590 ₸' : '5 770 ₸';
+      document.getElementById('rep-delta-val').style.color = '#DC2626';
 
       const tbody = document.getElementById('rep-table-body');
       tbody.innerHTML = '';
 
       items.forEach(function(item) {
         const tr = document.createElement('tr');
+        const statusText = item.hasSurplus 
+          ? ('<span style="color: var(--iiko-green); font-weight: 700;">' + item.remDiff + ' ' + item.unit + ' (' + item.remCost + ' ₸)</span>')
+          : ('<span style="color: var(--danger); font-weight: 700;">НЕ СВЕДЕНО (' + item.diffBefore + ' ' + item.unit + ')</span>');
+        
         tr.innerHTML = 
           '<td style="font-weight: 600;">' + item.title + '</td>' +
           '<td style="color: var(--danger); font-family: var(--mono);">' + item.diffBefore + ' ' + item.unit + '</td>' +
-          '<td style="color: var(--iiko-green); font-family: var(--mono);">+' + item.surplusQty + ' ' + item.unit + ' (' + item.surplusDate + ')</td>' +
-          '<td style="font-family: var(--mono); font-weight: 700;">' + item.remDiff + ' ' + item.unit + ' (' + item.remCost + ' ₸)</td>';
+          '<td style="font-family: var(--mono);">' + (item.hasSurplus ? ('+' + item.surplusQty + ' ' + item.unit) : '<span style="color: var(--danger);">НЕТ</span>') + '</td>' +
+          '<td>' + statusText + '</td>';
         tbody.appendChild(tr);
       });
 
