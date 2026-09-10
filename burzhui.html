@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BURЖУЙ — Стратегический доклад и операционная программа 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090D14;
+      --bg-surface: #0F1622;
+      --card-bg: rgba(19, 28, 43, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(255, 184, 0, 0.4);
+      --primary: #FFB800;
+      --primary-hover: #FFA000;
+      --primary-glow: rgba(255, 184, 0, 0.25);
+      --text-main: #F0F4F8;
+      --text-muted: #8E9BAE;
+      --danger: #FF453A;
+      --danger-bg: rgba(255, 69, 58, 0.12);
+      --danger-border: rgba(255, 69, 58, 0.3);
+      --success: #30D158;
+      --success-bg: rgba(48, 209, 88, 0.12);
+      --success-border: rgba(48, 209, 88, 0.3);
+      --info: #0A84FF;
+      --yandex: #FFCC00;
+      --wolt: #009DE0;
+      --glovo: #FFC244;
+      --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      line-height: 1.5;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      user-select: none;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(255, 184, 0, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(10, 132, 255, 0.05) 0%, transparent 40%);
+    }
+
+    .deck-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      height: 60px;
+      border-bottom: 1px solid var(--card-border);
+      background: rgba(9, 13, 20, 0.85);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      z-index: 100;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    .brand-title {
+      font-size: 13px;
+      color: var(--text-muted);
+      border-left: 1px solid var(--card-border);
+      padding-left: 14px;
+    }
+
+    .top-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .slide-badge {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(255, 184, 0, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 184, 0, 0.2);
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Slides Content Area */
+    .slide {
+      flex: 1;
+      display: none;
+      padding: 28px 48px;
+      overflow-y: auto;
+      max-width: 1380px;
+      width: 100%;
+      margin: 0 auto;
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Headers */
+    .slide-header {
+      margin-bottom: 20px;
+    }
+
+    .slide-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255, 184, 0, 0.12);
+      color: var(--primary);
+      border: 1px solid rgba(255, 184, 0, 0.25);
+    }
+
+    .slide-tag.danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border-color: var(--danger-border);
+    }
+
+    .slide-tag.success {
+      background: var(--success-bg);
+      color: var(--success);
+      border-color: rgba(48, 209, 88, 0.25);
+    }
+
+    .slide-tag.info {
+      background: rgba(10, 132, 255, 0.12);
+      color: var(--info);
+      border-color: rgba(10, 132, 255, 0.25);
+    }
+
+    .slide-title {
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      color: #FFF;
+      margin-bottom: 4px;
+    }
+
+    .slide-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 1050px;
+    }
+
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px;
+      backdrop-filter: blur(16px);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      border-color: var(--card-hover-border);
+    }
+
+    .card.alert {
+      background: linear-gradient(180deg, rgba(255, 69, 58, 0.08) 0%, rgba(19, 28, 43, 0.85) 100%);
+      border-color: var(--danger-border);
+    }
+
+    .card.highlight {
+      background: linear-gradient(180deg, rgba(255, 184, 0, 0.08) 0%, rgba(19, 28, 43, 0.85) 100%);
+      border-color: rgba(255, 184, 0, 0.3);
+    }
+
+    .card.success-card {
+      background: linear-gradient(180deg, rgba(48, 209, 88, 0.08) 0%, rgba(19, 28, 43, 0.85) 100%);
+      border-color: rgba(48, 209, 88, 0.3);
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stat-huge {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .stat-huge.gold { color: var(--primary); }
+    .stat-huge.red { color: var(--danger); }
+    .stat-huge.green { color: var(--success); }
+    .stat-huge.blue { color: var(--info); }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .badge.green { background: var(--success-bg); color: var(--success); }
+    .badge.red { background: var(--danger-bg); color: var(--danger); }
+    .badge.yellow { background: rgba(255, 184, 0, 0.15); color: var(--primary); }
+    .badge.blue { background: rgba(10, 132, 255, 0.15); color: var(--info); }
+
+    /* Lists */
+    .split-list { list-style: none; }
+    .split-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+    .split-list li span { font-weight: 700; color: var(--primary); }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      padding: 10px 14px;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    /* Timeline step indicator */
+    .timeline-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFF;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      height: 60px;
+      border-top: 1px solid var(--card-border);
+      background: rgba(9, 13, 20, 0.95);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      z-index: 100;
+    }
+
+    .nav-dots { display: flex; gap: 8px; }
+    .nav-dot {
+      width: 26px;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .nav-dot.active {
+      background: var(--primary);
+      width: 42px;
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .nav-buttons { display: flex; gap: 12px; }
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-nav:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+    .btn-nav.primary {
+      background: var(--primary);
+      color: #000;
+      border-color: var(--primary);
+    }
+    .btn-nav.primary:hover:not(:disabled) { background: var(--primary-hover); }
+
+    .key-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .key-badge {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container">
+    <!-- Top Header -->
+    <header class="top-bar">
+      <div class="brand-group">
+        <div class="brand-logo">BURЖУЙ</div>
+        <div class="brand-title">Стратегический доклад совету директоров и управляющим | <strong>2024 — 2026</strong></div>
+      </div>
+      <div class="top-controls">
+        <div class="slide-badge">СЛАЙД <span id="slide-num">1</span> ИЗ <span id="slide-total">8</span></div>
+        <button class="btn-action" onclick="toggleFullscreen()">⛶ На весь экран</button>
+      </div>
+    </header>
+
+    <!-- SLIDE 1: EXECUTIVE SUMMARY -->
+    <section class="slide active" id="slide-1">
+      <div class="slide-header">
+        <span class="slide-tag">Executive Summary</span>
+        <h1 class="slide-title">Диагностика бизнеса сети «BURЖУЙ»</h1>
+        <p class="slide-subtitle">Операционный аудит домашнего рынка, разбор регионального опыта, резервы в доставке и практическая программа модернизации.</p>
+      </div>
+
+      <div class="grid-3" style="margin-bottom: 24px;">
+        <div class="card highlight">
+          <div class="card-title"><i>📍</i> Домашний рынок (Павлодар)</div>
+          <div class="stat-huge gold">85.1 млн ₸</div>
+          <div class="stat-label">Выручка за август (Павлодар)<br>38 864 заказа, 15+ стабильных локаций</div>
+        </div>
+        <div class="card alert">
+          <div class="card-title"><i>🔴</i> Резервы в агрегаторах</div>
+          <div class="stat-huge red">~1.5 млн ₸</div>
+          <div class="stat-label">Ежемесячные потери от пауз в пик, отсутствия акций и незапущенного молла</div>
+        </div>
+        <div class="card success-card">
+          <div class="card-title"><i>🚀</i> Потенциал операционного роста</div>
+          <div class="stat-huge green">+2.0 млн ₸</div>
+          <div class="stat-label">Прирост чистой выручки в мес. за счет порядка в доставке и автоматизации рутины</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><i>📌</i> 3 ключевых вывода для руководства компании:</div>
+        <div class="grid-3" style="margin-top: 12px;">
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px; border-left: 3px solid var(--primary);">
+            <h4 style="font-size: 14px; margin-bottom: 6px; color: #FFF;">1. «Инфляционная маскировка»</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Выручка в тенге росла за счет повышения среднего чека (+43% за 3 года), тогда как физический поток гостей сжался на 8–10%. Ресурс дальнейшего роста цен исчерпан.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px; border-left: 3px solid var(--danger);">
+            <h4 style="font-size: 14px; margin-bottom: 6px; color: #FFF;">2. Проблема системного маркетинга</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Попытки масштабирования в другие города (Усть-Каменогорск, Астана, Караганда) приводили к закрытию точек из-за отсутствия воронки и локального маркетинга с нуля.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px; border-left: 3px solid var(--warning);">
+            <h4 style="font-size: 14px; margin-bottom: 6px; color: #FFF;">3. Резервы доставки и рутина управляющих</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Временные паузы планшетов в запару, нехватка акций в Glovo и часы ручной вечерней работы управляющих — это прямые внутренние точки немедленного роста.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: ОПЫТ РЕГИОНАЛЬНОЙ ЭКСПАНСИИ И МАРКЕТИНГ -->
+    <section class="slide" id="slide-2">
+      <div class="slide-header">
+        <span class="slide-tag danger">Анализ экспансии</span>
+        <h2 class="slide-title">Опыт региональной экспансии: ошибки и системные выводы</h2>
+        <p class="slide-subtitle">Разбор попыток масштабирования в Усть-Каменогорск, Астану и Караганду. Почему «павлодарский маркетинг» не работает в других городах.</p>
+      </div>
+
+      <div class="grid-4" style="margin-bottom: 20px;">
+        <div style="background: rgba(255,69,58,0.06); padding: 16px; border-radius: 12px; border: 1px solid var(--danger-border);">
+          <div style="font-weight: 800; color: #FFF; font-size: 15px; margin-bottom: 4px;">Усть-Каменогорск</div>
+          <div style="font-size: 11px; color: var(--danger); font-weight: 700;">B-27, B-28, В-29, В-30</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
+            Открыли сразу 4 точки без аудитории. 4 аренды и 4 ФОТ без локального маркетинга привели к кассовому разрыву и закрытию всех точек.
+          </div>
+        </div>
+
+        <div style="background: rgba(255,69,58,0.06); padding: 16px; border-radius: 12px; border: 1px solid var(--danger-border);">
+          <div style="font-weight: 800; color: #FFF; font-size: 15px; margin-bottom: 4px;">Астана</div>
+          <div style="font-size: 11px; color: var(--danger); font-weight: 700;">А-1, А-2, А-3, А-4, А-5, А-6</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
+            Попытка зайти сетью точек в столицу на жесткий конкурентный рынок без прогрева, воронки и позиционирования. Все точки закрыты.
+          </div>
+        </div>
+
+        <div style="background: rgba(255,69,58,0.06); padding: 16px; border-radius: 12px; border: 1px solid var(--danger-border);">
+          <div style="font-weight: 800; color: #FFF; font-size: 15px; margin-bottom: 4px;">Караганда</div>
+          <div style="font-size: 11px; color: var(--danger); font-weight: 700;">K-1, K-2, K-3, K-4</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
+            Аналогичный сценарий: открытие точек без знания бренда местными жителями, тихий запуск, отсутствие воронки и рекламы. Закрыты.
+          </div>
+        </div>
+
+        <div style="background: rgba(255,184,0,0.06); padding: 16px; border-radius: 12px; border: 1px solid rgba(255,184,0,0.3);">
+          <div style="font-weight: 800; color: #FFF; font-size: 15px; margin-bottom: 4px;">Аксу</div>
+          <div style="font-size: 11px; color: var(--primary); font-weight: 700;">1 действующая точка</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
+            Работает 1 локальная точка рядом с Павлодаром в стабильном моноформате.
+          </div>
+        </div>
+      </div>
+
+      <!-- Главная системная причина -->
+      <div class="card alert">
+        <div class="card-title" style="color: var(--danger); font-size: 16px;">
+          <i>🛑</i> Главная системная причина: Отсутствие системного маркетинга
+        </div>
+        <p style="font-size: 14px; color: #FFF; margin-bottom: 12px; font-weight: 500;">
+          Маркетинг в компании до сих пор воспринимается как «ведение инстаграма из Павлодара»:
+        </p>
+        <div class="grid-2" style="gap: 16px;">
+          <ul class="split-list">
+            <li><span>❌</span> <div><strong>Нет воронки привлечения:</strong> надежда на случайный трафик вместо управляемого потока гостей.</div></li>
+            <li><span>❌</span> <div><strong>Нет разделения аудиторий по гео-локациям:</strong> анонсы открытия в чужих городах крутились на павлодарскую базу.</div></li>
+          </ul>
+          <ul class="split-list">
+            <li><span>❌</span> <div><strong>Нет работы с LTV и повторными продажами:</strong> контакты гостей не собираются, базы нет.</div></li>
+            <li><span>❌</span> <div><strong>Нет BTL-механик при открытиях:</strong> тихие старты без очередей, блогеров, дегустаций и инфоповодов.</div></li>
+          </ul>
+        </div>
+        <div style="margin-top: 12px; padding: 10px 14px; background: rgba(255,69,58,0.12); border-radius: 8px; font-size: 13px; color: #FFF; font-weight: 700; border-left: 4px solid var(--danger);">
+          Следствие: Каждая попытка открыться в новом месте заканчивалась банкротством точки.
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: REGIONAL SUCCESS - EKIBASTUZ B-16 -->
+    <section class="slide" id="slide-3">
+      <div class="slide-header">
+        <span class="slide-tag success">Успешная модель</span>
+        <h2 class="slide-title">Региональный опыт: Филиал В-16 (г. Экибастуз)</h2>
+        <p class="slide-subtitle">Как одна правильно сфокусированная точка с сильной доставкой дает стабильный операционный плюс.</p>
+      </div>
+
+      <div class="grid-3" style="margin-bottom: 24px;">
+        <div class="card success-card">
+          <div class="card-title"><i>💰</i> Месячный оборот филиала</div>
+          <div class="stat-huge green">3.90 млн ₸</div>
+          <div class="stat-label">1 743 заказа за август<br>Устойчивая операционная прибыль</div>
+        </div>
+        <div class="card success-card">
+          <div class="card-title"><i>🛵</i> Доля доставки в выручке</div>
+          <div class="stat-huge blue">926 187 ₸</div>
+          <div class="stat-label">ТОП-3 сети по доставке<br>24% всей выручки филиала идет из доставки</div>
+        </div>
+        <div class="card highlight">
+          <div class="card-title"><i>🎯</i> Формат филиала</div>
+          <div class="stat-huge gold">1 ТОЧКА</div>
+          <div class="stat-label">ул. Ауэзова<br>Управляемый Opex без раздутого штата</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><i>💡</i> 3 ключевых фактора успеха точки В-16:</div>
+        <div class="grid-3" style="margin-top: 12px;">
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px;">
+            <h4 style="font-size: 14px; margin-bottom: 6px; color: var(--success);">1. Правило одного сильного юнита</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Вместо распыления на 4 объекта сеть сосредоточилась на одной сильной локации с высокой проходимостью.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px;">
+            <h4 style="font-size: 14px; margin-bottom: 6px; color: var(--info);">2. Опора на агрегаторы</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Почти 1 млн ₸ выручки точки генерируют Яндекс и Wolt — доставка формирует фундамент рентабельности.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px;">
+            <h4 style="font-size: 14px; margin-bottom: 6px; color: var(--primary);">3. Подтверждение жизнеспособности</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Блюда «BURЖУЙ» востребованы в регионах. При наличии локального спроса и контроле расходов модель отлично работает.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: AGGREGATORS AUDIT -->
+    <section class="slide" id="slide-4">
+      <div class="slide-header">
+        <span class="slide-tag info">Аудит доставки</span>
+        <h2 class="slide-title">Аудит агрегаторов: Яндекс Еда, Wolt и Glovo</h2>
+        <p class="slide-subtitle">Реальная картина работы сервисов: скрытые резервы выручки, паузы планшетов и точки роста.</p>
+      </div>
+
+      <div class="grid-3" style="margin-bottom: 24px;">
+        <!-- YANDEX -->
+        <div class="card alert">
+          <div class="card-title" style="color: var(--yandex);">
+            <i>🟡</i> Яндекс Еда (Основной поток)
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div class="stat-huge gold">4.7 млн ₸</div>
+            <div class="stat-label">64.1% всех доставок сети (~1 247 заказов)</div>
+          </div>
+          <ul class="split-list">
+            <li>
+              <span>📌</span>
+              <div><strong>Главный канал:</strong> Генерирует ключевой объем доставок сети.</div>
+            </li>
+            <li>
+              <span>⚠️</span>
+              <div><strong>53 открытых обращения:</strong> Зависшие тикеты в поддержке занижают рейтинг и показы заведений.</div>
+            </li>
+            <li>
+              <span>⏱️</span>
+              <div><strong>Временные паузы:</strong> В часы пик заказы зала тормозят доставку, создавая задержки сборки.</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- WOLT -->
+        <div class="card alert">
+          <div class="card-title" style="color: var(--wolt);">
+            <i>🔵</i> Wolt (Высокий средний чек)
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div class="stat-huge blue">3 638 ₸</div>
+            <div class="stat-label">Самый платежеспособный чек (25.8% доставок)</div>
+          </div>
+          <ul class="split-list">
+            <li>
+              <span>💰</span>
+              <div><strong>Премиальный сегмент:</strong> Гости заказывают комбо и большие сеты пит.</div>
+            </li>
+            <li>
+              <span>⏸️</span>
+              <div><strong>Паузы планшетов в часы пик:</strong> Персонал вручную отключает планшет, чтобы снять нагрузку в запару.</div>
+            </li>
+            <li>
+              <span>📊</span>
+              <div><strong>Коррекция статистики:</strong> Часть часов «закрытого времени» в кабинете относится к недействующим точкам, но на живых точках паузы все еще регулярны.</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- GLOVO -->
+        <div class="card alert">
+          <div class="card-title" style="color: var(--glovo);">
+            <i>🟢</i> Glovo (Резерв роста)
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div class="stat-huge green">Все ТТ работают</div>
+            <div class="stat-label">734 тыс. ₸/мес — скрытый потенциал</div>
+          </div>
+          <ul class="split-list">
+            <li>
+              <span>✅</span>
+              <div><strong>Точки активны:</strong> Все действующие локации сети заведены и работают (включая Б1 на ул. Лермонтова, 100).</div>
+            </li>
+            <li>
+              <span>🚀</span>
+              <div><strong>Не запущена только Б19 (Батыр Молл):</strong> Крупнейший молл города еще не подключен к Glovo — запуск даст моментальный прирост заказов.</div>
+            </li>
+            <li>
+              <span>📢</span>
+              <div><strong>Нехватка акций и узнаваемости:</strong> В приложении мало промо-акций и комбо, аудитория Glovo слабо видит бренд. Нужен запуск баннеров и промокодов.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card highlight">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h4 style="font-size: 15px; font-weight: 800; color: #FFF;">Резерв роста в агрегаторах без капитальных вложений:</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Запуск Б19 (Батыр Молл) в Glovo, разбор тикетов Яндекса, акции в Glovo и контроль планшетов в часы пик</p>
+          </div>
+          <div style="font-size: 24px; font-weight: 800; font-family: var(--font-mono); color: var(--primary);">
+            +1 200 000 – 1 600 000 ₸ / месяц
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: ROADMAP QUICK WINS -->
+    <section class="slide" id="slide-5">
+      <div class="slide-header">
+        <span class="slide-tag success">Быстрые результаты</span>
+        <h2 class="slide-title">Быстрые победы (Quick Wins): план действий</h2>
+        <p class="slide-subtitle">Точечные операционные шаги без затрат для мгновенного прироста продаж в доставке.</p>
+      </div>
+
+      <div class="grid-3" style="margin-bottom: 24px;">
+        <div class="card success-card">
+          <div class="card-title"><i>1️⃣</i> Разбор поддержки Яндекс Еды</div>
+          <ul class="split-list" style="margin-top: 8px;">
+            <li><strong>Срок:</strong> 2 рабочих дня.</li>
+            <li><strong>Действие:</strong> Закрыть 53 зависших обращения в техподдержке, выставить актуальные стоп-листы блюд.</li>
+            <li><strong>Результат:</strong> Повышение оценки алгоритма, рост доступности точек сети и поднятие в поисковой выдаче приложения.</li>
+            <li><strong>Эффект:</strong> +300 000 – 500 000 ₸ заказов в месяц.</li>
+          </ul>
+        </div>
+
+        <div class="card success-card">
+          <div class="card-title"><i>2️⃣</i> Контроль онлайна планшетов (Wolt / Яндекс)</div>
+          <ul class="split-list" style="margin-top: 8px;">
+            <li><strong>Срок:</strong> Немедленно (распоряжение смене).</li>
+            <li><strong>Действие:</strong> Запрет персоналу самовольно ставить планшеты на паузу во время вечерней нагрузки.</li>
+            <li><strong>Контроль:</strong> Мониторинг управляющими через порталы заведений.</li>
+            <li><strong>Эффект:</strong> Сохранение заказов гостей с чеком 3 600+ ₸ (+350 000 ₸ в неделю).</li>
+          </ul>
+        </div>
+
+        <div class="card success-card">
+          <div class="card-title"><i>3️⃣</i> Подключение Б19 (Батыр Молл) в Glovo и акции</div>
+          <ul class="split-list" style="margin-top: 8px;">
+            <li><strong>Срок:</strong> 2-3 рабочих дня.</li>
+            <li><strong>Действие:</strong> Запустить филиал <strong>Б19 (ТРЦ Батыр Молл, ул. Камзина, 67/1)</strong> в Glovo.</li>
+            <li><strong>Маркетинг:</strong> Включить 2–3 промо-акции и комбо-набора для роста узнаваемости сети внутри Glovo.</li>
+            <li><strong>Эффект:</strong> +300 000 – 450 000 ₸ дополнительного оборота в Glovo.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><i>💰</i> Итоговый финансовый эффект Быстрых Побед:</div>
+        <div class="grid-3" style="margin-top: 8px;">
+          <div>
+            <div class="stat-huge green">+1 500 000 ₸</div>
+            <div class="stat-label">Прирост ежемесячной выручки</div>
+          </div>
+          <div>
+            <div class="stat-huge green">+500 000 ₸</div>
+            <div class="stat-label">Чистая маржинальная прибыль</div>
+          </div>
+          <div>
+            <div class="stat-huge blue">0 ₸</div>
+            <div class="stat-label">Капитальные инвестиции</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: EXPANSION PLAYBOOK 2.0 -->
+    <section class="slide" id="slide-6">
+      <div class="slide-header">
+        <span class="slide-tag info">Стратегия масштабирования</span>
+        <h2 class="slide-title">Playbook экспансии «Launch 2.0»</h2>
+        <p class="slide-subtitle">Пошаговый регламент безопасного выхода в любой новый город без риска повторения прошлых ошибок.</p>
+      </div>
+
+      <div class="grid-4" style="margin-bottom: 24px;">
+        <div class="card">
+          <div class="timeline-num" style="margin-bottom: 12px;">1</div>
+          <h4 style="font-size: 15px; color: #FFF; margin-bottom: 8px;">Т-20 дней: Локальный прогрев</h4>
+          <p style="font-size: 13px; color: var(--text-muted);">
+            Создание отдельного городского аккаунта. Геотаргет исключительно на жителей нового города в радиусе 3 км от точки. Розыгрыш «Годовой запас питы за репост».
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="timeline-num" style="margin-bottom: 12px;">2</div>
+          <h4 style="font-size: 15px; color: #FFF; margin-bottom: 8px;">Т-1 день: Закрытый блогер-сет</h4>
+          <p style="font-size: 13px; color: var(--text-muted);">
+            Приглашение 10–15 местных микроинфлюенсеров и пабликов на бесплатную дегустацию фирменных блюд. Массовый вброс рилсов и отзывов накануне старта.
+          </p>
+        </div>
+
+        <div class="card highlight">
+          <div class="timeline-num" style="margin-bottom: 12px; background: rgba(255,184,0,0.3); color: var(--primary);">3</div>
+          <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 8px;">День 1–3: Big Bang (Очередь)</h4>
+          <p style="font-size: 13px; color: var(--text-muted);">
+            Лид-магнит: «Первые 500 гостей получают сырную питу за 500 ₸». Создание живой очереди, вирусный UGC-контент от гостей и первичное доверие.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="timeline-num" style="margin-bottom: 12px;">4</div>
+          <h4 style="font-size: 15px; color: #FFF; margin-bottom: 8px;">День 1–30: Промо в доставке</h4>
+          <p style="font-size: 13px; color: var(--text-muted);">
+            Подключение Яндекс / Wolt / Glovo в день открытия. Покупка промо-баннера в агрегаторе. Скидка 20% на первый заказ для быстрого набора базы.
+          </p>
+        </div>
+      </div>
+
+      <div class="card highlight">
+        <div class="card-title" style="color: var(--primary);"><i>🛡️</i> Железное правило масштабирования:</div>
+        <p style="font-size: 15px; color: #FFF; line-height: 1.5;">
+          <strong>«Один город — один пилотный юнит».</strong> Сеть категорически запрещает одновременное открытие нескольких точек в неисследованном городе. Вторая точка открывается только после того, как первая вышла на стабильную <strong>чистую прибыль в течение 30 дней подряд</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: OPERATIONAL MODERNIZATION -->
+    <section class="slide" id="slide-7">
+      <div class="slide-header">
+        <span class="slide-tag success">Операционная программа</span>
+        <h2 class="slide-title">Программа операционной модернизации (7 ключевых задач)</h2>
+        <p class="slide-subtitle">Сроки указаны как плановый норматив на реализацию каждой отдельной задачи. Внедрение ведется последовательно.</p>
+      </div>
+
+      <div class="table-container" style="margin-bottom: 20px;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 40px; text-align: center;">№</th>
+              <th style="width: 200px;">Задача / Модуль</th>
+              <th>Какая проблема решается (Боль бизнеса)</th>
+              <th>Что конкретно внедряем (Суть решения)</th>
+              <th style="width: 110px; text-align: center;">Срок задачи</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: 800; color: var(--primary); text-align: center;">1</td>
+              <td><strong>Автоматизация инвентаризации</strong></td>
+              <td>Управляющие тратят 1–2 часа вечером на ручной пересчет сотен позиций удаленно из дома. Усталость, ошибки, искажение фудкоста.</td>
+              <td>Веб-инвентаризация в телефоне: автоматическая сверка расхода по iiko. Экспресс-проверка только ключевых расхождений за 5 минут.</td>
+              <td style="text-align: center;"><span class="badge yellow">до 7 дней</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 800; color: var(--primary); text-align: center;">2</td>
+              <td><strong>Вечерняя заявка на цех</strong></td>
+              <td>В 21:00 управляющие вручную перепроверяют автопересчет максимальных остатков в iiko, отнимая вечернее личное время.</td>
+              <td>Единый веб-модуль автозаказа: скрипт сводит остатки и темп продаж, формируя заявку в едином сервисе с инвентаризацией. Подтверждение в 1 клик со смартфона.</td>
+              <td style="text-align: center;"><span class="badge green">5–7 дней</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 800; color: var(--primary); text-align: center;">3</td>
+              <td><strong>ИИ на камерах (CCTV AI Guard)</strong></td>
+              <td>Невозможно вручную смотреть 16 камер. Нарушение стандартов кухни, смартфоны в руках персонала, пустая касса, очереди.</td>
+              <td>Нейросеть на существующих камерах: детекция фирменной униформы сети (головной убор, китель/фартук, <em>без одноразовых шапочек</em>), кассир на месте, запрет телефона, очередь >3 чел.</td>
+              <td style="text-align: center;"><span class="badge blue">7–9 дней</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 800; color: var(--primary); text-align: center;">4</td>
+              <td><strong>Telegram-пуши админам</strong></td>
+              <td>В общих чатах важные алерты тонут в рабочем шуме, звук глушат, нет персональной реакции на косяки смены.</td>
+              <td>Закрытый канал управляющих и админов: бот мгновенно шлет фото нарушений (скриншот с камеры, точка, точное время, суть инцидента).</td>
+              <td style="text-align: center;"><span class="badge green">3–4 дня</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 800; color: var(--primary); text-align: center;">5</td>
+              <td><strong>Внедрение Своей доставки (4 хаба)</strong></td>
+              <td>Прошлый запуск сразу на весь город привел к простоям курьеров и холодным блюдам. Потеря ~1.9 млн ₸/мес на комиссиях агрегаторам.</td>
+              <td><strong>Готовое приложение «BURЖУЙ» уже есть:</strong> внедряем и разворачиваем его по 3 зонам вокруг фабрик-кухонь: <strong>Б5 (Толстого 90А)</strong>, <strong>Б1 (Лермонтова 100)</strong>, <strong>Б12 (Назарбаева 283)</strong> и <strong>Б19 (Батыр Молл)</strong>. Скорость до 35 мин + промокод -20% во всех агрегаторах.</td>
+              <td style="text-align: center;"><span class="badge yellow">15–20 дней</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 800; color: var(--primary); text-align: center;">6</td>
+              <td><strong>Сайт обучения (LMS «Буржуй»)</strong></td>
+              <td>Текучка линейного персонала фастфуда. Стажеров учат на словах, наставники искажают регламенты, плавает вкус и сборка.</td>
+              <td>Обучающая веб-платформа: фото/видео-ТТК каждого блюда, граммовки и стандарты + раздел «Школа наставника» (ввод стажера за 3 дня по чек-листам).</td>
+              <td style="text-align: center;"><span class="badge blue">7–10 дней</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 800; color: var(--primary); text-align: center;">7</td>
+              <td><strong>Спец-экзамены для ТОП-точек</strong></td>
+              <td>Нагрузка на флагманах (Б5, Б1, Б12, Б19) в 3–4 раза выше средней, в часы пик срываются тайминги и сборка пит.</td>
+              <td>Базовый тест для всей сети + жесткий спец-экзамен на скорость сборки (&lt;2.5 мин) и работу в запару для допуска персонала на ТОП-точки.</td>
+              <td style="text-align: center;"><span class="badge green">5–7 дней</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: ДОРОЖНАЯ КАРТА ВНЕДРЕНИЯ -->
+    <section class="slide" id="slide-8">
+      <div class="slide-header">
+        <span class="slide-tag highlight">План действий</span>
+        <h2 class="slide-title">Дорожная карта внедрения: Первые шаги по отделам</h2>
+        <p class="slide-subtitle">Практический план запуска для управляющих, маркетинга, HR и IT-департамента.</p>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 24px;">
+        <!-- Блок 1: Управляющие -->
+        <div class="card highlight">
+          <div class="card-title"><i>🏪</i> 1. Управляющие точками (Операции)</div>
+          <ul class="split-list" style="margin-top: 8px;">
+            <li><strong>Шаг 1:</strong> Подключение точки <strong>Б19 (Батыр Молл)</strong> к платформе Glovo за 2 рабочих дня.</li>
+            <li><strong>Шаг 2:</strong> Введение контроля онлайна планшетов Wolt/Яндекс в вечерние часы пик (без самовольных пауз).</li>
+            <li><strong>Шаг 3:</strong> Тестирование экспресс-инвентаризации со смартфона (сокращение времени с 1.5 часов до 5 минут).</li>
+          </ul>
+          <div class="badge yellow" style="margin-top: 10px;">Фокус: Стоп потерям выручки</div>
+        </div>
+
+        <!-- Блок 2: Маркетинг -->
+        <div class="card success-card">
+          <div class="card-title"><i>📱</i> 2. Маркетинг & Доставка</div>
+          <ul class="split-list" style="margin-top: 8px;">
+            <li><strong>Шаг 1:</strong> Внедрение и запуск готового приложения «BURЖУЙ» с привязкой к 4 ключевым хабам (Б5, Б1, Б12, Б19).</li>
+            <li><strong>Шаг 2:</strong> Печать вкладышей со скидкой 20% на первый заказ в приложении во все пакеты агрегаторов.</li>
+            <li><strong>Шаг 3:</strong> Запуск баннеров и комбо-наборов в Glovo для поднятия узнаваемости бренда.</li>
+          </ul>
+          <div class="badge green" style="margin-top: 10px;">Фокус: Перелив базы в своё приложение</div>
+        </div>
+
+        <!-- Блок 3: HR & Обучение -->
+        <div class="card">
+          <div class="card-title"><i>🎓</i> 3. HR & Обучение персонала</div>
+          <ul class="split-list" style="margin-top: 8px;">
+            <li><strong>Шаг 1:</strong> Запуск обучающего сайта (LMS) с фото/видео-ТТК каждого блюда и стандартами сборки.</li>
+            <li><strong>Шаг 2:</strong> Внедрение регламента «Школа наставника» (стандартизированный ввод стажера за 3 дня).</li>
+            <li><strong>Шаг 3:</strong> Аттестация и спец-экзамен на скорость сборки питы (&lt;2.5 мин) для допуска на топовые точки.</li>
+          </ul>
+          <div class="badge blue" style="margin-top: 10px;">Фокус: Стандарт качества и скорость</div>
+        </div>
+
+        <!-- Блок 4: IT & Контроль -->
+        <div class="card">
+          <div class="card-title"><i>👁️</i> 4. IT & Видеоконтроль</div>
+          <ul class="split-list" style="margin-top: 8px;">
+            <li><strong>Шаг 1:</strong> Подключение существующих видеокамер к базовой нейросети (униформа сети, кассир, телефон).</li>
+            <li><strong>Шаг 2:</strong> Запуск закрытого Telegram-канала инцидентов для управляющих и администраторов.</li>
+            <li><strong>Шаг 3:</strong> Настройка единого скрипта автозаказа сырья на заготовочный цех в 1 клик со смартфона.</li>
+          </ul>
+          <div class="badge yellow" style="margin-top: 10px;">Фокус: Автоматизация и порядок</div>
+        </div>
+      </div>
+
+      <div class="card success-card" style="text-align: center; padding: 20px;">
+        <h4 style="font-size: 16px; font-weight: 800; color: #FFF; margin-bottom: 6px;">
+          🎯 Итоговый эффект реализации программы:
+        </h4>
+        <p style="font-size: 14px; color: var(--text-muted); max-width: 900px; margin: 0 auto;">
+          Прирост маржинальной выручки доставки на <strong>+1.5 млн ₸/мес</strong>, экономия до <strong>1.5 часов личного времени управляющих каждый вечер</strong>, гарантия соблюдения стандартов бренда и безопасный фундамент для будущего масштабирования сети.
+        </p>
+      </div>
+    </section>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+      <div class="key-hint">
+        <span>Управление:</span>
+        <span class="key-badge">←</span>
+        <span class="key-badge">→</span>
+        <span>или пробел</span>
+      </div>
+
+      <div class="nav-dots" id="nav-dots">
+        <!-- Generated by JS -->
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-nav" id="btn-prev" onclick="prevSlide()">← Назад</button>
+        <button class="btn-nav primary" id="btn-next" onclick="nextSlide()">Далее →</button>
+      </div>
+    </nav>
+  </div>
+
+  <script>
+    const totalSlides = 8;
+    let currentSlide = 1;
+
+    function initDeck() {
+      const dotsContainer = document.getElementById('nav-dots');
+      dotsContainer.innerHTML = '';
+      for (let i = 1; i <= totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = `nav-dot ${i === 1 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+      }
+      document.getElementById('slide-total').textContent = totalSlides;
+      updateUI();
+    }
+
+    function goToSlide(n) {
+      if (n < 1 || n > totalSlides) return;
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(`slide-${n}`);
+      if (target) {
+        target.classList.add('active');
+        currentSlide = n;
+      }
+      updateUI();
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        goToSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        goToSlide(currentSlide - 1);
+      }
+    }
+
+    function updateUI() {
+      document.getElementById('slide-num').textContent = currentSlide;
+      document.querySelectorAll('.nav-dot').forEach((d, idx) => {
+        d.classList.toggle('active', idx + 1 === currentSlide);
+      });
+      document.getElementById('btn-prev').disabled = currentSlide === 1;
+      document.getElementById('btn-next').textContent = currentSlide === totalSlides ? 'В начало ↺' : 'Далее →';
+      if (currentSlide === totalSlides) {
+        document.getElementById('btn-next').onclick = () => goToSlide(1);
+      } else {
+        document.getElementById('btn-next').onclick = nextSlide;
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', initDeck);
+  </script>
+</body>
+</html>
