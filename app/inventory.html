@@ -876,6 +876,211 @@
     .toast-msg.show {
       transform: translateX(-50%) translateY(0);
     }
+  
+    /* Кнопки действий после сведения */
+    .reconciled-action-bar {
+      display: none;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .btn-report-view {
+      flex: 1;
+      height: 42px;
+      background: #0F172A;
+      color: #FFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-copy-quick {
+      height: 42px;
+      padding: 0 14px;
+      background: #E2E8F0;
+      color: #0F172A;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Модальное окно: Отчет о выполненной работе */
+    .report-card-modal {
+      background: #FFF;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.25);
+    }
+
+    .report-modal-head {
+      background: #0F172A;
+      color: #FFF;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .report-modal-title {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .report-modal-close {
+      background: none;
+      border: none;
+      color: #94A3B8;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 2px 6px;
+    }
+
+    .report-modal-body {
+      padding: 16px;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #1E293B;
+    }
+
+    .report-meta-grid {
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+      font-size: 12px;
+    }
+
+    .meta-item-label {
+      color: var(--text-muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .meta-item-value {
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .report-finance-card {
+      background: #FFF;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .finance-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      font-size: 12px;
+    }
+
+    .finance-row.divider {
+      border-top: 1px dashed var(--border-light);
+      margin-top: 6px;
+      padding-top: 8px;
+    }
+
+    .finance-total-pill {
+      background: #DCFCE7;
+      color: #166534;
+      font-weight: 800;
+      padding: 8px 10px;
+      border-radius: 6px;
+      text-align: center;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    .report-items-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      margin-top: 6px;
+    }
+
+    .report-items-table th {
+      text-align: left;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 6px 4px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .report-items-table td {
+      padding: 8px 4px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: top;
+    }
+
+    .report-modal-foot {
+      padding: 12px 16px;
+      background: #F8FAFC;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-foot-copy {
+      flex: 1;
+      height: 40px;
+      background: #16A34A;
+      color: #FFF;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-foot-close {
+      height: 40px;
+      padding: 0 14px;
+      background: #FFF;
+      color: #0F172A;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
   </style>
 </head>
 <body>
@@ -1065,6 +1270,19 @@
             </button>
 
             <!-- Список позиций -->
+            
+            <!-- Панель отчета после сведения -->
+            <div class="reconciled-action-bar" id="reconciled-bar">
+              <button type="button" class="btn-report-view" onclick="openReportModal()">
+                <span>📄</span>
+                <span>Акт сведения (Отчет)</span>
+              </button>
+              <button type="button" class="btn-copy-quick" onclick="copyReportForWhatsApp()" title="Скопировать для WhatsApp">
+                <span>📲</span>
+                <span>В WhatsApp</span>
+              </button>
+            </div>
+
             <div class="discrepancy-card">
               <div class="discrepancy-head">
                 <span id="list-head-title">Позиции с недостачей (сортировка по сумме)</span>
@@ -1119,6 +1337,90 @@
         <div class="modal-actions">
           <button class="modal-btn secondary" onclick="closeWarningModal()">Отмена</button>
           <button class="modal-btn primary" onclick="applyReconciliation()">Да</button>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- МОДАЛЬНОЕ ОКНО: АКТ СВЕДЕНИЯ / ОТЧЕТ -->
+    <div class="modal-backdrop" id="modal-report">
+      <div class="report-card-modal">
+        <div class="report-modal-head">
+          <div class="report-modal-title">
+            <span>BURЖУЙ</span>
+            <span style="opacity: 0.5;">|</span>
+            <span>Акт сведения инвентаризации</span>
+          </div>
+          <button class="report-modal-close" onclick="closeReportModal()">✕</button>
+        </div>
+
+        <div class="report-modal-body">
+          <div class="report-meta-grid">
+            <div>
+              <div class="meta-item-label">Торговая точка</div>
+              <div class="meta-item-value" id="rep-store-val">В-2</div>
+            </div>
+            <div>
+              <div class="meta-item-label">Дата смены</div>
+              <div class="meta-item-value">01.09.2026</div>
+            </div>
+            <div>
+              <div class="meta-item-label">Счёт излишков</div>
+              <div class="meta-item-value" id="rep-surplus-val">Весовой товар</div>
+            </div>
+            <div>
+              <div class="meta-item-label">Период проверки</div>
+              <div class="meta-item-value">01.09 — 10.09</div>
+            </div>
+          </div>
+
+          <div class="report-finance-card">
+            <div class="finance-row">
+              <span style="color: var(--text-muted);">Недостача по факту (01.09):</span>
+              <strong style="color: var(--danger); font-family: var(--mono);" id="rep-before-val">-8 450 ₸</strong>
+            </div>
+            <div class="finance-row">
+              <span style="color: var(--text-muted);">Погашено встречными излишками:</span>
+              <strong style="color: var(--iiko-green); font-family: var(--mono);" id="rep-covered-val">+7 375 ₸</strong>
+            </div>
+            <div class="finance-row divider">
+              <span style="color: var(--text-muted);">Реальная дельта (погрешность):</span>
+              <strong style="font-family: var(--mono);" id="rep-delta-val">1 075 ₸</strong>
+            </div>
+            <div class="finance-total-pill">
+              ✓ К УДЕРЖАНИЮ С СОТРУДНИКОВ: 0 ₸
+            </div>
+          </div>
+
+          <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">
+            Детализация по позициям:
+          </div>
+          <table class="report-items-table">
+            <thead>
+              <tr>
+                <th>Товар</th>
+                <th>01.09</th>
+                <th>Излишек</th>
+                <th>Итог</th>
+              </tr>
+            </thead>
+            <tbody id="rep-table-body">
+              <!-- Заполняется динамически -->
+            </tbody>
+          </table>
+
+          <div style="font-size: 11px; color: var(--text-dim); margin-top: 12px; text-align: center;">
+            Документ сведен по правилу «весовой товар &lt; 1 000 ₸» в iikoChain
+          </div>
+        </div>
+
+        <div class="report-modal-foot">
+          <button type="button" class="btn-foot-copy" onclick="copyReportForWhatsApp()">
+            <span>📲 Скопировать для WhatsApp</span>
+          </button>
+          <button type="button" class="btn-foot-close" onclick="closeReportModal()">
+            Закрыть
+          </button>
         </div>
       </div>
     </div>
@@ -1449,6 +1751,7 @@
       isReconciled = false;
       document.getElementById('placeholder-box').style.display = 'block';
       document.getElementById('results-box').style.display = 'none';
+      document.getElementById('reconciled-bar').style.display = 'none';
       document.getElementById('save-dock').style.display = 'none';
       document.getElementById('btn-save-doc').disabled = true;
     }
@@ -1464,11 +1767,80 @@
     }
 
     // Применение сведения (кнопка "Да")
+    
+    function openReportModal() {
+      const store = document.getElementById('select-store').value;
+      const isWeight = activeSurplus === 'weight';
+      const items = isWeight ? weightItems : pieceItems;
+
+      document.getElementById('rep-store-val').textContent = store;
+      document.getElementById('rep-surplus-val').textContent = isWeight ? 'Весовой товар' : 'Штучный товар';
+      document.getElementById('rep-before-val').textContent = isWeight ? '-8 450 ₸' : '-3 990 ₸';
+      document.getElementById('rep-covered-val').textContent = isWeight ? '+7 375 ₸' : '+3 450 ₸';
+      document.getElementById('rep-delta-val').textContent = isWeight ? '1 075 ₸' : '540 ₸';
+
+      const tbody = document.getElementById('rep-table-body');
+      tbody.innerHTML = '';
+
+      items.forEach(function(item) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = 
+          '<td style="font-weight: 600;">' + item.title + '</td>' +
+          '<td style="color: var(--danger); font-family: var(--mono);">' + item.diffBefore + '</td>' +
+          '<td style="color: var(--iiko-green); font-family: var(--mono);">' + item.surplusQty + '</td>' +
+          '<td><span style="color: var(--iiko-green); font-weight: 700;">✓ 0 ₸</span></td>';
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('modal-report').style.display = 'flex';
+    }
+
+    function closeReportModal() {
+      document.getElementById('modal-report').style.display = 'none';
+    }
+
+    function copyReportForWhatsApp() {
+      const store = document.getElementById('select-store').value;
+      const isWeight = activeSurplus === 'weight';
+      const items = isWeight ? weightItems : pieceItems;
+      const beforeSum = isWeight ? '8 450 ₸' : '3 990 ₸';
+      const coveredSum = isWeight ? '7 375 ₸' : '3 450 ₸';
+      const deltaSum = isWeight ? '1 075 ₸' : '540 ₸';
+
+      let text = '📋 *АКТ СВЕДЕНИЯ ИНВЕНТАРИЗАЦИИ • BURЖУЙ*\n';
+      text += '📍 *Точка:* ' + store + '\n';
+      text += '📅 *Дата инвентаризации:* 01.09.2026\n';
+      text += '⚖️ *Счёт:* ' + (isWeight ? 'Излишки — весовой товар' : 'Излишки — штучный товар') + '\n';
+      text += '🔍 *Период проверки:* 01.09 — 10.09\n';
+      text += '--------------------------------\n';
+      text += '• Недостача 01.09: -' + beforeSum + '\n';
+      text += '• Погашено излишками (02-03.09): +' + coveredSum + '\n';
+      text += '• Реальная дельта: ' + deltaSum + ' (все позиции < 1 000 ₸)\n';
+      text += '--------------------------------\n';
+      text += '*ПОЗИЦИИ:*\n';
+
+      items.forEach(function(item) {
+        text += '• ' + item.title + ': ' + item.diffBefore + ' ➔ излишек ' + item.surplusDate + ' (' + item.surplusQty + ') | дельта: ' + item.realDelta + ' ✓ Штраф снят\n';
+      });
+
+      text += '--------------------------------\n';
+      text += '✅ *ИТОГО ШТРАФ К НАЧИСЛЕНИЮ: 0 ₸*\n';
+      text += '📌 *Статус:* Сведено и проведено в iikoChain';
+
+      navigator.clipboard.writeText(text).then(function() {
+        showToast('✓ Текст отчета скопирован для WhatsApp');
+      }).catch(function() {
+        showToast('Отчет сформирован');
+      });
+    }
+
+
     function applyReconciliation() {
       closeWarningModal();
       isReconciled = true;
       renderDiscrepancies();
       showToast('Корректировка применена. Штрафы аннулированы!');
+      document.getElementById('reconciled-bar').style.display = 'flex';
     }
 
     function saveInventoryToIiko() {
