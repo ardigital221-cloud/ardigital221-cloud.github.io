@@ -1052,21 +1052,25 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(15, 23, 42, 0.65);
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
       z-index: 1000;
+      backdrop-filter: blur(2px);
     }
 
     .modal-panel {
       background: #FFF;
       border-radius: 12px;
       width: 100%;
-      max-width: 380px;
+      max-width: 480px;
+      max-height: 86vh;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.25);
     }
 
     .modal-head {
@@ -1078,7 +1082,23 @@
       border-bottom: 1px solid #FDE68A;
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: #92400E;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+    .modal-close-btn:hover {
+      background: rgba(146, 64, 14, 0.15);
     }
 
     .modal-content {
@@ -1086,25 +1106,30 @@
       font-size: 12px;
       line-height: 1.45;
       color: #334155;
+      overflow-y: auto;
+      flex: 1 1 auto;
+      max-height: calc(86vh - 110px);
     }
 
     .modal-formula-callout {
-      background: #F1F5F9;
+      background: #F8FAFC;
       border-left: 3px solid var(--accent);
       padding: 8px 10px;
       margin: 10px 0;
-      font-family: var(--mono);
-      font-size: 11px;
+      font-family: inherit;
+      font-size: 12px;
       color: #0F172A;
+      border-radius: 4px;
     }
 
     .modal-actions {
-      padding: 10px 16px;
+      padding: 12px 16px;
       background: #F8FAFC;
       border-top: 1px solid var(--border-light);
       display: flex;
       justify-content: flex-end;
-      gap: 8px;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
     .modal-btn {
@@ -1568,26 +1593,29 @@
     </div>
 
     <!-- МОДАЛКА ПРЕДУПРЕЖДЕНИЯ IIKO -->
-    <div class="modal-backdrop" id="modal-warning">
+    <div class="modal-backdrop" id="modal-warning" onclick="if(event.target === this) closeWarningModal()">
       <div class="modal-panel">
         <div class="modal-head">
-          <span>⚠️</span>
-          <span>Предупреждение iikoChain</span>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span>⚠️</span>
+            <span>Предупреждение iikoChain</span>
+          </div>
+          <button type="button" class="modal-close-btn" onclick="closeWarningModal()" title="Закрыть (Esc)">✕</button>
         </div>
         <div class="modal-content">
-          <div>Операция создаёт расход с образованием отрицательных остатков задним числом.</div>
+          <div style="color: #64748B; font-size: 11px; margin-bottom: 6px;">Операция создаёт расход с образованием отрицательных остатков задним числом.</div>
           <div class="modal-formula-callout" id="modal-formula-text"></div>
-          <strong>Применить корректировку книжного количества и зачесть встречные излишки?</strong>
+          <div style="margin-top: 10px; font-weight: 600; font-size: 12px; color: #0F172A;">Применить корректировку книжного количества и зачесть встречные излишки?</div>
         </div>
         <div class="modal-actions">
-          <button class="modal-btn secondary" onclick="closeWarningModal()">Отмена</button>
-          <button class="modal-btn primary" onclick="confirmModalAction()">Да, применить</button>
+          <button type="button" class="modal-btn secondary" onclick="closeWarningModal()">Отмена</button>
+          <button type="button" class="modal-btn primary" onclick="confirmModalAction()">Да, применить</button>
         </div>
       </div>
     </div>
 
     <!-- МОДАЛКА АКТА СВЕДЕНИЯ -->
-    <div class="modal-backdrop" id="modal-report">
+    <div class="modal-backdrop" id="modal-report" onclick="if(event.target === this) closeReportModal()">
       <div class="report-card-modal">
         <div class="report-modal-head">
           <div class="report-modal-title">
@@ -2245,15 +2273,15 @@
       pendingAction = { type: 'bulk' };
 
       const calc = calculateStoreReconciliation(items, roster);
-
       const dailyRosters = storeData ? (storeData.dailyRosters || {}) : {};
+
       let linesHtml = '';
       items.forEach(function(item) {
         const rem = Math.abs(item.hasSurplus ? item.remCost : item.costBefore);
         if (rem === 0) {
-          linesHtml += '• ' + item.title + ': <strong>✓ 0 ₸ (полный зачёт излишком)</strong><br>';
+          linesHtml += '<div style="padding: 2px 0; color: #16A34A;">• ' + item.title + ': <strong>✓ 0 ₸ (полный зачёт излишком)</strong></div>';
         } else if (rem <= 1000) {
-          linesHtml += '• ' + item.title + ': ' + rem + ' ₸ (≤ 1 000 ₸) ➔ 👨‍🍳 <strong>' + calc.sousPerson.role + ' (' + calc.sousPerson.name + ')</strong><br>';
+          linesHtml += '<div style="padding: 2px 0; color: #92400E;">• ' + item.title + ': <strong>' + rem + ' ₸</strong> (≤ 1 000 ₸) ➔ 👨‍🍳 ' + calc.sousPerson.name + ' (' + calc.sousPerson.role + ')</div>';
         } else {
           const minusMoves = (item.movements || []).filter(function(m) { return m.cls === 'minus'; });
           const shortageDate = (minusMoves[0] && minusMoves[0].date) || (item.dates && item.dates[0]) || '01.09';
@@ -2262,29 +2290,60 @@
                             || dayRoster.find(function(r) { return r.roleType !== 'sous'; })
                             || dayRoster[0]
                             || { name: 'Сотрудник смены ' + shortageDate, role: isPiece ? 'Кассир' : 'Повар' };
-          linesHtml += '• ' + item.title + ': ' + rem + ' ₸ (> 1 000 ₸) ➔ 🚨 <strong>' + targetWorker.role + ' ' + targetWorker.name + ' (смена ' + shortageDate + ')</strong><br>';
+          linesHtml += '<div style="padding: 2px 0; color: #DC2626;">• ' + item.title + ': <strong>' + rem + ' ₸</strong> (> 1 000 ₸, смена ' + shortageDate + ') ➔ 🚨 ' + targetWorker.name + ' (' + targetWorker.role + ')</div>';
         }
       });
 
-      let html = '<strong>Персональное распределение штрафов по сменам (' + (storeData ? storeData.storeLabel : '') + '):</strong><br><br>';
-      html += linesHtml + '<br>';
-      html += '<strong>Итого к удержанию по точке: ' + calc.totalResidual.toLocaleString('ru-RU') + ' ₸</strong><br><br>';
-      html += '<strong>Сводка удержаний по сотрудникам:</strong><br>';
-
+      let summaryHtml = '';
       let hasFines = false;
       for (const [pName, fineAmt] of Object.entries(calc.finesByPerson)) {
         if (fineAmt > 0) {
           hasFines = true;
           const isSous = (pName === calc.sousPerson.name);
           const pInfo = roster.find(function(r) { return r.name === pName; }) || { role: isSous ? 'Су-шеф кухни' : 'Сотрудник смены' };
-          html += (isSous ? '👨‍🍳 ' : '🚨 ') + '<strong>' + pName + '</strong> (' + pInfo.role + '): <strong>' + fineAmt.toLocaleString('ru-RU') + ' ₸</strong>' + (isSous ? ' <em>(позиции ≤ 1 000 ₸)</em>' : '') + '<br>';
+          summaryHtml += '<div style="display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px dashed #FDE68A;">' +
+            '<span>' + (isSous ? '👨‍🍳 ' : '🚨 ') + '<strong>' + pName + '</strong> <span style="color: #78350F; font-size: 10px;">(' + pInfo.role + ')</span>:</span>' +
+            '<span style="font-weight: 700; color: ' + (isSous ? '#B45309' : '#DC2626') + '; font-family: var(--mono);">' + fineAmt.toLocaleString('ru-RU') + ' ₸</span>' +
+          '</div>';
         }
       }
-      if (!hasFines) html += '• Все позиции сведены без удержаний.<br>';
+      if (!hasFines) {
+        summaryHtml = '<div style="color: #16A34A; font-weight: 600;">✓ Все позиции сведены без удержаний.</div>';
+      }
+
+      let html = 
+        '<div style="margin-bottom: 8px; font-weight: 700; color: #1E293B; font-size: 13px;">' +
+          'Распределение штрафов по сменам (' + (storeData ? storeData.storeLabel : '') + ')' +
+        '</div>' +
+        '<div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;">' +
+          '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 12px;">' +
+            '<span style="color: #92400E; font-weight: 700;">Итого к удержанию:</span>' +
+            '<span style="font-weight: 800; font-size: 14px; color: #B45309; font-family: var(--mono);">' + calc.totalResidual.toLocaleString('ru-RU') + ' ₸</span>' +
+          '</div>' +
+          '<div style="font-size: 11px; line-height: 1.45;">' +
+            summaryHtml +
+          '</div>' +
+        '</div>' +
+        '<details style="border: 1px solid #E2E8F0; border-radius: 8px; background: #FFF; overflow: hidden; margin-top: 6px;">' +
+          '<summary style="padding: 7px 10px; font-weight: 600; font-size: 11px; color: #475569; cursor: pointer; background: #F8FAFC; outline: none; user-select: none;">' +
+            '📋 Детализация по всем позициям (' + items.length + ' шт.) ▾' +
+          '</summary>' +
+          '<div style="padding: 8px 10px; max-height: 150px; overflow-y: auto; font-size: 11px; line-height: 1.4; border-top: 1px solid #E2E8F0; background: #FAFAFA;">' +
+            linesHtml +
+          '</div>' +
+        '</details>';
 
       document.getElementById('modal-formula-text').innerHTML = html;
       document.getElementById('modal-warning').style.display = 'flex';
     }
+
+    
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeWarningModal();
+        closeReportModal();
+      }
+    });
 
     function closeWarningModal() {
       document.getElementById('modal-warning').style.display = 'none';
