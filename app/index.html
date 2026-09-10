@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>BURЖУЙ — Мобильный оперхаб: Инвентаризация</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#090D14">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090D14;
+      --card-bg: #121824;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-active: rgba(255, 184, 0, 0.4);
+      --primary: #FFB800;
+      --primary-hover: #E5A600;
+      --primary-light: rgba(255, 184, 0, 0.12);
+      --danger: #FF453A;
+      --danger-bg: rgba(255, 69, 58, 0.12);
+      --danger-border: rgba(255, 69, 58, 0.35);
+      --success: #30D158;
+      --success-bg: rgba(48, 209, 88, 0.12);
+      --success-border: rgba(48, 209, 88, 0.35);
+      --text: #F2F5F8;
+      --text-muted: #8A96A6;
+      --text-dim: #5C6777;
+      --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      touch-action: pan-x pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-text-size-adjust: 100%;
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .app-shell {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Status Bar / Top Navigation */
+    .app-header {
+      padding: 14px 16px 10px;
+      background: rgba(18, 24, 36, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      z-index: 50;
+      flex-shrink: 0;
+    }
+
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-badge .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: 0.5px;
+      color: #FFF;
+    }
+
+    .hub-tag {
+      font-size: 10px;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .user-pill.active {
+      border-color: rgba(48, 209, 88, 0.4);
+      color: var(--success);
+    }
+
+    .user-pill span.role-icon {
+      font-size: 13px;
+    }
+
+    /* Point selector row */
+    .point-select-bar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .select-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    .select-wrap select {
+      width: 100%;
+      background: #0D121B;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #FFF;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-main);
+      appearance: none;
+      outline: none;
+    }
+
+    .select-wrap::after {
+      content: '▾';
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 12px;
+    }
+
+    .btn-refresh {
+      background: #0D121B;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: var(--primary);
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .btn-refresh.loading span.icon {
+      display: inline-block;
+      animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* App Tab Navigation */
+    .tab-bar {
+      display: flex;
+      background: #0B1017;
+      border-bottom: 1px solid var(--card-border);
+      padding: 4px;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      position: relative;
+    }
+
+    .tab-btn.active {
+      background: var(--card-bg);
+      color: #FFF;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .tab-btn.disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .badge-dev {
+      font-size: 9px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 1px 5px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Scrollable Container */
+    .app-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 16px 90px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* iiko Parameters Card */
+    .filter-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .filter-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .filter-label {
+      color: var(--text-muted);
+    }
+
+    .filter-val {
+      font-weight: 600;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .filter-val.badge {
+      background: rgba(255, 184, 0, 0.15);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+
+    /* Metrics Overview Banner */
+    .kpi-banner {
+      background: linear-gradient(135deg, rgba(255,69,58,0.12) 0%, rgba(18,24,36,0.95) 100%);
+      border: 1px solid var(--danger-border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 14px;
+      transition: all 0.3s;
+    }
+
+    .kpi-banner.resolved {
+      background: linear-gradient(135deg, rgba(48,209,88,0.12) 0%, rgba(18,24,36,0.95) 100%);
+      border-color: var(--success-border);
+    }
+
+    .kpi-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .kpi-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--danger);
+    }
+
+    .kpi-banner.resolved .kpi-title {
+      color: var(--success);
+    }
+
+    .kpi-status-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .kpi-banner.resolved .kpi-status-badge {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .kpi-nums {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .kpi-sum {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 800;
+      color: #FFF;
+      line-height: 1;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Auto-reconcile Big CTA */
+    .cta-btn {
+      width: 100%;
+      background: linear-gradient(180deg, #FFC72C 0%, #FFB800 100%);
+      border: none;
+      border-radius: 12px;
+      color: #000;
+      padding: 14px;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(255, 184, 0, 0.3);
+      transition: all 0.2s;
+    }
+
+    .cta-btn:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 8px rgba(255, 184, 0, 0.2);
+    }
+
+    .cta-btn.done {
+      background: rgba(48, 209, 88, 0.2);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+      box-shadow: none;
+    }
+
+    /* Items Section */
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .rule-pill {
+      font-size: 11px;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* Inventory Items List */
+    .item-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .item-card.alert-item {
+      border-color: var(--danger-border);
+    }
+
+    .item-card.resolved-item {
+      border-color: var(--success-border);
+      background: linear-gradient(180deg, rgba(48,209,88,0.04) 0%, rgba(18,24,36,1) 100%);
+    }
+
+    .item-card.normal-item {
+      opacity: 0.85;
+    }
+
+    .item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .item-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: #FFF;
+      line-height: 1.3;
+    }
+
+    .item-type {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .item-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .item-badge.red {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .item-badge.green {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .item-badge.gray {
+      background: rgba(255,255,255,0.08);
+      color: var(--text-muted);
+    }
+
+    /* Item Numbers Grid */
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      gap: 6px;
+    }
+
+    .grid-cell {
+      text-align: center;
+    }
+
+    .cell-lbl {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+
+    .cell-val {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .cell-val.danger { color: var(--danger); }
+    .cell-val.success { color: var(--success); }
+
+    /* Reconciliation Box */
+    .reconcile-box {
+      background: rgba(255, 184, 0, 0.06);
+      border: 1px dashed rgba(255, 184, 0, 0.35);
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 12px;
+      margin-top: 8px;
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .item-card.resolved-item .reconcile-box {
+      display: block;
+      background: rgba(48, 209, 88, 0.06);
+      border: 1px dashed rgba(48, 209, 88, 0.35);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .rec-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+    }
+
+    .rec-row strong {
+      color: #FFF;
+    }
+
+    .rec-highlight {
+      font-weight: 700;
+      color: var(--success);
+      font-size: 12px;
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Fixed Bottom Action Bar */
+    .bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 16px;
+      background: rgba(18, 24, 36, 0.95);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      gap: 10px;
+      z-index: 60;
+    }
+
+    .btn-save {
+      flex: 1;
+      background: var(--success);
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-size: 14px;
+      font-weight: 800;
+      font-family: var(--font-main);
+      padding: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-save:disabled {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-dim);
+      cursor: not-allowed;
+    }
+
+    /* Inactive Tab Placeholder */
+    .placeholder-view {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .placeholder-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.8;
+    }
+
+    .placeholder-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #FFF;
+      margin-bottom: 8px;
+    }
+
+    .placeholder-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    /* Modal Dialog (iiko warning mimic) */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 1000;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .modal-box {
+      background: #151C28;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    }
+
+    .modal-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #FFF;
+      margin-bottom: 8px;
+    }
+
+    .modal-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 18px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-modal {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-modal.primary {
+      background: var(--primary);
+      color: #000;
+    }
+
+    .btn-modal.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: #1A2433;
+      border: 1px solid var(--success-border);
+      color: #FFF;
+      padding: 10px 18px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 2000;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+    
+    <!-- HEADER -->
+    <header class="app-header">
+      <div class="brand-row">
+        <div class="logo-badge">
+          <div class="dot"></div>
+          <span class="logo-text">BURЖУЙ</span>
+          <span class="hub-tag">ОПЕРХАБ</span>
+        </div>
+        
+        <div class="user-pill active" id="user-role-toggle" onclick="toggleRole()" title="Нажмите для переключения роли">
+          <span class="role-icon">👤</span>
+          <span id="role-label">Управляющий (Редактор)</span>
+        </div>
+      </div>
+
+      <!-- Point Selector & Refresh -->
+      <div class="point-select-bar">
+        <div class="select-wrap">
+          <select id="point-select" onchange="changePoint()">
+            <option value="P2" selected>Точка продаж: P2 (ул. Катаева)</option>
+            <option value="B5">Б5: ул. Толстого, 90А (ТОП-1)</option>
+            <option value="B1">Б1: ул. Лермонтова, 100 (ТОП-3)</option>
+            <option value="B12">Б12: пр. Назарбаева, 283 (ТОП-2)</option>
+            <option value="B19">Б19: ТРЦ Батыр Молл, Камзина 67/1</option>
+            <option value="B16">В-16: г. Экибастуз, ул. Ауэзова</option>
+          </select>
+        </div>
+        <button class="btn-refresh" id="btn-refresh" onclick="refreshData()">
+          <span class="icon">🔄</span> iiko
+        </button>
+      </div>
+    </header>
+
+    <!-- TAB NAVIGATION -->
+    <nav class="tab-bar">
+      <button class="tab-btn active" id="tab-inv" onclick="switchTab('inv')">
+        <span>📊 Сведение инвентов</span>
+      </button>
+      <button class="tab-btn disabled" id="tab-ord" onclick="switchTab('ord')">
+        <span>📦 Вечерняя заявка</span>
+        <span class="badge-dev">Скоро</span>
+      </button>
+    </nav>
+
+    <!-- CONTENT 1: ИНВЕНТАРИЗАЦИЯ -->
+    <main class="app-content" id="view-inventory">
+      
+      <!-- iiko Config Card -->
+      <div class="filter-card">
+        <div class="filter-row">
+          <span class="filter-label">Период анализа:</span>
+          <span class="filter-val" id="filter-period">01.09.2026 — 10.09.2026</span>
+        </div>
+        <div class="filter-row">
+          <span class="filter-label">Счёт излишков:</span>
+          <span class="filter-val badge">Излишки — весовой товар</span>
+        </div>
+        <div class="filter-row">
+          <span class="filter-label">Инвентаризация:</span>
+          <span class="filter-val">01 сентября (смена закрыта)</span>
+        </div>
+      </div>
+
+      <!-- KPI Banner -->
+      <div class="kpi-banner" id="kpi-banner">
+        <div class="kpi-head">
+          <span class="kpi-title" id="kpi-status-title">⚠️ Внимание: Есть недостачи свыше 1 000 ₸</span>
+          <span class="kpi-status-badge" id="kpi-status-badge">Риск штрафа</span>
+        </div>
+        <div class="kpi-nums">
+          <div>
+            <div class="kpi-sum" id="kpi-penalty-sum">8 450 ₸</div>
+            <div class="kpi-sub" id="kpi-sub-text">Общая сумма штрафов на смену</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 14px; font-weight: 700; color: #FFF;" id="kpi-crit-count">3 позиции</div>
+            <div style="font-size: 11px; color: var(--text-muted);">влияют на штраф</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Big CTA Auto-reconcile Button -->
+      <button class="cta-btn" id="cta-reconcile" onclick="performAutoReconciliation()">
+        <span>⚡</span> ВЫПОЛНИТЬ АВТО-СВЕДЕНИЕ В 1 КЛИК
+      </button>
+
+      <!-- Section Header -->
+      <div class="section-head">
+        <span class="section-title">Позиции к сопоставлению</span>
+        <span class="rule-pill">Порог штрафа: >1 000 ₸</span>
+      </div>
+
+      <!-- Items List -->
+      <div id="items-list">
+        <!-- Item 1: Фарш говяжий -->
+        <div class="item-card alert-item" id="card-item-1">
+          <div class="item-top">
+            <div>
+              <div class="item-name">Фарш говяжий фирменный</div>
+              <div class="item-type">Весовой товар | Фабрика-кухня</div>
+            </div>
+            <span class="item-badge red" id="badge-1">Штраф: 2 500 ₸</span>
+          </div>
+
+          <div class="item-grid">
+            <div class="grid-cell">
+              <div class="cell-lbl">Книга 01.09</div>
+              <div class="cell-val" id="book-1">8.690 кг</div>
+            </div>
+            <div class="grid-cell">
+              <div class="cell-lbl">Факт 01.09</div>
+              <div class="cell-val">5.400 кг</div>
+            </div>
+            <div class="grid-cell">
+              <div class="cell-lbl">Недостача</div>
+              <div class="cell-val danger" id="diff-1">-3.290 кг</div>
+            </div>
+          </div>
+
+          <div class="reconcile-box" id="rec-box-1">
+            <div class="rec-row">
+              <span>Движение товара:</span>
+              <strong>02.09 обнаружен излишек +2.845 кг</strong>
+            </div>
+            <div class="rec-row">
+              <span>Расчет остатка (3.290 - 2.845):</span>
+              <strong>Реальная дельта: 0.445 кг</strong>
+            </div>
+            <div class="rec-row">
+              <span>Новый книжный остаток:</span>
+              <strong style="color: var(--primary);">8.245 кг</strong>
+            </div>
+            <div class="rec-highlight">
+              <span>✅</span> Излишек 02.09 закрыт. Недостача снижена до 340 ₸. Штраф отменен!
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2: Пекинская капуста -->
+        <div class="item-card alert-item" id="card-item-2">
+          <div class="item-top">
+            <div>
+              <div class="item-name">Капуста пекинская зачищенная</div>
+              <div class="item-type">Весовой товар | Овощной цех</div>
+            </div>
+            <span class="item-badge red" id="badge-2">Штраф: 1 850 ₸</span>
+          </div>
+
+          <div class="item-grid">
+            <div class="grid-cell">
+              <div class="cell-lbl">Книга 01.09</div>
+              <div class="cell-val" id="book-2">7.480 кг</div>
+            </div>
+            <div class="grid-cell">
+              <div class="cell-lbl">Факт 01.09</div>
+              <div class="cell-val">5.300 кг</div>
+            </div>
+            <div class="grid-cell">
+              <div class="cell-lbl">Недостача</div>
+              <div class="cell-val danger" id="diff-2">-2.180 кг</div>
+            </div>
+          </div>
+
+          <div class="reconcile-box" id="rec-box-2">
+            <div class="rec-row">
+              <span>Движение товара:</span>
+              <strong>03.09 обнаружен излишек +1.880 кг</strong>
+            </div>
+            <div class="rec-row">
+              <span>Расчет остатка (2.180 - 1.880):</span>
+              <strong>Реальная дельта: 0.300 кг</strong>
+            </div>
+            <div class="rec-row">
+              <span>Новый книжный остаток:</span>
+              <strong style="color: var(--primary);">7.180 кг</strong>
+            </div>
+            <div class="rec-highlight">
+              <span>✅</span> Излишек 03.09 закрыт. Недостача снижена до 255 ₸. Штраф отменен!
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Сыр Моцарелла -->
+        <div class="item-card alert-item" id="card-item-3">
+          <div class="item-top">
+            <div>
+              <div class="item-name">Сыр Моцарелла тертый (Буржуй)</div>
+              <div class="item-type">Весовой товар | Молочный склад</div>
+            </div>
+            <span class="item-badge red" id="badge-3">Штраф: 4 100 ₸</span>
+          </div>
+
+          <div class="item-grid">
+            <div class="grid-cell">
+              <div class="cell-lbl">Книга 01.09</div>
+              <div class="cell-val" id="book-3">12.500 кг</div>
+            </div>
+            <div class="grid-cell">
+              <div class="cell-lbl">Факт 01.09</div>
+              <div class="cell-val">10.800 кг</div>
+            </div>
+            <div class="grid-cell">
+              <div class="cell-lbl">Недостача</div>
+              <div class="cell-val danger" id="diff-3">-1.700 кг</div>
+            </div>
+          </div>
+
+          <div class="reconcile-box" id="rec-box-3">
+            <div class="rec-row">
+              <span>Движение товара:</span>
+              <strong>02.09 обнаружен излишек +1.500 кг</strong>
+            </div>
+            <div class="rec-row">
+              <span>Расчет остатка (1.700 - 1.500):</span>
+              <strong>Реальная дельта: 0.200 кг</strong>
+            </div>
+            <div class="rec-row">
+              <span>Новый книжный остаток:</span>
+              <strong style="color: var(--primary);">12.300 кг</strong>
+            </div>
+            <div class="rec-highlight">
+              <span>✅</span> Излишек 02.09 закрыт. Недостача снижена до 480 ₸. Штраф отменен!
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4: Картофель фри (Излишков нет) -->
+        <div class="item-card normal-item" id="card-item-4">
+          <div class="item-top">
+            <div>
+              <div class="item-name">Картофель фри заморозка</div>
+              <div class="item-type">Весовой товар | Заморозка</div>
+            </div>
+            <span class="item-badge gray">Норма (<1 000 ₸)</span>
+          </div>
+
+          <div class="item-grid">
+            <div class="grid-cell">
+              <div class="cell-lbl">Книга 01.09</div>
+              <div class="cell-val">15.000 кг</div>
+            </div>
+            <div class="grid-cell">
+              <div class="cell-lbl">Факт 01.09</div>
+              <div class="cell-val">14.200 кг</div>
+            </div>
+            <div class="grid-cell">
+              <div class="cell-lbl">Недостача</div>
+              <div class="cell-val danger">-0.800 кг</div>
+            </div>
+          </div>
+          <div style="font-size: 11px; color: var(--text-dim); text-align: center;">
+            Сумма 720 ₸ (ниже порога 1 000 ₸, штраф не начисляется)
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- CONTENT 2: ВЕЧЕРНЯЯ ЗАЯВКА (НЕАКТИВНО / В РАЗРАБОТКЕ) -->
+    <div class="app-content placeholder-view" id="view-orders">
+      <div class="placeholder-icon">📦</div>
+      <h2 class="placeholder-title">Вечерняя заявка на цех</h2>
+      <p class="placeholder-desc">
+        Модуль автоматического расчета сырья на заготовочный цех находится в разработке.<br><br>
+        После запуска управляющий сможет в 1 клик подтверждать автозаявку на основе текущих остатков и темпа вечерних продаж.
+      </p>
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 16px; text-align: left;">
+        <div style="font-size: 11px; color: var(--primary); font-weight: 700; margin-bottom: 6px; text-transform: uppercase;">План запуска функционала:</div>
+        <div style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+          • Синхронизация с нормативами iiko в 21:00<br>
+          • Авторасчет минимальных и максимальных запасов<br>
+          • Подтверждение в 1 клик со смартфона
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM ACTION BAR -->
+    <footer class="bottom-bar">
+      <button class="btn-save" id="btn-save-iiko" disabled onclick="saveToIiko()">
+        <span>💾</span> Сохранить и передать в iiko
+      </button>
+    </footer>
+
+    <!-- IIKO WARNING MODAL -->
+    <div class="modal-backdrop" id="modal-warning">
+      <div class="modal-box">
+        <div class="modal-icon">⚠️</div>
+        <h3 class="modal-title">Предупреждение iikoChain</h3>
+        <p class="modal-text">
+          Операция создаёт расход с образованием отрицательных остатков задним числом для закрытия встречных излишков.<br><br>
+          <strong>Применить автоматическую корректировку книги?</strong>
+        </p>
+        <div class="modal-actions">
+          <button class="btn-modal secondary" onclick="closeModal()">Отмена</button>
+          <button class="btn-modal primary" onclick="confirmRecalculation()">Да, применить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast">
+      <span id="toast-icon">✅</span>
+      <span id="toast-text">Данные успешно сохранены в iiko!</span>
+    </div>
+
+  </div>
+
+  <script>
+    let isReconciled = false;
+    let currentRole = 'manager'; // 'manager' | 'staff'
+
+    // Prevent accidental zoom on mobile
+    document.addEventListener('gesturestart', (e) => e.preventDefault());
+    document.addEventListener('dblclick', (e) => e.preventDefault());
+
+    function toggleRole() {
+      const label = document.getElementById('role-label');
+      const toggle = document.getElementById('user-role-toggle');
+      const cta = document.getElementById('cta-reconcile');
+      const saveBtn = document.getElementById('btn-save-iiko');
+
+      if (currentRole === 'manager') {
+        currentRole = 'staff';
+        label.textContent = 'Повар (Только просмотр)';
+        toggle.classList.remove('active');
+        cta.disabled = true;
+        cta.style.opacity = '0.4';
+        cta.style.cursor = 'not-allowed';
+        saveBtn.disabled = true;
+        showToast('🔒 Режим сотрудника: права редактирования отключены', 'ℹ️');
+      } else {
+        currentRole = 'manager';
+        label.textContent = 'Управляющий (Редактор)';
+        toggle.classList.add('active');
+        cta.disabled = false;
+        cta.style.opacity = '1';
+        cta.style.cursor = 'pointer';
+        if (isReconciled) saveBtn.disabled = false;
+        showToast('🔓 Режим управляющего: полный доступ к пересчету', '✅');
+      }
+    }
+
+    function switchTab(tab) {
+      if (tab === 'ord') {
+        document.getElementById('tab-inv').classList.remove('active');
+        document.getElementById('tab-ord').classList.add('active');
+        document.getElementById('view-inventory').style.display = 'none';
+        document.getElementById('view-orders').style.display = 'block';
+        document.getElementById('btn-save-iiko').style.display = 'none';
+      } else {
+        document.getElementById('tab-ord').classList.remove('active');
+        document.getElementById('tab-inv').classList.add('active');
+        document.getElementById('view-orders').style.display = 'none';
+        document.getElementById('view-inventory').style.display = 'block';
+        document.getElementById('btn-save-iiko').style.display = 'flex';
+      }
+    }
+
+    function changePoint() {
+      const select = document.getElementById('point-select');
+      showToast('Загрузка данных точки ' + select.value + '...', '🔄');
+      resetReconciliation();
+    }
+
+    function refreshData() {
+      const btn = document.getElementById('btn-refresh');
+      btn.classList.add('loading');
+      setTimeout(() => {
+        btn.classList.remove('loading');
+        showToast('Данные iiko обновлены', '✅');
+        resetReconciliation();
+      }, 700);
+    }
+
+    function resetReconciliation() {
+      isReconciled = false;
+      const cta = document.getElementById('cta-reconcile');
+      cta.innerHTML = '<span>⚡</span> ВЫПОЛНИТЬ АВТО-СВЕДЕНИЕ В 1 КЛИК';
+      cta.classList.remove('done');
+      
+      const kpi = document.getElementById('kpi-banner');
+      kpi.classList.remove('resolved');
+      document.getElementById('kpi-status-title').textContent = '⚠️ Внимание: Есть недостачи свыше 1 000 ₸';
+      document.getElementById('kpi-status-badge').textContent = 'Риск штрафа';
+      document.getElementById('kpi-penalty-sum').textContent = '8 450 ₸';
+      document.getElementById('kpi-sub-text').textContent = 'Общая сумма штрафов на смену';
+      document.getElementById('kpi-crit-count').textContent = '3 позиции';
+
+      for (let i = 1; i <= 3; i++) {
+        const card = document.getElementById('card-item-' + i);
+        card.classList.remove('resolved-item');
+        card.classList.add('alert-item');
+      }
+      document.getElementById('badge-1').textContent = 'Штраф: 2 500 ₸';
+      document.getElementById('badge-2').textContent = 'Штраф: 1 850 ₸';
+      document.getElementById('badge-3').textContent = 'Штраф: 4 100 ₸';
+
+      document.getElementById('book-1').textContent = '8.690 кг';
+      document.getElementById('book-2').textContent = '7.480 кг';
+      document.getElementById('book-3').textContent = '12.500 кг';
+
+      document.getElementById('btn-save-iiko').disabled = true;
+    }
+
+    function performAutoReconciliation() {
+      if (currentRole !== 'manager') {
+        showToast('У вас нет прав на редактирование инвентов', '🚫');
+        return;
+      }
+      // Show iiko warning modal first, exactly as in iikoChain
+      document.getElementById('modal-warning').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal-warning').style.display = 'none';
+    }
+
+    function confirmRecalculation() {
+      closeModal();
+      isReconciled = true;
+
+      // Update CTA
+      const cta = document.getElementById('cta-reconcile');
+      cta.innerHTML = '<span>✅</span> АВТО-СВЕДЕНИЕ ВЫПОЛНЕНО (ДЕЛЬТЫ СВЕДЕНЫ)';
+      cta.classList.add('done');
+
+      // Update KPI
+      const kpi = document.getElementById('kpi-banner');
+      kpi.classList.add('resolved');
+      document.getElementById('kpi-status-title').textContent = '🎉 Все недостачи успешно сведены!';
+      document.getElementById('kpi-status-badge').textContent = 'Штрафы: 0 ₸';
+      document.getElementById('kpi-penalty-sum').textContent = '0 ₸';
+      document.getElementById('kpi-sub-text').textContent = 'Сэкономлено для сотрудников: 8 450 ₸';
+      document.getElementById('kpi-crit-count').textContent = '0 позиций';
+
+      // Update Items
+      for (let i = 1; i <= 3; i++) {
+        const card = document.getElementById('card-item-' + i);
+        card.classList.remove('alert-item');
+        card.classList.add('resolved-item');
+      }
+
+      document.getElementById('badge-1').className = 'item-badge green';
+      document.getElementById('badge-1').textContent = 'Штраф: 0 ₸ (Снято)';
+
+      document.getElementById('badge-2').className = 'item-badge green';
+      document.getElementById('badge-2').textContent = 'Штраф: 0 ₸ (Снято)';
+
+      document.getElementById('badge-3').className = 'item-badge green';
+      document.getElementById('badge-3').textContent = 'Штраф: 0 ₸ (Снято)';
+
+      // Updated book amounts
+      document.getElementById('book-1').innerHTML = '<span style="color: var(--primary);">8.245 кг</span>';
+      document.getElementById('book-2').innerHTML = '<span style="color: var(--primary);">7.180 кг</span>';
+      document.getElementById('book-3').innerHTML = '<span style="color: var(--primary);">12.300 кг</span>';
+
+      // Enable save button
+      document.getElementById('btn-save-iiko').disabled = false;
+
+      showToast('Авто-сведение завершено: 3 позиции пересчитаны!', '⚡');
+    }
+
+    function saveToIiko() {
+      if (currentRole !== 'manager') {
+        showToast('У вас нет прав на сохранение инвентов', '🚫');
+        return;
+      }
+      const saveBtn = document.getElementById('btn-save-iiko');
+      saveBtn.innerHTML = '<span>⏳</span> Сохранение в iiko...';
+      saveBtn.disabled = true;
+
+      setTimeout(() => {
+        saveBtn.innerHTML = '<span>✅</span> Сохранено в iikoChain';
+        showToast('Инвентаризация P2 за 01.09 успешно записана!', '🎉');
+      }, 1000);
+    }
+
+    function showToast(msg, icon = '✅') {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').textContent = msg;
+      document.getElementById('toast-icon').textContent = icon;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
