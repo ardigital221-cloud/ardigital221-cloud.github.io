@@ -768,13 +768,26 @@
       <header class="top-header">
         <div class="store-badge">
           <span class="store-icon">🏪</span>
-          <select class="store-select" id="store-select">
-            <option value="P2">BURЖУЙ — Точка P2 (ул. Катаева)</option>
-            <option value="B5">BURЖУЙ — Б5 (ул. Толстого, 90А)</option>
-            <option value="B1">BURЖУЙ — Б1 (ул. Лермонтова, 100)</option>
-            <option value="B12">BURЖУЙ — Б12 (пр. Назарбаева, 283)</option>
-            <option value="B19">BURЖУЙ — Б19 (Батыр Молл, Камзина)</option>
-            <option value="B16">BURЖУЙ — В-16 (г. Экибастуз)</option>
+          <select class="store-select" id="store-select" onchange="changeStore()">
+            <option value="В-3">В-3</option>
+            <option value="В-4">В-4</option>
+            <option value="В-20">В-20</option>
+            <option value="В-10">В-10</option>
+            <option value="Б19(Батыр Молл)">Б19(Батыр Молл)</option>
+            <option value="В-5" selected>В-5</option>
+            <option value="В-22 (Баянтау)">В-22 (Баянтау)</option>
+            <option value="В-25">В-25</option>
+            <option value="В-13">В-13</option>
+            <option value="В-15">В-15</option>
+            <option value="В-1">В-1</option>
+            <option value="В-7">В-7</option>
+            <option value="В-9">В-9</option>
+            <option value="В-11">В-11</option>
+            <option value="В-16">В-16</option>
+            <option value="В-2">В-2</option>
+            <option value="В-21">В-21</option>
+            <option value="В-14">В-14</option>
+            <option value="В-12">В-12</option>
           </select>
         </div>
 
@@ -1076,6 +1089,37 @@
       // Enable Save
       document.getElementById('btn-save-iiko').disabled = false;
       showToast('Корректировка книжных остатков применена');
+    }
+
+    function changeStore() {
+      const store = document.getElementById('store-select').value;
+      showToast('Загрузка данных точки: ' + store);
+      if (isReconciled) {
+        isReconciled = false;
+        const btn = document.getElementById('btn-reconcile');
+        btn.textContent = 'Свести инвентаризацию (Найти встречные излишки)';
+        btn.classList.remove('done');
+        const badge = document.getElementById('sum-badge');
+        badge.textContent = 'Требует сопоставления';
+        badge.className = 'sum-badge red';
+        const sumAmount = document.getElementById('sum-amount');
+        sumAmount.textContent = '8 450 ₸';
+        sumAmount.className = 'sum-amount';
+        document.getElementById('sum-desc').textContent = '3 критические позиции с риском штрафа';
+        for (let i = 1; i <= 3; i++) {
+          document.getElementById('row-' + i).classList.remove('resolved');
+        }
+        document.getElementById('price-1').textContent = '-2 500 ₸';
+        document.getElementById('price-1').className = 'r-price';
+        document.getElementById('book-1').textContent = '8.690 кг';
+        document.getElementById('price-2').textContent = '-1 850 ₸';
+        document.getElementById('price-2').className = 'r-price';
+        document.getElementById('book-2').textContent = '7.480 кг';
+        document.getElementById('price-3').textContent = '-4 100 ₸';
+        document.getElementById('price-3').className = 'r-price';
+        document.getElementById('book-3').textContent = '12.500 кг';
+        document.getElementById('btn-save-iiko').disabled = true;
+      }
     }
 
     function saveToIiko() {
