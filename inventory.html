@@ -1916,8 +1916,11 @@
     }
 
     function calculateStoreReconciliation(items, roster) {
-      const sousPerson = roster.find(r => r.roleType === 'sous') || roster[0] || { name: 'Су-шеф', role: 'Су-шеф' };
-      const shiftPerson = roster.find(r => r.roleType === 'shift' || r.roleType === 'cashier') || roster[roster.length - 1] || { name: 'Сотрудник смены', role: 'Смена' };
+      const storeData = getActiveStoreData();
+      const dailyRosters = storeData ? (storeData.dailyRosters || {}) : {};
+      const isPiece = activeSurplus === 'piece';
+
+      const sousPerson = roster.find(function(r) { return r.roleType === 'sous'; }) || roster[0] || { name: 'Сушеф', role: 'Су-шеф кухни' };
 
       let totalBefore = 0;
       let totalCovered = 0;
@@ -1925,6 +1928,7 @@
       let sousFines = 0;
       let shiftFines = 0;
       const finesByPerson = {};
+      const fineItemsByPerson = {};
 
       items.forEach(function(item) {
         totalBefore += Math.abs(item.costBefore || 0);
@@ -1936,24 +1940,41 @@
 
         if (rem > 0) {
           if (rem <= 1000) {
+            // Регламент: штрафы до 1 000 ₸ закрепляются за Су-шефом
             sousFines += rem;
             finesByPerson[sousPerson.name] = (finesByPerson[sousPerson.name] || 0) + rem;
+            if (!fineItemsByPerson[sousPerson.name]) fineItemsByPerson[sousPerson.name] = [];
+            fineItemsByPerson[sousPerson.name].push({ title: item.title, amount: rem, date: '01.09–10.09' });
           } else {
+            // Регламент: штрафы более 1 000 ₸ закрепляются за сотрудником КОНКРЕТНОЙ смены
+            const minusMoves = (item.movements || []).filter(function(m) { return m.cls === 'minus'; });
+            const shortageDate = (minusMoves[0] && minusMoves[0].date) || (item.dates && item.dates[0]) || '01.09';
+            const dayRoster = dailyRosters[shortageDate] || [];
+
+            // Определяем сотрудника именно той даты
+            const targetWorker = dayRoster.find(function(r) { return r.roleType === (isPiece ? 'cashier' : 'shift'); })
+                              || dayRoster.find(function(r) { return r.roleType !== 'sous'; })
+                              || dayRoster[0]
+                              || roster.find(function(r) { return r.roleType === (isPiece ? 'cashier' : 'shift'); })
+                              || { name: 'Смена ' + shortageDate, role: isPiece ? 'Кассир' : 'Повар' };
+
             shiftFines += rem;
-            finesByPerson[shiftPerson.name] = (finesByPerson[shiftPerson.name] || 0) + rem;
+            finesByPerson[targetWorker.name] = (finesByPerson[targetWorker.name] || 0) + rem;
+            if (!fineItemsByPerson[targetWorker.name]) fineItemsByPerson[targetWorker.name] = [];
+            fineItemsByPerson[targetWorker.name].push({ title: item.title, amount: rem, date: shortageDate });
           }
         }
       });
 
       return {
-        totalBefore,
-        totalCovered,
-        totalResidual,
-        sousFines,
-        shiftFines,
-        sousPerson,
-        shiftPerson,
-        finesByPerson
+        totalBefore: totalBefore,
+        totalCovered: totalCovered,
+        totalResidual: totalResidual,
+        sousFines: sousFines,
+        shiftFines: shiftFines,
+        sousPerson: sousPerson,
+        finesByPerson: finesByPerson,
+        fineItemsByPerson: fineItemsByPerson
       };
     }
 
@@ -2065,8 +2086,12 @@
         penaltyBadge.className = 'penalty-pill danger';
 
         let subParts = [];
-        if (calc.sousFines > 0) subParts.push('👨‍🍳 ' + calc.sousPerson.role + ': ' + calc.sousFines.toLocaleString('ru-RU') + ' ₸');
-        if (calc.shiftFines > 0) subParts.push('👤 ' + calc.shiftPerson.role + ' (' + calc.shiftPerson.name + '): ' + calc.shiftFines.toLocaleString('ru-RU') + ' ₸');
+        for (const [pName, fAmt] of Object.entries(calc.finesByPerson)) {
+          if (fAmt > 0) {
+            const isSous = (pName === calc.sousPerson.name);
+            subParts.push((isSous ? '👨‍🍳 ' : '🚨 ') + pName + ': ' + fAmt.toLocaleString('ru-RU') + ' ₸');
+          }
+        }
         subNote.textContent = subParts.length > 0 ? subParts.join(' | ') : '✓ Все расхождения зачтены встречными излишками';
 
         recAllBtn.classList.add('done');
@@ -2157,7 +2182,19 @@
               moveHtml +
             '</div>' +
             '<div class="calc-explain-box ' + (!item.hasSurplus ? 'danger-note' : '') + '">' +
-              '<strong>Статус iiko:</strong> ' + item.explain +
+              '<strong>Статус iiko:</strong> ' + (function() {
+              const rem = Math.abs(item.hasSurplus ? item.remCost : item.costBefore);
+              if (rem === 0) return '✓ Недостача за период зачтена встречным излишком на 100%. К удержанию: 0 ₸.';
+              if (rem <= 1000) return 'Остаточная недостача: ' + rem + ' ₸ (≤ 1 000 ₸ ➔ закрепляется за 👨‍🍳 ' + calc.sousPerson.role + ' ' + calc.sousPerson.name + ').';
+              const minusMoves = (item.movements || []).filter(function(m) { return m.cls === 'minus'; });
+              const shortageDate = (minusMoves[0] && minusMoves[0].date) || '01.09';
+              const dayRoster = (storeData && storeData.dailyRosters && storeData.dailyRosters[shortageDate]) || [];
+              const targetWorker = dayRoster.find(function(r) { return r.roleType === (isPiece ? 'cashier' : 'shift'); })
+                                || dayRoster.find(function(r) { return r.roleType !== 'sous'; })
+                                || dayRoster[0]
+                                || { name: 'Сотрудник смены ' + shortageDate, role: isPiece ? 'Кассир' : 'Повар' };
+              return 'Недостача: ' + rem + ' ₸ (> 1 000 ₸, смена ' + shortageDate + ') ➔ закрепляется за кассиром/поваром смены: 🚨 ' + targetWorker.name + ' (' + targetWorker.role + ').';
+            })() +
             '</div>' +
           '</div>';
 
@@ -2209,6 +2246,7 @@
 
       const calc = calculateStoreReconciliation(items, roster);
 
+      const dailyRosters = storeData ? (storeData.dailyRosters || {}) : {};
       let linesHtml = '';
       items.forEach(function(item) {
         const rem = Math.abs(item.hasSurplus ? item.remCost : item.costBefore);
@@ -2217,16 +2255,32 @@
         } else if (rem <= 1000) {
           linesHtml += '• ' + item.title + ': ' + rem + ' ₸ (≤ 1 000 ₸) ➔ 👨‍🍳 <strong>' + calc.sousPerson.role + ' (' + calc.sousPerson.name + ')</strong><br>';
         } else {
-          linesHtml += '• ' + item.title + ': ' + rem + ' ₸ (> 1 000 ₸) ➔ 🚨 <strong>' + calc.shiftPerson.role + ' (' + calc.shiftPerson.name + ')</strong><br>';
+          const minusMoves = (item.movements || []).filter(function(m) { return m.cls === 'minus'; });
+          const shortageDate = (minusMoves[0] && minusMoves[0].date) || (item.dates && item.dates[0]) || '01.09';
+          const dayRoster = dailyRosters[shortageDate] || [];
+          const targetWorker = dayRoster.find(function(r) { return r.roleType === (isPiece ? 'cashier' : 'shift'); })
+                            || dayRoster.find(function(r) { return r.roleType !== 'sous'; })
+                            || dayRoster[0]
+                            || { name: 'Сотрудник смены ' + shortageDate, role: isPiece ? 'Кассир' : 'Повар' };
+          linesHtml += '• ' + item.title + ': ' + rem + ' ₸ (> 1 000 ₸) ➔ 🚨 <strong>' + targetWorker.role + ' ' + targetWorker.name + ' (смена ' + shortageDate + ')</strong><br>';
         }
       });
 
-      let html = '<strong>Распределение штрафов по Журналу явок iiko (' + (storeData ? storeData.storeLabel : '') + '):</strong><br><br>';
+      let html = '<strong>Персональное распределение штрафов по сменам (' + (storeData ? storeData.storeLabel : '') + '):</strong><br><br>';
       html += linesHtml + '<br>';
-      html += '<strong>Итого к удержанию: ' + calc.totalResidual.toLocaleString('ru-RU') + ' ₸</strong><br>';
-      if (calc.sousFines > 0) html += '• 👨‍🍳 ' + calc.sousPerson.role + ' (' + calc.sousPerson.name + '): ' + calc.sousFines.toLocaleString('ru-RU') + ' ₸<br>';
-      if (calc.shiftFines > 0) html += '• 👤 ' + calc.shiftPerson.role + ' (' + calc.shiftPerson.name + '): ' + calc.shiftFines.toLocaleString('ru-RU') + ' ₸<br>';
-      if (calc.sousFines === 0 && calc.shiftFines === 0) html += '• Все позиции сведены без удержаний.<br>';
+      html += '<strong>Итого к удержанию по точке: ' + calc.totalResidual.toLocaleString('ru-RU') + ' ₸</strong><br><br>';
+      html += '<strong>Сводка удержаний по сотрудникам:</strong><br>';
+
+      let hasFines = false;
+      for (const [pName, fineAmt] of Object.entries(calc.finesByPerson)) {
+        if (fineAmt > 0) {
+          hasFines = true;
+          const isSous = (pName === calc.sousPerson.name);
+          const pInfo = roster.find(function(r) { return r.name === pName; }) || { role: isSous ? 'Су-шеф кухни' : 'Сотрудник смены' };
+          html += (isSous ? '👨‍🍳 ' : '🚨 ') + '<strong>' + pName + '</strong> (' + pInfo.role + '): <strong>' + fineAmt.toLocaleString('ru-RU') + ' ₸</strong>' + (isSous ? ' <em>(позиции ≤ 1 000 ₸)</em>' : '') + '<br>';
+        }
+      }
+      if (!hasFines) html += '• Все позиции сведены без удержаний.<br>';
 
       document.getElementById('modal-formula-text').innerHTML = html;
       document.getElementById('modal-warning').style.display = 'flex';
@@ -2348,14 +2402,20 @@
       });
 
       text += '--------------------------------\n';
-      text += '*РАСПРЕДЕЛЕНИЕ ШТРАФОВ ПО РЕГЛАМЕНТУ:*\n';
-      if (calc.sousFines > 0) {
-        text += '👨‍🍳 ' + calc.sousPerson.role + ' (' + calc.sousPerson.name + '): ' + calc.sousFines.toLocaleString('ru-RU') + ' ₸ (позиции ≤ 1 000 ₸)\n';
+      text += '*ПЕРСОНАЛЬНОЕ РАСПРЕДЕЛЕНИЕ ШТРАФОВ ПО СМЕНАМ:*\n';
+      let hasAnyFine = false;
+      for (const [pName, fineAmt] of Object.entries(calc.finesByPerson)) {
+        if (fineAmt > 0) {
+          hasAnyFine = true;
+          const isSous = (pName === calc.sousPerson.name);
+          const pInfo = roster.find(function(r) { return r.name === pName; }) || { role: isSous ? 'Су-шеф кухни' : 'Сотрудник смены' };
+          const itemsList = (calc.fineItemsByPerson && calc.fineItemsByPerson[pName])
+            ? calc.fineItemsByPerson[pName].map(function(it) { return it.title + (it.date ? ' [' + it.date + ']' : '') + ' (' + it.amount + ' ₸)'; }).join(', ')
+            : '';
+          text += (isSous ? '👨‍🍳 ' : '🚨 ') + '*' + pName + '* (' + pInfo.role + '): *' + fineAmt.toLocaleString('ru-RU') + ' ₸*' + (isSous ? ' (все позиции ≤ 1 000 ₸)' : ('\n   ↳ ' + itemsList)) + '\n';
+        }
       }
-      if (calc.shiftFines > 0) {
-        text += '👤 ' + calc.shiftPerson.role + ' (' + calc.shiftPerson.name + '): ' + calc.shiftFines.toLocaleString('ru-RU') + ' ₸ (позиции > 1 000 ₸)\n';
-      }
-      if (calc.sousFines === 0 && calc.shiftFines === 0) {
+      if (!hasAnyFine) {
         text += '✓ Все расхождения зачтены излишками (штрафов нет)\n';
       }
       text += '📌 *Статус:* Документ скорректирован и проведён в iikoChain';
