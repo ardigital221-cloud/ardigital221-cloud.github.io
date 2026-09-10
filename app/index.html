@@ -6,24 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="theme-color" content="#FFFFFF">
+  <meta name="theme-color" content="#0F172A">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #F5F7FA;
-      --white: #FFFFFF;
-      --border: #DCE2E8;
-      --border-light: #EBF0F5;
-      --text: #1E293B;
+      --bg: #F1F5F9;
+      --card-bg: #FFFFFF;
+      --border: #CBD5E1;
+      --border-light: #E2E8F0;
+      --text: #0F172A;
       --text-muted: #64748B;
       --text-dim: #94A3B8;
       --primary: #FFB800;
-      --primary-dark: #D99B00;
-      --iiko-blue: #0284C7;
+      --accent: #2563EB;
+      --accent-hover: #1D4ED8;
       --iiko-green: #16A34A;
+      --iiko-green-bg: #DCFCE7;
       --danger: #DC2626;
+      --danger-bg: #FEE2E2;
       --font: 'Inter', system-ui, -apple-system, sans-serif;
       --mono: 'Roboto Mono', monospace;
     }
@@ -53,16 +55,16 @@
       margin: 0 auto;
       min-height: 100vh;
       min-height: 100dvh;
-      background: var(--white);
+      background: var(--card-bg);
       display: flex;
       flex-direction: column;
       position: relative;
-      border-left: 1px solid var(--border);
-      border-right: 1px solid var(--border);
+      border-left: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
     }
 
     /* ---------------------------------------------------- */
-    /* ЭКРАН 1: АВТОРИЗАЦИЯ СОТРУДНИКА (ЧИСТАЯ, БЕЗ ПОЧТЫ)   */
+    /* ЭКРАН 1: АВТОРИЗАЦИЯ СОТРУДНИКА                     */
     /* ---------------------------------------------------- */
     .auth-view {
       padding: 40px 24px;
@@ -70,27 +72,28 @@
       flex-direction: column;
       flex: 1;
       justify-content: center;
-      background: var(--white);
+      background: var(--card-bg);
     }
 
     .auth-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
+      gap: 12px;
+      margin-bottom: 28px;
     }
 
     .brand-mark {
-      width: 36px;
-      height: 36px;
+      width: 42px;
+      height: 42px;
       background: #0F172A;
-      border-radius: 8px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
       color: var(--primary);
-      font-size: 18px;
+      font-size: 22px;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
     }
 
     .brand-title-wrap h1 {
@@ -110,13 +113,13 @@
     }
 
     .auth-card {
-      margin-top: 10px;
+      margin-top: 4px;
     }
 
     .auth-form-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       color: #0F172A;
     }
 
@@ -157,7 +160,7 @@
 
     .form-input:focus {
       border-color: #0F172A;
-      background: var(--white);
+      background: #FFF;
     }
 
     .btn-login {
@@ -175,7 +178,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-top: 8px;
+      margin-top: 10px;
       transition: opacity 0.2s;
     }
 
@@ -197,76 +200,199 @@
     }
 
     /* ---------------------------------------------------- */
-    /* ЭКРАН 2: РАБОЧАЯ ПАНЕЛЬ ИНВЕНТАРИЗАЦИИ               */
+    /* ЭКРАН 2: РАБОЧИЙ ИНТЕРФЕЙС                           */
     /* ---------------------------------------------------- */
     .app-main {
       display: none;
       flex-direction: column;
       flex: 1;
+      background: #F8FAFC;
     }
 
-    /* Оптимизированный верхний блок (2 компактные строки) */
+    /* Компактная шапка */
     .header-bar {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
+      background: #FFF;
+      border-bottom: 1px solid var(--border-light);
       position: sticky;
       top: 0;
       z-index: 100;
-    }
-
-    .header-top-row {
+      padding: 12px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 16px 8px;
     }
 
-    .logo-compact {
-      font-weight: 900;
-      font-size: 17px;
-      letter-spacing: -0.5px;
-      color: #0F172A;
-    }
-
-    .user-compact {
+    .header-logo {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
+    }
+
+    .logo-badge {
+      width: 26px;
+      height: 26px;
+      background: #0F172A;
+      color: var(--primary);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.4px;
+      color: #0F172A;
+    }
+
+    .header-user-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .user-pill {
+      font-size: 11px;
       font-weight: 600;
       color: #0F172A;
       background: #F1F5F9;
-      padding: 4px 8px;
+      padding: 5px 8px;
       border-radius: 6px;
+      border: 1px solid var(--border-light);
     }
 
-    .btn-exit {
+    .btn-logout {
       background: none;
       border: none;
       color: var(--text-dim);
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      text-decoration: underline;
+      padding: 4px 6px;
     }
 
-    /* Выбор точки на всю ширину под шапкой */
-    .store-select-wrap {
-      padding: 0 16px 10px;
+    /* Область прокрутки контента */
+    .content-scroll {
+      flex: 1;
+      padding: 14px 16px 80px;
+      overflow-y: auto;
+    }
+
+    /* ---------------------------------------------------- */
+    /* ПОШАГОВЫЙ БЛОК НАСТРОЙКИ (1 - 2 - 3)                */
+    /* ---------------------------------------------------- */
+    .workflow-card {
+      background: #FFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .step-box {
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--border-light);
+    }
+
+    .step-box:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .step-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #0F172A;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .step-heading {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #334155;
+    }
+
+    /* Шаг 1: Переключение разделов */
+    .section-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .section-btn {
+      padding: 10px 8px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #F8FAFC;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+
+    .section-btn.active {
+      background: #0F172A;
+      color: #FFF;
+      border-color: #0F172A;
+    }
+
+    .section-btn.disabled {
+      background: #F1F5F9;
+      color: var(--text-dim);
+      cursor: not-allowed;
+      border-color: var(--border-light);
+    }
+
+    .badge-soon {
+      font-size: 9px;
+      font-weight: 700;
+      background: #E2E8F0;
+      color: #64748B;
+      padding: 1px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Шаг 2: Селектор торговой точки */
+    .store-dropdown-wrap {
       position: relative;
     }
 
-    .store-select-field {
+    .store-dropdown {
       width: 100%;
-      height: 38px;
+      height: 42px;
       background: #F8FAFC;
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0 32px 0 12px;
-      font-size: 13px;
+      border-radius: 8px;
+      padding: 0 34px 0 12px;
+      font-size: 14px;
       font-weight: 700;
       color: #0F172A;
       font-family: var(--font);
@@ -275,102 +401,104 @@
       cursor: pointer;
     }
 
-    .store-select-wrap::after {
+    .store-dropdown:focus {
+      border-color: #0F172A;
+      background: #FFF;
+    }
+
+    .store-dropdown-wrap::after {
       content: '▾';
       position: absolute;
-      right: 28px;
+      right: 14px;
       top: 50%;
-      transform: translateY(-65%);
+      transform: translateY(-50%);
       color: var(--text-muted);
       pointer-events: none;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
     }
 
-    /* Навигация (вкладки) */
-    .nav-tabs {
-      display: flex;
-      background: #F8FAFC;
-      border-bottom: 1px solid var(--border);
-      padding: 0 16px;
+    /* Шаг 3: Счёт излишков (Весовой / Штучный) */
+    .surplus-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
     }
 
-    .tab-item {
-      padding: 10px 14px;
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid transparent;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      font-family: var(--font);
+    .surplus-card-btn {
+      padding: 10px 10px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: #F8FAFC;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      text-align: left;
+      transition: all 0.15s;
     }
 
-    .tab-item.active {
-      color: #0F172A;
-      border-bottom-color: #0F172A;
-      background: var(--white);
+    .surplus-card-btn.active {
+      border-color: #0F172A;
+      background: #FFF;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
     }
 
-    .tab-item.disabled {
-      color: var(--text-dim);
-      cursor: not-allowed;
+    .surplus-icon {
+      font-size: 20px;
     }
 
-    .badge-disabled {
-      font-size: 9px;
-      background: #E2E8F0;
-      color: #64748B;
-      padding: 1px 5px;
-      border-radius: 4px;
+    .surplus-name {
+      font-size: 12px;
       font-weight: 700;
-      text-transform: uppercase;
+      color: #0F172A;
+      line-height: 1.2;
     }
 
-    /* Основная область контента */
-    .content-scroll {
-      flex: 1;
-      padding: 14px 16px 80px;
-      overflow-y: auto;
+    .surplus-desc {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
     }
 
-    /* Блок параметров перед формированием */
-    .config-card {
+    /* Период и кнопка "Обновить" */
+    .period-action-wrap {
+      margin-top: 12px;
       background: #F8FAFC;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-light);
       border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 14px;
+      padding: 10px 12px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      font-size: 12px;
+      gap: 10px;
     }
 
-    .config-line {
+    .period-fields {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 12px;
     }
 
-    .config-label {
+    .period-label {
       color: var(--text-muted);
-    }
-
-    .config-val {
       font-weight: 600;
-      color: #0F172A;
     }
 
-    /* Кнопка "Сформировать инвентаризацию" */
-    .btn-build-report {
+    .period-range {
+      font-family: var(--mono);
+      font-weight: 700;
+      color: #0F172A;
+      background: #FFF;
+      border: 1px solid var(--border-light);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+
+    .btn-update-data {
       width: 100%;
       height: 42px;
-      background: #0284C7;
+      background: var(--accent);
       color: #FFF;
       border: none;
       border-radius: 8px;
@@ -382,52 +510,54 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-top: 4px;
       transition: background 0.2s;
     }
 
-    .btn-build-report:hover {
-      background: #0369A1;
+    .btn-update-data:hover {
+      background: var(--accent-hover);
     }
 
-    .btn-build-report.loading {
+    .btn-update-data.loading {
       opacity: 0.75;
       cursor: wait;
     }
 
-    /* Пустое состояние до формирования */
-    .empty-state-card {
+    /* ---------------------------------------------------- */
+    /* ПУСТОЕ СОСТОЯНИЕ (ДО ОБНОВЛЕНИЯ)                     */
+    /* ---------------------------------------------------- */
+    .empty-placeholder {
       text-align: center;
-      padding: 40px 20px;
-      background: #F8FAFC;
+      padding: 36px 20px;
+      background: #FFF;
       border: 1px dashed var(--border);
-      border-radius: 8px;
-      margin-top: 10px;
+      border-radius: 12px;
     }
 
-    .empty-icon {
+    .placeholder-icon {
       font-size: 32px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       color: var(--text-dim);
     }
 
-    .empty-title {
+    .placeholder-title {
       font-size: 14px;
       font-weight: 700;
       color: #0F172A;
       margin-bottom: 4px;
     }
 
-    .empty-text {
+    .placeholder-sub {
       font-size: 12px;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.4;
       max-width: 280px;
       margin: 0 auto;
     }
 
-    /* Результаты после формирования */
-    .report-results-wrap {
+    /* ---------------------------------------------------- */
+    /* БЛОК РЕЗУЛЬТАТОВ (ПОСЛЕ НАЖАТИЯ ОБНОВИТЬ)            */
+    /* ---------------------------------------------------- */
+    .results-section {
       display: none;
       animation: fadeIn 0.25s ease-out;
     }
@@ -437,67 +567,67 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Сводная плашка расхождений */
-    .summary-card {
+    /* Сводная плашка инвентаризации за 1 сентября */
+    .inventory-header-card {
       background: #FFF;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 12px 14px;
       margin-bottom: 12px;
     }
 
-    .summary-header {
+    .inv-top-info {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 6px;
     }
 
-    .summary-title {
+    .inv-date-tag {
       font-size: 11px;
-      font-weight: 700;
-      color: var(--text-muted);
+      font-weight: 800;
+      color: #0F172A;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
-    .summary-tag {
+    .penalty-pill {
       font-size: 11px;
       font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: #FEE2E2;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--danger-bg);
       color: var(--danger);
     }
 
-    .summary-tag.resolved {
-      background: #DCFCE7;
+    .penalty-pill.cleared {
+      background: var(--iiko-green-bg);
       color: var(--iiko-green);
     }
 
-    .summary-main-row {
+    .inv-sum-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
     }
 
-    .summary-amount {
+    .inv-sum-val {
       font-family: var(--mono);
       font-size: 24px;
       font-weight: 800;
       color: var(--danger);
     }
 
-    .summary-amount.resolved {
+    .inv-sum-val.cleared {
       color: var(--iiko-green);
     }
 
-    .summary-sub {
+    .inv-rule-note {
       font-size: 11px;
       color: var(--text-muted);
     }
 
-    /* Кнопка "Свести инвентаризацию" */
+    /* Кнопка автоматического сведения */
     .btn-reconcile-action {
       width: 100%;
       height: 44px;
@@ -518,29 +648,32 @@
     }
 
     .btn-reconcile-action.done {
-      background: #DCFCE7;
+      background: var(--iiko-green-bg);
       color: var(--iiko-green);
       border: 1px solid rgba(22, 163, 74, 0.3);
       cursor: default;
     }
 
-    /* Список позиций */
-    .items-table {
+    /* Таблица позиций */
+    .discrepancy-card {
+      background: #FFF;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
-      background: var(--white);
+      margin-bottom: 16px;
     }
 
-    .table-head {
+    .discrepancy-head {
       background: #F8FAFC;
-      padding: 8px 12px;
+      padding: 10px 12px;
       font-size: 11px;
       font-weight: 700;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
     }
 
     .item-row {
@@ -556,31 +689,31 @@
       background: #F8FCF8;
     }
 
-    .row-top {
+    .row-main-line {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       margin-bottom: 6px;
     }
 
-    .row-title {
+    .item-title {
       font-size: 13px;
       font-weight: 700;
       color: #0F172A;
     }
 
-    .row-diff-price {
+    .item-amount-badge {
       font-size: 13px;
       font-weight: 700;
       font-family: var(--mono);
       color: var(--danger);
     }
 
-    .row-diff-price.green {
+    .item-amount-badge.ok {
       color: var(--iiko-green);
     }
 
-    .row-metrics-grid {
+    .item-metrics-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       font-size: 11px;
@@ -588,54 +721,56 @@
       margin-bottom: 6px;
     }
 
-    .metric-value {
+    .metric-data {
       font-family: var(--mono);
       font-weight: 600;
       color: #0F172A;
       margin-top: 1px;
     }
 
-    .reconciled-box {
-      background: #F8FAFC;
-      border-left: 3px solid var(--iiko-green);
+    .reconciliation-details {
+      display: none;
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: 6px;
       padding: 8px 10px;
       font-size: 11px;
-      color: var(--text-muted);
-      border-radius: 0 4px 4px 0;
+      color: #166534;
+      line-height: 1.4;
+      margin-top: 6px;
+    }
+
+    /* Заявка на цех (заглушка) */
+    .orders-tab-view {
       display: none;
+      text-align: center;
+      padding: 40px 20px;
+      background: #FFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
     }
 
-    .item-row.resolved .reconciled-box {
-      display: block;
-    }
-
-    .rec-line {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 2px;
-    }
-
-    .rec-line strong {
-      color: #0F172A;
-    }
-
-    /* Нижняя плашка сохранения */
-    .save-bottom-bar {
+    /* Фиксированная нижняя панель сохранения */
+    .save-dock {
       position: fixed;
       bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      padding: 10px 16px;
-      background: var(--white);
+      left: 0;
+      right: 0;
+      background: #FFF;
       border-top: 1px solid var(--border);
-      z-index: 100;
+      padding: 10px 16px;
+      display: none;
+      z-index: 99;
     }
 
-    .btn-save-action {
+    .save-dock-inner {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .btn-save-doc {
       width: 100%;
-      height: 42px;
+      height: 44px;
       background: #0F172A;
       color: #FFF;
       border: none;
@@ -646,20 +781,16 @@
       cursor: pointer;
     }
 
-    .btn-save-action:disabled {
-      background: #E2E8F0;
-      color: #94A3B8;
+    .btn-save-doc:disabled {
+      opacity: 0.5;
       cursor: not-allowed;
     }
 
-    /* Модальное окно предупреждения */
-    .modal-overlay {
+    /* Модальное окно iiko */
+    .modal-backdrop {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(15, 23, 42, 0.5);
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
       display: none;
       align-items: center;
       justify-content: center;
@@ -667,33 +798,36 @@
       z-index: 1000;
     }
 
-    .modal-card {
-      background: var(--white);
-      border-radius: 8px;
+    .modal-panel {
+      background: #FFF;
+      border-radius: 12px;
       width: 100%;
-      max-width: 340px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      border: 1px solid var(--border);
+      max-width: 360px;
       overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
 
     .modal-head {
       padding: 14px 16px;
-      border-bottom: 1px solid var(--border-light);
       font-size: 14px;
       font-weight: 700;
-      color: #0F172A;
+      background: #FFFBEB;
+      color: #92400E;
+      border-bottom: 1px solid #FDE68A;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .modal-body {
-      padding: 14px 16px;
+    .modal-content {
+      padding: 16px;
       font-size: 13px;
-      line-height: 1.45;
-      color: var(--text-muted);
+      line-height: 1.5;
+      color: #334155;
     }
 
-    .modal-foot {
-      padding: 10px 16px;
+    .modal-actions {
+      padding: 12px 16px;
       background: #F8FAFC;
       border-top: 1px solid var(--border-light);
       display: flex;
@@ -701,45 +835,45 @@
       gap: 8px;
     }
 
-    .btn-modal {
-      padding: 8px 14px;
+    .modal-btn {
+      padding: 8px 16px;
       border-radius: 6px;
       font-size: 13px;
       font-weight: 600;
-      font-family: var(--font);
       cursor: pointer;
       border: 1px solid var(--border);
     }
 
-    .btn-modal.primary {
+    .modal-btn.primary {
       background: #0F172A;
       color: #FFF;
       border-color: #0F172A;
     }
 
-    .btn-modal.secondary {
-      background: var(--white);
+    .modal-btn.secondary {
+      background: #FFF;
       color: #0F172A;
     }
 
     /* Тост */
-    .toast-box {
+    .toast-msg {
       position: fixed;
       top: 16px;
       left: 50%;
       transform: translateX(-50%) translateY(-80px);
       background: #0F172A;
       color: #FFF;
-      padding: 9px 16px;
+      padding: 8px 16px;
       border-radius: 6px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       transition: transform 0.25s ease;
       z-index: 2000;
+      pointer-events: none;
     }
 
-    .toast-box.visible {
+    .toast-msg.show {
       transform: translateX(-50%) translateY(0);
     }
   </style>
@@ -749,34 +883,34 @@
   <div class="app-shell">
     
     <!-- ---------------------------------------------------- -->
-    <!-- ЭКРАН 1: АВТОРИЗАЦИЯ СОТРУДНИКА (ПУСТЫЕ ПОЛЯ, БЕЗ ПОЧТЫ)-->
+    <!-- АВТОРИЗАЦИЯ СОТРУДНИКА (ПУСТЫЕ ПОЛЯ, БЕЗ ПОЧТЫ)       -->
     <!-- ---------------------------------------------------- -->
     <div class="auth-view" id="view-auth">
       <div class="auth-brand">
         <div class="brand-mark">B</div>
         <div class="brand-title-wrap">
           <h1>BURЖУЙ</h1>
-          <p>Операционная система</p>
+          <p>Операционная система сети</p>
         </div>
       </div>
 
       <div class="auth-card">
         <div class="auth-form-title">Вход для сотрудников</div>
-        <div class="auth-form-sub">Введите учетные данные для доступа к инвентаризациям.</div>
+        <div class="auth-form-sub">Доступ только для сотрудников с правом редактирования инвентаризаций в iiko.</div>
 
         <form id="auth-form" onsubmit="handleLoginSubmit(event)">
           <div class="form-group">
-            <label class="form-label">Логин или код сотрудника</label>
+            <label class="form-label">Логин или табельный номер</label>
             <input type="text" id="input-login" class="form-input" placeholder="например, manager или 4082" autocomplete="off" required>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Пароль / PIN-код</label>
+            <label class="form-label">PIN-код / Пароль</label>
             <input type="password" id="input-pin" class="form-input" placeholder="••••" autocomplete="off" required>
           </div>
 
           <button type="submit" class="btn-login" id="btn-login">
-            Войти
+            Войти в систему
           </button>
         </form>
 
@@ -785,179 +919,159 @@
     </div>
 
     <!-- ---------------------------------------------------- -->
-    <!-- ЭКРАН 2: РАБОЧИЙ ИНТЕРФЕЙС ИНВЕНТАРИЗАЦИИ             -->
+    <!-- РАБОЧИЙ ИНТЕРФЕЙС ИНВЕНТАРИЗАЦИИ                     -->
     <!-- ---------------------------------------------------- -->
     <div class="app-main" id="view-main">
       
-      <!-- Оптимизированная мобильная шапка -->
+      <!-- Шапка приложения -->
       <header class="header-bar">
-        <div class="header-top-row">
-          <div class="logo-compact">BURЖУЙ</div>
-          <div class="user-compact">
-            <span class="user-pill" id="current-user-title">Управляющий</span>
-            <button class="btn-exit" onclick="handleLogout()">Выйти</button>
-          </div>
+        <div class="header-logo">
+          <div class="logo-badge">B</div>
+          <div class="logo-text">BURЖУЙ</div>
         </div>
-
-        <div class="store-select-wrap">
-          <select class="store-select-field" id="select-store" onchange="handleStoreChange()">
-            <option value="В-3">В-3</option>
-            <option value="В-4">В-4</option>
-            <option value="В-20">В-20</option>
-            <option value="В-10">В-10</option>
-            <option value="Б19(Батыр Молл)">Б19(Батыр Молл)</option>
-            <option value="В-5" selected>В-5</option>
-            <option value="В-22 (Баянтау)">В-22 (Баянтау)</option>
-            <option value="В-25">В-25</option>
-            <option value="В-13">В-13</option>
-            <option value="В-15">В-15</option>
-            <option value="В-1">В-1</option>
-            <option value="В-7">В-7</option>
-            <option value="В-9">В-9</option>
-            <option value="В-11">В-11</option>
-            <option value="В-16">В-16</option>
-            <option value="В-2">В-2</option>
-            <option value="В-21">В-21</option>
-            <option value="В-14">В-14</option>
-            <option value="В-12">В-12</option>
-          </select>
+        <div class="header-user-actions">
+          <span class="user-pill" id="user-role-label">Управляющий (EDIT_INV)</span>
+          <button class="btn-logout" onclick="handleLogout()">Выйти</button>
         </div>
-
-        <!-- Навигационные вкладки -->
-        <nav class="nav-tabs">
-          <button class="tab-item active" id="tab-inventory" onclick="switchNavTab('inv')">
-            Инвентаризация
-          </button>
-          <button class="tab-item disabled" id="tab-orders" onclick="switchNavTab('ord')">
-            Вечерняя заявка
-            <span class="badge-disabled">Скоро</span>
-          </button>
-        </nav>
       </header>
 
-      <!-- Область контента: Инвентаризация -->
-      <div class="content-scroll" id="content-inventory">
+      <!-- Основная рабочая область -->
+      <div class="content-scroll">
         
-        <!-- Параметры инвентаризации -->
-        <div class="config-card">
-          <div class="config-line">
-            <span class="config-label">Предприятие:</span>
-            <span class="config-val" id="cfg-store-name">В-5</span>
-          </div>
-          <div class="config-line">
-            <span class="config-label">Счёт излишков:</span>
-            <span class="config-val">Излишки — весовой товар</span>
-          </div>
-          <div class="config-line">
-            <span class="config-label">Период:</span>
-            <span class="config-val">01.09 — 10.09</span>
-          </div>
-
-          <button class="btn-build-report" id="btn-build" onclick="loadInventoryReport()">
-            Сформировать инвентаризацию
-          </button>
-        </div>
-
-        <!-- 1. Пустое состояние до формирования -->
-        <div class="empty-state-card" id="empty-state">
-          <div class="empty-icon">📋</div>
-          <div class="empty-title">Инвентаризация не сформирована</div>
-          <div class="empty-text">
-            Выберите торговую точку и нажмите «Сформировать инвентаризацию» для запроса данных из iikoChain.
-          </div>
-        </div>
-
-        <!-- 2. Результаты (появляются ТОЛЬКО после формирования) -->
-        <div class="report-results-wrap" id="report-results">
+        <!-- ============================================== -->
+        <!-- ПОШАГОВАЯ ПАНЕЛЬ (ШАГИ 1, 2, 3)                -->
+        <!-- ============================================== -->
+        <div class="workflow-card">
           
-          <div class="summary-card">
-            <div class="summary-header">
-              <span class="summary-title">Сумма расхождений</span>
-              <span class="summary-tag" id="sum-tag">Штраф: > 1 000 ₸</span>
+          <!-- ШАГ 1: ВЫБОР РАЗДЕЛА -->
+          <div class="step-box">
+            <div class="step-title-row">
+              <span class="step-num">1</span>
+              <span class="step-heading">1 шаг: Выбрать раздел</span>
             </div>
-            <div class="summary-main-row">
-              <div class="summary-amount" id="sum-val">8 450 ₸</div>
-              <div class="summary-sub" id="sum-count">3 позиции влияют на штраф</div>
+            <div class="section-selector">
+              <button type="button" class="section-btn active" id="btn-sec-inv" onclick="selectSection('inv')">
+                <span>📋 Инвентаризация</span>
+              </button>
+              <button type="button" class="section-btn disabled" id="btn-sec-ord" onclick="selectSection('ord')">
+                <span>📦 Вечерняя заявка</span>
+                <span class="badge-soon">Скоро</span>
+              </button>
             </div>
           </div>
 
-          <button class="btn-reconcile-action" id="btn-reconcile" onclick="openReconciliationModal()">
-            Свести инвентаризацию (сопоставить излишки)
-          </button>
+          <!-- ШАГ 2: ВЫБОР ТОРГОВОЙ ТОЧКИ -->
+          <div class="step-box" id="step-box-store">
+            <div class="step-title-row">
+              <span class="step-num">2</span>
+              <span class="step-heading">2 шаг: Выбрать торговую точку</span>
+            </div>
+            <div class="store-dropdown-wrap">
+              <select class="store-dropdown" id="select-store" onchange="onStoreChange()">
+                <option value="В-3">В-3</option>
+                <option value="В-4">В-4</option>
+                <option value="В-20">В-20</option>
+                <option value="В-10">В-10</option>
+                <option value="Б19(Батыр Молл)">Б19(Батыр Молл)</option>
+                <option value="В-5" selected>В-5</option>
+                <option value="В-22 (Баянтау)">В-22 (Баянтау)</option>
+                <option value="В-25">В-25</option>
+                <option value="В-13">В-13</option>
+                <option value="В-15">В-15</option>
+                <option value="В-1">В-1</option>
+                <option value="В-7">В-7</option>
+                <option value="В-9">В-9</option>
+                <option value="В-11">В-11</option>
+                <option value="В-16">В-16</option>
+                <option value="В-2">В-2</option>
+                <option value="В-21">В-21</option>
+                <option value="В-14">В-14</option>
+                <option value="В-12">В-12</option>
+              </select>
+            </div>
+          </div>
 
-          <div class="items-table">
-            <div class="table-head">Позиции с недостачами за 01.09</div>
+          <!-- ШАГ 3: ВЫБОР СЧЕТА ИЗЛИШКОВ -->
+          <div class="step-box" id="step-box-surplus">
+            <div class="step-title-row">
+              <span class="step-num">3</span>
+              <span class="step-heading">3 шаг: Выбрать счёт излишков</span>
+            </div>
+            <div class="surplus-options">
+              <button type="button" class="surplus-card-btn active" id="btn-surplus-weight" onclick="selectSurplusType('weight')">
+                <span class="surplus-icon">⚖️</span>
+                <div>
+                  <div class="surplus-name">Весовой товар</div>
+                  <div class="surplus-desc">Фарш, сыр, овощи (кг)</div>
+                </div>
+              </button>
+              <button type="button" class="surplus-card-btn" id="btn-surplus-piece" onclick="selectSurplusType('piece')">
+                <span class="surplus-icon">📦</span>
+                <div>
+                  <div class="surplus-name">Штучный товар</div>
+                  <div class="surplus-desc">Булочки, соусы, тара (шт)</div>
+                </div>
+              </button>
+            </div>
 
-            <!-- Позиция 1: Фарш -->
-            <div class="item-row" id="row-1">
-              <div class="row-top">
-                <span class="row-title">Фарш говяжий фирменный</span>
-                <span class="row-diff-price" id="price-1">-2 500 ₸</span>
+            <!-- Период и кнопка "Обновить" -->
+            <div class="period-action-wrap">
+              <div class="period-fields">
+                <span class="period-label">Период:</span>
+                <span class="period-range">с 01.09 по 10.09</span>
               </div>
-              <div class="row-metrics-grid">
-                <div>Книга: <span class="metric-value" id="book-1">8.690 кг</span></div>
-                <div>Факт 01.09: <span class="metric-value">5.400 кг</span></div>
-                <div>Недостача: <span class="metric-value" style="color: var(--danger);" id="diff-1">-3.290 кг</span></div>
+              <button type="button" class="btn-update-data" id="btn-update" onclick="handleRefreshData()">
+                <span>🔄</span>
+                <span id="btn-update-text">Обновить</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ============================================== -->
+        <!-- РАЗДЕЛ 1: ИНВЕНТАРИЗАЦИЯ (КОНТЕНТ)            -->
+        <!-- ============================================== -->
+        <div id="section-inventory-content">
+          
+          <!-- Пустое состояние до нажатия "Обновить" -->
+          <div class="empty-placeholder" id="placeholder-box">
+            <div class="placeholder-icon">📋</div>
+            <div class="placeholder-title">Инвентаризация готова к формированию</div>
+            <div class="placeholder-sub">
+              Выполните шаги 1, 2, 3 выше и нажмите <strong>«Обновить»</strong>, чтобы загрузить инвентаризацию за 1 сентября из iikoChain.
+            </div>
+          </div>
+
+          <!-- Результаты инвентаризации за 1 сентября -->
+          <div class="results-section" id="results-box">
+            
+            <!-- Сводка за 1 сентября -->
+            <div class="inventory-header-card">
+              <div class="inv-top-info">
+                <span class="inv-date-tag" id="inv-current-title">Инвентаризация: 01.09 (В-5, Весовой)</span>
+                <span class="penalty-pill" id="penalty-badge">Штраф: > 1 000 ₸</span>
               </div>
-              <div class="reconciled-box" id="rec-1">
-                <div class="rec-line">Встречный излишек: <strong>02.09 (+2.845 кг)</strong></div>
-                <div class="rec-line">Реальная дельта: <strong>0.445 кг (340 ₸)</strong></div>
-                <div class="rec-line">Скорректированная книга: <strong>8.245 кг</strong></div>
-                <div style="color: var(--iiko-green); font-weight: 600; margin-top: 2px;">✓ Излишек закрыт, сумма < 1 000 ₸ (Штраф снят)</div>
+              <div class="inv-sum-row">
+                <div class="inv-sum-val" id="total-diff-val">8 450 ₸</div>
+                <div class="inv-rule-note" id="total-diff-sub">В первую очередь: наибольшие суммы недостач</div>
               </div>
             </div>
 
-            <!-- Позиция 2: Капуста -->
-            <div class="item-row" id="row-2">
-              <div class="row-top">
-                <span class="row-title">Капуста пекинская зачищенная</span>
-                <span class="row-diff-price" id="price-2">-1 850 ₸</span>
-              </div>
-              <div class="row-metrics-grid">
-                <div>Книга: <span class="metric-value" id="book-2">7.480 кг</span></div>
-                <div>Факт 01.09: <span class="metric-value">5.300 кг</span></div>
-                <div>Недостача: <span class="metric-value" style="color: var(--danger);" id="diff-2">-2.180 кг</span></div>
-              </div>
-              <div class="reconciled-box" id="rec-2">
-                <div class="rec-line">Встречный излишек: <strong>03.09 (+1.880 кг)</strong></div>
-                <div class="rec-line">Реальная дельта: <strong>0.300 кг (255 ₸)</strong></div>
-                <div class="rec-line">Скорректированная книга: <strong>7.180 кг</strong></div>
-                <div style="color: var(--iiko-green); font-weight: 600; margin-top: 2px;">✓ Излишек закрыт, сумма < 1 000 ₸ (Штраф снят)</div>
-              </div>
-            </div>
+            <!-- Кнопка сведения -->
+            <button class="btn-reconcile-action" id="btn-reconcile" onclick="triggerReconciliationModal()">
+              <span>⚡</span>
+              <span id="btn-reconcile-label">Свести инвентаризацию (сопоставить излишки)</span>
+            </button>
 
-            <!-- Позиция 3: Сыр -->
-            <div class="item-row" id="row-3">
-              <div class="row-top">
-                <span class="row-title">Сыр Моцарелла тертый</span>
-                <span class="row-diff-price" id="price-3">-4 100 ₸</span>
+            <!-- Список позиций -->
+            <div class="discrepancy-card">
+              <div class="discrepancy-head">
+                <span id="list-head-title">Позиции с недостачей (сортировка по сумме)</span>
+                <span>Факт / Книга</span>
               </div>
-              <div class="row-metrics-grid">
-                <div>Книга: <span class="metric-value" id="book-3">12.500 кг</span></div>
-                <div>Факт 01.09: <span class="metric-value">10.800 кг</span></div>
-                <div>Недостача: <span class="metric-value" style="color: var(--danger);" id="diff-3">-1.700 кг</span></div>
-              </div>
-              <div class="reconciled-box" id="rec-3">
-                <div class="rec-line">Встречный излишек: <strong>02.09 (+1.500 кг)</strong></div>
-                <div class="rec-line">Реальная дельта: <strong>0.200 кг (480 ₸)</strong></div>
-                <div class="rec-line">Скорректированная книга: <strong>12.300 кг</strong></div>
-                <div style="color: var(--iiko-green); font-weight: 600; margin-top: 2px;">✓ Излишек закрыт, сумма < 1 000 ₸ (Штраф снят)</div>
-              </div>
-            </div>
-
-            <!-- Позиция 4: Картофель -->
-            <div class="item-row" id="row-4">
-              <div class="row-top">
-                <span class="row-title">Картофель фри заморозка</span>
-                <span class="row-diff-price" style="color: var(--text-muted);">-720 ₸</span>
-              </div>
-              <div class="row-metrics-grid">
-                <div>Книга: <span class="metric-value">15.000 кг</span></div>
-                <div>Факт 01.09: <span class="metric-value">14.200 кг</span></div>
-                <div>Недостача: <span class="metric-value" style="color: var(--text-muted);">-0.800 кг</span></div>
-              </div>
-              <div style="font-size: 11px; color: var(--text-dim);">
-                Сумма меньше 1 000 ₸. Последующих излишков нет.
+              <div id="items-container">
+                <!-- Заполняется динамически JS: весовой или штучный -->
               </div>
             </div>
 
@@ -965,54 +1079,195 @@
 
         </div>
 
+        <!-- ============================================== -->
+        <!-- РАЗДЕЛ 2: ВЕЧЕРНЯЯ ЗАЯВКА (ЗАГЛУШКА)          -->
+        <!-- ============================================== -->
+        <div class="orders-tab-view" id="section-orders-content">
+          <div style="font-size: 36px; margin-bottom: 10px;">📦</div>
+          <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">Вечерняя заявка на цех</h3>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; max-width: 290px; margin: 0 auto;">
+            Модуль автозаказа полуфабрикатов для фабрики-кухни находится на стадии разработки. Скоро будет доступен!
+          </p>
+        </div>
+
       </div>
 
-      <!-- Область контента: Заявка (заглушка) -->
-      <div class="content-scroll" id="content-orders" style="display: none; text-align: center; padding-top: 40px;">
-        <div style="font-size: 32px; margin-bottom: 12px; color: var(--text-dim);">📦</div>
-        <h3 style="font-size: 15px; font-weight: 700; color: #0F172A; margin-bottom: 6px;">Вечерняя заявка на цех</h3>
-        <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; max-width: 300px; margin: 0 auto;">
-          Модуль находится в разработке. Будет активирован следующим этапом.
-        </p>
-      </div>
-
-      <!-- Нижняя кнопка сохранения -->
-      <div class="save-bottom-bar" id="save-bar" style="display: none;">
-        <button class="btn-save-action" id="btn-save" disabled onclick="saveDocument()">
-          Сохранить документ в iikoChain
-        </button>
+      <!-- Фиксированная нижняя панель сохранения -->
+      <div class="save-dock" id="save-dock">
+        <div class="save-dock-inner">
+          <button class="btn-save-doc" id="btn-save-doc" disabled onclick="saveInventoryToIiko()">
+            Сохранить сведение в iikoChain
+          </button>
+        </div>
       </div>
 
     </div>
 
-    <!-- Модальное окно предупреждения -->
-    <div class="modal-overlay" id="modal-iiko-warning">
-      <div class="modal-card">
-        <div class="modal-head">Предупреждение iikoChain</div>
-        <div class="modal-body">
-          Операция создаёт расход с образованием отрицательных остатков задним числом.<br><br>
-          <strong>Применить корректировку книжного количества?</strong>
+    <!-- ---------------------------------------------------- -->
+    <!-- МОДАЛЬНОЕ ОКНО ПРЕДУПРЕЖДЕНИЯ IIKO                   -->
+    <!-- ---------------------------------------------------- -->
+    <div class="modal-backdrop" id="modal-warning">
+      <div class="modal-panel">
+        <div class="modal-head">
+          <span>⚠️</span>
+          <span>Предупреждение iikoChain</span>
         </div>
-        <div class="modal-foot">
-          <button class="btn-modal secondary" onclick="closeModal()">Отмена</button>
-          <button class="btn-modal primary" onclick="confirmReconciliation()">Да</button>
+        <div class="modal-content">
+          Операция создаёт расход с образованием отрицательных остатков.<br><br>
+          <strong>Применить автоматическую корректировку книги остатков со встречным списанием излишков?</strong>
+        </div>
+        <div class="modal-actions">
+          <button class="modal-btn secondary" onclick="closeWarningModal()">Отмена</button>
+          <button class="modal-btn primary" onclick="applyReconciliation()">Да</button>
         </div>
       </div>
     </div>
 
     <!-- Тост -->
-    <div class="toast-box" id="toast"></div>
+    <div class="toast-msg" id="toast-msg"></div>
 
   </div>
 
   <script>
+    // Состояние приложения
+    let activeSection = 'inv'; // 'inv' | 'ord'
+    let activeSurplus = 'weight'; // 'weight' | 'piece'
+    let isDataLoaded = false;
     let isReconciled = false;
-    let isReportLoaded = false;
 
-    // Static mobile viewport (no double tap zoom)
-    document.addEventListener('gesturestart', (e) => e.preventDefault());
-    document.addEventListener('dblclick', (e) => e.preventDefault());
+    // Предотвращение зума на мобильных экранах
+    document.addEventListener('gesturestart', function(e) { e.preventDefault(); });
+    document.addEventListener('dblclick', function(e) { e.preventDefault(); });
 
+    // Данные для весового счёта излишков (в кг)
+    const weightItems = [
+      {
+        id: 'w1',
+        title: 'Сыр Моцарелла тертый',
+        unit: 'кг',
+        bookBefore: '12.500 кг',
+        fact: '10.800 кг',
+        diffBefore: '-1.700 кг',
+        costBefore: '-4 100 ₸',
+        costNum: 4100,
+        surplusDate: '02.09',
+        surplusQty: '+1.500 кг',
+        realDelta: '0.200 кг (480 ₸)',
+        bookAfter: '12.300 кг',
+        note: 'Излишек за 02.09 перекрыл недостачу. Дельта 480 ₸ < 1 000 ₸ (Штраф снят)'
+      },
+      {
+        id: 'w2',
+        title: 'Фарш говяжий фирменный',
+        unit: 'кг',
+        bookBefore: '8.690 кг',
+        fact: '5.400 кг',
+        diffBefore: '-3.290 кг',
+        costBefore: '-2 500 ₸',
+        costNum: 2500,
+        surplusDate: '02.09',
+        surplusQty: '+2.845 кг',
+        realDelta: '0.445 кг (340 ₸)',
+        bookAfter: '8.245 кг',
+        note: 'Излишек за 02.09 перекрыл недостачу. Дельта 340 ₸ < 1 000 ₸ (Штраф снят)'
+      },
+      {
+        id: 'w3',
+        title: 'Капуста пекинская зачищенная',
+        unit: 'кг',
+        bookBefore: '7.480 кг',
+        fact: '5.300 кг',
+        diffBefore: '-2.180 кг',
+        costBefore: '-1 850 ₸',
+        costNum: 1850,
+        surplusDate: '03.09',
+        surplusQty: '+1.880 кг',
+        realDelta: '0.300 кг (255 ₸)',
+        bookAfter: '7.180 кг',
+        note: 'Излишек за 03.09 перекрыл недостачу. Дельта 255 ₸ < 1 000 ₸ (Штраф снят)'
+      },
+      {
+        id: 'w4',
+        title: 'Картофель фри заморозка',
+        unit: 'кг',
+        bookBefore: '15.000 кг',
+        fact: '14.200 кг',
+        diffBefore: '-0.800 кг',
+        costBefore: '-720 ₸',
+        costNum: 720,
+        surplusDate: '—',
+        surplusQty: '0 кг',
+        realDelta: '0.800 кг (720 ₸)',
+        bookAfter: '15.000 кг',
+        note: 'Сумма < 1 000 ₸. Штраф по правилу весового товара не начисляется.'
+      }
+    ];
+
+    // Данные для штучного счёта излишков (в шт)
+    const pieceItems = [
+      {
+        id: 'p1',
+        title: 'Булочка Бриошь с кунжутом',
+        unit: 'шт',
+        bookBefore: '240 шт',
+        fact: '222 шт',
+        diffBefore: '-18 шт',
+        costBefore: '-1 620 ₸',
+        costNum: 1620,
+        surplusDate: '02.09',
+        surplusQty: '+15 шт',
+        realDelta: '3 шт (270 ₸)',
+        bookAfter: '225 шт',
+        note: 'Излишек 02.09 (+15 шт) скомпенсирован. Дельта 270 ₸ < 1 000 ₸ (Штраф снят)'
+      },
+      {
+        id: 'p2',
+        title: 'Соус сырный порционный 25г',
+        unit: 'шт',
+        bookBefore: '180 шт',
+        fact: '158 шт',
+        diffBefore: '-22 шт',
+        costBefore: '-1 320 ₸',
+        costNum: 1320,
+        surplusDate: '03.09',
+        surplusQty: '+20 шт',
+        realDelta: '2 шт (120 ₸)',
+        bookAfter: '160 шт',
+        note: 'Излишек 03.09 (+20 шт) скомпенсирован. Дельта 120 ₸ < 1 000 ₸ (Штраф снят)'
+      },
+      {
+        id: 'p3',
+        title: 'Стаканы BURЖУЙ 0.5л',
+        unit: 'шт',
+        bookBefore: '350 шт',
+        fact: '315 шт',
+        diffBefore: '-35 шт',
+        costBefore: '-1 050 ₸',
+        costNum: 1050,
+        surplusDate: '02.09',
+        surplusQty: '+30 шт',
+        realDelta: '5 шт (150 ₸)',
+        bookAfter: '320 шт',
+        note: 'Излишек 02.09 (+30 шт) скомпенсирован. Дельта 150 ₸ < 1 000 ₸ (Штраф снят)'
+      },
+      {
+        id: 'p4',
+        title: 'Салфетки брендированные (упак)',
+        unit: 'упак',
+        bookBefore: '50 упак',
+        fact: '46 упак',
+        diffBefore: '-4 упак',
+        costBefore: '-480 ₸',
+        costNum: 480,
+        surplusDate: '—',
+        surplusQty: '0 упак',
+        realDelta: '4 упак (480 ₸)',
+        bookAfter: '50 упак',
+        note: 'Сумма < 1 000 ₸. Штраф не начисляется.'
+      }
+    ];
+
+    // Авторизация
     function handleLoginSubmit(e) {
       e.preventDefault();
       const login = document.getElementById('input-login').value.trim().toLowerCase();
@@ -1021,183 +1276,219 @@
       const errBox = document.getElementById('auth-error-msg');
 
       btn.disabled = true;
-      btn.textContent = 'Проверка прав сотрудника...';
+      btn.textContent = 'Проверка прав в iikoChain...';
       errBox.style.display = 'none';
 
-      setTimeout(() => {
+      setTimeout(function() {
         btn.disabled = false;
-        btn.textContent = 'Войти';
+        btn.textContent = 'Войти в систему';
 
-        // Check if employee has EDIT_INVENTORY permissions:
-        // cook / povar / cashier do NOT have edit rights.
-        if (login.includes('cook') || login.includes('povar') || login.includes('кассир') || login.includes('повар')) {
-          errBox.innerHTML = '<strong>Доступ ограничен:</strong> У данной учетной записи нет права <code>EDIT_INVENTORY</code> (Редактирование результатов инвентаризации) в iikoChain.';
+        if (login.includes('cook') || login.includes('povar') || login.includes('повар') || login.includes('кассир')) {
+          errBox.innerHTML = '<strong>Доступ запрещен:</strong> У данной учетной записи нет права <code>EDIT_INVENTORY</code> (Редактирование инвентаризаций) в iikoChain.';
           errBox.style.display = 'block';
-          showToast('Ошибка прав доступа');
+          showToast('Недостаточно прав доступа');
         } else {
-          // Success: Manager, Admin, or any valid manager login/code
           document.getElementById('view-auth').style.display = 'none';
           document.getElementById('view-main').style.display = 'flex';
           showToast('Вход выполнен');
         }
-      }, 500);
+      }, 400);
     }
 
     function handleLogout() {
-      // Clear inputs
       document.getElementById('input-login').value = '';
       document.getElementById('input-pin').value = '';
       document.getElementById('auth-error-msg').style.display = 'none';
-      
-      // Reset report state
-      resetReport();
-
+      resetResults();
       document.getElementById('view-main').style.display = 'none';
       document.getElementById('view-auth').style.display = 'flex';
       showToast('Вы вышли из системы');
     }
 
-    function handleStoreChange() {
-      const store = document.getElementById('select-store').value;
-      document.getElementById('cfg-store-name').textContent = store;
-      showToast('Выбрана точка: ' + store);
-      resetReport();
-    }
-
-    function switchNavTab(tab) {
-      if (tab === 'ord') {
-        document.getElementById('tab-inventory').classList.remove('active');
-        document.getElementById('tab-orders').classList.add('active');
-        document.getElementById('content-inventory').style.display = 'none';
-        document.getElementById('content-orders').style.display = 'block';
-        document.getElementById('save-bar').style.display = 'none';
+    // ШАГ 1: ВЫБОР РАЗДЕЛА
+    function selectSection(sec) {
+      if (sec === 'ord') {
+        activeSection = 'ord';
+        document.getElementById('btn-sec-inv').classList.remove('active');
+        document.getElementById('btn-sec-ord').classList.add('active');
+        document.getElementById('step-box-store').style.display = 'none';
+        document.getElementById('step-box-surplus').style.display = 'none';
+        document.getElementById('section-inventory-content').style.display = 'none';
+        document.getElementById('section-orders-content').style.display = 'block';
+        document.getElementById('save-dock').style.display = 'none';
       } else {
-        document.getElementById('tab-orders').classList.remove('active');
-        document.getElementById('tab-inventory').classList.add('active');
-        document.getElementById('content-orders').style.display = 'none';
-        document.getElementById('content-inventory').style.display = 'block';
-        if (isReportLoaded) {
-          document.getElementById('save-bar').style.display = 'block';
+        activeSection = 'inv';
+        document.getElementById('btn-sec-ord').classList.remove('active');
+        document.getElementById('btn-sec-inv').classList.add('active');
+        document.getElementById('step-box-store').style.display = 'block';
+        document.getElementById('step-box-surplus').style.display = 'block';
+        document.getElementById('section-orders-content').style.display = 'none';
+        document.getElementById('section-inventory-content').style.display = 'block';
+        if (isDataLoaded) {
+          document.getElementById('save-dock').style.display = 'block';
         }
       }
     }
 
-    function loadInventoryReport() {
-      const btn = document.getElementById('btn-build');
+    // ШАГ 2: СМЕНА ТОРГОВОЙ ТОЧКИ
+    function onStoreChange() {
+      const store = document.getElementById('select-store').value;
+      showToast('Выбрана точка: ' + store);
+      resetResults();
+    }
+
+    // ШАГ 3: СМЕНА СЧЕТА ИЗЛИШКОВ (ВЕСОВОЙ / ШТУЧНЫЙ)
+    function selectSurplusType(type) {
+      activeSurplus = type;
+      if (type === 'weight') {
+        document.getElementById('btn-surplus-weight').classList.add('active');
+        document.getElementById('btn-surplus-piece').classList.remove('active');
+        showToast('Счёт: Весовой товар');
+      } else {
+        document.getElementById('btn-surplus-piece').classList.add('active');
+        document.getElementById('btn-surplus-weight').classList.remove('active');
+        showToast('Счёт: Штучный товар');
+      }
+      resetResults();
+    }
+
+    // ДЕЙСТВИЕ: НАЖАТИЕ "ОБНОВИТЬ"
+    function handleRefreshData() {
+      const btn = document.getElementById('btn-update');
+      const text = document.getElementById('btn-update-text');
       btn.classList.add('loading');
-      btn.textContent = 'Загрузка данных из iiko...';
+      text.textContent = 'Обновление данных из iiko...';
 
-      setTimeout(() => {
+      setTimeout(function() {
         btn.classList.remove('loading');
-        btn.textContent = 'Обновить инвентаризацию';
-        
-        isReportLoaded = true;
-        document.getElementById('empty-state').style.display = 'none';
-        document.getElementById('report-results').style.display = 'block';
-        document.getElementById('save-bar').style.display = 'block';
-        showToast('Инвентаризация сформирована');
-      }, 600);
+        text.textContent = 'Обновить';
+        isDataLoaded = true;
+        isReconciled = false;
+
+        renderDiscrepancies();
+        document.getElementById('placeholder-box').style.display = 'none';
+        document.getElementById('results-box').style.display = 'block';
+        document.getElementById('save-dock').style.display = 'block';
+        showToast('Данные за 01.09 обновлены');
+      }, 450);
     }
 
-    function resetReport() {
-      isReportLoaded = false;
-      isReconciled = false;
-      document.getElementById('empty-state').style.display = 'block';
-      document.getElementById('report-results').style.display = 'none';
-      document.getElementById('save-bar').style.display = 'none';
-      
-      const btn = document.getElementById('btn-build');
-      btn.textContent = 'Сформировать инвентаризацию';
+    // Отрисовка списка расхождений
+    function renderDiscrepancies() {
+      const store = document.getElementById('select-store').value;
+      const isWeight = activeSurplus === 'weight';
+      const items = isWeight ? weightItems : pieceItems;
 
-      // Reset items state
+      document.getElementById('inv-current-title').textContent = 
+        'Инвентаризация: 01.09 (' + store + ', ' + (isWeight ? 'Весовой' : 'Штучный') + ')';
+
+      const penaltyBadge = document.getElementById('penalty-badge');
+      const sumVal = document.getElementById('total-diff-val');
+      const subNote = document.getElementById('total-diff-sub');
       const recBtn = document.getElementById('btn-reconcile');
-      recBtn.textContent = 'Свести инвентаризацию (сопоставить излишки)';
+      const recLabel = document.getElementById('btn-reconcile-label');
+
       recBtn.classList.remove('done');
+      recLabel.textContent = 'Свести инвентаризацию (сопоставить излишки)';
+      document.getElementById('btn-save-doc').disabled = true;
 
-      document.getElementById('sum-tag').textContent = 'Штраф: > 1 000 ₸';
-      document.getElementById('sum-tag').className = 'summary-tag';
-      document.getElementById('sum-val').textContent = '8 450 ₸';
-      document.getElementById('sum-val').className = 'summary-amount';
-      document.getElementById('sum-count').textContent = '3 позиции влияют на штраф';
-
-      for (let i = 1; i <= 3; i++) {
-        document.getElementById('row-' + i).classList.remove('resolved');
+      if (!isReconciled) {
+        penaltyBadge.textContent = 'Штраф: > 1 000 ₸';
+        penaltyBadge.className = 'penalty-pill';
+        sumVal.textContent = isWeight ? '8 450 ₸' : '3 990 ₸';
+        sumVal.className = 'inv-sum-val';
+        subNote.textContent = isWeight 
+          ? '3 позиции с недостачей > 1 000 ₸ (риск штрафа)' 
+          : '3 позиции с расхождением > 1 000 ₸';
+      } else {
+        penaltyBadge.textContent = '✓ Штраф снят (0 ₸)';
+        penaltyBadge.className = 'penalty-pill cleared';
+        sumVal.textContent = '0 ₸';
+        sumVal.className = 'inv-sum-val cleared';
+        subNote.textContent = 'Все излишки следующих дней сопоставлены и учтены';
+        recBtn.classList.add('done');
+        recLabel.textContent = '✓ Инвентаризация сведена';
+        document.getElementById('btn-save-doc').disabled = false;
       }
 
-      document.getElementById('price-1').textContent = '-2 500 ₸';
-      document.getElementById('price-1').className = 'row-diff-price';
-      document.getElementById('book-1').textContent = '8.690 кг';
+      const container = document.getElementById('items-container');
+      container.innerHTML = '';
 
-      document.getElementById('price-2').textContent = '-1 850 ₸';
-      document.getElementById('price-2').className = 'row-diff-price';
-      document.getElementById('book-2').textContent = '7.480 кг';
+      items.forEach(function(item) {
+        const row = document.createElement('div');
+        row.className = 'item-row' + (isReconciled ? ' resolved' : '');
+        row.id = 'row-' + item.id;
 
-      document.getElementById('price-3').textContent = '-4 100 ₸';
-      document.getElementById('price-3').className = 'row-diff-price';
-      document.getElementById('book-3').textContent = '12.500 кг';
+        const isOverPenalty = item.costNum >= 1000;
 
-      document.getElementById('btn-save').disabled = true;
+        row.innerHTML = 
+          '<div class="row-main-line">' +
+            '<span class="item-title">' + item.title + '</span>' +
+            '<span class="item-amount-badge ' + (isReconciled ? 'ok' : (isOverPenalty ? '' : 'ok')) + '">' +
+              (isReconciled ? '✓ 0 ₸' : item.costBefore) +
+            '</span>' +
+          '</div>' +
+          '<div class="item-metrics-grid">' +
+            '<div>Книга: <span class="metric-data">' + (isReconciled ? item.bookAfter : item.bookBefore) + '</span></div>' +
+            '<div>Факт 01.09: <span class="metric-data">' + item.fact + '</span></div>' +
+            '<div>Недостача: <span class="metric-data" style="color: ' + (isReconciled ? 'var(--iiko-green)' : (isOverPenalty ? 'var(--danger)' : 'inherit')) + ';">' + (isReconciled ? ('0 ' + item.unit) : item.diffBefore) + '</span></div>' +
+          '</div>' +
+          '<div class="reconciliation-details" style="display: ' + (isReconciled ? 'block' : 'none') + ';">' +
+            '<div>• Встречный излишек за <strong>' + item.surplusDate + ' (' + item.surplusQty + ')</strong></div>' +
+            '<div>• Реальная разница: <strong>' + item.realDelta + '</strong></div>' +
+            '<div>• Книга остатков скорректирована: <strong>' + item.bookAfter + '</strong></div>' +
+            '<div style="font-weight: 700; color: var(--iiko-green); margin-top: 2px;">✓ ' + item.note + '</div>' +
+          '</div>';
+        container.appendChild(row);
+      });
     }
 
-    function openReconciliationModal() {
+    // Сброс результатов при изменении параметров
+    function resetResults() {
+      isDataLoaded = false;
+      isReconciled = false;
+      document.getElementById('placeholder-box').style.display = 'block';
+      document.getElementById('results-box').style.display = 'none';
+      document.getElementById('save-dock').style.display = 'none';
+      document.getElementById('btn-save-doc').disabled = true;
+    }
+
+    // Модалка предупреждения
+    function triggerReconciliationModal() {
       if (isReconciled) return;
-      document.getElementById('modal-iiko-warning').style.display = 'flex';
+      document.getElementById('modal-warning').style.display = 'flex';
     }
 
-    function closeModal() {
-      document.getElementById('modal-iiko-warning').style.display = 'none';
+    function closeWarningModal() {
+      document.getElementById('modal-warning').style.display = 'none';
     }
 
-    function confirmReconciliation() {
-      closeModal();
+    // Применение сведения (кнопка "Да")
+    function applyReconciliation() {
+      closeWarningModal();
       isReconciled = true;
-
-      const btn = document.getElementById('btn-reconcile');
-      btn.textContent = '✓ Инвентаризация сведена';
-      btn.classList.add('done');
-
-      document.getElementById('sum-tag').textContent = 'Сведено (Штрафы: 0 ₸)';
-      document.getElementById('sum-tag').className = 'summary-tag resolved';
-      document.getElementById('sum-val').textContent = '0 ₸';
-      document.getElementById('sum-val').className = 'summary-amount resolved';
-      document.getElementById('sum-count').textContent = 'Встречные излишки закрыты';
-
-      for (let i = 1; i <= 3; i++) {
-        document.getElementById('row-' + i).classList.add('resolved');
-      }
-
-      document.getElementById('price-1').textContent = '340 ₸ (Без штрафа)';
-      document.getElementById('price-1').className = 'row-diff-price green';
-      document.getElementById('book-1').textContent = '8.245 кг';
-
-      document.getElementById('price-2').textContent = '255 ₸ (Без штрафа)';
-      document.getElementById('price-2').className = 'row-diff-price green';
-      document.getElementById('book-2').textContent = '7.180 кг';
-
-      document.getElementById('price-3').textContent = '480 ₸ (Без штрафа)';
-      document.getElementById('price-3').className = 'row-diff-price green';
-      document.getElementById('book-3').textContent = '12.300 кг';
-
-      document.getElementById('btn-save').disabled = false;
-      showToast('Корректировка остатков применена');
+      renderDiscrepancies();
+      showToast('Корректировка применена. Штрафы аннулированы!');
     }
 
-    function saveDocument() {
-      const btn = document.getElementById('btn-save');
+    function saveInventoryToIiko() {
+      const btn = document.getElementById('btn-save-doc');
       btn.disabled = true;
-      btn.textContent = 'Отправка в iikoChain...';
-
-      setTimeout(() => {
-        btn.textContent = '✓ Документ записан в iikoChain';
-        showToast('Инвентаризация успешно сохранена!');
+      btn.textContent = 'Сохранение в iikoChain...';
+      
+      setTimeout(function() {
+        btn.textContent = '✓ Документ успешно сохранен в iiko';
+        showToast('Документ инвентаризации сохранен');
       }, 700);
     }
 
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('visible');
-      setTimeout(() => t.classList.remove('visible'), 2200);
+    function showToast(text) {
+      const toast = document.getElementById('toast-msg');
+      toast.textContent = text;
+      toast.classList.add('show');
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 2200);
     }
   </script>
 </body>
