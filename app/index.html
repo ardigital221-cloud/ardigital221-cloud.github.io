@@ -4266,7 +4266,7 @@
         <div class="header-user-actions">
           <button type="button" class="btn-back-modules" id="btn-back-modules" onclick="goToModulesScreen()" style="display: none;" title="Вернуться к выбору разделов">← Разделы</button>
           <button type="button" class="header-store-btn" id="header-store-btn" onclick="openStoreDrawer()" style="display: none;" title="Выбрать торговую точку сети">
-            <span class="store-pin">📍</span><span id="header-store-name">Точка P2 (В-2)</span><span class="store-chevron">▾</span>
+            <span class="store-pin">📍</span><span id="header-store-name">В-1 (ул. Лермонтова, 100)</span><span class="store-chevron">▾</span>
           </button>
           <button type="button" class="header-icon-btn" onclick="openStoreDrawer()" title="Поиск торговой точки">🔍</button>
           <button type="button" class="header-icon-btn" onclick="openStoreDrawer()" title="Фильтры">🎛️</button>
@@ -4354,28 +4354,28 @@
           <!-- СКРЫТЫЙ СЕЛЕКТОР ТОЧКИ ДЛЯ СОВМЕСТИМОСТИ JS -->
           <div id="step-box-store" style="display: none;">
             <select class="store-dropdown" id="select-store" onchange="onStoreChange()">
-              <option value="В-1">В-1</option>
-              <option value="В-2" selected>В-2 (Точка P2)</option>
-              <option value="В-3">В-3</option>
-              <option value="В-4">В-4</option>
-              <option value="В-5">В-5</option>
-              <option value="В-6">В-6</option>
-              <option value="В-7">В-7</option>
-              <option value="В-8">В-8</option>
-              <option value="В-9">В-9</option>
-              <option value="В-10">В-10</option>
-              <option value="В-11">В-11</option>
-              <option value="В-12">В-12</option>
-              <option value="В-13">В-13</option>
-              <option value="В-14">В-14</option>
-              <option value="В-15">В-15</option>
-              <option value="В-16">В-16</option>
-              <option value="В-17">В-17</option>
-              <option value="Б19(Батыр Молл)">Б19(Батыр Молл)</option>
-              <option value="В-20">В-20</option>
-              <option value="В-21">В-21</option>
-              <option value="В-22 (Баянтау)">В-22 (Баянтау)</option>
-              <option value="В-25">В-25</option>
+              <option value="В-1" selected>🟢 В-1 (ул. Лермонтова, 100)</option>
+              <option value="В-5">🟢 В-5 (ул. Толстого, 90А — ТОП-1)</option>
+              <option value="В-12">🟢 В-12 (пр. Назарбаева, 283 — ТОП-2)</option>
+              <option value="Б19(Батыр Молл)">🟢 Б19 (ТРЦ Батыр Молл)</option>
+              <option value="В-14">🟢 В-14 (ул. Торайгырова, 36)</option>
+              <option value="В-4">🟢 В-4 (ул. Ломова, 157)</option>
+              <option value="В-6">🟢 В-6</option>
+              <option value="В-7">🟢 В-7 (Привокзальная пл., 1Е)</option>
+              <option value="В-8">🟢 В-8</option>
+              <option value="В-9">🟢 В-9 (ул. Нуркина, 57/1)</option>
+              <option value="В-10">🟢 В-10 (пр. Назарбаева, 283/1)</option>
+              <option value="В-11">🟢 В-11</option>
+              <option value="В-13">🟢 В-13</option>
+              <option value="В-16">🟢 В-16 (г. Экибастуз, ул. Ауэзова)</option>
+              <option value="В-17">🟢 В-17 (г. Аксу)</option>
+              <option value="В-20">🟢 В-20</option>
+              <option value="В-21">🟢 В-21</option>
+              <option value="В-22 (Баянтау)">🟢 В-22 (Баянтау)</option>
+              <option value="В-25">🟢 В-25</option>
+              <option value="В-2" style="color: #EF4444;">🔴 В-2 (Чокина 38/1 — ЗАКРЫТА)</option>
+              <option value="В-3" style="color: #EF4444;">🔴 В-3 (Сатпаева 250 — ЗАКРЫТА)</option>
+              <option value="В-15" style="color: #EF4444;">🔴 В-15 (Назарбаева 89/4 — ЗАКРЫТА)</option>
             </select>
           </div>
 
@@ -5208,7 +5208,7 @@
         
         // Загружаем данные для выбранной точки
         isDataLoaded = true;
-        updateHeaderStoreButton(document.getElementById('select-store').value || 'В-2');
+        updateHeaderStoreButton(document.getElementById('select-store').value || 'В-1');
         populateShiftDateSelect();
         renderItemsCards();
 
@@ -6888,7 +6888,7 @@
 
     function populateReportPageData() {
       const storeData = getActiveStoreData();
-      const storeKey = storeData ? storeData.storeLabel : (document.getElementById('select-store') ? document.getElementById('select-store').value : 'В-2');
+      const storeKey = storeData ? storeData.storeLabel : (document.getElementById('select-store') ? document.getElementById('select-store').value : 'В-1');
       const isPiece = activeSurplus === 'piece';
       const items = getItemsForActiveStore(isPiece);
       const roster = storeData ? (storeData.roster || []) : [];
@@ -7039,7 +7039,7 @@
       try {
         const storeSelect = document.getElementById('select-store');
         if (storeSelect) {
-          storeSelect.value = 'В-2';
+          storeSelect.value = 'В-1'; updateHeaderStoreButton('В-1');
         }
         // По умолчанию 1 этап: сначала только 2 блока!
         goToModulesScreen();
@@ -7050,28 +7050,28 @@
 
     // ====== ШТОРКА ВЫБОРА ТОЧКИ (IIKOWEB) ======
     const STORES_LIST_DRAWER = [
-      { key: 'В-1', label: 'В-1', dept: 'Отдел B-1' },
-      { key: 'В-2', label: 'Точка P2 (В-2)', dept: 'Отдел B-2 • iikoChain' },
-      { key: 'В-3', label: 'В-3', dept: 'Отдел B-3' },
-      { key: 'В-4', label: 'В-4', dept: 'Отдел B-4' },
-      { key: 'В-5', label: 'В-5', dept: 'Отдел B-5' },
-      { key: 'В-6', label: 'В-6', dept: 'Отдел B-6' },
-      { key: 'В-7', label: 'В-7', dept: 'Отдел B-7' },
-      { key: 'В-8', label: 'В-8', dept: 'Отдел B-8' },
-      { key: 'В-9', label: 'В-9', dept: 'Отдел B-9' },
-      { key: 'В-10', label: 'В-10', dept: 'Отдел В-10' },
-      { key: 'В-11', label: 'В-11', dept: 'Отдел В-11' },
-      { key: 'В-12', label: 'В-12', dept: 'Отдел В-12' },
-      { key: 'В-13', label: 'В-13', dept: 'Отдел В-13' },
-      { key: 'В-14', label: 'В-14', dept: 'Отдел В-14' },
-      { key: 'В-15', label: 'В-15', dept: 'Отдел В-15' },
-      { key: 'В-16', label: 'В-16', dept: 'Отдел В-16' },
-      { key: 'В-17', label: 'В-17', dept: 'Отдел В-17' },
-      { key: 'Б19(Батыр Молл)', label: 'Б19 (Батыр Молл)', dept: 'ТРЦ Batyr Mall' },
-      { key: 'В-20', label: 'В-20', dept: 'Отдел В-20' },
-      { key: 'В-21', label: 'В-21', dept: 'Отдел В-21' },
-      { key: 'В-22 (Баянтау)', label: 'В-22 (Баянтау)', dept: 'Отдел В-22' },
-      { key: 'В-25', label: 'В-25', dept: 'Отдел В-25' }
+      { key: 'В-1', label: 'В-1', dept: 'ул. Лермонтова, 100 • ТОП-3', isClosed: false },
+      { key: 'В-5', label: 'В-5', dept: 'ул. Толстого, 90А • ТОП-1 сети', isClosed: false },
+      { key: 'В-12', label: 'В-12', dept: 'пр. Назарбаева, 283 • ТОП-2 сети', isClosed: false },
+      { key: 'Б19(Батыр Молл)', label: 'Б19 (Батыр Молл)', dept: 'ТРЦ Батыр Молл (ул. Камзина, 67/1)', isClosed: false },
+      { key: 'В-14', label: 'В-14', dept: 'ул. Торайгырова, 36', isClosed: false },
+      { key: 'В-4', label: 'В-4', dept: 'ул. Ломова, 157', isClosed: false },
+      { key: 'В-6', label: 'В-6', dept: 'Отдел B-6', isClosed: false },
+      { key: 'В-7', label: 'В-7', dept: 'Привокзальная пл., 1Е', isClosed: false },
+      { key: 'В-8', label: 'В-8', dept: 'Отдел B-8', isClosed: false },
+      { key: 'В-9', label: 'В-9', dept: 'ул. Нуркина, 57/1', isClosed: false },
+      { key: 'В-10', label: 'В-10', dept: 'пр. Назарбаева, 283/1', isClosed: false },
+      { key: 'В-11', label: 'В-11', dept: 'Отдел В-11', isClosed: false },
+      { key: 'В-13', label: 'В-13', dept: 'Отдел В-13', isClosed: false },
+      { key: 'В-16', label: 'В-16', dept: 'г. Экибастуз, ул. Ауэзова', isClosed: false },
+      { key: 'В-17', label: 'В-17', dept: 'г. Аксу', isClosed: false },
+      { key: 'В-20', label: 'В-20', dept: 'Отдел В-20', isClosed: false },
+      { key: 'В-21', label: 'В-21', dept: 'Отдел В-21', isClosed: false },
+      { key: 'В-22 (Баянтау)', label: 'В-22 (Баянтау)', dept: 'Отдел В-22', isClosed: false },
+      { key: 'В-25', label: 'В-25', dept: 'Отдел В-25', isClosed: false },
+      { key: 'В-2', label: 'В-2 (Чокина, 38/1)', dept: '🔴 НЕ РАБОТАЕТ (ЗАКРЫТА)', isClosed: true },
+      { key: 'В-3', label: 'В-3 (Сатпаева, 250)', dept: '🔴 НЕ РАБОТАЕТ (ЗАКРЫТА)', isClosed: true },
+      { key: 'В-15', label: 'В-15 (Назарбаева, 89/4)', dept: '🔴 НЕ РАБОТАЕТ (ЗАКРЫТА)', isClosed: true }
     ];
 
     function renderDrawerStores(filterQuery) {
@@ -7132,6 +7132,10 @@
       if (select) {
         select.value = storeKey;
       }
+      const item = STORES_LIST_DRAWER.find(function(s) { return s.key === storeKey; });
+      if (item && item.isClosed) {
+        showToast('⚠️ Точка ' + storeKey + ' закрыта. Статистика исключена из сети.');
+      }
       updateHeaderStoreButton(storeKey);
       closeStoreDrawer(null, true);
       onStoreChange();
@@ -7144,12 +7148,12 @@
     function updateHeaderStoreButton(storeKey) {
       const label = document.getElementById('header-store-name');
       if (!label) return;
-      if (storeKey === 'В-2') {
-        label.textContent = 'Точка P2 (В-2)';
-        return;
-      }
       const found = STORES_LIST_DRAWER.find(function(s) { return s.key === storeKey; });
-      label.textContent = found ? found.label : ('Точка ' + storeKey);
+      if (found) {
+        label.textContent = found.isClosed ? ('⛔ ' + found.label + ' (Закрыта)') : found.label;
+      } else {
+        label.textContent = 'Филиал ' + storeKey;
+      }
     }
 
     // Keyboard navigation (Esc to close drawer and modals)
