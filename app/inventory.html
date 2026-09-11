@@ -2675,6 +2675,421 @@
       opacity: 1;
     }
 
+  
+    /* ЧИСТАЯ СВОДНАЯ ПАНЕЛЬ (БЕЗ ШУМА) */
+    .summary-dashboard {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .summary-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .summary-tags-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .summary-store-tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0F172A;
+      background: #F1F5F9;
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+
+    .summary-type-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    .summary-date-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .summary-status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #FEF2F2;
+      color: #DC2626;
+      white-space: nowrap;
+    }
+
+    .summary-status-badge.done {
+      background: #DCFCE7;
+      color: #166534;
+    }
+
+    .summary-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .stat-card {
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 8px 6px;
+      text-align: center;
+    }
+
+    .stat-card.result {
+      background: #FFF7ED;
+      border-color: #FED7AA;
+    }
+
+    .stat-card.result.done {
+      background: #F0FDF4;
+      border-color: #BBF7D0;
+    }
+
+    .stat-card-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 2px;
+    }
+
+    .stat-card-num {
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 800;
+      color: #0F172A;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+
+    .stat-card-num.red {
+      color: var(--danger);
+    }
+
+    .stat-card-num.green {
+      color: var(--iiko-green);
+    }
+
+    .stat-card-sub {
+      font-size: 10px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .shift-compact-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #F8FAFC;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 11px;
+      color: #475569;
+    }
+
+    .shift-icon {
+      font-size: 13px;
+    }
+
+    .shift-text {
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ГЛАВНАЯ КНОПКА СВЕДЕНИЯ */
+    .btn-reconcile-main {
+      width: 100%;
+      height: 44px;
+      background: var(--iiko-green);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(22, 163, 74, 0.2);
+      transition: all 0.18s;
+    }
+
+    .btn-reconcile-main:hover {
+      background: #15803D;
+      transform: translateY(-1px);
+    }
+
+    .btn-reconcile-main.done {
+      background: #DCFCE7;
+      color: #166534;
+      border: 1px solid #86EFAC;
+      box-shadow: none;
+      cursor: default;
+    }
+
+    /* БЛОК НАЧИСЛЕНИЯ ШТРАФОВ */
+    .fines-breakdown-card {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+
+    .fines-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #FCA5A5;
+    }
+
+    .fines-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #991B1B;
+    }
+
+    .fines-total-badge {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 800;
+      color: #DC2626;
+    }
+
+    .fines-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .fine-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 8px;
+      background: #FFFFFF;
+      border: 1px solid #FECDD3;
+      border-radius: 6px;
+      font-size: 11px;
+    }
+
+    .fine-person-info {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .fine-person-name {
+      font-weight: 700;
+      color: #0F172A;
+      font-size: 12px;
+    }
+
+    .fine-person-role {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .fine-amount {
+      font-family: var(--mono);
+      font-weight: 800;
+      color: #DC2626;
+      font-size: 13px;
+    }
+
+    /* ЗАГОЛОВОК СПИСКА ТОВАРОВ */
+    .items-list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 12px 2px 8px;
+    }
+
+    .items-list-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #475569;
+    }
+
+    .items-list-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: #F1F5F9;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* КАРТОЧКА ТОВАРА */
+    .item-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      padding: 10px 12px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+      transition: all 0.15s;
+    }
+
+    .item-card.has-surplus {
+      border-left: 3px solid var(--iiko-green);
+    }
+
+    .item-card.no-surplus {
+      border-left: 3px solid var(--danger);
+    }
+
+    .item-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .item-card-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+
+    .item-card-price {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--danger);
+      white-space: nowrap;
+    }
+
+    .item-card-price.done {
+      color: var(--iiko-green);
+    }
+
+    .item-surplus-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .item-surplus-status.ok {
+      background: #F0FDF4;
+      color: #166534;
+      border: 1px solid #DCFCE7;
+    }
+
+    .item-surplus-status.none {
+      background: #FEF2F2;
+      color: #991B1B;
+      border: 1px solid #FEE2E2;
+    }
+
+    .item-qty-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #64748B;
+      margin-bottom: 8px;
+    }
+
+    .item-qty-row strong {
+      color: #0F172A;
+      font-weight: 700;
+    }
+
+    .qty-sep {
+      color: #CBD5E1;
+    }
+
+    .qty-diff.red strong {
+      color: var(--danger);
+    }
+
+    .qty-diff.green strong {
+      color: var(--iiko-green);
+    }
+
+    .item-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 6px;
+      border-top: 1px solid #F1F5F9;
+    }
+
+    .btn-toggle-history {
+      background: none;
+      border: none;
+      color: #64748B;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 4px;
+    }
+
+    .btn-toggle-history:hover {
+      color: #0F172A;
+    }
+
+    .btn-single-rec {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #1D4ED8;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-single-rec.done {
+      background: #DCFCE7;
+      border-color: #86EFAC;
+      color: #166534;
+    }
+
   </style>
 </head>
 <body>
@@ -2875,39 +3290,64 @@
 
           <div class="results-section" id="results-box">
             
-            <div class="inventory-header-card">
-              <div class="inv-top-info">
-                <span class="inv-date-tag" id="inv-current-title">Инвентаризация: 01.09</span>
-                <span class="penalty-pill" id="penalty-badge">Не всё сводится</span>
-              </div>
-              <div class="inv-sum-row">
-                <div class="inv-sum-val" id="total-diff-val">-3 990 ₸</div>
-                <div class="inv-rule-note" id="total-diff-sub">Позиции без излишков останутся к удержанию</div>
-              </div>
-            </div>
-
-            
-            <!-- ЖУРНАЛ ЯВОК IIKO ЗА ДАТУ СМЕНЫ -->
-            <div class="shift-roster-box" id="shift-roster-box">
-              <div class="roster-head">
-                <div class="roster-title">
-                  <span>👥</span>
-                  <span id="roster-period-title">Журнал явок iiko • Период 01.09 — 10.09</span>
+            <!-- СВОДНАЯ КАРТОЧКА: 3 ЧЁТКИЕ ЦИФРЫ (БЕЗ ШУМА) -->
+            <div class="summary-dashboard">
+              <div class="summary-head">
+                <div class="summary-tags-row">
+                  <span class="summary-store-tag" id="sum-store-tag">В-2</span>
+                  <span class="summary-type-tag" id="sum-type-tag">Штучный</span>
+                  <span class="summary-date-tag" id="sum-date-tag">01.09 — 10.09</span>
                 </div>
-                <span class="roster-badge" id="roster-store-tag">В-2 (4 на смене)</span>
+                <div class="summary-status-badge" id="sum-status-badge">Требует сведения</div>
               </div>
-              <div class="roster-grid" id="roster-grid">
-                <!-- Заполняется динамически из Журнала явок iiko -->
+
+              <!-- 3 ЧЁТКИХ БЛОКА С ЦИФРАМИ -->
+              <div class="summary-stats-grid">
+                <div class="stat-card">
+                  <div class="stat-card-title">Недостача</div>
+                  <div class="stat-card-num red" id="stat-before-val">-18 041 ₸</div>
+                  <div class="stat-card-sub" id="stat-items-count">4 позиции</div>
+                </div>
+
+                <div class="stat-card">
+                  <div class="stat-card-title">Излишки</div>
+                  <div class="stat-card-num green" id="stat-covered-val">+12 400 ₸</div>
+                  <div class="stat-card-sub">перекроют долг</div>
+                </div>
+
+                <div class="stat-card result" id="stat-result-card">
+                  <div class="stat-card-title" id="stat-result-title">К списанию</div>
+                  <div class="stat-card-num" id="stat-residual-val">-5 641 ₸</div>
+                  <div class="stat-card-sub" id="stat-residual-sub">после зачёта</div>
+                </div>
+              </div>
+
+              <!-- КОМПАКТНАЯ СТРОКА СМЕНЫ (БЕЗ ШУМА) -->
+              <div class="shift-compact-row">
+                <span class="shift-icon">👥</span>
+                <span class="shift-text" id="shift-summary-text">Смена: Сушеф смены, Бондарь О., Семченко А.</span>
               </div>
             </div>
 
-            <button class="btn-reconcile-all" id="btn-reconcile-all" onclick="openBulkReconcileModal()">
-              <span>⚡</span>
-              <span id="btn-reconcile-label">Свести позиции с найденными излишками</span>
+            <!-- ГЛАВНАЯ КНОПКА СВЕДЕНИЯ -->
+            <button class="btn-reconcile-main" id="btn-reconcile-all" onclick="openBulkReconcileModal()">
+              <span class="btn-rec-icon">⚡</span>
+              <span id="btn-reconcile-label">Свести недостачи с излишками</span>
             </button>
 
-            <!-- Панель отчета и отката -->
-            <div class="reconciled-action-bar" id="reconciled-bar">
+            <!-- БЛОК НАЧИСЛЕНИЯ ШТРАФОВ (ПОЯВЛЯЕТСЯ ТОЛЬКО ПОСЛЕ СВЕДЕНИЯ) -->
+            <div class="fines-breakdown-card" id="fines-breakdown-card" style="display: none;">
+              <div class="fines-head">
+                <span class="fines-title">⚖️ Начислено штрафов за остаток долга:</span>
+                <span class="fines-total-badge" id="fines-total-badge">-5 641 ₸</span>
+              </div>
+              <div class="fines-list" id="fines-list">
+                <!-- Заполняется динамически -->
+              </div>
+            </div>
+
+            <!-- ПАНЕЛЬ ОТЧЁТА И ОТКАТА -->
+            <div class="reconciled-action-bar" id="reconciled-bar" style="display: none;">
               <button type="button" class="btn-report-view" onclick="openReportModal()">
                 <span>📄</span>
                 <span>Акт сведения</span>
@@ -2922,10 +3362,13 @@
               </button>
             </div>
 
-            <!-- Список карточек с "Движением товара" -->
-            <div id="items-cards-container"></div>
+            <!-- ЗАГОЛОВОК СПИСКА ТОВАРОВ -->
+            <div class="items-list-header">
+              <span class="items-list-title">Товары с расхождениями</span>
+              <span class="items-list-badge" id="items-list-count">4 поз.</span>
+            </div>
 
-          </div>
+            <div id="items-cards-container"></div></div>
 
         </div>
 
@@ -3711,83 +4154,132 @@
       const isPiece = activeSurplus === 'piece';
       const storeData = getActiveStoreData();
       const allItems = getItemsForActiveStore(isPiece);
-      
+
       let roster = [];
       let items = allItems;
       const isAll = (activeShiftDate === 'all');
 
       if (storeData) {
-        if (isAll) {
-          roster = storeData.roster || [];
-        } else {
-          roster = (storeData.dailyRosters && storeData.dailyRosters[activeShiftDate]) || [];
-          if (roster.length === 0) {
-            roster = storeData.roster || [];
-          }
-          // Highlight items on that date
+        roster = (isAll ? storeData.roster : (storeData.dailyRosters && storeData.dailyRosters[activeShiftDate])) || storeData.roster || [];
+        if (!isAll) {
           const filtered = allItems.filter(function(it) {
             return (it.movements || []).some(function(m) { return m.date === activeShiftDate; });
           });
-          if (filtered.length > 0) {
-            items = filtered;
-          }
+          if (filtered.length > 0) items = filtered;
         }
       }
-
-      const periodStr = isAll ? '01.09 — 10.09' : activeShiftDate;
-      document.getElementById('inv-current-title').textContent = 
-        'Инвентаризация: ' + periodStr + ' (' + store + ', ' + (isPiece ? 'Штучный' : 'Весовой') + ')';
-
-      const rTitle = document.getElementById('roster-period-title');
-      if (rTitle) {
-        rTitle.textContent = isAll 
-          ? 'Журнал явок iiko • Период с 01.09 по 10.09' 
-          : 'Журнал явок iiko • Смена за ' + activeShiftDate;
-      }
-
-      const penaltyBadge = document.getElementById('penalty-badge');
-      const sumVal = document.getElementById('total-diff-val');
-      const subNote = document.getElementById('total-diff-sub');
-      const recAllBtn = document.getElementById('btn-reconcile-all');
-      const recLabel = document.getElementById('btn-reconcile-label');
-      document.getElementById('roster-store-tag').textContent = 
-        store + ' (' + roster.length + (isAll ? ' сотр. в периоде' : ' на смене') + ')';
 
       const calc = calculateStoreReconciliation(items, roster);
 
-      renderRosterCards(roster, calc.finesByPerson, isReconciled);
+      // 1. Теги в шапке сводки
+      const storeTag = document.getElementById('sum-store-tag');
+      if (storeTag) storeTag.textContent = store;
+      const typeTag = document.getElementById('sum-type-tag');
+      if (typeTag) typeTag.textContent = isPiece ? 'Штучный товар' : 'Весовой товар';
+      const dateTag = document.getElementById('sum-date-tag');
+      if (dateTag) dateTag.textContent = isAll ? '01.09 — 10.09' : ('Смена ' + activeShiftDate);
 
-      if (!isReconciled) {
-        penaltyBadge.textContent = 'До 1000 ₸: Су-шеф | > 1000 ₸: Смена';
-        penaltyBadge.className = 'penalty-pill';
-        sumVal.textContent = '-' + calc.totalBefore.toLocaleString('ru-RU') + ' ₸';
-        sumVal.className = 'inv-sum-val';
-        subNote.textContent = 'До 1 000 ₸ штраф закрепляется за Су-шефом, после 1 000 ₸ — за сотрудником смены';
-        recAllBtn.classList.remove('done');
-        recLabel.textContent = '⚡ Свести позиции с найденными излишками';
-        document.getElementById('reconciled-bar').style.display = 'none';
-        document.getElementById('btn-save-doc').disabled = true;
-      } else {
-        sumVal.textContent = '-' + calc.totalResidual.toLocaleString('ru-RU') + ' ₸';
-        penaltyBadge.textContent = 'Су-шеф: ' + calc.sousFines.toLocaleString('ru-RU') + ' ₸ • Смена: ' + calc.shiftFines.toLocaleString('ru-RU') + ' ₸';
-        penaltyBadge.className = 'penalty-pill danger';
-
-        let subParts = [];
-        for (const [pName, fAmt] of Object.entries(calc.finesByPerson)) {
-          if (fAmt > 0) {
-            const isSous = (pName === calc.sousPerson.name);
-            subParts.push((isSous ? '👨‍🍳 ' : '🚨 ') + pName + ': ' + fAmt.toLocaleString('ru-RU') + ' ₸');
-          }
-        }
-        subNote.textContent = subParts.length > 0 ? subParts.join(' | ') : '✓ Все расхождения зачтены встречными излишками';
-
-        recAllBtn.classList.add('done');
-        recLabel.textContent = '✓ Излишки зачтены (штрафы распределены)';
-        document.getElementById('reconciled-bar').style.display = 'flex';
-        document.getElementById('btn-save-doc').disabled = false;
+      const statusBadge = document.getElementById('sum-status-badge');
+      if (statusBadge) {
+        statusBadge.textContent = isReconciled ? 'Сведено ✓' : 'Требует сведения';
+        statusBadge.className = 'summary-status-badge ' + (isReconciled ? 'done' : '');
       }
 
+      // 2. 3 Статистических блока с цифрами
+      const beforeVal = document.getElementById('stat-before-val');
+      if (beforeVal) beforeVal.textContent = '-' + calc.totalBefore.toLocaleString('ru-RU') + ' ₸';
+
+      const coveredVal = document.getElementById('stat-covered-val');
+      if (coveredVal) coveredVal.textContent = '+' + calc.totalCovered.toLocaleString('ru-RU') + ' ₸';
+
+      const residualVal = document.getElementById('stat-residual-val');
+      const resultCard = document.getElementById('stat-result-card');
+      const resultTitle = document.getElementById('stat-result-title');
+      const residualSub = document.getElementById('stat-residual-sub');
+
+      if (residualVal) {
+        residualVal.textContent = '-' + calc.totalResidual.toLocaleString('ru-RU') + ' ₸';
+        if (isReconciled) {
+          residualVal.style.color = calc.totalResidual === 0 ? 'var(--iiko-green)' : 'var(--danger)';
+          if (resultTitle) resultTitle.textContent = 'Остаток долга';
+          if (residualSub) residualSub.textContent = 'к удержанию';
+          if (resultCard) resultCard.className = 'stat-card result done';
+        } else {
+          residualVal.style.color = '#0F172A';
+          if (resultTitle) resultTitle.textContent = 'К списанию';
+          if (residualSub) residualSub.textContent = 'после зачёта';
+          if (resultCard) resultCard.className = 'stat-card result';
+        }
+      }
+
+      const itemsCountBadge = document.getElementById('stat-items-count');
+      if (itemsCountBadge) itemsCountBadge.textContent = items.length + ' поз.';
+      const listCountBadge = document.getElementById('items-list-count');
+      if (listCountBadge) listCountBadge.textContent = items.length + ' поз.';
+
+      // 3. Компактная строка смены (только повара и кассиры)
+      const shiftText = document.getElementById('shift-summary-text');
+      if (shiftText) {
+        const names = roster.filter(function(r) { return r.roleType === 'sous' || r.roleType === 'cashier'; }).map(function(r) { return r.name; });
+        shiftText.textContent = 'Смена: ' + (names.length > 0 ? names.join(', ') : 'Сушеф смены, Кассир');
+      }
+
+      // 4. Кнопка сведения и блок штрафов
+      const recBtn = document.getElementById('btn-reconcile-all');
+      const recLabel = document.getElementById('btn-reconcile-label');
+      const finesCard = document.getElementById('fines-breakdown-card');
+      const finesList = document.getElementById('fines-list');
+      const finesTotalBadge = document.getElementById('fines-total-badge');
+      const reconciledBar = document.getElementById('reconciled-bar');
+      const saveDockBtn = document.getElementById('btn-save-doc');
+
+      if (!isReconciled) {
+        if (recBtn) {
+          recBtn.className = 'btn-reconcile-main';
+          recBtn.disabled = false;
+        }
+        if (recLabel) recLabel.textContent = 'Свести недостачи с излишками';
+        if (finesCard) finesCard.style.display = 'none';
+        if (reconciledBar) reconciledBar.style.display = 'none';
+        if (saveDockBtn) saveDockBtn.disabled = true;
+      } else {
+        if (recBtn) {
+          recBtn.className = 'btn-reconcile-main done';
+          recBtn.disabled = true;
+        }
+        if (recLabel) recLabel.textContent = '✓ Недостачи перекрыты излишками';
+        if (finesCard) {
+          finesCard.style.display = 'block';
+          if (finesTotalBadge) finesTotalBadge.textContent = '-' + calc.totalResidual.toLocaleString('ru-RU') + ' ₸';
+
+          let finesHtml = '';
+          for (const [pName, fAmt] of Object.entries(calc.finesByPerson)) {
+            if (fAmt > 0) {
+              const isSous = (calc.sousPerson && pName === calc.sousPerson.name);
+              finesHtml += '<div class="fine-row">' +
+                '<div class="fine-person-info">' +
+                  '<span>' + (isSous ? '👨‍🍳' : '👤') + '</span>' +
+                  '<div>' +
+                    '<div class="fine-person-name">' + pName + '</div>' +
+                    '<div class="fine-person-role">' + (isSous ? 'Су-шеф кухни (до 1000 ₸)' : 'Кассир смены (свыше 1000 ₸)') + '</div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="fine-amount">-' + fAmt.toLocaleString('ru-RU') + ' ₸</div>' +
+              '</div>';
+            }
+          }
+          if (!finesHtml) {
+            finesHtml = '<div style="font-size: 12px; color: #166534; font-weight: 600; padding: 4px;">✓ Все недостачи полностью перекрыты излишками (долга нет)</div>';
+          }
+          if (finesList) finesList.innerHTML = finesHtml;
+        }
+        if (reconciledBar) reconciledBar.style.display = 'flex';
+        if (saveDockBtn) saveDockBtn.disabled = false;
+      }
+
+      // 5. Рендер списка товаров (чистые карточки без шума)
       const container = document.getElementById('items-cards-container');
+      if (!container) return;
       container.innerHTML = '';
 
       if (items.length === 0) {
@@ -3795,124 +4287,70 @@
           '<div style="text-align: center; padding: 25px 15px; background: #fff; border-radius: 12px; border: 1px solid #E2E8F0; margin-top: 10px;">' +
             '<div style="font-size: 28px; margin-bottom: 8px;">✅</div>' +
             '<div style="font-weight: 700; color: #0F172A; font-size: 14px; margin-bottom: 4px;">Расхождений не зафиксировано</div>' +
-            '<div style="font-size: 12px; color: #64748B;">По точке ' + store + ' в iikoChain все сличительные ведомости по выбранному счёту сведены без отклонений.</div>' +
+            '<div style="font-size: 12px; color: #64748B;">По точке ' + store + ' в iikoChain все сличительные ведомости сведены без отклонений.</div>' +
           '</div>';
         return;
       }
 
       items.forEach(function(item) {
         const card = document.createElement('div');
-        card.className = 'item-card' + (!item.hasSurplus ? ' unreconciled-card' : '');
+        const isCurrentResolved = isReconciled && item.hasSurplus;
+        card.className = 'item-card ' + (item.hasSurplus ? 'has-surplus' : 'no-surplus');
         card.id = 'card-' + item.id;
 
-        const isCurrentResolved = isReconciled && item.hasSurplus;
-        let displayDiff = item.diffBefore + ' ' + item.unit;
-        let displayCost = item.costBefore + ' ₸';
-        let displayBook = item.bookBefore + ' ' + item.unit;
-        let badgeCls = '';
+        let displayCost = isCurrentResolved ? (item.remCost + ' ₸') : (item.costBefore + ' ₸');
+        if (isCurrentResolved && item.remCost === 0) displayCost = '0 ₸';
 
-        if (isReconciled) {
-          if (item.hasSurplus) {
-            displayDiff = item.remDiff + ' ' + item.unit;
-            displayCost = item.remCost + ' ₸';
-            displayBook = item.bookAfter + ' ' + item.unit;
-            badgeCls = item.remCost === 0 ? 'ok' : 'warning';
-          } else {
-            displayDiff = item.diffBefore + ' ' + item.unit;
-            displayCost = item.costBefore + ' ₸';
-            badgeCls = '';
-          }
+        let statusHtml = '';
+        if (item.hasSurplus) {
+          statusHtml = isCurrentResolved 
+            ? '<div class="item-surplus-status ok"><span>✅</span><span>Зачтено встречным излишком ➔ Расхождение: 0 ₸</span></div>'
+            : '<div class="item-surplus-status ok"><span>✨</span><span>Есть встречный излишек — перекрывается в 0 ₸</span></div>';
+        } else {
+          statusHtml = '<div class="item-surplus-status none"><span>❌</span><span>Встречных излишков нет — идёт к удержанию (' + Math.abs(item.costBefore).toLocaleString('ru-RU') + ' ₸)</span></div>';
         }
 
         let moveHtml = '';
         (item.movements || []).forEach(function(m) {
-          moveHtml += 
-            '<div class="move-item">' +
-              '<span class="move-date">' + m.date + '</span>' +
-              '<span class="move-type">' + m.type + '</span>' +
-              '<span class="move-qty ' + m.cls + '">' + m.qty + '</span>' +
-            '</div>';
+          moveHtml += '<div class="move-item">' +
+            '<span class="move-date">' + m.date + '</span>' +
+            '<span class="move-type">' + m.type + '</span>' +
+            '<span class="move-qty ' + m.cls + '">' + m.qty + '</span>' +
+          '</div>';
         });
 
-        const actionRightButton = item.hasSurplus 
-          ? ('<button type="button" class="btn-item-reconcile ' + (isCurrentResolved ? 'done' : '') + '" onclick="triggerSingleReconcile(\'' + item.id + '\')"><span>' + (isCurrentResolved ? '✓ Зачтено' : '⚡ Зачесть излишек') + '</span></button>')
-          : ('<span class="badge-no-surplus">✕ Излишков до 10.09 нет</span>');
-
         card.innerHTML = 
-          '<div class="item-card-main">' +
-            '<div class="item-row-top">' +
-              '<span class="item-title">' + item.title + '</span>' +
-              '<span class="item-cost-badge ' + badgeCls + '">' +
-                displayCost +
-              '</span>' +
-            '</div>' +
-            '<div class="item-metrics-3col">' +
-              '<div>Книга: <div class="item-metric-val">' + displayBook + '</div></div>' +
-              '<div>Факт ' + (activeShiftDate === 'all' ? 'периода' : activeShiftDate) + ': <div class="item-metric-val">' + item.fact + ' ' + item.unit + '</div></div>' +
-              '<div>Недостача: <div class="item-metric-val" style="color: ' + (isCurrentResolved ? (item.remCost === 0 ? 'var(--iiko-green)' : 'var(--warning)') : 'var(--danger)') + ';">' + displayDiff + '</div></div>' +
-            '</div>' +
-            '<div class="item-actions-row">' +
-              '<button type="button" class="btn-movement-toggle" onclick="toggleMovement(\'' + item.id + '\')">' +
-                '<span>📊</span>' +
-                '<span>Движение товара</span>' +
-                '<span id="arrow-' + item.id + '">▾</span>' +
-              '</button>' +
-              actionRightButton +
+          '<div class="item-card-header">' +
+            '<div class="item-card-name">' + item.title + '</div>' +
+            '<div class="item-card-price ' + (isCurrentResolved && item.remCost === 0 ? 'done' : '') + '">' +
+              displayCost +
             '</div>' +
           '</div>' +
-          '<div class="movement-card" id="move-' + item.id + '">' +
-            '<div class="movement-header">' +
-              '<span>Аудит движения: 01.09 — 10.09</span>' +
-              '<span style="color: ' + (item.hasSurplus ? 'var(--iiko-green)' : 'var(--danger)') + ';">' + (item.hasSurplus ? ('Найден излишек: +' + item.surplusQty + ' ' + item.unit) : 'Излишков не обнаружено!') + '</span>' +
-            '</div>' +
-            '<div class="movement-timeline">' +
-              moveHtml +
-            '</div>' +
-            '<div class="calc-explain-box ' + (!item.hasSurplus ? 'danger-note' : '') + '">' +
-              '<strong>Статус iiko:</strong> ' + (function() {
-              const rem = Math.abs(item.hasSurplus ? item.remCost : item.costBefore);
-              if (rem === 0) return '✓ Недостача за период зачтена встречным излишком на 100%. К удержанию: 0 ₸.';
-              if (rem <= 1000) {
-                if (!isPiece) {
-                  return 'Остаточная недостача: ' + rem + ' ₸ (≤ 1 000 ₸ ➔ Су-шеф ' + calc.sousPerson.name + ', начисление 0,001%).';
-                }
-                return 'Остаточная недостача: ' + rem + ' ₸ (≤ 1 000 ₸ ➔ закрепляется за 👨‍🍳 ' + calc.sousPerson.role + ' ' + calc.sousPerson.name + ').';
-              }
-              const minusMoves = (item.movements || []).filter(function(m) { return m.cls === 'minus'; });
-              const shortageDate = (minusMoves[0] && minusMoves[0].date) || (item.dates && item.dates[0]) || '01.09';
-              const dayRoster = (storeData && storeData.dailyRosters && storeData.dailyRosters[shortageDate]) || [];
-              const eligibleWorkers = dayRoster.filter(function(r) {
-                const rL = (r.role || '').toLowerCase();
-                return rL.includes('кассир-универсал') || rL.includes('кассир-универсал2') || rL.includes('кассир-фасфуда') || rL.includes('кассир-фастфуда') || r.roleType === 'cashier';
-              });
-              const targetWorkers = eligibleWorkers.length > 0 ? eligibleWorkers : [dayRoster.find(function(r) { return r.roleType !== 'sous'; }) || dayRoster[0] || { name: 'Сотрудник смены ' + shortageDate, role: 'Кассир-универсал' }];
-              const targetNames = targetWorkers.map(function(w) { return w.name; }).join(', ');
-
-              if (!isPiece) {
-                const pen = rem - 1000;
-                return 'Недостача: ' + rem + ' ₸ (> 1 000 ₸, смена ' + shortageDate + '). ' +
-                       '<strong>Формула: ' + rem + ' ₸ − 1 000 ₸ = ' + pen.toLocaleString('ru-RU') + ' ₸</strong>. ' +
-                       '➔ Штраф начисляется на сотрудников смены: 🚨 ' + targetNames + ' (' + targetWorkers[0].role + ').';
-              }
-              return 'Недостача: ' + rem + ' ₸ (> 1 000 ₸, смена ' + shortageDate + ') ➔ закрепляется за кассиром смены: 🚨 ' + targetNames + '.';
-            })() +
-            '</div>' +
+          statusHtml +
+          '<div class="item-qty-row">' +
+            '<span>Учёт: <strong>' + (isCurrentResolved ? item.bookAfter : item.bookBefore) + ' ' + item.unit + '</strong></span>' +
+            '<span class="qty-sep">•</span>' +
+            '<span>Факт: <strong>' + item.fact + ' ' + item.unit + '</strong></span>' +
+            '<span class="qty-sep">•</span>' +
+            '<span class="qty-diff ' + (isCurrentResolved && item.remCost === 0 ? 'green' : 'red') + '">' +
+              'Разница: <strong>' + (isCurrentResolved ? item.remDiff : item.diffBefore) + ' ' + item.unit + '</strong>' +
+            '</span>' +
+          '</div>' +
+          '<div class="item-card-footer">' +
+            '<button type="button" class="btn-toggle-history" onclick="toggleMovement(\'' + item.id + '\')">' +
+              '<span>История движений</span>' +
+              '<span id="arrow-' + item.id + '">▾</span>' +
+            '</button>' +
+            (item.hasSurplus 
+              ? ('<button type="button" class="btn-single-rec ' + (isCurrentResolved ? 'done' : '') + '" onclick="triggerSingleReconcile(\'' + item.id + '\')">' + (isCurrentResolved ? '✓ Зачтено' : 'Зачесть') + '</button>')
+              : ('<span style="font-size: 11px; color: #DC2626; font-weight: 700;">Без излишка</span>')) +
+          '</div>' +
+          '<div class="movement-card" id="movement-' + item.id + '" style="display: none; margin-top: 8px; border-top: 1px dashed var(--border-light); padding-top: 8px;">' +
+            '<div class="movement-timeline">' + moveHtml + '</div>' +
           '</div>';
 
         container.appendChild(card);
       });
-    }
-
-    function toggleMovement(id) {
-      const moveBox = document.getElementById('move-' + id);
-      const arrow = document.getElementById('arrow-' + id);
-      if (moveBox.style.display === 'block') {
-        moveBox.style.display = 'none';
-        arrow.textContent = '▾';
-      } else {
-        moveBox.style.display = 'block';
-        arrow.textContent = '▴';
-      }
     }
 
     function triggerSingleReconcile(id) {
