@@ -1335,6 +1335,607 @@
     .toast-msg.show {
       transform: translateX(-50%) translateY(0);
     }
+  
+    /* МОДАЛКА ШАГА 3: ЗАВЕРШЕНИЕ ИНВЕНТАРИЗАЦИИ И НАЧИСЛЕНИЕ ШТРАФОВ */
+    .step3-modal {
+      background: #FFF;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 580px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 48px rgba(15, 23, 42, 0.3);
+      animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .step3-head {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      color: #FFF;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #334155;
+      flex-shrink: 0;
+    }
+
+    .step3-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .step3-title-main {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step3-badge-pill {
+      background: rgba(255, 184, 0, 0.2);
+      color: #FCD34D;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 184, 0, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .step3-subtitle {
+      font-size: 11px;
+      color: #94A3B8;
+    }
+
+    .step3-close-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #CBD5E1;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .step3-close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFF;
+    }
+
+    /* Workflow indicator bar */
+    .step3-workflow-bar {
+      display: flex;
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--border-light);
+      padding: 8px 14px;
+      gap: 6px;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      overflow-x: auto;
+      flex-shrink: 0;
+    }
+
+    .workflow-step {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+    .workflow-step.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .workflow-step.done {
+      color: var(--iiko-green);
+      font-weight: 600;
+    }
+    .workflow-step-num {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #E2E8F0;
+      color: #475569;
+      font-size: 10px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .workflow-step.active .workflow-step-num {
+      background: var(--accent);
+      color: #FFF;
+    }
+    .workflow-step.done .workflow-step-num {
+      background: var(--iiko-green);
+      color: #FFF;
+    }
+
+    .step3-body {
+      padding: 14px 18px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Search and filter controls */
+    .step3-search-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .step3-search-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .step3-search-icon {
+      position: absolute;
+      left: 11px;
+      font-size: 14px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .step3-search-input {
+      width: 100%;
+      height: 38px;
+      padding: 0 34px 0 34px;
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-family: var(--font);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+    .step3-search-input:focus {
+      border-color: var(--accent);
+      background: #FFF;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .step3-search-clear {
+      position: absolute;
+      right: 8px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px;
+      display: none;
+    }
+    .step3-search-clear.show {
+      display: block;
+    }
+
+    .step3-filter-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .step3-chip {
+      background: #F1F5F9;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 4px 9px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.12s ease;
+    }
+    .step3-chip:hover {
+      background: #E2E8F0;
+      color: var(--text);
+    }
+    .step3-chip.active {
+      background: #0F172A;
+      color: #FFF;
+      border-color: #0F172A;
+    }
+
+    /* Info rule callout */
+    .step3-rule-callout {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: #1E40AF;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .step3-formula-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      color: #92400E;
+    }
+
+    .step3-toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Staff List Table */
+    .step3-staff-section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    .step3-bulk-chk-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .step3-staff-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .step3-emp-card {
+      background: #FFF;
+      border: 1.5px solid var(--border-light);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+    .step3-emp-card.selected {
+      border-color: var(--accent);
+      background: #F8FAFC;
+    }
+    .step3-emp-card.confirmed {
+      border-color: var(--iiko-green);
+      background: #F0FDF4;
+    }
+    .step3-emp-card.hidden {
+      display: none !important;
+    }
+
+    .step3-emp-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .step3-emp-identity {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .step3-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .step3-emp-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .step3-role-badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #E2E8F0;
+      color: #334155;
+    }
+    .step3-role-badge.cashier {
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #DBEAFE;
+    }
+    .step3-role-badge.sous {
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FDE68A;
+    }
+
+    .step3-emp-details {
+      padding-left: 26px;
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .step3-emp-reasons {
+      background: #FFF;
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 11px;
+      color: #334155;
+    }
+
+    .step3-emp-fine-row {
+      padding-left: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .step3-fine-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #FFF;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 8px;
+      transition: border-color 0.15s;
+    }
+    .step3-fine-input-wrap:focus-within {
+      border-color: var(--accent);
+    }
+
+    .step3-fine-input {
+      width: 85px;
+      border: none;
+      outline: none;
+      font-size: 13px;
+      font-weight: 800;
+      font-family: var(--mono);
+      color: var(--danger);
+      text-align: right;
+      background: transparent;
+    }
+
+    .step3-status-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .step3-status-badge.pending {
+      background: #FEF3C7;
+      color: #B45309;
+    }
+    .step3-status-badge.confirmed {
+      background: #DCFCE7;
+      color: #15803D;
+    }
+    .step3-status-badge.off {
+      background: #F1F5F9;
+      color: #94A3B8;
+    }
+
+    /* Summary bar at bottom of list */
+    .step3-total-card {
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+    }
+    .step3-total-stat {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .step3-total-num {
+      font-size: 15px;
+      font-weight: 800;
+      font-family: var(--mono);
+      color: var(--danger);
+    }
+
+    /* Success confirmation card */
+    .step3-success-card {
+      background: #F0FDF4;
+      border: 1.5px solid #86EFAC;
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      animation: modalFadeIn 0.25s ease;
+    }
+    .step3-success-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #DCFCE7;
+      color: #16A34A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
+    }
+    .step3-success-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #14532D;
+    }
+    .step3-success-sub {
+      font-size: 12px;
+      color: #166534;
+      line-height: 1.5;
+      max-width: 380px;
+    }
+    .step3-receipt-box {
+      width: 100%;
+      background: #FFF;
+      border: 1px dashed #86EFAC;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 11px;
+      text-align: left;
+      color: #0F172A;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* Modal footer */
+    .step3-foot {
+      padding: 12px 18px;
+      background: #F8FAFC;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-step3-cancel {
+      height: 38px;
+      padding: 0 14px;
+      background: #FFF;
+      color: #475569;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+    .btn-step3-cancel:hover {
+      background: #F1F5F9;
+    }
+
+    .btn-step3-confirm {
+      height: 38px;
+      padding: 0 16px;
+      background: var(--accent);
+      color: #FFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+      transition: background 0.12s, transform 0.08s;
+    }
+    .btn-step3-confirm:hover {
+      background: var(--accent-hover);
+    }
+    .btn-step3-confirm:active {
+      transform: scale(0.98);
+    }
+
+    .btn-step3-save {
+      height: 38px;
+      padding: 0 18px;
+      background: var(--iiko-green);
+      color: #FFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+      transition: all 0.15s;
+    }
+    .btn-step3-save:disabled {
+      background: #94A3B8;
+      cursor: not-allowed;
+      box-shadow: none;
+      opacity: 0.6;
+    }
+    .btn-step3-save:not(:disabled):hover {
+      background: #15803D;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35);
+    }
+
+    .btn-step3-quick {
+      height: 34px;
+      padding: 0 12px;
+      background: #FFFBEB;
+      color: #92400E;
+      border: 1px solid #FDE68A;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s;
+    }
+    .btn-step3-quick:hover {
+      background: #FEF3C7;
+      border-color: #F59E0B;
+    }
+
   </style>
 </head>
 <body>
@@ -1584,8 +2185,8 @@
       <!-- Сохранение -->
       <div class="save-dock" id="save-dock">
         <div class="save-dock-inner">
-          <button class="btn-save-doc" id="btn-save-doc" disabled onclick="saveInventoryToIiko()">
-            Сохранить сведение в iikoChain
+          <button class="btn-save-doc" id="btn-save-doc" disabled onclick="openStep3Modal()">
+            ⚖️ Шаг 3: Начислить штрафы и провести в iiko
           </button>
         </div>
       </div>
@@ -1700,6 +2301,142 @@
             Закрыть
           </button>
         </div>
+      </div>
+    </div>
+
+    
+    <!-- МОДАЛКА ШАГА 3: ЗАВЕРШЕНИЕ ИНВЕНТАРИЗАЦИИ И НАЧИСЛЕНИЕ ШТРАФОВ -->
+    <div class="modal-backdrop" id="modal-step3" onclick="if(event.target === this) closeStep3Modal()">
+      <div class="step3-modal">
+        <div class="step3-head">
+          <div class="step3-title-wrap">
+            <div class="step3-title-main">
+              <span>iikoChain • Завершение инвентаризации</span>
+              <span class="step3-badge-pill" id="step3-store-badge">В-2</span>
+            </div>
+            <div class="step3-subtitle">Шаг 3: Начисление штрафов ответственным лицам по журналу явок</div>
+          </div>
+          <button type="button" class="step3-close-btn" onclick="closeStep3Modal()" title="Закрыть (Esc)">✕</button>
+        </div>
+
+        <div class="step3-workflow-bar">
+          <div class="workflow-step active" id="wf-step-1">
+            <span class="workflow-step-num">1</span>
+            <span>1. Найти фамилию</span>
+          </div>
+          <span>➔</span>
+          <div class="workflow-step active" id="wf-step-2">
+            <span class="workflow-step-num">2</span>
+            <span>2. Поставить галочку</span>
+          </div>
+          <span>➔</span>
+          <div class="workflow-step" id="wf-step-3">
+            <span class="workflow-step-num">3</span>
+            <span>3. Подтвердить</span>
+          </div>
+          <span>➔</span>
+          <div class="workflow-step" id="wf-step-4">
+            <span class="workflow-step-num">4</span>
+            <span>4. Сохранить</span>
+          </div>
+        </div>
+
+        <div class="step3-body" id="step3-body-main">
+          
+          <!-- Регламент / Информационная плашка -->
+          <div class="step3-rule-callout" id="step3-rule-box">
+            <span style="font-size: 15px;">⚖️</span>
+            <div>
+              <strong>Регламент BURЖУЙ:</strong>
+              <span id="step3-rule-text">Недостача ≤ 1 000 ₸ ➔ Су-шеф кухни. Недостача > 1 000 ₸ ➔ Сотрудники смены (за вычетом 1 000 ₸).</span>
+            </div>
+          </div>
+
+          <!-- Опция формулы вычета 1000 ₸ -->
+          <div class="step3-formula-toggle-row">
+            <label class="step3-toggle-label">
+              <input type="checkbox" id="chk-deduct-1000" checked onchange="onToggleDeduct1000()">
+              <span>Применять формулу вычета: <strong>Сумма недостачи − 1 000 ₸</strong> (по регламенту)</span>
+            </label>
+            <span style="font-size: 11px; font-weight: 700; color: #B45309;" id="toggle-rule-label">1 000 ₸ вычет ВКЛ</span>
+          </div>
+
+          <!-- Панель поиска по фамилии и фильтры -->
+          <div class="step3-search-panel">
+            <div class="step3-search-input-wrap">
+              <span class="step3-search-icon">🔍</span>
+              <input type="text" id="step3-search-input" class="step3-search-input" placeholder="Найти нужную фамилию (например: Бондарь, Семченко, Сушеф)..." oninput="filterStep3Staff(this.value)">
+              <button type="button" class="step3-search-clear" id="step3-clear-btn" onclick="clearStep3Search()">✕</button>
+            </div>
+            
+            <div class="step3-filter-chips">
+              <span class="step3-chip active" data-filter="all" onclick="setStep3FilterChip('all')">Все (<span id="count-all">4</span>)</span>
+              <span class="step3-chip" data-filter="penalty" onclick="setStep3FilterChip('penalty')">🚨 С штрафом (<span id="count-penalty">3</span>)</span>
+              <span class="step3-chip" data-filter="cashier" onclick="setStep3FilterChip('cashier')">Кассиры</span>
+              <span class="step3-chip" data-filter="sous" onclick="setStep3FilterChip('sous')">Су-шеф</span>
+              <span class="step3-chip" data-filter="checked" onclick="setStep3FilterChip('checked')">☑️ Отмеченные</span>
+            </div>
+          </div>
+
+          <!-- Список сотрудников -->
+          <div class="step3-staff-section-head">
+            <span>Ответственные сотрудники точки:</span>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="step3-bulk-chk-btn" onclick="toggleStep3SelectAll(true)">Выбрать всех</button>
+              <span style="color: var(--border);">|</span>
+              <button type="button" class="step3-bulk-chk-btn" onclick="toggleStep3SelectAll(false)">Снять все</button>
+            </div>
+          </div>
+
+          <div class="step3-staff-list" id="step3-staff-list">
+            <!-- Динамический список сотрудников точки с чекбоксами и суммами -->
+          </div>
+
+          <!-- Сводка и итог -->
+          <div class="step3-total-card">
+            <div class="step3-total-stat">
+              <div>Выбрано к начислению: <strong id="step3-checked-count" style="color: var(--text);">2 сотр.</strong></div>
+              <div style="font-size: 10px; color: var(--text-dim);" id="step3-status-desc">Нажмите «Подтвердить» для фиксации сумм</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Итого штрафы:</div>
+              <div class="step3-total-num" id="step3-total-sum">0 ₸</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Карточка успешного сохранения (после нажатия Сохранить) -->
+        <div class="step3-body" id="step3-body-success" style="display: none;">
+          <div class="step3-success-card" style="display: flex;">
+            <div class="step3-success-icon">✓</div>
+            <div class="step3-success-title">Штрафы успешно начислены и проведены в iikoChain!</div>
+            <div class="step3-success-sub">
+              Акт сведения инвентаризации закрыт со списанием встречных излишков и фиксацией штрафов в расчетных листах сотрудников.
+            </div>
+            <div class="step3-receipt-box" id="step3-receipt-box">
+              <!-- Заполняется динамически -->
+            </div>
+            <div style="display: flex; gap: 8px; width: 100%; justify-content: center; margin-top: 6px;">
+              <button type="button" class="btn-foot-copy" onclick="copyStep3SuccessReport()" style="flex: 1; max-width: 260px;">
+                <span>📲 Скопировать для WhatsApp / Бухгалтерии</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="step3-foot">
+          <button type="button" class="btn-step3-cancel" onclick="closeStep3Modal()">Отмена</button>
+          <button type="button" class="btn-step3-confirm" id="btn-step3-confirm" onclick="confirmStep3Fines()">
+            <span>✓</span>
+            <span>Подтвердить начисление</span>
+          </button>
+          <button type="button" class="btn-step3-save" id="btn-step3-save" onclick="saveStep3ToIiko()" disabled>
+            <span>💾</span>
+            <span>Сохранить в iiko</span>
+          </button>
+        </div>
+
       </div>
     </div>
 
@@ -2584,6 +3321,496 @@
         showToast('Отчет готов');
       });
     }
+
+    
+    // --- ШАГ 3: НАЧИСЛЕНИЕ ШТРАФОВ ОТВЕТСТВЕННЫМ ЛИЦАМ (IIKO РЕГЛАМЕНТ) ---
+    let step3State = {
+      store: 'В-2',
+      items: [],
+      roster: [],
+      calc: null,
+      fines: {},       // empName -> number
+      checked: {},     // empName -> boolean
+      filterChip: 'all',
+      searchQuery: '',
+      deduct1000: true,
+      isConfirmed: false,
+      isSaved: false
+    };
+
+    function openStep3Modal() {
+      const storeData = getActiveStoreData();
+      const storeKey = storeData ? storeData.storeLabel : document.getElementById('select-store').value;
+      const isPiece = activeSurplus === 'piece';
+      const items = getItemsForActiveStore(isPiece);
+      const roster = storeData ? (storeData.roster || []) : [];
+      const calc = calculateStoreReconciliation(items, roster);
+
+      step3State.store = storeKey;
+      step3State.items = items;
+      step3State.roster = roster;
+      step3State.calc = calc;
+      step3State.isConfirmed = false;
+      step3State.isSaved = false;
+      step3State.filterChip = 'all';
+      step3State.searchQuery = '';
+
+      document.getElementById('step3-store-badge').textContent = storeKey;
+      document.getElementById('step3-search-input').value = '';
+      document.getElementById('step3-clear-btn').classList.remove('show');
+      document.getElementById('step3-body-main').style.display = 'flex';
+      document.getElementById('step3-body-success').style.display = 'none';
+
+      const ruleText = isPiece
+        ? 'Штучный товар: Недостача ≤ 1 000 ₸ ➔ Су-шеф кухни. Недостача > 1 000 ₸ ➔ Сотрудники смены (кассиры).'
+        : 'Весовой товар: Недостача ≤ 1 000 ₸ ➔ Су-шеф (0,001%). Недостача > 1 000 ₸ ➔ Сотрудники смены (за вычетом 1 000 ₸).';
+      document.getElementById('step3-rule-text').textContent = ruleText;
+
+      const deductCheckbox = document.getElementById('chk-deduct-1000');
+      step3State.deduct1000 = deductCheckbox ? deductCheckbox.checked : true;
+
+      // Initialize fines and checked states
+      step3State.fines = {};
+      step3State.checked = {};
+
+      roster.forEach(function(emp) {
+        const rawFine = calc.finesByPerson[emp.name] || 0;
+        let finalFine = rawFine;
+
+        if (step3State.deduct1000 && emp.roleType === 'cashier' && rawFine > 1000) {
+          finalFine = rawFine - 1000;
+        } else if (!isPiece && emp.roleType === 'sous' && rawFine > 0) {
+          finalFine = Math.max(1, Math.round(rawFine * 0.00001));
+        }
+
+        step3State.fines[emp.name] = finalFine;
+        step3State.checked[emp.name] = (finalFine > 0);
+      });
+
+      // Update chip active status
+      document.querySelectorAll('.step3-chip').forEach(function(el) {
+        el.classList.toggle('active', el.getAttribute('data-filter') === 'all');
+      });
+
+      // Reset workflow steps
+      document.getElementById('wf-step-1').className = 'workflow-step active';
+      document.getElementById('wf-step-2').className = 'workflow-step active';
+      document.getElementById('wf-step-3').className = 'workflow-step';
+      document.getElementById('wf-step-4').className = 'workflow-step';
+
+      const saveBtn = document.getElementById('btn-step3-save');
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<span>💾</span><span>Сохранить в iiko</span>';
+
+      const confirmBtn = document.getElementById('btn-step3-confirm');
+      confirmBtn.innerHTML = '<span>✓</span><span>Подтвердить начисление</span>';
+
+      renderStep3StaffList();
+      updateStep3Totals();
+
+      document.getElementById('modal-step3').style.display = 'flex';
+    }
+
+    function closeStep3Modal() {
+      document.getElementById('modal-step3').style.display = 'none';
+    }
+
+    function onToggleDeduct1000() {
+      const chk = document.getElementById('chk-deduct-1000');
+      step3State.deduct1000 = !!(chk && chk.checked);
+      document.getElementById('toggle-rule-label').textContent = step3State.deduct1000 ? '1 000 ₸ вычет ВКЛ' : 'Полная сумма (вычет ВЫКЛ)';
+
+      const isPiece = activeSurplus === 'piece';
+      const calc = step3State.calc;
+
+      step3State.roster.forEach(function(emp) {
+        const rawFine = (calc && calc.finesByPerson[emp.name]) || 0;
+        let finalFine = rawFine;
+
+        if (step3State.deduct1000 && emp.roleType === 'cashier' && rawFine > 1000) {
+          finalFine = rawFine - 1000;
+        } else if (!isPiece && emp.roleType === 'sous' && rawFine > 0) {
+          finalFine = Math.max(1, Math.round(rawFine * 0.00001));
+        }
+
+        step3State.fines[emp.name] = finalFine;
+      });
+
+      renderStep3StaffList();
+      updateStep3Totals();
+    }
+
+    function renderStep3StaffList() {
+      const container = document.getElementById('step3-staff-list');
+      container.innerHTML = '';
+
+      const calc = step3State.calc;
+      const roster = step3State.roster;
+      const isPiece = activeSurplus === 'piece';
+
+      let countPenalty = 0;
+
+      roster.forEach(function(emp, idx) {
+        const fineAmt = step3State.fines[emp.name] !== undefined ? step3State.fines[emp.name] : 0;
+        const isChecked = !!step3State.checked[emp.name];
+        if (fineAmt > 0) countPenalty++;
+
+        const card = document.createElement('div');
+        card.className = 'step3-emp-card' + (isChecked ? ' selected' : '') + (step3State.isConfirmed && isChecked ? ' confirmed' : '');
+        card.id = 'step3-emp-card-' + idx;
+        card.setAttribute('data-name', (emp.name || '').toLowerCase());
+        card.setAttribute('data-role', (emp.role || '').toLowerCase());
+        card.setAttribute('data-role-type', emp.roleType || '');
+        card.setAttribute('data-has-fine', fineAmt > 0 ? 'yes' : 'no');
+        card.setAttribute('data-checked', isChecked ? 'yes' : 'no');
+
+        let roleCls = 'cashier';
+        if (emp.roleType === 'sous') roleCls = 'sous';
+
+        // Reasons & details
+        let reasonText = '';
+        if (calc && calc.fineItemsByPerson && calc.fineItemsByPerson[emp.name]) {
+          const items = calc.fineItemsByPerson[emp.name];
+          reasonText = items.map(function(it) {
+            return '• ' + it.title + ' (' + it.amount + ' ₸, смена ' + it.date + ')';
+          }).join('<br>');
+        } else if (fineAmt > 0) {
+          reasonText = '• Позиции с остатком недостачи в смене ' + (emp.dates ? emp.dates.join(', ') : '01.09');
+        } else {
+          reasonText = '<span style="color: var(--iiko-green);">✓ Недостач и нарушений за период нет (0 ₸)</span>';
+        }
+
+        let formulaFormulaBadge = '';
+        const rawFine = (calc && calc.finesByPerson[emp.name]) || 0;
+        if (step3State.deduct1000 && emp.roleType === 'cashier' && rawFine > 1000) {
+          formulaFormulaBadge = '<span style="font-size: 10px; color: #B45309; margin-left: 6px;">(из ' + rawFine.toLocaleString('ru-RU') + ' − 1 000 ₸)</span>';
+        }
+
+        let statusText = 'К начислению';
+        let statusCls = 'pending';
+        if (!isChecked) {
+          statusText = 'Снято (0 ₸)';
+          statusCls = 'off';
+        } else if (step3State.isConfirmed) {
+          statusText = '✓ Подтверждено';
+          statusCls = 'confirmed';
+        }
+
+        card.innerHTML = 
+          '<div class="step3-emp-top">' +
+            '<label class="step3-emp-identity">' +
+              '<input type="checkbox" class="step3-checkbox" id="chk-emp-' + idx + '" ' + (isChecked ? 'checked' : '') + ' onchange="toggleStep3Emp(\'' + emp.name + '\', ' + idx + ')">' +
+              '<span class="step3-emp-name">' + emp.name + '</span>' +
+              '<span class="step3-role-badge ' + roleCls + '">' + emp.role + '</span>' +
+            '</label>' +
+            '<span class="step3-status-badge ' + statusCls + '" id="status-badge-' + idx + '">' + statusText + '</span>' +
+          '</div>' +
+          '<div class="step3-emp-details">' +
+            '<div style="color: var(--text-dim);">' + (emp.time || 'Смены iiko') + '</div>' +
+            '<div class="step3-emp-reasons">' + reasonText + '</div>' +
+          '</div>' +
+          '<div class="step3-emp-fine-row">' +
+            '<div style="font-size: 11px; color: var(--text-muted); display: flex; align-items: center;">' +
+              '<span>Графа «Сумма штрафа»:</span>' + formulaFormulaBadge +
+            '</div>' +
+            '<div class="step3-fine-input-wrap">' +
+              '<input type="number" class="step3-fine-input" id="fine-input-' + idx + '" value="' + fineAmt + '" oninput="updateStep3FineAmount(\'' + emp.name + '\', this.value, ' + idx + ')" ' + (!isChecked ? 'disabled' : '') + '>' +
+              '<span style="font-size: 11px; font-weight: 700; color: var(--danger);">₸</span>' +
+            '</div>' +
+          '</div>';
+
+        container.appendChild(card);
+      });
+
+      document.getElementById('count-all').textContent = roster.length;
+      document.getElementById('count-penalty').textContent = countPenalty;
+
+      applyFilterVisibility();
+    }
+
+    function toggleStep3Emp(empName, idx) {
+      const chk = document.getElementById('chk-emp-' + idx);
+      const isChecked = !!(chk && chk.checked);
+      step3State.checked[empName] = isChecked;
+
+      const fineInput = document.getElementById('fine-input-' + idx);
+      if (fineInput) fineInput.disabled = !isChecked;
+
+      const card = document.getElementById('step3-emp-card-' + idx);
+      if (card) {
+        card.classList.toggle('selected', isChecked);
+        card.setAttribute('data-checked', isChecked ? 'yes' : 'no');
+      }
+
+      // Reset confirmed state if user toggles checkbox
+      step3State.isConfirmed = false;
+      document.getElementById('btn-step3-save').disabled = true;
+      document.getElementById('wf-step-3').className = 'workflow-step active';
+      document.getElementById('wf-step-4').className = 'workflow-step';
+
+      const statusBadge = document.getElementById('status-badge-' + idx);
+      if (statusBadge) {
+        statusBadge.textContent = isChecked ? 'К начислению' : 'Снято (0 ₸)';
+        statusBadge.className = 'step3-status-badge ' + (isChecked ? 'pending' : 'off');
+      }
+
+      updateStep3Totals();
+    }
+
+    function updateStep3FineAmount(empName, val, idx) {
+      const num = parseInt(val, 10);
+      step3State.fines[empName] = isNaN(num) ? 0 : Math.max(0, num);
+
+      step3State.isConfirmed = false;
+      document.getElementById('btn-step3-save').disabled = true;
+
+      updateStep3Totals();
+    }
+
+    function toggleStep3SelectAll(selectAll) {
+      step3State.roster.forEach(function(emp, idx) {
+        step3State.checked[emp.name] = selectAll;
+        const chk = document.getElementById('chk-emp-' + idx);
+        if (chk) chk.checked = selectAll;
+        const fineInput = document.getElementById('fine-input-' + idx);
+        if (fineInput) fineInput.disabled = !selectAll;
+        const card = document.getElementById('step3-emp-card-' + idx);
+        if (card) {
+          card.classList.toggle('selected', selectAll);
+          card.setAttribute('data-checked', selectAll ? 'yes' : 'no');
+        }
+        const statusBadge = document.getElementById('status-badge-' + idx);
+        if (statusBadge) {
+          statusBadge.textContent = selectAll ? 'К начислению' : 'Снято (0 ₸)';
+          statusBadge.className = 'step3-status-badge ' + (selectAll ? 'pending' : 'off');
+        }
+      });
+
+      step3State.isConfirmed = false;
+      document.getElementById('btn-step3-save').disabled = true;
+      updateStep3Totals();
+    }
+
+    function filterStep3Staff(val) {
+      step3State.searchQuery = (val || '').toLowerCase().trim();
+      const clearBtn = document.getElementById('step3-clear-btn');
+      if (clearBtn) clearBtn.classList.toggle('show', step3State.searchQuery.length > 0);
+      applyFilterVisibility();
+    }
+
+    function clearStep3Search() {
+      document.getElementById('step3-search-input').value = '';
+      step3State.searchQuery = '';
+      document.getElementById('step3-clear-btn').classList.remove('show');
+      applyFilterVisibility();
+    }
+
+    function setStep3FilterChip(chip) {
+      step3State.filterChip = chip;
+      document.querySelectorAll('.step3-chip').forEach(function(el) {
+        el.classList.toggle('active', el.getAttribute('data-filter') === chip);
+      });
+      applyFilterVisibility();
+    }
+
+    function applyFilterVisibility() {
+      const q = step3State.searchQuery;
+      const filter = step3State.filterChip;
+
+      const cards = document.querySelectorAll('.step3-emp-card');
+      cards.forEach(function(card) {
+        const name = card.getAttribute('data-name') || '';
+        const role = card.getAttribute('data-role') || '';
+        const roleType = card.getAttribute('data-role-type') || '';
+        const hasFine = card.getAttribute('data-has-fine') === 'yes';
+        const isChecked = card.getAttribute('data-checked') === 'yes';
+
+        let matchSearch = true;
+        if (q.length > 0) {
+          matchSearch = name.includes(q) || role.includes(q);
+        }
+
+        let matchFilter = true;
+        if (filter === 'penalty') matchFilter = hasFine;
+        else if (filter === 'cashier') matchFilter = (roleType === 'cashier' || role.includes('кассир'));
+        else if (filter === 'sous') matchFilter = (roleType === 'sous' || role.includes('су-шеф'));
+        else if (filter === 'checked') matchFilter = isChecked;
+
+        if (matchSearch && matchFilter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    function updateStep3Totals() {
+      let totalSum = 0;
+      let checkedCount = 0;
+
+      step3State.roster.forEach(function(emp) {
+        if (step3State.checked[emp.name]) {
+          checkedCount++;
+          totalSum += (step3State.fines[emp.name] || 0);
+        }
+      });
+
+      document.getElementById('step3-checked-count').textContent = checkedCount + ' сотр.';
+      document.getElementById('step3-total-sum').textContent = totalSum.toLocaleString('ru-RU') + ' ₸';
+
+      const desc = document.getElementById('step3-status-desc');
+      if (step3State.isConfirmed) {
+        desc.textContent = '✓ Начисление подтверждено! Нажмите «Сохранить в iiko»';
+        desc.style.color = 'var(--iiko-green)';
+      } else {
+        desc.textContent = 'Шаг 3: Нажмите «Подтвердить» для фиксации сумм';
+        desc.style.color = 'var(--text-dim)';
+      }
+    }
+
+    function confirmStep3Fines() {
+      let checkedCount = 0;
+      step3State.roster.forEach(function(emp) {
+        if (step3State.checked[emp.name]) checkedCount++;
+      });
+
+      step3State.isConfirmed = true;
+
+      // Update card styles
+      step3State.roster.forEach(function(emp, idx) {
+        const card = document.getElementById('step3-emp-card-' + idx);
+        const isChecked = step3State.checked[emp.name];
+        if (card) {
+          card.classList.toggle('confirmed', isChecked);
+        }
+        const badge = document.getElementById('status-badge-' + idx);
+        if (badge) {
+          badge.textContent = isChecked ? '✓ Подтверждено' : 'Снято (0 ₸)';
+          badge.className = 'step3-status-badge ' + (isChecked ? 'confirmed' : 'off');
+        }
+      });
+
+      // Update workflow progress
+      document.getElementById('wf-step-1').className = 'workflow-step done';
+      document.getElementById('wf-step-2').className = 'workflow-step done';
+      document.getElementById('wf-step-3').className = 'workflow-step done';
+      document.getElementById('wf-step-4').className = 'workflow-step active';
+
+      // Enable Save button
+      const saveBtn = document.getElementById('btn-step3-save');
+      saveBtn.disabled = false;
+
+      updateStep3Totals();
+      showToast('✓ Начисление подтверждено: ' + checkedCount + ' сотр. Нажмите «Сохранить в iiko»');
+    }
+
+    function saveStep3ToIiko() {
+      if (!step3State.isConfirmed) {
+        confirmStep3Fines();
+      }
+
+      const saveBtn = document.getElementById('btn-step3-save');
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<span>⏳</span><span>Сохранение в iiko...</span>';
+
+      setTimeout(function() {
+        step3State.isSaved = true;
+
+        // Populate success card
+        const docNum = 'АКТ-ИНВ-' + (step3State.store.replace('-', '')) + '-2026/02';
+        const nowStr = new Date().toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+        let rowsHtml = '';
+        let totalFines = 0;
+        let chargedEmps = [];
+
+        step3State.roster.forEach(function(emp) {
+          if (step3State.checked[emp.name]) {
+            const amt = step3State.fines[emp.name] || 0;
+            totalFines += amt;
+            chargedEmps.push(emp.name);
+            rowsHtml += '<div style="display: flex; justify-content: space-between; padding: 2px 0;">' +
+                          '<span>• <strong>' + emp.name + '</strong> (' + emp.role + '):</span>' +
+                          '<strong style="color: var(--danger); font-family: var(--mono);">' + amt.toLocaleString('ru-RU') + ' ₸</strong>' +
+                        '</div>';
+          }
+        });
+
+        if (!rowsHtml) {
+          rowsHtml = '<div>✓ Штрафы не начислялись (все удержания сняты).</div>';
+        }
+
+        const receiptBox = document.getElementById('step3-receipt-box');
+        receiptBox.innerHTML = 
+          '<div style="font-weight: 700; border-bottom: 1px solid #E2E8F0; padding-bottom: 4px; margin-bottom: 6px; display: flex; justify-content: space-between;">' +
+            '<span>№ ' + docNum + '</span>' +
+            '<span style="color: var(--iiko-green);">● ПРОВЕДЕНО В IIKO</span>' +
+          '</div>' +
+          '<div><strong>Торговая точка:</strong> ' + step3State.store + ' | <strong>Период:</strong> 01.09 — 10.09</div>' +
+          '<div><strong>Дата и время проводки:</strong> ' + nowStr + '</div>' +
+          '<div style="margin-top: 6px; font-weight: 600; color: var(--text-muted);">Начисленные штрафы в расчетные листы:</div>' +
+          rowsHtml +
+          '<div style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border); display: flex; justify-content: space-between; font-weight: 800;">' +
+            '<span>ИТОГО УДЕРЖАНО:</span>' +
+            '<span style="color: var(--danger); font-family: var(--mono);">' + totalFines.toLocaleString('ru-RU') + ' ₸</span>' +
+          '</div>';
+
+        document.getElementById('step3-body-main').style.display = 'none';
+        document.getElementById('step3-body-success').style.display = 'flex';
+
+        document.getElementById('wf-step-4').className = 'workflow-step done';
+
+        isReconciled = true;
+        renderItemsCards();
+
+        // Update main page save dock
+        const dockSaveBtn = document.getElementById('btn-save-doc');
+        if (dockSaveBtn) {
+          dockSaveBtn.textContent = '✓ Документ и штрафы проведены в iiko (' + totalFines.toLocaleString('ru-RU') + ' ₸)';
+          dockSaveBtn.disabled = true;
+          dockSaveBtn.style.background = 'var(--iiko-green)';
+        }
+
+        showToast('🎉 Акт сведения и штрафы успешно проведены в iikoChain!');
+      }, 600);
+    }
+
+    function copyStep3SuccessReport() {
+      const docNum = 'АКТ-ИНВ-' + (step3State.store.replace('-', '')) + '-2026/02';
+      const isPiece = activeSurplus === 'piece';
+
+      const lines = [
+        '📋 *РЕЕСТР НАЧИСЛЕНИЯ ШТРАФОВ • BURЖУЙ*',
+        '📍 *Точка:* ' + step3State.store,
+        '📦 *Тип:* ' + (isPiece ? 'Штучный товар' : 'Весовой товар'),
+        '📑 *Номер акта iiko:* ' + docNum,
+        '📅 *Период инвентаризации:* 01.09.2026 — 10.09.2026',
+        '--------------------------------',
+        '*НАЧИСЛЕННЫЕ ШТРАФЫ В РАСЧЕТНЫЕ ЛИСТЫ:*'
+      ];
+
+      let totalFines = 0;
+      step3State.roster.forEach(function(emp) {
+        if (step3State.checked[emp.name]) {
+          const amt = step3State.fines[emp.name] || 0;
+          totalFines += amt;
+          lines.push('• *' + emp.name + '* (' + emp.role + '): *' + amt.toLocaleString('ru-RU') + ' ₸*');
+        }
+      });
+
+      lines.push('--------------------------------');
+      lines.push('💰 *ИТОГО К УДЕРЖАНИЮ:* *' + totalFines.toLocaleString('ru-RU') + ' ₸*');
+      lines.push('✅ *Статус iikoChain:* Документ инвентаризации успешно закрыт и проведён.');
+
+      const text = lines.join('\n');
+
+      navigator.clipboard.writeText(text).then(function() {
+        showToast('✓ Реестр штрафов скопирован для WhatsApp');
+      }).catch(function() {
+        showToast('Реестр готов');
+      });
+    }
+
 
     function saveInventoryToIiko() {
       const btn = document.getElementById('btn-save-doc');
