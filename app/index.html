@@ -4328,6 +4328,10 @@
           <div class="header-menu-wrap">
             <button type="button" class="header-icon-btn" id="btn-header-menu" onclick="toggleHeaderMenu(event)" title="Меню">⋮</button>
             <div class="header-dropdown-menu" id="header-dropdown-menu">
+              <div id="header-user-info" style="padding: 8px 14px 6px; font-size: 11px; color: #64748B; border-bottom: 1px solid #F1F5F9;">
+                <div id="header-user-role" style="font-weight: 700; color: #1E293B;">Администратор сети</div>
+                <div id="header-user-name" style="font-size: 10px; color: #94A3B8;">iikoChain • Права EDIT_INVENTORY</div>
+              </div>
               <button type="button" class="header-dropdown-item" onclick="handleLogout()">
                 <span style="font-size: 15px;">🚪</span>
                 <span>Выйти</span>
@@ -5128,12 +5132,97 @@
       return (num < 0 ? '-' : '') + Math.abs(Math.round(num || 0)).toLocaleString('ru-RU') + ' ₸';
     }
 
+    // ====== РЕЕСТР АВТОРИЗОВАННЫХ ПОЛЬЗОВАТЕЛЕЙ IIKOCHAIN С ПРАВОМ EDIT_INVENTORY ======
+    const AUTHORIZED_USERS = [
+      {
+        logins: ['admin', 'админ', 'администратор'],
+        pins: ['1234', '0000', 'admin', '4082'],
+        role: 'Администратор сети iikoChain',
+        name: 'Администратор сети'
+      },
+      {
+        logins: ['manager', 'менеджер'],
+        pins: ['1234', '0000', 'manager'],
+        role: 'Управляющий филиалом',
+        name: 'Управляющий точки'
+      },
+      {
+        logins: ['управляющий', 'управляющий сети', 'director'],
+        pins: ['1234', '0000'],
+        role: 'Управляющий сети BURЖУЙ',
+        name: 'Управляющий сети'
+      },
+      {
+        logins: ['бухгалтер', 'buh', 'buhgalter'],
+        pins: ['1234', '0000'],
+        role: 'Бухгалтер-калькулятор iiko',
+        name: 'Бухгалтер-калькулятор'
+      },
+      {
+        logins: ['4082'],
+        pins: ['1234', '4082', '0000'],
+        role: 'Управляющий (таб. №4082)',
+        name: 'Управляющий 4082'
+      },
+      {
+        logins: ['burzhui', 'буржуй'],
+        pins: ['1234', '0000', 'burzhui'],
+        role: 'BURЖУЙ Chain Supervisor',
+        name: 'BURЖУЙ Chain'
+      },
+      {
+        logins: ['auditor', 'аудитор'],
+        pins: ['1234', '0000'],
+        role: 'Аудитор складских остатков',
+        name: 'Аудитор сети'
+      }
+    ];
+
+    const BLOCKED_ROLES = [
+      'cook', 'povar', 'повар', 'кассир', 'cashier', 'бармен', 'barmen', 'кухня'
+    ];
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function findAuthorizedUser(login) {
+      if (!login) return null;
+      const clean = login.toLowerCase().trim();
+      return AUTHORIZED_USERS.find(function(u) {
+        return u.logins.some(function(l) { return l.toLowerCase() === clean; });
+      }) || null;
+    }
+
+    function updateUserDisplay(user) {
+      const roleEl = document.getElementById('header-user-role');
+      const nameEl = document.getElementById('header-user-name');
+      if (roleEl && user) {
+        roleEl.textContent = user.role || user.name || 'Авторизованный сотрудник';
+      }
+      if (nameEl && user) {
+        nameEl.textContent = 'Логин: ' + (user.login || '') + ' • EDIT_INVENTORY';
+      }
+    }
+
     function handleLoginSubmit(e) {
       e.preventDefault();
       const login = document.getElementById('input-login').value.trim().toLowerCase();
       const pin = document.getElementById('input-pin').value.trim();
       const btn = document.getElementById('btn-login');
       const errBox = document.getElementById('auth-error-msg');
+
+      if (!login || !pin) {
+        errBox.innerHTML = '<strong>Внимание:</strong> Введите логин и пароль/ПИН-код.';
+        errBox.style.display = 'block';
+        return;
+      }
 
       btn.disabled = true;
       btn.textContent = 'Проверка прав в iikoChain...';
@@ -5143,21 +5232,55 @@
         btn.disabled = false;
         btn.textContent = 'Войти в систему';
 
-        if (login.includes('cook') || login.includes('povar') || login.includes('повар') || login.includes('кассир')) {
+        // 1. Проверка на заблокированные должности (повара, кассиры, бармены)
+        const isBlocked = BLOCKED_ROLES.some(function(role) {
+          return login.includes(role);
+        });
+
+        if (isBlocked) {
           errBox.innerHTML = '<strong>Доступ запрещен:</strong> У данной учетной записи нет права <code>EDIT_INVENTORY</code> в iikoChain.';
           errBox.style.display = 'block';
           showToast('Недостаточно прав доступа');
-        } else {
-          document.getElementById('view-auth').style.display = 'none';
-          document.getElementById('view-main').style.display = 'flex';
+          return;
+        }
+
+        // 2. Поиск пользователя в официальном реестре
+        const user = findAuthorizedUser(login);
+        if (!user) {
+          errBox.innerHTML = '<strong>Пользователь не найден:</strong> «' + escapeHtml(login) + '» не зарегистрирован в iikoChain сети «BURЖУЙ». Доступ имеют только управляющие и администраторы.';
+          errBox.style.display = 'block';
+          showToast('Пользователь не найден');
+          return;
+        }
+
+        // 3. Проверка ПИН-кода/пароля
+        const pinMatch = user.pins.some(function(p) { return p === pin; });
+        if (!pinMatch) {
+          errBox.innerHTML = '<strong>Неверный пароль:</strong> Проверьте правильность ввода пароля/ПИН-кода для «' + escapeHtml(login) + '».';
+          errBox.style.display = 'block';
+          showToast('Неверный пароль');
+          return;
+        }
+
+        // 4. Успешная авторизация
+        errBox.style.display = 'none';
+        document.getElementById('view-auth').style.display = 'none';
+        document.getElementById('view-main').style.display = 'flex';
+        updateUserDisplay({ login: login, role: user.role, name: user.name });
+
+        try {
           localStorage.setItem('burzhui_user_session', JSON.stringify({
             loggedIn: true,
             login: login,
+            role: user.role,
+            name: user.name,
             timestamp: Date.now()
           }));
-          showToast('Вход выполнен');
-        }
-      }, 400);
+        } catch (e) {}
+
+        goToModulesScreen();
+        showToast('Вход выполнен: ' + user.name);
+      }, 350);
     }
 
     
@@ -5191,6 +5314,12 @@
       var pinEl = document.getElementById('input-pin');
       if (loginEl) loginEl.value = '';
       if (pinEl) pinEl.value = '';
+
+      var errBox = document.getElementById('auth-error-msg');
+      if (errBox) {
+        errBox.innerHTML = '';
+        errBox.style.display = 'none';
+      }
 
       resetResults();
 
@@ -7077,21 +7206,35 @@
         var sessionStr = null;
         try { sessionStr = localStorage.getItem('burzhui_user_session'); } catch(e) {}
         var isAuth = false;
+        var validUser = null;
+
         if (sessionStr) {
           try {
             var sess = JSON.parse(sessionStr);
-            if (sess && sess.loggedIn) isAuth = true;
-          } catch(e) {}
+            if (sess && sess.loggedIn && sess.login) {
+              validUser = findAuthorizedUser(sess.login);
+              if (validUser) {
+                isAuth = true;
+              } else {
+                localStorage.removeItem('burzhui_user_session');
+              }
+            } else {
+              localStorage.removeItem('burzhui_user_session');
+            }
+          } catch(e) {
+            localStorage.removeItem('burzhui_user_session');
+          }
         }
 
         var authView = document.getElementById('view-auth');
         var mainView = document.getElementById('view-main');
         var saveDock = document.getElementById('save-dock');
 
-        if (isAuth) {
+        if (isAuth && validUser) {
           if (authView) authView.style.display = 'none';
           if (mainView) mainView.style.display = 'flex';
           if (saveDock) saveDock.style.display = 'none';
+          updateUserDisplay({ login: validUser.logins[0], role: validUser.role, name: validUser.name });
           goToModulesScreen();
         } else {
           if (authView) authView.style.display = 'flex';
