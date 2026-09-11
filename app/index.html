@@ -1908,7 +1908,7 @@
       } else {
         document.getElementById('btn-surplus-weight').classList.add('active');
         document.getElementById('btn-surplus-piece').classList.remove('active');
-        hint.innerHTML = '<strong>Регламент штрафов:</strong> До 1 000 ₸ штраф закрепляется за сотрудником <strong>Су-шеф</strong> 👨‍🍳. После 1 000 ₸ штраф ложится на <strong>сотрудника на смене</strong> (повар цеха по Журналу явок iiko).';
+        hint.innerHTML = '<strong>Регламент весовой инвентаризации:</strong><br>• До 1 000 ₸: штраф начисляется на <strong>Су-шефа</strong> в размере <strong>0,001%</strong>.<br>• Свыше 1 000 ₸: <strong>Сумма штрафа = Сумма недостачи − 1 000 ₸</strong> (начисляется на сотрудников смены: <em>кассир-универсал, кассир-универсал2, кассир-фастфуда</em>).<br><em>Пример: при недостаче 1 560 ₸ в графе «Сумма штрафа» указывается 560 ₸.</em>';
         showToast('Счёт: Излишки — весовой товар');
       }
       isReconciled = false;
@@ -1967,29 +1967,86 @@
         totalResidual += rem;
 
         if (rem > 0) {
-          if (rem <= 1000) {
-            // Регламент: штрафы до 1 000 ₸ закрепляются за Су-шефом
-            sousFines += rem;
-            finesByPerson[sousPerson.name] = (finesByPerson[sousPerson.name] || 0) + rem;
-            if (!fineItemsByPerson[sousPerson.name]) fineItemsByPerson[sousPerson.name] = [];
-            fineItemsByPerson[sousPerson.name].push({ title: item.title, amount: rem, date: '01.09–10.09' });
+          if (isPiece) {
+            // ШТУЧНАЯ ИНВЕНТАРИЗАЦИЯ
+            if (rem <= 1000) {
+              sousFines += rem;
+              finesByPerson[sousPerson.name] = (finesByPerson[sousPerson.name] || 0) + rem;
+              if (!fineItemsByPerson[sousPerson.name]) fineItemsByPerson[sousPerson.name] = [];
+              fineItemsByPerson[sousPerson.name].push({ title: item.title, amount: rem, date: '01.09–10.09', note: '≤ 1 000 ₸' });
+            } else {
+              const minusMoves = (item.movements || []).filter(function(m) { return m.cls === 'minus'; });
+              const shortageDate = (minusMoves[0] && minusMoves[0].date) || (item.dates && item.dates[0]) || '01.09';
+              const dayRoster = dailyRosters[shortageDate] || [];
+              const targetWorker = dayRoster.find(function(r) { return r.roleType === 'cashier'; })
+                                || dayRoster.find(function(r) { return r.roleType !== 'sous'; })
+                                || dayRoster[0]
+                                || roster.find(function(r) { return r.roleType === 'cashier'; })
+                                || { name: 'Смена ' + shortageDate, role: 'Кассир' };
+
+              shiftFines += rem;
+              finesByPerson[targetWorker.name] = (finesByPerson[targetWorker.name] || 0) + rem;
+              if (!fineItemsByPerson[targetWorker.name]) fineItemsByPerson[targetWorker.name] = [];
+              fineItemsByPerson[targetWorker.name].push({ title: item.title, amount: rem, date: shortageDate, note: '> 1 000 ₸' });
+            }
           } else {
-            // Регламент: штрафы более 1 000 ₸ закрепляются за сотрудником КОНКРЕТНОЙ смены
-            const minusMoves = (item.movements || []).filter(function(m) { return m.cls === 'minus'; });
-            const shortageDate = (minusMoves[0] && minusMoves[0].date) || (item.dates && item.dates[0]) || '01.09';
-            const dayRoster = dailyRosters[shortageDate] || [];
+            // ВЕСОВАЯ ИНВЕНТАРИЗАЦИЯ (РЕГЛАМЕНТ BURЖУЙ):
+            // 1. Недостача до 1000 тенге: штраф начисляется на сушефа в размере 0,001%
+            // 2. Недостача превышает 1000 тенге: Формула: Сумма штрафа = Сумма недостачи − 1000 тенге.
+            //    Начисляется на сотрудников смены (должность: кассир-универсал, кассир-универсал2, кассир-фасфуда)
+            if (rem <= 1000) {
+              const sousAmount = Math.max(1, Math.round(rem * 0.00001)); // символический 0,001%
+              sousFines += sousAmount;
+              finesByPerson[sousPerson.name] = (finesByPerson[sousPerson.name] || 0) + sousAmount;
+              if (!fineItemsByPerson[sousPerson.name]) fineItemsByPerson[sousPerson.name] = [];
+              fineItemsByPerson[sousPerson.name].push({ 
+                title: item.title, 
+                amount: sousAmount, 
+                fullRem: rem, 
+                isSousRate: true,
+                date: '01.09–10.09', 
+                note: '≤ 1 000 ₸ (ставка 0,001%)' 
+              });
+            } else {
+              const penaltyAmount = rem - 1000; // Формула: Сумма недостачи - 1000 тенге
+              const minusMoves = (item.movements || []).filter(function(m) { return m.cls === 'minus'; });
+              const shortageDate = (minusMoves[0] && minusMoves[0].date) || (item.dates && item.dates[0]) || '01.09';
+              const dayRoster = dailyRosters[shortageDate] || [];
 
-            // Определяем сотрудника именно той даты
-            const targetWorker = dayRoster.find(function(r) { return r.roleType === (isPiece ? 'cashier' : 'shift'); })
-                              || dayRoster.find(function(r) { return r.roleType !== 'sous'; })
-                              || dayRoster[0]
-                              || roster.find(function(r) { return r.roleType === (isPiece ? 'cashier' : 'shift'); })
-                              || { name: 'Смена ' + shortageDate, role: isPiece ? 'Кассир' : 'Повар' };
+              // В журнале явки в фильтре выбираем точку, должность: кассир-универсал, кассир-универсал2, кассир-фасфуда
+              const eligibleWorkers = dayRoster.filter(function(r) {
+                const rLow = (r.role || '').toLowerCase();
+                return rLow.includes('кассир-универсал') || 
+                       rLow.includes('кассир-универсал2') || 
+                       rLow.includes('кассир-фасфуда') || 
+                       rLow.includes('кассир-фастфуда') || 
+                       r.roleType === 'cashier';
+              });
 
-            shiftFines += rem;
-            finesByPerson[targetWorker.name] = (finesByPerson[targetWorker.name] || 0) + rem;
-            if (!fineItemsByPerson[targetWorker.name]) fineItemsByPerson[targetWorker.name] = [];
-            fineItemsByPerson[targetWorker.name].push({ title: item.title, amount: rem, date: shortageDate });
+              const targetWorkers = eligibleWorkers.length > 0 
+                ? eligibleWorkers 
+                : [dayRoster.find(function(r) { return r.roleType !== 'sous'; }) || dayRoster[0] || { name: 'Сотрудник смены ' + shortageDate, role: 'Кассир-универсал' }];
+
+              shiftFines += penaltyAmount;
+
+              // Если на смене 1 сотрудник - ему вся сумма, если несколько - распределяем поровну
+              const split = Math.round(penaltyAmount / targetWorkers.length);
+              targetWorkers.forEach(function(w, idx) {
+                const actualFine = (idx === targetWorkers.length - 1) 
+                  ? (penaltyAmount - split * (targetWorkers.length - 1)) 
+                  : split;
+                finesByPerson[w.name] = (finesByPerson[w.name] || 0) + actualFine;
+                if (!fineItemsByPerson[w.name]) fineItemsByPerson[w.name] = [];
+                fineItemsByPerson[w.name].push({ 
+                  title: item.title, 
+                  amount: actualFine, 
+                  fullRem: rem, 
+                  deduction: 1000, 
+                  date: shortageDate, 
+                  note: rem + ' ₸ − 1 000 ₸ = ' + penaltyAmount + ' ₸' + (targetWorkers.length > 1 ? ' (на ' + targetWorkers.length + ' сотр.)' : '')
+                });
+              });
+            }
           }
         }
       });
@@ -2025,7 +2082,7 @@
             if (isSous) {
               cardCls += ' fined-sous';
               tagCls += ' sous';
-              tagText = '⚠️ Штраф: ' + fine.toLocaleString('ru-RU') + ' ₸ (≤ 1 000 ₸)';
+              tagText = (!isPiece) ? '👨‍🍳 Су-шеф: 0,001% по регламенту (≤ 1 000 ₸)' : ('⚠️ Штраф: ' + fine.toLocaleString('ru-RU') + ' ₸ (≤ 1 000 ₸)');
             } else {
               cardCls += ' fined';
               tagCls += ' shift';
@@ -2213,15 +2270,29 @@
               '<strong>Статус iiko:</strong> ' + (function() {
               const rem = Math.abs(item.hasSurplus ? item.remCost : item.costBefore);
               if (rem === 0) return '✓ Недостача за период зачтена встречным излишком на 100%. К удержанию: 0 ₸.';
-              if (rem <= 1000) return 'Остаточная недостача: ' + rem + ' ₸ (≤ 1 000 ₸ ➔ закрепляется за 👨‍🍳 ' + calc.sousPerson.role + ' ' + calc.sousPerson.name + ').';
+              if (rem <= 1000) {
+                if (!isPiece) {
+                  return 'Остаточная недостача: ' + rem + ' ₸ (≤ 1 000 ₸ ➔ Су-шеф ' + calc.sousPerson.name + ', начисление 0,001%).';
+                }
+                return 'Остаточная недостача: ' + rem + ' ₸ (≤ 1 000 ₸ ➔ закрепляется за 👨‍🍳 ' + calc.sousPerson.role + ' ' + calc.sousPerson.name + ').';
+              }
               const minusMoves = (item.movements || []).filter(function(m) { return m.cls === 'minus'; });
-              const shortageDate = (minusMoves[0] && minusMoves[0].date) || '01.09';
+              const shortageDate = (minusMoves[0] && minusMoves[0].date) || (item.dates && item.dates[0]) || '01.09';
               const dayRoster = (storeData && storeData.dailyRosters && storeData.dailyRosters[shortageDate]) || [];
-              const targetWorker = dayRoster.find(function(r) { return r.roleType === (isPiece ? 'cashier' : 'shift'); })
-                                || dayRoster.find(function(r) { return r.roleType !== 'sous'; })
-                                || dayRoster[0]
-                                || { name: 'Сотрудник смены ' + shortageDate, role: isPiece ? 'Кассир' : 'Повар' };
-              return 'Недостача: ' + rem + ' ₸ (> 1 000 ₸, смена ' + shortageDate + ') ➔ закрепляется за кассиром/поваром смены: 🚨 ' + targetWorker.name + ' (' + targetWorker.role + ').';
+              const eligibleWorkers = dayRoster.filter(function(r) {
+                const rL = (r.role || '').toLowerCase();
+                return rL.includes('кассир-универсал') || rL.includes('кассир-универсал2') || rL.includes('кассир-фасфуда') || rL.includes('кассир-фастфуда') || r.roleType === 'cashier';
+              });
+              const targetWorkers = eligibleWorkers.length > 0 ? eligibleWorkers : [dayRoster.find(function(r) { return r.roleType !== 'sous'; }) || dayRoster[0] || { name: 'Сотрудник смены ' + shortageDate, role: 'Кассир-универсал' }];
+              const targetNames = targetWorkers.map(function(w) { return w.name; }).join(', ');
+
+              if (!isPiece) {
+                const pen = rem - 1000;
+                return 'Недостача: ' + rem + ' ₸ (> 1 000 ₸, смена ' + shortageDate + '). ' +
+                       '<strong>Формула: ' + rem + ' ₸ − 1 000 ₸ = ' + pen.toLocaleString('ru-RU') + ' ₸</strong>. ' +
+                       '➔ Штраф начисляется на сотрудников смены: 🚨 ' + targetNames + ' (' + targetWorkers[0].role + ').';
+              }
+              return 'Недостача: ' + rem + ' ₸ (> 1 000 ₸, смена ' + shortageDate + ') ➔ закрепляется за кассиром смены: 🚨 ' + targetNames + '.';
             })() +
             '</div>' +
           '</div>';
@@ -2281,16 +2352,28 @@
         if (rem === 0) {
           linesHtml += '<div style="padding: 2px 0; color: #16A34A;">• ' + item.title + ': <strong>✓ 0 ₸ (полный зачёт излишком)</strong></div>';
         } else if (rem <= 1000) {
-          linesHtml += '<div style="padding: 2px 0; color: #92400E;">• ' + item.title + ': <strong>' + rem + ' ₸</strong> (≤ 1 000 ₸) ➔ 👨‍🍳 ' + calc.sousPerson.name + ' (' + calc.sousPerson.role + ')</div>';
+          if (!isPiece) {
+            linesHtml += '<div style="padding: 2px 0; color: #92400E;">• ' + item.title + ': <strong>' + rem + ' ₸</strong> (≤ 1 000 ₸) ➔ 👨‍🍳 ' + calc.sousPerson.name + ' (0,001% ставка)</div>';
+          } else {
+            linesHtml += '<div style="padding: 2px 0; color: #92400E;">• ' + item.title + ': <strong>' + rem + ' ₸</strong> (≤ 1 000 ₸) ➔ 👨‍🍳 ' + calc.sousPerson.name + ' (' + calc.sousPerson.role + ')</div>';
+          }
         } else {
           const minusMoves = (item.movements || []).filter(function(m) { return m.cls === 'minus'; });
           const shortageDate = (minusMoves[0] && minusMoves[0].date) || (item.dates && item.dates[0]) || '01.09';
           const dayRoster = dailyRosters[shortageDate] || [];
-          const targetWorker = dayRoster.find(function(r) { return r.roleType === (isPiece ? 'cashier' : 'shift'); })
-                            || dayRoster.find(function(r) { return r.roleType !== 'sous'; })
-                            || dayRoster[0]
-                            || { name: 'Сотрудник смены ' + shortageDate, role: isPiece ? 'Кассир' : 'Повар' };
-          linesHtml += '<div style="padding: 2px 0; color: #DC2626;">• ' + item.title + ': <strong>' + rem + ' ₸</strong> (> 1 000 ₸, смена ' + shortageDate + ') ➔ 🚨 ' + targetWorker.name + ' (' + targetWorker.role + ')</div>';
+          const eligibleWorkers = dayRoster.filter(function(r) {
+            const rL = (r.role || '').toLowerCase();
+            return rL.includes('кассир-универсал') || rL.includes('кассир-универсал2') || rL.includes('кассир-фасфуда') || rL.includes('кассир-фастфуда') || r.roleType === 'cashier';
+          });
+          const targetWorkers = eligibleWorkers.length > 0 ? eligibleWorkers : [dayRoster.find(function(r) { return r.roleType !== 'sous'; }) || dayRoster[0] || { name: 'Сотрудник смены ' + shortageDate, role: 'Кассир-универсал' }];
+          const targetNames = targetWorkers.map(function(w) { return w.name; }).join(', ');
+
+          if (!isPiece) {
+            const pen = rem - 1000;
+            linesHtml += '<div style="padding: 2px 0; color: #DC2626;">• ' + item.title + ': недостача ' + rem + ' ₸ − 1 000 ₸ = <strong>' + pen.toLocaleString('ru-RU') + ' ₸</strong> (смена ' + shortageDate + ') ➔ 🚨 ' + targetNames + '</div>';
+          } else {
+            linesHtml += '<div style="padding: 2px 0; color: #DC2626;">• ' + item.title + ': <strong>' + rem + ' ₸</strong> (> 1 000 ₸, смена ' + shortageDate + ') ➔ 🚨 ' + targetNames + '</div>';
+          }
         }
       });
 
@@ -2313,7 +2396,7 @@
 
       let html = 
         '<div style="margin-bottom: 8px; font-weight: 700; color: #1E293B; font-size: 13px;">' +
-          'Распределение штрафов по сменам (' + (storeData ? storeData.storeLabel : '') + ')' +
+          'Распределение штрафов по сменам (' + (storeData ? storeData.storeLabel : '') + ', ' + (isPiece ? 'Штучный товар' : 'Весовой товар') + ')' + (!isPiece ? '<div style="font-size: 11px; font-weight: normal; color: #0284C7; margin-top: 2px;">Формула: Сумма штрафа = Недостача − 1 000 ₸</div>' : '') +
         '</div>' +
         '<div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;">' +
           '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 12px;">' +
@@ -2409,9 +2492,18 @@
         if (rem === 0) {
           statusText = '<span style="color: var(--iiko-green); font-weight: 700;">✓ Сведено (0 ₸)</span>';
         } else if (rem <= 1000) {
-          statusText = '<span style="color: #D97706; font-weight: 700;">👨‍🍳 Су-шеф: ' + rem.toLocaleString('ru-RU') + ' ₸ (≤ 1 000 ₸)</span>';
+          if (!isPiece) {
+            statusText = '<span style="color: #D97706; font-weight: 700;">👨‍🍳 Су-шеф: 0,001% (' + rem.toLocaleString('ru-RU') + ' ₸)</span>';
+          } else {
+            statusText = '<span style="color: #D97706; font-weight: 700;">👨‍🍳 Су-шеф: ' + rem.toLocaleString('ru-RU') + ' ₸ (≤ 1 000 ₸)</span>';
+          }
         } else {
-          statusText = '<span style="color: var(--danger); font-weight: 700;">🚨 Смена: ' + rem.toLocaleString('ru-RU') + ' ₸ (> 1 000 ₸)</span>';
+          if (!isPiece) {
+            const pen = rem - 1000;
+            statusText = '<span style="color: var(--danger); font-weight: 700;">🚨 Смена: ' + pen.toLocaleString('ru-RU') + ' ₸ (' + rem.toLocaleString('ru-RU') + ' − 1 000)</span>';
+          } else {
+            statusText = '<span style="color: var(--danger); font-weight: 700;">🚨 Смена: ' + rem.toLocaleString('ru-RU') + ' ₸ (> 1 000 ₸)</span>';
+          }
         }
 
         tr.innerHTML = 
@@ -2461,7 +2553,14 @@
       });
 
       text += '--------------------------------\n';
-      text += '*ПЕРСОНАЛЬНОЕ РАСПРЕДЕЛЕНИЕ ШТРАФОВ ПО СМЕНАМ:*\n';
+      if (!isPiece) {
+        text += '*ПЕРСОНАЛЬНОЕ НАЧИСЛЕНИЕ ШТРАФОВ (ВЕСОВАЯ ИНВЕНТАРИЗАЦИЯ)*\n';
+        text += '📌 *Формула:* Сумма штрафа = Сумма недостачи − 1 000 ₸\n';
+        text += '📌 *Су-шеф кухни:* ставка 0,001% (недостачи до 1 000 ₸)\n';
+        text += '📌 *Сотрудники смены:* кассир-универсал, кассир-универсал2, кассир-фастфуда\n';
+      } else {
+        text += '*ПЕРСОНАЛЬНОЕ РАСПРЕДЕЛЕНИЕ ШТРАФОВ ПО СМЕНАМ:*\n';
+      }
       let hasAnyFine = false;
       for (const [pName, fineAmt] of Object.entries(calc.finesByPerson)) {
         if (fineAmt > 0) {
