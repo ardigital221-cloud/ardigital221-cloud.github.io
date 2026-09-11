@@ -4206,6 +4206,52 @@
       margin-bottom: 12px;
     }
 
+
+    /* ВЫПАДАЮЩЕЕ МЕНЮ 3 ТОЧКИ */
+    .header-menu-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .header-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 4px;
+      min-width: 140px;
+      background: #FFFFFF;
+      border: 1px solid #E0E0E0;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      z-index: 120;
+      display: none;
+      padding: 4px 0;
+    }
+
+    .header-dropdown-menu.show {
+      display: block;
+    }
+
+    .header-dropdown-item {
+      width: 100%;
+      padding: 9px 14px;
+      border: none;
+      background: transparent;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--danger);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+
+    .header-dropdown-item:hover {
+      background: var(--danger-subtle);
+    }
+
 </style>
 </head>
 <body>
@@ -4223,18 +4269,15 @@
       </div>
 
       <div class="auth-card">
-        <div class="auth-form-title">Вход для сотрудников</div>
-        <div class="auth-form-sub">Доступ только для сотрудников с правом <code>EDIT_INVENTORY</code> в iikoChain.</div>
-
         <form id="auth-form" onsubmit="handleLoginSubmit(event)">
           <div class="form-group">
-            <label class="form-label">Логин или табельный номер</label>
-            <input type="text" id="input-login" class="form-input" placeholder="например, manager или 4082" autocomplete="off" required>
+            <label class="form-label">Логин</label>
+            <input type="text" id="input-login" class="form-input" autocomplete="off" required>
           </div>
 
           <div class="form-group">
-            <label class="form-label">PIN-код / Пароль</label>
-            <input type="password" id="input-pin" class="form-input" placeholder="••••" autocomplete="off" required>
+            <label class="form-label">Пароль</label>
+            <input type="password" id="input-pin" class="form-input" autocomplete="off" required>
           </div>
 
           <button type="submit" class="btn-login" id="btn-login">
@@ -4258,19 +4301,22 @@
           </div>
         </div>
 
-        <!-- Центральная плашка даты из скриншота 2 -->
-        <div class="header-date-pill" onclick="openModule('inv')" title="Выбранный период">
-          <span id="header-date-pill-val">01.09 — 10.09.26</span>
-        </div>
-
         <div class="header-user-actions">
           <button type="button" class="btn-back-modules" id="btn-back-modules" onclick="goToModulesScreen()" style="display: none;" title="Вернуться к выбору разделов">← Разделы</button>
           <button type="button" class="header-store-btn" id="header-store-btn" onclick="openStoreDrawer()" style="display: none;" title="Выбрать торговую точку сети">
             <span class="store-pin">📍</span><span id="header-store-name">В-1 (ул. Лермонтова, 100)</span><span class="store-chevron">▾</span>
           </button>
-          <button type="button" class="header-icon-btn" onclick="openStoreDrawer()" title="Поиск торговой точки">🔍</button>
-          <button type="button" class="header-icon-btn" onclick="openStoreDrawer()" title="Фильтры">🎛️</button>
-          <button type="button" class="header-icon-btn" onclick="handleLogout()" title="Выйти из системы">⋮</button>
+          
+          <!-- Выпадающее меню по клику на 3 точки -->
+          <div class="header-menu-wrap">
+            <button type="button" class="header-icon-btn" id="btn-header-menu" onclick="toggleHeaderMenu(event)" title="Меню">⋮</button>
+            <div class="header-dropdown-menu" id="header-dropdown-menu">
+              <button type="button" class="header-dropdown-item" onclick="handleLogout()">
+                <span style="font-size: 15px;">🚪</span>
+                <span>Выйти</span>
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -4297,36 +4343,6 @@
             <div class="iiko-tile iiko-tile-green" id="btn-sec-ord" onclick="openModule('ord')" role="button" tabindex="0">
               <div class="iiko-tile-title">Вечерняя заявка</div>
               <div class="iiko-tile-glyph">📦</div>
-            </div>
-
-            <!-- Плитка 3: Персонал и смены -->
-            <div class="iiko-tile iiko-tile-green" onclick="openModule('inv'); setTimeout(toggleShiftAccordion, 200);" role="button" tabindex="0">
-              <div class="iiko-tile-title">Персонал</div>
-              <div class="iiko-tile-glyph">👥</div>
-            </div>
-
-            <!-- Плитка 4: Кассовые смены -->
-            <div class="iiko-tile iiko-tile-green" onclick="openModule('inv')" role="button" tabindex="0">
-              <div class="iiko-tile-title">Кассовые смены</div>
-              <div class="iiko-tile-glyph">📅</div>
-            </div>
-          </div>
-
-          <div class="iiko-section-header">
-            <span>Управление бизнесом</span>
-          </div>
-
-          <div class="iiko-grid">
-            <!-- Плитка 5: Лояльность -->
-            <div class="iiko-tile iiko-tile-magenta" onclick="showToast('Раздел: Лояльность')" role="button" tabindex="0">
-              <div class="iiko-tile-title">Лояльность</div>
-              <div class="iiko-tile-glyph">❤️</div>
-            </div>
-
-            <!-- Плитка 6: Закупки и перемещения -->
-            <div class="iiko-tile iiko-tile-magenta" onclick="showToast('Раздел: Закупки и перемещения')" role="button" tabindex="0">
-              <div class="iiko-tile-title">Закупки и перемещения</div>
-              <div class="iiko-tile-glyph">🛒</div>
             </div>
           </div>
 
@@ -4401,18 +4417,14 @@
             <label for="chk-zero-diff" class="iiko-toggle-label">Не показывать нулевые и отрицательные результаты</label>
           </div>
 
-          <!-- Выбор периода и обновление данных -->
-          <div class="period-action-wrap">
-            <div class="period-header-row">
-              <div class="period-title-group">
-                <span class="period-label">Интервал времени:</span>
-                <span class="period-range" id="display-period-range">01.09.2026 — 10.09.2026</span>
-              </div>
+          <!-- Обновление данных (интервал скрыт по требованию) -->
+          <div class="period-action-wrap" style="padding-top: 4px;">
+            <div class="period-header-row" style="display: none;">
+              <span class="period-range" id="display-period-range">01.09.2026 — 10.09.2026</span>
               <span class="period-days-badge" id="period-days-badge">10 дней</span>
             </div>
 
-            <!-- Быстрые пресеты периодов -->
-            <div class="interval-presets">
+            <div class="interval-presets" style="display: none;">
               <button type="button" class="preset-btn active" data-preset="dec1" onclick="selectIntervalPreset('dec1')">01–10 сент</button>
               <button type="button" class="preset-btn" data-preset="dec2" onclick="selectIntervalPreset('dec2')">11–20 сент</button>
               <button type="button" class="preset-btn" data-preset="dec3" onclick="selectIntervalPreset('dec3')">21–30 сент</button>
@@ -4420,22 +4432,14 @@
               <button type="button" class="preset-btn" data-preset="custom" onclick="selectIntervalPreset('custom')">📅 Свой период</button>
             </div>
 
-            <!-- Выбор точных дат -->
-            <div class="interval-dates-row" id="custom-dates-row">
-              <div class="date-field">
-                <span class="date-field-label">С:</span>
-                <input type="date" id="input-date-from" class="date-input" value="2026-09-01" onchange="onCustomDateRangeChange()">
-              </div>
-              <span class="date-sep">➔</span>
-              <div class="date-field">
-                <span class="date-field-label">По:</span>
-                <input type="date" id="input-date-to" class="date-input" value="2026-09-10" onchange="onCustomDateRangeChange()">
-              </div>
+            <div class="interval-dates-row" id="custom-dates-row" style="display: none;">
+              <input type="date" id="input-date-from" class="date-input" value="2026-09-01" onchange="onCustomDateRangeChange()">
+              <input type="date" id="input-date-to" class="date-input" value="2026-09-10" onchange="onCustomDateRangeChange()">
             </div>
 
             <button type="button" class="btn-update-data" id="btn-update" onclick="handleRefreshData()">
               <span>🔄</span>
-              <span id="btn-update-text">Обновить данные iiko за выбранный период</span>
+              <span id="btn-update-text">Обновить данные iiko</span>
             </button>
           </div>
 
@@ -5158,13 +5162,40 @@
       }, 400);
     }
 
+    
+    // ====== ВЫПАДАЮЩЕЕ МЕНЮ ШАПКИ (3 ТОЧКИ) ======
+    function toggleHeaderMenu(e) {
+      if (e) e.stopPropagation();
+      const menu = document.getElementById('header-dropdown-menu');
+      if (menu) menu.classList.toggle('show');
+    }
+
+    function closeHeaderMenu() {
+      const menu = document.getElementById('header-dropdown-menu');
+      if (menu) menu.classList.remove('show');
+    }
+
+    window.addEventListener('click', function(e) {
+      const wrap = document.querySelector('.header-menu-wrap');
+      if (wrap && !wrap.contains(e.target)) {
+        closeHeaderMenu();
+      }
+    });
+
     function handleLogout() {
+      closeHeaderMenu();
       localStorage.removeItem('burzhui_user_session');
-      document.getElementById('input-login').value = '';
-      document.getElementById('input-pin').value = '';
+      sessionStorage.removeItem('burzhui_auth');
+      const loginEl = document.getElementById('input-login');
+      const pinEl = document.getElementById('input-pin');
+      if (loginEl) loginEl.value = '';
+      if (pinEl) pinEl.value = '';
       resetResults();
-      document.getElementById('view-main').style.display = 'none';
-      document.getElementById('view-auth').style.display = 'flex';
+      goToModulesScreen();
+      const mainView = document.getElementById('view-main');
+      const authView = document.getElementById('view-auth');
+      if (mainView) mainView.style.display = 'none';
+      if (authView) authView.style.display = 'flex';
       showToast('Вы вышли из системы');
     }
 
@@ -7179,14 +7210,10 @@
           <button type="button" class="btn-iiko-hamburger" onclick="closeLeftNavDrawer(null, true)">✕</button>
         </div>
         <div class="left-drawer-menu">
-          <div class="left-nav-item" onclick="showToast('Раздел: Прогноз')">
-            <span>Прогноз</span>
-            <span class="nav-chevron">⌵</span>
-          </div>
           <div class="left-nav-item" onclick="toggleLeftNavSub('sub-wh')">
             <div style="display:flex; align-items:center; gap:8px;">
               <span>Управление складом</span>
-              <span class="nav-count-badge">4</span>
+              <span class="nav-count-badge">2</span>
             </div>
             <span class="nav-chevron">⌵</span>
           </div>
@@ -7197,14 +7224,6 @@
             <div class="left-nav-sub-item" onclick="openModule('ord'); closeLeftNavDrawer(null, true);">
               <span>📦 Вечерняя заявка</span>
             </div>
-          </div>
-          <div class="left-nav-item" onclick="openModule('inv'); setTimeout(toggleShiftAccordion, 200); closeLeftNavDrawer(null, true);">
-            <span>Персонал</span>
-            <span class="nav-chevron">⌵</span>
-          </div>
-          <div class="left-nav-item" onclick="openModule('inv'); closeLeftNavDrawer(null, true);">
-            <span>Кассовые смены</span>
-            <span class="nav-chevron">⌵</span>
           </div>
         </div>
         <div class="left-drawer-footer">
