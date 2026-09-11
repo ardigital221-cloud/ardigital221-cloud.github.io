@@ -4250,6 +4250,25 @@
       background: var(--danger-subtle);
     }
 
+
+    #view-auth {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    #view-main {
+      display: none;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    #save-dock {
+      display: none;
+    }
+
 </style>
 </head>
 <body>
@@ -4259,7 +4278,7 @@
     <!-- АВТОРИЗАЦИЯ -->
     <div class="auth-view" id="view-auth">
       <div class="auth-brand">
-        <img src="logo.png" class="auth-brand-logo" alt="BURЖУЙ">
+        <img src="logo.png" class="auth-brand-logo" alt="BURЖУЙ" onerror="this.style.display='none'">
         <div class="brand-title-wrap">
           <h1>BURЖУЙ</h1>
           <p>Операционная система сети</p>
@@ -4288,7 +4307,7 @@
     </div>
 
     <!-- РАБОЧИЙ ЭКРАН -->
-    <div class="app-main" id="view-main">
+    <div class="app-main" id="view-main" style="display: none;">
       
       <header class="header-bar">
         <div class="header-left-group">
@@ -4696,7 +4715,7 @@
       </div>
 
       <!-- Сохранение -->
-      <div class="save-dock" id="save-dock">
+      <div class="save-dock" id="save-dock" style="display: none;">
         <div class="save-dock-inner">
           <button class="btn-save-doc" id="btn-save-doc" disabled onclick="openStep3Modal()">
             ⚖️ Начислить штрафы и провести в iiko
@@ -5064,22 +5083,14 @@
   </div>
 
   <script>
-    // АВТО-ВОССТАНОВЛЕНИЕ СЕССИИ ПРИ ПЕРЕЗАГРУЗКЕ СТРАНИЦЫ
-    (function checkStoredSession() {
-      try {
-        document.getElementById('view-auth').style.display = 'none';
-        document.getElementById('view-main').style.display = 'flex';
-        goToModulesScreen();
-      } catch (e) {
-        console.error('Session restore error:', e);
-      }
-    })();
 
-    let activeSection = 'inv';
-    let activeSurplus = 'piece';
-    let isDataLoaded = false;
-    let isReconciled = false;
-    let pendingAction = null;
+
+        // ГЛОБАЛЬНОЕ СОСТОЯНИЕ (VAR ДЛЯ ПРЕДОТВРАЩЕНИЯ TDZ)
+    var activeSection = 'none';
+    var activeSurplus = 'piece';
+    var isDataLoaded = false;
+    var isReconciled = false;
+    var pendingAction = null;
 
     document.addEventListener('gesturestart', function(e) { e.preventDefault(); });
     document.addEventListener('dblclick', function(e) { e.preventDefault(); });
@@ -5171,18 +5182,26 @@
 
     function handleLogout() {
       closeHeaderMenu();
-      localStorage.removeItem('burzhui_user_session');
-      sessionStorage.removeItem('burzhui_auth');
-      const loginEl = document.getElementById('input-login');
-      const pinEl = document.getElementById('input-pin');
+      try {
+        localStorage.removeItem('burzhui_user_session');
+        sessionStorage.removeItem('burzhui_auth');
+      } catch (e) {}
+
+      var loginEl = document.getElementById('input-login');
+      var pinEl = document.getElementById('input-pin');
       if (loginEl) loginEl.value = '';
       if (pinEl) pinEl.value = '';
+
       resetResults();
-      goToModulesScreen();
-      const mainView = document.getElementById('view-main');
-      const authView = document.getElementById('view-auth');
+
+      var mainView = document.getElementById('view-main');
+      var authView = document.getElementById('view-auth');
+      var saveDock = document.getElementById('save-dock');
+
       if (mainView) mainView.style.display = 'none';
+      if (saveDock) saveDock.style.display = 'none';
       if (authView) authView.style.display = 'flex';
+
       showToast('Вы вышли из системы');
     }
 
@@ -7053,14 +7072,45 @@
       }, 400);
     }
 
+    function checkStoredSession() {
+      try {
+        var sessionStr = null;
+        try { sessionStr = localStorage.getItem('burzhui_user_session'); } catch(e) {}
+        var isAuth = false;
+        if (sessionStr) {
+          try {
+            var sess = JSON.parse(sessionStr);
+            if (sess && sess.loggedIn) isAuth = true;
+          } catch(e) {}
+        }
+
+        var authView = document.getElementById('view-auth');
+        var mainView = document.getElementById('view-main');
+        var saveDock = document.getElementById('save-dock');
+
+        if (isAuth) {
+          if (authView) authView.style.display = 'none';
+          if (mainView) mainView.style.display = 'flex';
+          if (saveDock) saveDock.style.display = 'none';
+          goToModulesScreen();
+        } else {
+          if (authView) authView.style.display = 'flex';
+          if (mainView) mainView.style.display = 'none';
+          if (saveDock) saveDock.style.display = 'none';
+        }
+      } catch (err) {
+        console.error('Session check error:', err);
+      }
+    }
+
     window.addEventListener('DOMContentLoaded', function() {
       try {
-        const storeSelect = document.getElementById('select-store');
+        var storeSelect = document.getElementById('select-store');
         if (storeSelect) {
-          storeSelect.value = 'В-1'; updateHeaderStoreButton('В-1');
+          storeSelect.value = 'В-1';
+          if (typeof updateHeaderStoreButton === 'function') updateHeaderStoreButton('В-1');
         }
-        // По умолчанию 1 этап: сначала только 2 блока!
-        goToModulesScreen();
+        checkStoredSession();
       } catch (err) {
         console.error('Init error:', err);
       }
