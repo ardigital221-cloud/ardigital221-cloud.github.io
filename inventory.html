@@ -14,74 +14,48 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500;700&display=swap');
 
     :root {
-      /* ReUI Slate & Zinc Color Tokens */
-      --bg: #F8FAFC;
-      --card-bg: #FFFFFF;
-      --border: #E2E8F0;
-      --border-subtle: #F1F5F9;
-      --border-focus: #2563EB;
+      /* Цветовая палитра iiko Web 9.8 */
+      --iiko-bg: #FFFFFF;
+      --iiko-body-bg: #F4F5F7;
+      --iiko-text: #212121;
+      --iiko-text-muted: #616161;
+      --iiko-text-light: #9E9E9E;
+      --iiko-border: #E0E0E0;
+      --iiko-border-light: #EEEEEE;
+
+      /* Фирменный красный iiko */
+      --iiko-red: #D32F2F;
+      --iiko-red-dark: #B71C1C;
       
-      --text: #0F172A;
-      --text-muted: #64748B;
-      --text-subtle: #94A3B8;
+      /* Зеленые плитки ежедневных операций (Screenshot 1) */
+      --iiko-green: #5A9435;
+      --iiko-green-gradient: linear-gradient(135deg, #649F3D 0%, #52892F 100%);
+      --iiko-green-hover: #487A29;
 
-      /* Primary Brand / Action Buttons (ReUI Deep Slate) */
-      --primary: #0F172A;
-      --primary-hover: #1E293B;
-      --primary-active: #020617;
-      --primary-fg: #FFFFFF;
+      /* Пурпурные плитки управления бизнесом (Screenshot 1) */
+      --iiko-magenta: #9C1258;
+      --iiko-magenta-gradient: linear-gradient(135deg, #A81B63 0%, #8C0D4D 100%);
+      --iiko-magenta-hover: #7E0C45;
 
-      /* iiko Chain Brand Accent */
-      --accent-blue: #2563EB;
-      --accent-blue-hover: #1D4ED8;
-      --accent-blue-light: #EFF6FF;
-      --accent-blue-border: #BFDBFE;
+      /* Синий акцент для активных вкладок и действий (Screenshot 2) */
+      --iiko-blue: #1976D2;
+      --iiko-blue-hover: #1565C0;
+      --iiko-blue-light: #EBF3FE;
+      --iiko-blue-border: #90CAF9;
 
-      /* Success / iiko Emerald */
-      --success: #10B981;
-      --success-hover: #059669;
-      --success-light: #ECFDF5;
-      --success-border: #A7F3D0;
-      --success-text: #047857;
+      /* Финансовые статусы */
+      --iiko-danger: #D32F2F;
+      --iiko-danger-bg: #FFEBEE;
+      --iiko-success: #2E7D32;
+      --iiko-success-bg: #E8F5E9;
+      --iiko-warning: #ED6C02;
+      --iiko-warning-bg: #FFF3E0;
 
-      /* Destructive / Deficit Red */
-      --danger: #EF4444;
-      --danger-hover: #DC2626;
-      --danger-light: #FEF2F2;
-      --danger-border: #FECACA;
-      --danger-text: #B91C1C;
-
-      /* Warning / Attention Amber */
-      --warning: #F59E0B;
-      --warning-hover: #D97706;
-      --warning-light: #FFFBEB;
-      --warning-border: #FDE68A;
-      --warning-text: #B45309;
-
-      /* Typography */
-      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --mono: 'JetBrains Mono', 'Roboto Mono', monospace;
-
-      /* Elevation & Shadows (ReUI Layered Shadows) */
-      --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
-
-      /* Radii */
-      --radius-sm: 6px;
-      --radius-md: 8px;
-      --radius-lg: 12px;
-      --radius-xl: 16px;
-      --radius-full: 9999px;
-
-      --btn-height: 36px;
-      --dock-height: 64px;
+      --font: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      --mono: 'Roboto Mono', monospace;
     }
 
     * {
@@ -92,984 +66,831 @@
     }
 
     html, body {
-      background-color: var(--bg);
-      color: var(--text);
+      background-color: var(--iiko-body-bg);
+      color: var(--iiko-text);
       font-family: var(--font);
       font-size: 13px;
-      line-height: 1.5;
-      touch-action: pan-x pan-y;
-      user-select: none;
-      -webkit-user-select: none;
-      -webkit-text-size-adjust: 100%;
+      line-height: 1.4;
       height: 100%;
       width: 100%;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #CBD5E1;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #94A3B8;
-    }
-
-    .app-shell {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
     }
 
     /* ============================================================ */
-    /* 1. АВТОРИЗАЦИЯ (ReUI Auth Card)                             */
+    /* 1. ШАПКА IIKO WEB (SCREENSHOT 1 & 2)                         */
     /* ============================================================ */
-    .auth-view {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: linear-gradient(180deg, #F8FAFC 0%, #EDF2F7 100%);
-    }
-
-    .auth-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .auth-brand-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: var(--radius-lg);
-      object-fit: cover;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .brand-title-wrap h1 {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
-
-    .brand-title-wrap p {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .auth-card {
-      width: 100%;
-      max-width: 380px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: 28px 24px;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .auth-form-title {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.015em;
-      margin-bottom: 6px;
-    }
-
-    .auth-form-sub {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      line-height: 1.45;
-    }
-
-    .auth-form-sub code {
-      background: var(--border-subtle);
-      padding: 2px 6px;
-      border-radius: var(--radius-sm);
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--accent-blue);
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .form-input {
-      width: 100%;
-      height: 38px;
-      padding: 0 12px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      background: #FFFFFF;
-      font-family: var(--font);
-      font-size: 13px;
-      color: var(--text);
-      transition: all 0.15s ease;
-      outline: none;
-    }
-
-    .form-input:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-    }
-
-    .btn-login {
-      width: 100%;
-      height: 40px;
-      border-radius: var(--radius-md);
-      background: var(--primary);
-      color: var(--primary-fg);
-      font-size: 13px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      margin-top: 8px;
-      transition: all 0.15s ease;
-      box-shadow: var(--shadow-xs);
-    }
-
-    .btn-login:hover {
-      background: var(--primary-hover);
-    }
-
-    .btn-login:active {
-      transform: scale(0.99);
-    }
-
-    .auth-error {
-      margin-top: 12px;
-      font-size: 12px;
-      color: var(--danger-text);
-      background: var(--danger-light);
-      border: 1px solid var(--danger-border);
-      padding: 8px 12px;
-      border-radius: var(--radius-md);
-      display: none;
-    }
-
-    /* ============================================================ */
-    /* 2. ШАПКА ПРИЛОЖЕНИЯ (ReUI Navbar Component)                  */
-    /* ============================================================ */
-    .app-main {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background-color: var(--bg);
-    }
-
     .header-bar {
       position: sticky;
       top: 0;
       left: 0;
       right: 0;
-      height: 56px;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      height: 48px;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--iiko-border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
-      z-index: 50;
-      box-shadow: var(--shadow-xs);
+      padding: 0 12px;
+      z-index: 60;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     }
 
-    .header-logo {
+    .header-left-group {
       display: flex;
       align-items: center;
       gap: 10px;
-      cursor: pointer;
     }
 
-    .header-logo-img {
+    .btn-iiko-hamburger {
       width: 32px;
       height: 32px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      object-fit: cover;
-      box-shadow: var(--shadow-xs);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: #424242;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.15s;
     }
 
-    .logo-text {
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -0.02em;
+    .btn-iiko-hamburger:hover {
+      background: #EEEEEE;
+    }
+
+    .iiko-brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .iiko-logo-text {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--iiko-red);
+      letter-spacing: -0.5px;
+      line-height: 1;
+      font-family: 'Arial Black', Impact, sans-serif;
+    }
+
+    .iiko-logo-text .iiko-tm {
+      font-size: 9px;
+      vertical-align: super;
+      font-weight: 700;
+      font-family: sans-serif;
+      margin-left: 1px;
+    }
+
+    .iiko-brand-sub {
+      font-size: 11px;
+      font-weight: 700;
+      color: #616161;
+      padding: 1px 5px;
+      background: #EEEEEE;
+      border-radius: 3px;
+    }
+
+    /* Центральная плашка даты из скриншота 2 */
+    .header-date-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 28px;
+      padding: 0 12px;
+      background: #FFFFFF;
+      border: 1px solid #D1D5DB;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--iiko-text);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+
+    .header-date-pill:hover {
+      border-color: var(--iiko-blue);
+      background: var(--iiko-blue-light);
     }
 
     .header-user-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-
-    /* ReUI Button (Outline & Ghost variants) */
-    .btn-back-modules {
-      display: inline-flex;
-      align-items: center;
       gap: 6px;
-      height: 34px;
-      padding: 0 12px;
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-    }
-
-    .btn-back-modules:hover {
-      background: var(--bg);
-      border-color: #CBD5E1;
     }
 
     .header-store-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      height: 34px;
-      padding: 0 12px;
+      gap: 5px;
+      height: 30px;
+      padding: 0 10px;
       background: #FFFFFF;
-      border: 1px solid #CBD5E1;
-      border-radius: var(--radius-md);
-      color: var(--text);
+      border: 1px solid #D1D5DB;
+      border-radius: 15px;
+      color: var(--iiko-text);
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
+      white-space: nowrap !important;
+      flex-shrink: 0;
+      transition: all 0.15s;
     }
 
     .header-store-btn:hover {
-      background: var(--bg);
-      border-color: var(--text-muted);
+      border-color: var(--iiko-blue);
+      background: var(--iiko-blue-light);
     }
 
-    .store-pin {
-      font-size: 13px;
+    .header-store-btn span {
+      white-space: nowrap !important;
     }
 
-    .store-chevron {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .btn-logout {
-      height: 34px;
-      padding: 0 12px;
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: var(--radius-md);
-      color: var(--text-muted);
+    .btn-back-modules {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      height: 28px;
+      padding: 0 8px;
+      border: 1px solid var(--iiko-border);
+      border-radius: 4px;
+      background: #FFFFFF;
+      color: var(--iiko-text);
       font-size: 12px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.15s ease;
     }
 
-    .btn-logout:hover {
-      background: var(--border-subtle);
-      color: var(--danger);
+    .btn-back-modules:hover {
+      background: #EEEEEE;
+    }
+
+    .header-icon-btn {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      font-size: 15px;
+      color: #616161;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+
+    .header-icon-btn:hover {
+      background: #EEEEEE;
+      color: #212121;
     }
 
     .content-scroll {
       flex: 1;
-      padding: 24px 20px 80px 20px;
-      max-width: 900px;
+      padding: 16px 14px 60px 14px;
+      max-width: 720px;
       width: 100%;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
     }
 
     /* ============================================================ */
-    /* 3. ЭТАП 1: ЛАУНЧЕР МОДУЛЕЙ (ReUI Bento Cards)               */
+    /* 2. ЛАУНЧЕР: КВАДРАТНЫЕ ПЛИТКИ IIKO WEB (SCREENSHOT 1)         */
     /* ============================================================ */
     .modules-launcher-screen {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 10px;
-      margin: auto 0;
       width: 100%;
+      padding: 4px 0 30px 0;
     }
 
-    .launcher-header-box {
-      text-align: center;
-      max-width: 520px;
-      margin-bottom: 32px;
-    }
-
-    .launcher-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      background: var(--accent-blue-light);
-      border: 1px solid var(--accent-blue-border);
-      color: var(--accent-blue);
-      font-size: 11px;
+    .iiko-section-header {
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
+      color: #212121;
+      margin: 18px 0 12px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .launcher-title {
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -0.025em;
-      line-height: 1.2;
-      margin-bottom: 8px;
+    .iiko-section-header:first-child {
+      margin-top: 4px;
     }
 
-    .launcher-sub {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .launcher-grid {
+    .iiko-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
-      gap: 20px;
-      width: 100%;
-      justify-content: center;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
     }
 
-    /* ReUI Bento Feature Card */
-    .launcher-tile {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: 24px;
+    @media (min-width: 600px) {
+      .iiko-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Фирменная квадратная плитка iiko (Screenshot 1) */
+    .iiko-tile {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 240px;
-      box-shadow: var(--shadow-sm);
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
+      user-select: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
       overflow: hidden;
     }
 
-    .launcher-tile:hover:not(.disabled) {
-      border-color: #94A3B8;
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-lg);
+    .iiko-tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
     }
 
-    .launcher-tile:active:not(.disabled) {
-      transform: translateY(-1px);
+    .iiko-tile:active {
+      transform: translateY(0);
     }
 
-    .launcher-icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-lg);
-      background: var(--accent-blue-light);
-      border: 1px solid var(--accent-blue-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 18px;
+    .iiko-tile-green {
+      background: var(--iiko-green-gradient);
+      color: #FFFFFF;
     }
 
-    .launcher-tile.disabled .launcher-icon-box {
-      background: var(--border-subtle);
-      border-color: var(--border);
+    .iiko-tile-magenta {
+      background: var(--iiko-magenta-gradient);
+      color: #FFFFFF;
     }
 
-    .launcher-name {
-      font-size: 18px;
+    .iiko-tile-title {
+      font-size: 14px;
       font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.015em;
-      margin-bottom: 6px;
+      line-height: 1.25;
+      color: #FFFFFF;
+      z-index: 2;
+      max-width: 85%;
     }
 
-    .launcher-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.45;
-      margin-bottom: 24px;
-      flex-grow: 1;
-    }
-
-    /* ReUI Button (Primary inside Tile) */
-    .launcher-tag.action {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      width: 100%;
-      height: 38px;
-      border-radius: var(--radius-md);
-      background: var(--primary);
-      color: var(--primary-fg);
-      font-size: 13px;
-      font-weight: 600;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-    }
-
-    .launcher-tile:hover .launcher-tag.action {
-      background: var(--primary-hover);
-    }
-
-    /* ReUI Badge (Secondary/Disabled) */
-    .launcher-tag.soon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 38px;
-      border-radius: var(--radius-md);
-      background: var(--border-subtle);
-      color: var(--text-subtle);
-      border: 1px solid var(--border);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .launcher-tile.disabled {
-      opacity: 0.75;
-      cursor: not-allowed;
-      background: #FAFAFA;
+    .iiko-tile-glyph {
+      position: absolute;
+      right: 12px;
+      bottom: 10px;
+      font-size: 42px;
+      line-height: 1;
+      opacity: 0.95;
+      user-select: none;
+      z-index: 1;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
     }
 
     /* ============================================================ */
-    /* 4. ЭТАП 2: РАБОЧИЙ ПРОЦЕСС ИНВЕНТАРИЗАЦИИ                    */
+    /* 3. РАБОЧИЙ ЭКРАН И ВКЛАДКИ (SCREENSHOT 2)                    */
     /* ============================================================ */
-    .workflow-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      box-shadow: var(--shadow-xs);
-      margin-bottom: 16px;
-    }
-
-    /* ReUI Segmented Tabs (Счёт излишков) */
-    .surplus-options {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      background: var(--border-subtle);
-      padding: 4px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      margin-bottom: 16px;
-    }
-
-    .surplus-card-btn {
-      border: none;
-      background: transparent;
-      border-radius: var(--radius-md);
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .surplus-card-btn.active {
-      background: #FFFFFF;
-      color: var(--text);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .surplus-icon {
-      font-size: 20px;
-    }
-
-    .surplus-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .surplus-desc {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    /* Выбор интервала и кнопка обновления */
-    .period-action-wrap {
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-    }
-
-    .period-header-row {
+    .iiko-module-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--iiko-border);
     }
 
-    .period-title-group {
+    .iiko-module-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #212121;
+    }
+
+    .iiko-head-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
-    .period-label {
+    .btn-iiko-square {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--iiko-border);
+      background: #FFFFFF;
+      color: #424242;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.15s;
+    }
+
+    .btn-iiko-square:hover {
+      background: #F5F5F5;
+      border-color: #BDBDBD;
+    }
+
+    .btn-iiko-square.blue {
+      background: var(--iiko-blue);
+      color: #FFFFFF;
+      border-color: var(--iiko-blue);
+    }
+
+    .btn-iiko-square.blue:hover {
+      background: var(--iiko-blue-hover);
+    }
+
+    .btn-iiko-outline-action {
+      height: 32px;
+      padding: 0 12px;
+      border: 1px solid #D1D5DB;
+      border-radius: 4px;
+      background: #FFFFFF;
+      color: #212121;
       font-size: 12px;
       font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .period-range {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .period-days-badge {
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      background: var(--accent-blue-light);
-      border: 1px solid var(--accent-blue-border);
-      color: var(--accent-blue);
-      font-size: 11px;
-      font-weight: 700;
+      gap: 6px;
+      transition: all 0.15s;
     }
 
-    /* ReUI Button Group (Пресеты) */
-    .interval-presets {
+    .btn-iiko-outline-action:hover {
+      background: #F5F5F5;
+      border-color: #9E9E9E;
+    }
+
+    /* Вкладки iiko Web (Screenshot 2) */
+    .iiko-tabs-row {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
-    .preset-btn {
-      height: 32px;
-      padding: 0 12px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
+    .iiko-tab-btn {
+      height: 30px;
+      padding: 0 14px;
+      border: 1px solid #D1D5DB;
+      border-radius: 3px;
       background: #FFFFFF;
-      color: var(--text-muted);
+      color: #424242;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.15s ease;
-      box-shadow: var(--shadow-xs);
+      transition: all 0.12s;
     }
 
-    .preset-btn:hover {
-      background: var(--bg);
-      border-color: #CBD5E1;
-      color: var(--text);
+    .iiko-tab-btn:hover {
+      background: #F9FAFB;
     }
 
-    .preset-btn.active {
-      background: var(--primary);
-      color: var(--primary-fg);
-      border-color: var(--primary);
-      box-shadow: var(--shadow-xs);
+    .iiko-tab-btn.active {
+      border: 1px solid var(--iiko-blue);
+      background: var(--iiko-blue-light);
+      color: var(--iiko-blue);
+      font-weight: 600;
     }
 
-    .interval-dates-row {
+    /* Тумблер iiko (Screenshot 2) */
+    .iiko-toggle-row {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 14px;
+      padding: 6px 0 12px 0;
+      user-select: none;
     }
 
-    .date-field {
+    .iiko-switch {
+      position: relative;
+      display: inline-block;
+      width: 36px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .iiko-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .iiko-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #BDBDBD;
+      transition: .2s;
+      border-radius: 20px;
+    }
+
+    .iiko-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+
+    .iiko-switch input:checked + .iiko-slider {
+      background-color: var(--iiko-blue);
+    }
+
+    .iiko-switch input:checked + .iiko-slider:before {
+      transform: translateX(16px);
+    }
+
+    .iiko-toggle-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #424242;
+      cursor: pointer;
+    }
+
+    /* ============================================================ */
+    /* 4. ВЫДВИЖНОЕ ЛЕВОЕ МЕНЮ (SCREENSHOT 3)                       */
+    /* ============================================================ */
+    .iiko-left-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .iiko-left-drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .iiko-left-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 280px;
+      max-width: 85vw;
+      background: #FFFFFF;
+      box-shadow: 4px 0 16px rgba(0, 0, 0, 0.15);
+      z-index: 101;
+      transform: translateX(-100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .iiko-left-drawer-backdrop.open .iiko-left-drawer {
+      transform: translateX(0);
+    }
+
+    .left-drawer-header {
+      height: 48px;
+      border-bottom: 1px solid var(--iiko-border);
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: space-between;
+      padding: 0 12px;
     }
 
-    .date-field-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
+    .left-drawer-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #212121;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
     }
 
-    .date-input {
-      height: 34px;
-      padding: 0 10px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      font-family: var(--font);
-      font-size: 12px;
-      color: var(--text);
+    .left-drawer-menu {
+      flex: 1;
+      overflow-y: auto;
+      padding: 6px 0;
+    }
+
+    .left-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      font-size: 13px;
       font-weight: 500;
-      outline: none;
-      transition: all 0.15s ease;
+      color: #212121;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: background 0.12s;
     }
 
-    .date-input:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    .left-nav-item:hover {
+      background: #F5F5F5;
     }
 
-    .date-sep {
-      color: var(--text-subtle);
-      font-size: 12px;
+    .left-nav-item.active {
+      background: var(--iiko-blue-light);
+      color: var(--iiko-blue);
+      border-left-color: var(--iiko-blue);
+      font-weight: 600;
     }
 
-    /* ReUI Button (Primary - Обновить данные) */
-    .btn-update-data {
+    .nav-count-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      width: 100%;
-      height: 38px;
-      border-radius: var(--radius-md);
-      background: var(--primary);
-      color: var(--primary-fg);
-      font-size: 13px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-    }
-
-    .btn-update-data:hover {
-      background: var(--primary-hover);
-    }
-
-    .btn-update-data:active {
-      transform: scale(0.99);
-    }
-
-    .shift-filter-panel {
-      margin-top: 12px;
-      padding: 12px 14px;
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-    }
-
-    .store-dropdown {
-      width: 100%;
-      height: 38px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      padding: 0 12px;
-      font-family: var(--font);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      outline: none;
-      transition: all 0.15s ease;
-      cursor: pointer;
-    }
-
-    .store-dropdown:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-    }
-
-    /* ============================================================ */
-    /* 5. РЕЗУЛЬТАТЫ ИНВЕНТАРИЗАЦИИ (ReUI Metric Cards & Grids)    */
-    /* ============================================================ */
-    .empty-placeholder {
-      text-align: center;
-      padding: 48px 20px;
-      background: var(--card-bg);
-      border: 1px dashed var(--border);
-      border-radius: var(--radius-lg);
-      margin-top: 16px;
-    }
-
-    .placeholder-icon {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .placeholder-title {
-      font-size: 16px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 9px;
+      background: var(--iiko-red);
+      color: #FFFFFF;
+      font-size: 10px;
       font-weight: 700;
-      color: var(--text);
-      margin-bottom: 6px;
     }
 
-    .placeholder-sub {
-      font-size: 13px;
-      color: var(--text-muted);
-      max-width: 440px;
-      margin: 0 auto;
-      line-height: 1.5;
+    .nav-chevron {
+      font-size: 11px;
+      color: #9E9E9E;
     }
 
-    .results-section {
-      margin-top: 16px;
+    .left-nav-submenu {
+      background: #FAFAFA;
+      padding: 4px 0 4px 16px;
+      border-bottom: 1px solid var(--iiko-border-light);
     }
 
-    /* ReUI Card (Сводка инвентаризации) */
-    .summary-dashboard {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      box-shadow: var(--shadow-xs);
-      margin-bottom: 16px;
+    .left-nav-sub-item {
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #424242;
+      cursor: pointer;
+      border-radius: 4px;
+      margin: 2px 8px 2px 0;
     }
 
-    .summary-head {
+    .left-nav-sub-item:hover {
+      background: #EEEEEE;
+    }
+
+    .left-nav-sub-item.active {
+      background: var(--iiko-blue-light);
+      color: var(--iiko-blue);
+      font-weight: 600;
+    }
+
+    .left-drawer-footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--iiko-border);
+      background: #FAFAFA;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
     }
 
-    .summary-tags-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* ReUI Badges */
-    .summary-store-tag,
-    .summary-type-tag,
-    .summary-date-tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 3px 8px;
-      border-radius: var(--radius-sm);
-      background: var(--border-subtle);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .summary-status-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      background: var(--warning-light);
-      border: 1px solid var(--warning-border);
-      color: var(--warning-text);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .summary-status-badge.done {
-      background: var(--success-light);
-      border-color: var(--success-border);
-      color: var(--success-text);
-    }
-
-    /* 3 Карточки метрик (ReUI Stat KPI Cards) */
+    /* ============================================================ */
+    /* 5. СОСТАВ СМЕНЫ И СВОДКА                                     */
+    /* ============================================================ */
     .summary-stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
     .stat-card {
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
+      background: #FFFFFF;
+      border: 1px solid var(--iiko-border);
+      border-radius: 4px;
+      padding: 10px 12px;
     }
 
     .stat-card-title {
       font-size: 11px;
       font-weight: 600;
-      color: var(--text-muted);
+      color: var(--iiko-text-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 4px;
     }
 
     .stat-card-num {
-      font-size: 22px;
-      font-weight: 800;
+      font-size: 18px;
+      font-weight: 700;
       font-variant-numeric: tabular-nums;
-      line-height: 1.2;
-      color: var(--text);
-      letter-spacing: -0.02em;
     }
 
-    .stat-card-num.red {
-      color: var(--danger);
-    }
-
-    .stat-card-num.green {
-      color: var(--success);
-    }
+    .stat-card-num.red { color: var(--iiko-danger); }
+    .stat-card-num.green { color: var(--iiko-success); }
 
     .stat-card-sub {
-      font-size: 11px;
-      color: var(--text-subtle);
-      margin-top: 4px;
-      font-weight: 500;
+      font-size: 10px;
+      color: var(--iiko-text-light);
+      margin-top: 2px;
     }
 
-    .stat-card.result.done {
-      background: var(--success-light);
-      border-color: var(--success-border);
-    }
-
-    .shift-compact-row {
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 8px 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .shift-icon {
-      font-size: 14px;
-    }
-
-    /* Карточки позиций (ReUI Data Cards) */
-    .items-list-wrap {
-      margin-top: 16px;
-    }
-
-    .items-list-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .shift-accordion-box {
+      background: #FFFFFF;
+      border: 1px solid var(--iiko-border);
+      border-radius: 4px;
       margin-bottom: 12px;
     }
 
-    .items-list-title {
-      font-size: 14px;
+    .shift-accordion-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+
+    .shift-head-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .shift-head-title {
+      font-size: 11px;
       font-weight: 700;
-      color: var(--text);
+      color: var(--iiko-text-muted);
+      text-transform: uppercase;
+    }
+
+    .shift-head-sub {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--iiko-text);
+    }
+
+    .shift-expand-tag {
+      font-size: 11px;
+      color: var(--iiko-blue);
+      font-weight: 600;
+      padding: 2px 8px;
+      background: var(--iiko-blue-light);
+      border-radius: 10px;
+    }
+
+    .shift-accordion-body {
+      padding: 8px 12px 12px 12px;
+      border-top: 1px solid var(--iiko-border-light);
+    }
+
+    .shift-roster-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 6px;
+    }
+
+    .shift-roster-item {
+      padding: 6px 10px;
+      background: #F9FAFB;
+      border: 1px solid var(--iiko-border-light);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .shift-roster-item-name { font-size: 12px; font-weight: 700; }
+    .shift-roster-item-role { font-size: 10px; color: var(--iiko-text-muted); }
+
+    /* Пресеты дат */
+    .interval-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+
+    .preset-btn {
+      height: 26px;
+      padding: 0 10px;
+      border: 1px solid #D1D5DB;
+      border-radius: 3px;
+      background: #FFFFFF;
+      font-size: 11px;
+      font-weight: 500;
+      color: #424242;
+      cursor: pointer;
+    }
+
+    .preset-btn.active {
+      border-color: var(--iiko-blue);
+      background: var(--iiko-blue-light);
+      color: var(--iiko-blue);
+      font-weight: 600;
+    }
+
+    /* Раскрывающийся список товаров */
+    .items-list-header {
+      background: #FFFFFF;
+      border: 1px solid var(--iiko-border);
+      border-radius: 4px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .items-list-title-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .items-list-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #212121;
     }
 
     .items-list-count {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      background: var(--border-subtle);
-      border: 1px solid var(--border);
       font-size: 11px;
       font-weight: 600;
-      color: var(--text-muted);
+      color: var(--iiko-blue);
+      background: var(--iiko-blue-light);
+      padding: 2px 6px;
+      border-radius: 10px;
     }
 
+    .btn-toggle-items-list {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--iiko-blue);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Карточки расхождений */
     .item-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 16px 18px;
-      margin-bottom: 10px;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-    }
-
-    .item-card:hover {
-      border-color: #CBD5E1;
-      box-shadow: var(--shadow-sm);
+      background: #FFFFFF;
+      border: 1px solid var(--iiko-border);
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
     }
 
     .item-card-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .item-card-name {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      color: var(--text);
-      line-height: 1.35;
+      color: #212121;
     }
 
     .item-card-price {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 800;
-      color: var(--danger);
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
+      color: var(--iiko-danger);
     }
 
     .item-card-price.done {
-      color: var(--success);
+      color: var(--iiko-success);
     }
 
-    /* Статус наличия встречных излишков */
     .item-surplus-status {
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 10px;
-      border-radius: var(--radius-md);
-      font-size: 12px;
+      padding: 5px 8px;
+      border-radius: 3px;
+      font-size: 11px;
       font-weight: 500;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .item-surplus-status.ok {
-      background: var(--success-light);
-      border: 1px solid var(--success-border);
-      color: var(--success-text);
+      background: var(--iiko-success-bg);
+      color: #2E7D32;
+      border: 1px solid #C8E6C9;
     }
 
     .item-surplus-status.none {
-      background: var(--danger-light);
-      border: 1px solid var(--danger-border);
-      color: var(--danger-text);
+      background: var(--iiko-danger-bg);
+      color: #C62828;
+      border: 1px solid #FFCDD2;
     }
 
     .item-qty-row {
@@ -1077,349 +898,253 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    .qty-sep {
-      color: var(--border);
-    }
-
-    .qty-diff.red strong {
-      color: var(--danger);
-    }
-
-    .qty-diff.green strong {
-      color: var(--success);
+      font-size: 11px;
+      color: var(--iiko-text-muted);
+      margin-bottom: 8px;
     }
 
     .item-card-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 10px;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .btn-toggle-history {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      height: 28px;
-      padding: 0 8px;
-      border: none;
-      background: transparent;
-      border-radius: var(--radius-sm);
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.12s ease;
-    }
-
-    .btn-toggle-history:hover {
-      background: var(--border-subtle);
-      color: var(--text);
-    }
-
-    .btn-single-rec {
-      display: inline-flex;
-      align-items: center;
-      height: 28px;
-      padding: 0 12px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--accent-blue-border);
-      background: var(--accent-blue-light);
-      color: var(--accent-blue);
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .btn-single-rec:hover:not(.done) {
-      background: var(--accent-blue);
-      color: #FFFFFF;
-    }
-
-    .btn-single-rec.done {
-      background: var(--success-light);
-      border-color: var(--success-border);
-      color: var(--success-text);
-      cursor: default;
-    }
-
-    .movement-card {
-      margin-top: 8px;
-      border-top: 1px dashed var(--border);
+      border-top: 1px solid var(--iiko-border-light);
       padding-top: 8px;
     }
 
-    .movement-timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      padding: 8px 10px;
-      background: #F8FAFC;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-    }
-
-    .move-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .btn-single-rec {
+      height: 26px;
+      padding: 0 10px;
+      border-radius: 3px;
+      border: 1px solid var(--iiko-blue);
+      background: #FFFFFF;
+      color: var(--iiko-blue);
       font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
-    .move-date {
-      color: var(--text-muted);
-      font-family: var(--mono);
+    .btn-single-rec.done {
+      background: var(--iiko-success-bg);
+      border-color: #A5D6A7;
+      color: #2E7D32;
     }
 
-    .move-type {
-      color: var(--text);
+    .btn-toggle-history {
+      background: transparent;
+      border: none;
+      color: var(--iiko-blue);
+      font-size: 11px;
       font-weight: 500;
+      cursor: pointer;
     }
 
-    .move-qty {
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .move-qty.green {
-      color: var(--success);
-    }
-
-    .move-qty.red {
-      color: var(--danger);
-    }
-
-    /* Блок начисленных штрафов */
+    /* Блок штрафов */
     .fines-breakdown-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 18px 20px;
-      margin-top: 16px;
-      box-shadow: var(--shadow-xs);
+      background: #FFFFFF;
+      border: 1px solid var(--iiko-border);
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
     }
 
     .fines-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--iiko-border-light);
     }
 
     .fines-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .fines-total-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 3px 8px;
-      border-radius: var(--radius-full);
-      background: var(--danger-light);
-      border: 1px solid var(--danger-border);
-      color: var(--danger-text);
       font-size: 12px;
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      color: #212121;
     }
 
     .fine-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 12px;
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      margin-bottom: 6px;
+      padding: 6px 0;
+      border-bottom: 1px solid #F5F5F5;
+      font-size: 12px;
+    }
+
+    .fine-row:last-child {
+      border-bottom: none;
     }
 
     .fine-person-info {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .fine-person-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
+    .fine-person-name { font-weight: 600; }
+    .fine-person-role { font-size: 10px; color: var(--iiko-text-muted); }
+    .fine-amount { font-weight: 700; color: var(--iiko-danger); font-family: var(--mono); }
 
-    .fine-person-role {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .fine-amount {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--danger);
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* Roster Person Card */
-    .roster-person-card {
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 10px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .person-role {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-
-    .person-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .person-time {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-family: var(--mono);
-    }
-
-    .person-fine-tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 6px;
-      border-radius: var(--radius-sm);
-      font-size: 11px;
-      font-weight: 600;
-      background: var(--border-subtle);
-      color: var(--text-muted);
-    }
-
-    /* ============================================================ */
-    /* 6. ПЛАВАЮЩИЙ НИЖНИЙ ДОК (ReUI Sticky Action Dock)            */
-    /* ============================================================ */
+    /* Полоса успеха сведения */
     .reconciled-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-top: 1px solid var(--border);
-      padding: 12px 20px;
+      background: var(--iiko-success-bg);
+      border: 1px solid #A5D6A7;
+      border-radius: 4px;
+      padding: 10px 14px;
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 10px;
-      z-index: 40;
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
+      justify-content: space-between;
+      margin-bottom: 12px;
     }
 
-    .btn-reconcile-main {
-      display: inline-flex;
+    .reconciled-info {
+      display: flex;
       align-items: center;
       gap: 8px;
-      height: 38px;
-      padding: 0 16px;
-      border-radius: var(--radius-md);
-      background: var(--primary);
-      color: var(--primary-fg);
-      font-size: 13px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
     }
 
-    .btn-reconcile-main:hover:not(:disabled) {
-      background: var(--primary-hover);
-    }
-
-    .btn-reconcile-main.done,
-    .btn-reconcile-main:disabled {
-      background: var(--success-light);
-      border: 1px solid var(--success-border);
-      color: var(--success-text);
-      box-shadow: none;
-      cursor: default;
-    }
-
-    .btn-view-report {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 38px;
-      padding: 0 16px;
-      border-radius: var(--radius-md);
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-    }
-
-    .btn-view-report:hover {
-      background: var(--bg);
-      border-color: #CBD5E1;
-    }
-
-    .btn-save-doc {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 38px;
-      padding: 0 16px;
-      border-radius: var(--radius-md);
-      background: var(--success);
+    .btn-report-view {
+      height: 28px;
+      padding: 0 12px;
+      background: #2E7D32;
       color: #FFFFFF;
-      font-size: 13px;
-      font-weight: 600;
       border: none;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 600;
       cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-    }
-
-    .btn-save-doc:hover:not(:disabled) {
-      background: var(--success-hover);
-    }
-
-    .btn-save-doc:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
     }
 
     /* ============================================================ */
-    /* 7. ВЫБОР ТОЧКИ: ШТОРКА СПРАВА (ReUI Sheet Component)        */
+    /* 6. ОТДЕЛЬНАЯ СТРАНИЦА ОТЧЁТА (IIKO СЛИЧИТЕЛЬНАЯ ВЕДОМОСТЬ)    */
+    /* ============================================================ */
+    .report-page-container {
+      background: #FFFFFF;
+      border: 1px solid var(--iiko-border);
+      border-radius: 4px;
+      padding: 18px 20px;
+    }
+
+    .report-page-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--iiko-border);
+    }
+
+    .btn-report-back {
+      height: 30px;
+      padding: 0 12px;
+      border: 1px solid #D1D5DB;
+      border-radius: 4px;
+      background: #FFFFFF;
+      color: #212121;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-report-back:hover {
+      background: #F5F5F5;
+    }
+
+    .report-page-status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: #2E7D32;
+      background: var(--iiko-success-bg);
+      border: 1px solid #C8E6C9;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+
+    .report-page-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #212121;
+      margin-bottom: 4px;
+    }
+
+    .report-page-sub {
+      font-size: 12px;
+      color: var(--iiko-text-muted);
+      margin-bottom: 14px;
+    }
+
+    .report-section-card {
+      border: 1px solid var(--iiko-border);
+      border-radius: 4px;
+      padding: 14px 16px;
+      margin-top: 14px;
+      background: #FFFFFF;
+    }
+
+    .report-section-card.manual-review {
+      border-color: #FFE082;
+      background: #FFFDF8;
+    }
+
+    .report-section-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .report-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #212121;
+    }
+
+    .report-robot-banner {
+      padding: 10px 14px;
+      background: var(--iiko-success-bg);
+      border: 1px solid #C8E6C9;
+      color: #1B5E20;
+      font-size: 12px;
+      border-radius: 3px;
+    }
+
+    .btn-report-action {
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-report-action.copy {
+      background: var(--iiko-green);
+      color: #FFFFFF;
+    }
+
+    .btn-report-action.save {
+      background: var(--iiko-blue);
+      color: #FFFFFF;
+    }
+
+    .btn-report-action.return {
+      background: #FFFFFF;
+      border: 1px solid #D1D5DB;
+      color: #212121;
+    }
+
+    /* ============================================================ */
+    /* 7. ШТОРКА ТОЧЕК И МОДАЛКИ                                    */
     /* ============================================================ */
     .store-drawer-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.45);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.4);
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.25s;
     }
 
     .store-drawer-backdrop.open {
@@ -1432,14 +1157,13 @@
       top: 0;
       right: 0;
       bottom: 0;
-      width: 380px;
-      max-width: 90vw;
-      background: var(--card-bg);
-      border-left: 1px solid var(--border);
-      box-shadow: var(--shadow-xl);
+      width: 320px;
+      max-width: 85vw;
+      background: #FFFFFF;
+      box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
       z-index: 101;
       transform: translateX(100%);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.25s;
       display: flex;
       flex-direction: column;
     }
@@ -1449,141 +1173,103 @@
     }
 
     .drawer-header {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
+      height: 48px;
+      padding: 0 14px;
+      border-bottom: 1px solid var(--iiko-border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #F8FAFC;
     }
 
     .drawer-title-group {
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-
-    .drawer-icon {
-      font-size: 16px;
+      gap: 6px;
     }
 
     .drawer-title {
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.01em;
+      color: #212121;
     }
 
     .drawer-count-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 7px;
-      border-radius: var(--radius-full);
-      background: var(--border-subtle);
-      border: 1px solid var(--border);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
-      color: var(--text-muted);
+      color: #616161;
+      background: #EEEEEE;
+      padding: 2px 6px;
+      border-radius: 10px;
     }
 
     .drawer-close-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: transparent;
+      font-size: 15px;
+      color: #616161;
       cursor: pointer;
-      transition: all 0.12s ease;
-    }
-
-    .drawer-close-btn:hover {
-      background: var(--border-subtle);
-      color: var(--text);
+      border-radius: 4px;
     }
 
     .drawer-search-box {
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--border-subtle);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--iiko-border-light);
     }
 
     .drawer-search-input {
       width: 100%;
-      height: 36px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #F8FAFC;
-      padding: 0 12px;
-      font-family: var(--font);
-      font-size: 13px;
-      color: var(--text);
+      height: 32px;
+      padding: 0 10px;
+      border: 1px solid #D1D5DB;
+      border-radius: 4px;
+      font-size: 12px;
       outline: none;
-      transition: all 0.15s ease;
     }
 
     .drawer-search-input:focus {
-      background: #FFFFFF;
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      border-color: var(--iiko-blue);
     }
 
-    .drawer-stores-container,
     .drawer-stores-list {
       flex: 1;
       overflow-y: auto;
-      padding: 8px 12px;
     }
 
     .drawer-store-item {
       padding: 10px 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid transparent;
+      border-bottom: 1px solid var(--iiko-border-light);
       display: flex;
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
-      transition: all 0.12s ease;
-      margin-bottom: 4px;
     }
 
     .drawer-store-item:hover {
-      background: #F8FAFC;
-      border-color: var(--border);
+      background: #F5F5F5;
     }
 
     .drawer-store-item.active {
-      background: var(--accent-blue-light);
-      border-color: var(--accent-blue-border);
-    }
-
-    .drawer-store-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+      background: var(--iiko-blue-light);
+      color: var(--iiko-blue);
+      font-weight: 700;
     }
 
     .drawer-store-name {
       font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
+      font-weight: 600;
     }
 
     .drawer-store-dept {
       font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .drawer-store-item.active .drawer-store-name {
-      color: var(--accent-blue);
+      color: #757575;
+      margin-top: 1px;
     }
 
     .drawer-store-check {
-      font-size: 13px;
-      color: var(--accent-blue);
-      font-weight: 800;
+      font-weight: 700;
+      color: var(--iiko-blue);
       display: none;
     }
 
@@ -1591,743 +1277,20 @@
       display: block;
     }
 
-    /* ============================================================ */
-    /* 8. МОДАЛЬНЫЕ ОКНА (ReUI Dialog Components)                  */
-    /* ============================================================ */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.55);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      z-index: 120;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .step3-modal,
-    .audit-modal,
-    .modal-confirm-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-xl);
-      width: 100%;
-      max-width: 680px;
-      max-height: 88vh;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      animation: modalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes modalIn {
-      from {
-        opacity: 0;
-        transform: scale(0.96);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .step3-head,
-    .audit-head {
-      padding: 16px 22px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #F8FAFC;
-      border-top-left-radius: var(--radius-xl);
-      border-top-right-radius: var(--radius-xl);
-    }
-
-    .step3-head-title,
-    .audit-head-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .audit-status-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      background: var(--success-light);
-      border: 1px solid var(--success-border);
-      color: var(--success-text);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .modal-close-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.12s ease;
-    }
-
-    .modal-close-btn:hover {
-      background: var(--border-subtle);
-      color: var(--text);
-    }
-
-    .step3-body,
-    .audit-body {
-      padding: 20px 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .report-meta-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 10px;
-      padding: 12px 14px;
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-    }
-
-    .meta-item-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-
-    .meta-item-value {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    /* Модалка штрафов: Карточки сотрудников (ReUI Card) */
-    .step3-fines-container {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .step3-emp-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
-      transition: all 0.15s ease;
-    }
-
-    .step3-emp-card.selected {
-      border-color: #CBD5E1;
-      box-shadow: var(--shadow-xs);
-    }
-
-    .step3-emp-card.confirmed {
-      border-color: var(--success-border);
-      background: var(--success-light);
-    }
-
-    .step3-emp-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 6px;
-    }
-
-    .step3-emp-identity {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-
-    .step3-checkbox {
-      width: 16px;
-      height: 16px;
-      accent-color: var(--primary);
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    .step3-emp-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .step3-role-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 7px;
-      border-radius: var(--radius-full);
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .step3-role-badge.sous {
-      background: var(--warning-light);
-      color: var(--warning-text);
-      border: 1px solid var(--warning-border);
-    }
-
-    .step3-role-badge.cashier {
-      background: var(--accent-blue-light);
-      color: var(--accent-blue);
-      border: 1px solid var(--accent-blue-border);
-    }
-
-    .step3-status-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .step3-status-badge.pending {
-      background: var(--danger-light);
-      color: var(--danger-text);
-      border: 1px solid var(--danger-border);
-    }
-
-    .step3-status-badge.off {
-      background: var(--border-subtle);
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-    }
-
-    .step3-status-badge.confirmed {
-      background: var(--success-light);
-      color: var(--success-text);
-      border: 1px solid var(--success-border);
-    }
-
-    .step3-emp-details {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.45;
-      margin-bottom: 10px;
-      padding-left: 24px;
-    }
-
-    .step3-emp-reasons {
-      margin-top: 4px;
-      color: #475569;
-    }
-
-    .step3-emp-fine-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 10px;
-      border-top: 1px solid var(--border-subtle);
-      padding-left: 24px;
-    }
-
-    .step3-fine-input-wrap {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .step3-fine-input {
-      width: 110px;
-      height: 32px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      padding: 0 8px;
-      font-family: var(--font);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-      text-align: right;
-      outline: none;
-      transition: all 0.15s ease;
-    }
-
-    .step3-fine-input:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
-    }
-
-    .step3-fine-input:disabled {
-      opacity: 0.5;
-      background: var(--bg);
-    }
-
-    .step3-total-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      margin-top: 6px;
-    }
-
-    .step3-total-num {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--danger);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .step3-success-card {
-      text-align: center;
-      padding: 24px 16px;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .step3-success-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-full);
-      background: var(--success-light);
-      border: 1px solid var(--success-border);
-      color: var(--success-text);
-      font-size: 24px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .step3-success-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .step3-success-sub {
-      font-size: 13px;
-      color: var(--text-muted);
-      max-width: 460px;
-      line-height: 1.45;
-    }
-
-    .step3-receipt-box {
-      width: 100%;
-      text-align: left;
-      margin-top: 10px;
-    }
-
-    /* Модалка аудита: Блоки и карточки */
-    .audit-section-box {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 14px 16px;
-      background: #FFFFFF;
-    }
-
-    .audit-section-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-
-    .audit-metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .audit-metric-card {
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 8px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .audit-metric-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .audit-metric-num {
-      font-size: 14px;
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .audit-metric-num.danger {
-      color: var(--danger);
-    }
-
-    .audit-metric-num.ok {
-      color: var(--success);
-    }
-
-    .audit-penalty-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 6px;
-    }
-
-    .audit-penalty-card.sous-penalty {
-      border-left: 3px solid var(--warning);
-      background: #FFFDF9;
-    }
-
-    .audit-penalty-card.active-penalty {
-      border-left: 3px solid var(--danger);
-      background: #FEF8F8;
-    }
-
-    .audit-penalty-left {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      flex: 1;
-    }
-
-    .audit-emp-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .audit-emp-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .audit-emp-role {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 7px;
-      border-radius: var(--radius-full);
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .audit-penalty-reason {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .audit-penalty-sum {
-      font-size: 14px;
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
-      color: var(--danger);
-      white-space: nowrap;
-    }
-
-    .audit-manual-box {
-      border: 1px solid var(--warning-border);
-      background: var(--warning-light);
-      border-radius: var(--radius-lg);
-      padding: 14px 16px;
-    }
-
-    .audit-manual-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .audit-manual-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--warning-text);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .audit-manual-count {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 7px;
-      border-radius: var(--radius-full);
-      background: #FFFFFF;
-      border: 1px solid var(--warning-border);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--warning-text);
-    }
-
-    .audit-manual-list {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .audit-manual-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #FFFFFF;
-      border: 1px solid var(--warning-border);
-      border-radius: var(--radius-md);
-      padding: 8px 12px;
-      font-size: 12px;
-      gap: 12px;
-    }
-
-    .audit-manual-left {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      flex: 1;
-    }
-
-    .audit-manual-item-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .audit-manual-item-desc {
-      font-size: 11px;
-      color: #78350F;
-      line-height: 1.4;
-    }
-
-    .audit-manual-action-btn {
-      height: 26px;
-      padding: 0 10px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--warning-border);
-      background: #FFFFFF;
-      color: var(--warning-text);
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .step3-foot,
-    .audit-foot {
-      padding: 14px 22px;
-      border-top: 1px solid var(--border);
-      background: #F8FAFC;
-      border-bottom-left-radius: var(--radius-xl);
-      border-bottom-right-radius: var(--radius-xl);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .btn-foot-copy {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 36px;
-      padding: 0 14px;
-      border-radius: var(--radius-md);
-      background: var(--success-light);
-      border: 1px solid var(--success-border);
-      color: var(--success-text);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .btn-foot-copy:hover {
-      background: var(--success);
-      color: #FFFFFF;
-    }
-
-    .btn-foot-close,
-    .btn-step3-cancel {
-      display: inline-flex;
-      align-items: center;
-      height: 36px;
-      padding: 0 14px;
-      border-radius: var(--radius-md);
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .btn-foot-close:hover,
-    .btn-step3-cancel:hover {
-      background: var(--bg);
-      border-color: #CBD5E1;
-    }
-
-    .btn-step3-confirm {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 36px;
-      padding: 0 14px;
-      border-radius: var(--radius-md);
-      background: var(--primary);
-      color: var(--primary-fg);
-      font-size: 12px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .btn-step3-confirm:hover {
-      background: var(--primary-hover);
-    }
-
-    .btn-step3-save {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 36px;
-      padding: 0 14px;
-      border-radius: var(--radius-md);
-      background: var(--success);
-      color: #FFFFFF;
-      font-size: 12px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .btn-step3-save:hover:not(:disabled) {
-      background: var(--success-hover);
-    }
-
-    .btn-step3-save:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .btn-step3-quick {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 36px;
-      padding: 0 14px;
-      border-radius: var(--radius-md);
-      background: var(--primary);
-      color: var(--primary-fg);
-      font-size: 12px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .btn-step3-quick:hover {
-      background: var(--primary-hover);
-    }
-
-    /* Подтверждение (Confirm Modal) */
-    .modal-confirm-box {
-      max-width: 440px;
-      padding: 24px;
-    }
-
-    .modal-confirm-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .modal-confirm-text {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .modal-confirm-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-    }
-
-    .btn-modal-cancel {
-      height: 36px;
-      padding: 0 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .btn-modal-proceed {
-      height: 36px;
-      padding: 0 14px;
-      border-radius: var(--radius-md);
-      border: none;
-      background: var(--primary);
-      color: var(--primary-fg);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    /* ============================================================ */
-    /* 9. УВЕДОМЛЕНИЯ (ReUI Sonner Toast)                          */
-    /* ============================================================ */
     .toast-msg {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: var(--primary);
-      color: var(--primary-fg);
-      padding: 12px 20px;
-      border-radius: var(--radius-md);
-      font-size: 13px;
+      bottom: 20px;
+      right: 20px;
+      background: #212121;
+      color: #FFFFFF;
+      padding: 10px 18px;
+      border-radius: 4px;
+      font-size: 12px;
       font-weight: 500;
-      box-shadow: var(--shadow-xl);
-      border: 1px solid #334155;
       z-index: 150;
-      transform: translateY(100px);
+      transform: translateY(80px);
       opacity: 0;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.25s;
       pointer-events: none;
     }
 
@@ -2337,1205 +1300,108 @@
       pointer-events: auto;
     }
 
-    /* Responsive */
-    @media (max-width: 640px) {
-      .header-bar {
-        padding: 0 12px;
-      }
-      .content-scroll {
-        padding: 16px 12px 90px 12px;
-      }
-      .summary-stats-grid {
-        grid-template-columns: 1fr;
-      }
-      .reconciled-bar {
-        flex-direction: column;
-        gap: 8px;
-        padding: 10px 16px;
-      }
-      .btn-reconcile-main,
-      .btn-view-report,
-      .btn-save-doc {
-        width: 100%;
-        justify-content: center;
-      }
-      .surplus-options {
-        grid-template-columns: 1fr;
-      }
-    }
-
-  
-    /* ============================================================ */
-    /* 10. ДОПОЛНИТЕЛЬНЫЕ ReUI КОМПОНЕНТЫ И МОДАЛКИ                 */
-    /* ============================================================ */
-    .section-top-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      padding: 0 2px;
-    }
-
-    .btn-nav-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 32px;
-      padding: 0 10px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-    }
-
-    .btn-nav-back:hover {
-      background: var(--bg);
-      border-color: #CBD5E1;
-    }
-
-    .section-current-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 3px 10px;
-      border-radius: var(--radius-full);
-      background: var(--accent-blue-light);
-      border: 1px solid var(--accent-blue-border);
-      color: var(--accent-blue);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .orders-placeholder-box {
-      background: var(--card-bg);
-      border: 1px dashed var(--border);
-      border-radius: var(--radius-xl);
-      padding: 48px 24px;
-      text-align: center;
-      margin-top: 20px;
-      box-shadow: var(--shadow-xs);
-    }
-
-    .btn-orders-return {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 38px;
-      padding: 0 16px;
-      border-radius: var(--radius-md);
-      background: var(--primary);
-      color: #FFFFFF;
-      font-size: 13px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      margin-top: 16px;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-    }
-
-    .btn-orders-return:hover {
-      background: var(--primary-hover);
-    }
-
-    /* Индикатор шагов в модалке штрафов */
-    .step3-workflow-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px;
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    .workflow-step {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-muted);
-      transition: all 0.15s ease;
-    }
-
-    .workflow-step.active {
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .workflow-step.done {
-      color: var(--success);
-      font-weight: 700;
-    }
-
-    .workflow-step-num {
-      width: 20px;
-      height: 20px;
-      border-radius: var(--radius-full);
-      background: var(--border-subtle);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
+    /* Модалки сведения и подтверждения */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 80;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
-      font-weight: 700;
+      padding: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
     }
 
-    .workflow-step.active .workflow-step-num {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #FFFFFF;
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    .workflow-step.done .workflow-step-num {
-      background: var(--success-light);
-      border-color: var(--success-border);
-      color: var(--success-text);
-    }
-
-    /* Поиск и фильтры в модалке начисления штрафов */
-    .step3-title-wrap {
+    .modal-card {
+      width: 100%;
+      max-width: 520px;
+      background: #FFFFFF;
+      border: 1px solid var(--iiko-border);
+      border-radius: 6px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
       display: flex;
       flex-direction: column;
-      gap: 2px;
-    }
-
-    .step3-title-main {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .step3-badge-pill {
-      font-size: 11px;
-      font-weight: 700;
-      background: var(--accent-blue-light);
-      color: var(--accent-blue);
-      border: 1px solid var(--accent-blue-border);
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-    }
-
-    .step3-subtitle {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .step3-close-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.12s ease;
-    }
-
-    .step3-close-btn:hover {
-      background: var(--border-subtle);
-      color: var(--text);
-    }
-
-    .step3-search-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 12px 14px;
-    }
-
-    .step3-search-input-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-      width: 100%;
-    }
-
-    .step3-search-icon {
-      position: absolute;
-      left: 10px;
-      font-size: 13px;
-      color: var(--text-subtle);
-    }
-
-    .step3-search-input {
-      width: 100%;
-      height: 36px;
-      padding: 0 32px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      font-family: var(--font);
-      font-size: 13px;
-      color: var(--text);
-      outline: none;
-      transition: all 0.15s ease;
-    }
-
-    .step3-search-input:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-    }
-
-    .step3-search-clear {
-      position: absolute;
-      right: 8px;
-      width: 20px;
-      height: 20px;
-      border-radius: var(--radius-full);
-      border: none;
-      background: var(--border-subtle);
-      color: var(--text-muted);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-    }
-
-    .step3-filter-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .step3-chip {
-      height: 28px;
-      padding: 0 10px;
-      border-radius: var(--radius-full);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.12s ease;
-    }
-
-    .step3-chip:hover {
-      border-color: #CBD5E1;
-      color: var(--text);
-    }
-
-    .step3-chip.active {
-      background: var(--primary);
-      color: #FFFFFF;
-      border-color: var(--primary);
-    }
-
-    .step3-staff-section-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 4px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .step3-bulk-chk-btn {
-      height: 26px;
-      padding: 0 8px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.12s ease;
-    }
-
-    .step3-bulk-chk-btn:hover {
-      background: var(--border-subtle);
-      color: var(--text);
-    }
-
-    .step3-total-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      margin-top: 8px;
-    }
-
-    .step3-total-stat {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .step3-rule-callout {
-      padding: 10px 14px;
-      background: var(--warning-light);
-      border: 1px solid var(--warning-border);
-      border-radius: var(--radius-md);
-      font-size: 12px;
-      color: var(--warning-text);
-      line-height: 1.45;
-    }
-
-    .step3-formula-toggle-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 12px;
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      font-size: 12px;
-      color: var(--text);
-    }
-
-    .step3-toggle-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    /* Модалка финансового отчета (ReUI Dialog) */
-    .report-card-modal {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-xl);
-      width: 100%;
-      max-width: 720px;
-      max-height: 88vh;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      animation: modalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .report-modal-head {
-      padding: 16px 22px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #F8FAFC;
-      border-top-left-radius: var(--radius-xl);
-      border-top-right-radius: var(--radius-xl);
-    }
-
-    .report-modal-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .report-modal-close {
-      width: 30px;
-      height: 30px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.12s ease;
-    }
-
-    .report-modal-close:hover {
-      background: var(--border-subtle);
-      color: var(--text);
-    }
-
-    .report-modal-body {
-      padding: 20px 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .report-finance-card {
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
-    }
-
-    .finance-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 13px;
-      color: var(--text);
-      padding: 4px 0;
-    }
-
-    .finance-row.divider {
-      border-top: 1px solid var(--border);
-      margin: 6px 0;
-      padding-top: 8px;
-      font-weight: 700;
-    }
-
-    .finance-total-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      font-size: 12px;
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .report-items-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-      margin-top: 8px;
-    }
-
-    .report-items-table th {
-      background: #F8FAFC;
-      border-bottom: 1px solid var(--border);
-      font-weight: 600;
-      color: var(--text-muted);
-      padding: 8px 10px;
-      text-align: left;
-    }
-
-    .report-items-table td {
-      padding: 8px 10px;
-      border-bottom: 1px solid var(--border-subtle);
-      color: var(--text);
-    }
-
-    .report-modal-foot {
-      padding: 14px 22px;
-      border-top: 1px solid var(--border);
-      background: #F8FAFC;
-      border-bottom-left-radius: var(--radius-xl);
-      border-bottom-right-radius: var(--radius-xl);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    /* Модалка формулы / сведений */
-    .modal-panel {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-xl);
-      width: 100%;
-      max-width: 540px;
+      max-height: 85vh;
       overflow: hidden;
-      animation: modalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .modal-head {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
+    .modal-header {
+      height: 48px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--iiko-border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #F8FAFC;
     }
 
-    .modal-content {
-      padding: 20px;
+    .modal-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #212121;
     }
 
-    .modal-formula-callout {
-      padding: 12px 14px;
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      font-size: 12px;
-      line-height: 1.5;
-      color: var(--text);
+    .modal-close-btn {
+      width: 28px;
+      height: 28px;
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      color: #616161;
+      cursor: pointer;
+      border-radius: 4px;
     }
 
-    .modal-actions {
-      padding: 12px 20px;
-      border-top: 1px solid var(--border);
+    .modal-body {
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    .modal-footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--iiko-border);
+      background: #FAFAFA;
       display: flex;
+      align-items: center;
       justify-content: flex-end;
-      gap: 10px;
-      background: #F8FAFC;
+      gap: 8px;
     }
 
     .modal-btn {
-      height: 36px;
+      height: 32px;
       padding: 0 14px;
-      border-radius: var(--radius-md);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all 0.15s ease;
-    }
-
-    .modal-btn.secondary {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
-
-    .modal-btn.secondary:hover {
-      background: var(--bg);
-    }
-
-    /* Sticky Bottom Actions */
-    .save-dock {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-top: 1px solid var(--border);
-      padding: 12px 20px;
-      z-index: 40;
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
-    }
-
-    .save-dock-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .launcher-emoji {
-      font-size: 22px;
-      line-height: 1;
-    }
-
-    .shift-text {
+      border-radius: 4px;
       font-size: 12px;
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    .btn-rec-icon {
-      font-size: 14px;
-    }
-
-    .fines-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .reconciled-action-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-report-view {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 38px;
-      padding: 0 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid #D1D5DB;
       background: #FFFFFF;
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
+      color: #212121;
     }
 
-    .btn-report-view:hover {
-      background: var(--bg);
-      border-color: #CBD5E1;
-    }
-
-    .btn-copy-quick {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 38px;
-      padding: 0 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-    }
-
-    .btn-copy-quick:hover {
-      background: var(--bg);
-      border-color: #CBD5E1;
-    }
-
-    .btn-revert-quick {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 38px;
-      padding: 0 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--danger-border);
-      background: var(--danger-light);
-      color: var(--danger-text);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-    }
-
-    .btn-revert-quick:hover {
-      background: var(--danger);
+    .modal-btn.primary {
+      background: var(--iiko-blue);
+      border-color: var(--iiko-blue);
       color: #FFFFFF;
     }
 
-    .items-list-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
-
-    .items-list-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      background: var(--border-subtle);
-      border: 1px solid var(--border);
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    .step3-staff-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    /* ============================================================ */
-    /* 11. РАСКРЫВАЮЩИЙСЯ БЛОК СМЕНЫ (ReUI Accordion)              */
-    /* ============================================================ */
-    .shift-accordion-box {
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      margin-top: 10px;
-      transition: all 0.2s ease;
-    }
-
-    .shift-accordion-box:hover {
-      border-color: #CBD5E1;
-    }
-
-    .shift-accordion-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 14px;
-      cursor: pointer;
-      user-select: none;
-      gap: 10px;
-    }
-
-    .shift-head-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .shift-head-icon {
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .shift-head-texts {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      min-width: 0;
-      overflow: hidden;
-    }
-
-    .shift-head-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .shift-head-sub {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .shift-head-action {
-      flex-shrink: 0;
-    }
-
-    .shift-expand-tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 11px;
-      font-weight: 600;
-      transition: all 0.15s ease;
-    }
-
-    .shift-accordion-head:hover .shift-expand-tag {
-      background: var(--primary);
-      color: #FFFFFF;
-      border-color: var(--primary);
-    }
-
-    .shift-accordion-body {
-      padding: 10px 14px 14px 14px;
-      border-top: 1px solid var(--border);
-      background: #FFFFFF;
-    }
-
-    .shift-roster-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 8px;
-    }
-
-    .shift-roster-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 12px;
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      gap: 8px;
-    }
-
-    .shift-roster-item-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .shift-roster-item-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .shift-roster-item-role {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .shift-roster-item-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 7px;
-      border-radius: var(--radius-full);
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .shift-roster-item-badge.sous {
-      background: var(--warning-light);
-      color: var(--warning-text);
-      border: 1px solid var(--warning-border);
-    }
-
-    .shift-roster-item-badge.cashier {
-      background: var(--accent-blue-light);
-      color: var(--accent-blue);
-      border: 1px solid var(--accent-blue-border);
-    }
-
-    /* ============================================================ */
-    /* 12. ШАПКА: ФИКС КНОПКИ ТОЧКИ (NO MULTILINE WRAP)            */
-    /* ============================================================ */
-    .header-store-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 36px;
-      padding: 0 14px;
-      background: #FFFFFF;
-      border: 1px solid #CBD5E1;
-      border-radius: var(--radius-md);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-      white-space: nowrap !important;
-      flex-shrink: 0;
-      max-width: 260px;
-      line-height: 1;
-    }
-
-    #header-store-name {
-      white-space: nowrap !important;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: inline-block;
-      max-width: 170px;
-    }
-
-    /* ============================================================ */
-    /* 13. РАСКРЫВАЮЩИЙСЯ СПИСОК ТОВАРОВ С РАСХОЖДЕНИЯМИ           */
-    /* ============================================================ */
-    .items-list-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      padding: 10px 14px;
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.15s ease;
-    }
-
-    .items-list-header:hover {
-      border-color: #CBD5E1;
-      box-shadow: var(--shadow-xs);
-    }
-
-    .btn-toggle-items-list {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 28px;
-      padding: 0 10px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #F8FAFC;
-      color: var(--text);
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .items-list-header:hover .btn-toggle-items-list {
-      background: var(--primary);
-      color: #FFFFFF;
-      border-color: var(--primary);
-    }
-
-    /* ============================================================ */
-    /* 14. ЭТАП 3: ОТДЕЛЬНАЯ СТРАНИЦА ОТЧЁТА (ReUI Dedicated Page)  */
-    /* ============================================================ */
-    .report-page-container {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      width: 100%;
-      animation: modalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .report-page-topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 4px 0 12px 0;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 8px;
-    }
-
-    .btn-report-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      height: 36px;
-      padding: 0 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-    }
-
-    .btn-report-back:hover {
-      background: var(--bg);
-      border-color: #CBD5E1;
-    }
-
-    .report-page-status-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 12px;
-      border-radius: var(--radius-full);
-      background: var(--success-light);
-      border: 1px solid var(--success-border);
-      color: var(--success-text);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .report-page-header {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 20px 22px;
-      box-shadow: var(--shadow-xs);
-    }
-
-    .report-page-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
-    }
-
-    .report-page-sub {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
-    .report-page-meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .report-meta-chip {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 10px;
-      border-radius: var(--radius-sm);
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    /* KPI Сводка */
-    .report-kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .report-kpi-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 16px 18px;
-      box-shadow: var(--shadow-xs);
-    }
-
-    .report-kpi-card.highlight {
-      border-color: var(--danger-border);
-      background: #FFFDFD;
-    }
-
-    .report-kpi-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
-    }
-
-    .report-kpi-val {
-      font-size: 24px;
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-    }
-
-    .report-kpi-val.red {
-      color: var(--danger);
-    }
-
-    .report-kpi-val.green {
-      color: var(--success);
-    }
-
-    .report-kpi-sub {
-      display: block;
-      font-size: 11px;
-      color: var(--text-subtle);
-      margin-top: 4px;
-      font-weight: 500;
-    }
-
-    /* Блоки отчета */
-    .report-section-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 20px 22px;
-      box-shadow: var(--shadow-xs);
-    }
-
-    .report-section-card.manual-review {
-      border-color: var(--warning-border);
-      background: #FFFEFA;
-    }
-
-    .report-section-head {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .report-section-icon {
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-
-    .report-section-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .report-section-sub {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .report-manual-badge {
-      margin-left: auto;
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      background: var(--warning-light);
-      border: 1px solid var(--warning-border);
-      color: var(--warning-text);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .report-robot-banner {
-      padding: 12px 16px;
-      border-radius: var(--radius-md);
-      background: var(--success-light);
-      border: 1px solid var(--success-border);
-      color: var(--success-text);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .report-penalties-list,
-    .report-manual-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .report-page-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 16px 0;
-    }
-
-    .btn-report-action {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      height: 42px;
-      padding: 0 18px;
-      border-radius: var(--radius-md);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: var(--shadow-xs);
-      transition: all 0.15s ease;
-      border: none;
-    }
-
-    .btn-report-action.copy {
-      background: var(--success);
+    .modal-btn.success {
+      background: var(--iiko-green);
+      border-color: var(--iiko-green);
       color: #FFFFFF;
     }
 
-    .btn-report-action.copy:hover {
-      background: var(--success-hover);
-    }
-
-    .btn-report-action.save {
-      background: var(--primary);
+    .modal-btn.danger {
+      background: var(--iiko-danger);
+      border-color: var(--iiko-danger);
       color: #FFFFFF;
-    }
-
-    .btn-report-action.save:hover {
-      background: var(--primary-hover);
-    }
-
-    .btn-report-action.return {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
-
-    .btn-report-action.return:hover {
-      background: var(--bg);
-      border-color: #CBD5E1;
     }
 </style>
 </head>
@@ -3581,16 +1447,27 @@
     <div class="app-main" id="view-main">
       
       <header class="header-bar">
-        <div class="header-logo">
-          <img src="logo.png" class="header-logo-img" alt="BURЖУЙ">
-          <div class="logo-text">BURЖУЙ</div>
+        <div class="header-left-group">
+          <button type="button" class="btn-iiko-hamburger" onclick="toggleLeftNavDrawer()" title="Меню разделов">≡</button>
+          <div class="iiko-brand-logo" onclick="goToModulesScreen()" title="На главную">
+            <span class="iiko-logo-text">iiko<span class="iiko-tm">™</span></span>
+            <span class="iiko-brand-sub">BURЖУЙ</span>
+          </div>
         </div>
+
+        <!-- Центральная плашка даты из скриншота 2 -->
+        <div class="header-date-pill" onclick="openModule('inv')" title="Выбранный период">
+          <span id="header-date-pill-val">01.09 — 10.09.26</span>
+        </div>
+
         <div class="header-user-actions">
           <button type="button" class="btn-back-modules" id="btn-back-modules" onclick="goToModulesScreen()" style="display: none;" title="Вернуться к выбору разделов">← Разделы</button>
           <button type="button" class="header-store-btn" id="header-store-btn" onclick="openStoreDrawer()" style="display: none;" title="Выбрать торговую точку сети">
             <span class="store-pin">📍</span><span id="header-store-name">Точка P2 (В-2)</span><span class="store-chevron">▾</span>
           </button>
-          <button class="btn-logout" onclick="handleLogout()" title="Выйти из системы">Выйти</button>
+          <button type="button" class="header-icon-btn" onclick="openStoreDrawer()" title="Поиск торговой точки">🔍</button>
+          <button type="button" class="header-icon-btn" onclick="openStoreDrawer()" title="Фильтры">🎛️</button>
+          <button type="button" class="header-icon-btn" onclick="handleLogout()" title="Выйти из системы">⋮</button>
         </div>
       </header>
 
@@ -3601,32 +1478,55 @@
         <!-- Кроме этих двух блоков ничего не отображается!   -->
         <!-- ============================================== -->
         <div class="modules-launcher-screen" id="screen-launcher">
-          <div class="launcher-header-box">
-            <h2 class="launcher-title">Рабочие разделы</h2>
-            <p class="launcher-sub">Выберите нужный модуль для начала работы</p>
+          
+          <div class="iiko-section-header">
+            <span>Ежедневные операции в сети</span>
           </div>
 
-          <div class="launcher-grid">
-            <!-- Блок 1: Инвентаризация -->
-            <div class="launcher-tile" id="btn-sec-inv" onclick="openModule('inv')" role="button" tabindex="0">
-              <div class="launcher-icon-box">
-                <span class="launcher-emoji">📋</span>
-              </div>
-              <div class="launcher-name">Инвентаризация</div>
-              <div class="launcher-desc">Сведение излишков, недостач и удержания</div>
-              <div class="launcher-tag action">Открыть раздел →</div>
+          <div class="iiko-grid">
+            <!-- Плитка 1: Инвентаризация -->
+            <div class="iiko-tile iiko-tile-green" id="btn-sec-inv" onclick="openModule('inv')" role="button" tabindex="0">
+              <div class="iiko-tile-title">Инвентаризация</div>
+              <div class="iiko-tile-glyph">📋</div>
             </div>
 
-            <!-- Блок 2: Вечерняя заявка -->
-            <div class="launcher-tile disabled" id="btn-sec-ord" onclick="openModule('ord')" role="button" tabindex="0">
-              <div class="launcher-icon-box">
-                <span class="launcher-emoji">📦</span>
-              </div>
-              <div class="launcher-name">Вечерняя заявка</div>
-              <div class="launcher-desc">Автозаказ полуфабрикатов на цех</div>
-              <div class="launcher-tag soon">СКОРО</div>
+            <!-- Плитка 2: Вечерняя заявка -->
+            <div class="iiko-tile iiko-tile-green" id="btn-sec-ord" onclick="openModule('ord')" role="button" tabindex="0">
+              <div class="iiko-tile-title">Вечерняя заявка</div>
+              <div class="iiko-tile-glyph">📦</div>
+            </div>
+
+            <!-- Плитка 3: Персонал и смены -->
+            <div class="iiko-tile iiko-tile-green" onclick="openModule('inv'); setTimeout(toggleShiftAccordion, 200);" role="button" tabindex="0">
+              <div class="iiko-tile-title">Персонал</div>
+              <div class="iiko-tile-glyph">👥</div>
+            </div>
+
+            <!-- Плитка 4: Кассовые смены -->
+            <div class="iiko-tile iiko-tile-green" onclick="openModule('inv')" role="button" tabindex="0">
+              <div class="iiko-tile-title">Кассовые смены</div>
+              <div class="iiko-tile-glyph">📅</div>
             </div>
           </div>
+
+          <div class="iiko-section-header">
+            <span>Управление бизнесом</span>
+          </div>
+
+          <div class="iiko-grid">
+            <!-- Плитка 5: Лояльность -->
+            <div class="iiko-tile iiko-tile-magenta" onclick="showToast('Раздел: Лояльность')" role="button" tabindex="0">
+              <div class="iiko-tile-title">Лояльность</div>
+              <div class="iiko-tile-glyph">❤️</div>
+            </div>
+
+            <!-- Плитка 6: Закупки и перемещения -->
+            <div class="iiko-tile iiko-tile-magenta" onclick="showToast('Раздел: Закупки и перемещения')" role="button" tabindex="0">
+              <div class="iiko-tile-title">Закупки и перемещения</div>
+              <div class="iiko-tile-glyph">🛒</div>
+            </div>
+          </div>
+
         </div>
 
         <!-- ============================================== -->
@@ -3636,12 +1536,17 @@
         <div id="screen-inventory-workflow" style="display: none;">
           
           <!-- Верхняя полоска навигации раздела -->
-          <div class="section-top-nav">
-            <button type="button" class="btn-nav-back" onclick="goToModulesScreen()">
-              <span>←</span>
-              <span>Все разделы</span>
-            </button>
-            <div class="section-current-badge">📋 Инвентаризация iiko</div>
+          <div class="iiko-module-head">
+            <div class="iiko-module-title">Инвентаризация</div>
+            <div class="iiko-head-actions">
+              <button type="button" class="btn-iiko-square" onclick="handleRefreshData()" title="Обновить данные">🔄</button>
+              <button type="button" class="btn-iiko-square blue" onclick="copyAuditReportForWhatsApp()" title="Печать / Экспорт">🖨️</button>
+              <button type="button" class="btn-iiko-outline-action" onclick="openBulkReconcileModal()">
+                <span>⚡</span>
+                <span>Свести недостачи</span>
+              </button>
+            </div>
+          </div>
           </div>
 
           <!-- СКРЫТЫЙ СЕЛЕКТОР ТОЧКИ ДЛЯ СОВМЕСТИМОСТИ JS -->
@@ -3676,21 +1581,22 @@
           <div class="workflow-card" id="step-box-surplus">
           
           <!-- Счёт излишков (Штучный / Весовой) -->
-          <div class="surplus-options">
-            <button type="button" class="surplus-card-btn active" id="btn-surplus-piece" onclick="selectSurplusType('piece')">
-              <span class="surplus-icon">📦</span>
-              <div>
-                <div class="surplus-name">Штучный товар</div>
-                <div class="surplus-desc">Булочки, тара, соусы (шт)</div>
-              </div>
+          <div class="iiko-tabs-row">
+            <button type="button" class="iiko-tab-btn active" id="btn-surplus-piece" onclick="selectSurplusType('piece')">
+              Штучный товар
             </button>
-            <button type="button" class="surplus-card-btn" id="btn-surplus-weight" onclick="selectSurplusType('weight')">
-              <span class="surplus-icon">⚖️</span>
-              <div>
-                <div class="surplus-name">Весовой товар</div>
-                <div class="surplus-desc">Фарш, сыр, овощи (кг)</div>
-              </div>
+            <button type="button" class="iiko-tab-btn" id="btn-surplus-weight" onclick="selectSurplusType('weight')">
+              Весовой товар
             </button>
+          </div>
+
+          <!-- Свитч тумблер из скриншота 2 -->
+          <div class="iiko-toggle-row">
+            <label class="iiko-switch">
+              <input type="checkbox" id="chk-zero-diff" onchange="toggleZeroDiffFilter(this.checked)">
+              <span class="iiko-slider"></span>
+            </label>
+            <label for="chk-zero-diff" class="iiko-toggle-label">Не показывать нулевые и отрицательные результаты</label>
           </div>
 
           <!-- Выбор периода и обновление данных -->
@@ -4656,7 +2562,18 @@
       const finesByPerson = {};
       const fineItemsByPerson = {};
 
-      items.forEach(function(item) {
+      
+      // Фильтрация тумблером: "Не показывать нулевые и отрицательные результаты"
+      let displayItems = items;
+      if (typeof filterHideZero !== 'undefined' && filterHideZero) {
+        displayItems = items.filter(function(it) {
+          if (isReconciled && it.hasSurplus && it.remCost === 0) return false;
+          if (it.costBefore === 0 || it.diffBefore >= 0) return false;
+          return true;
+        });
+      }
+
+      displayItems.forEach(function(item) {
         totalBefore += Math.abs(item.costBefore || 0);
         const hasSurplus = !!item.hasSurplus;
         const rem = Math.abs(hasSurplus ? item.remCost : item.costBefore);
@@ -6278,6 +4195,42 @@
       }
     }
 
+    
+    // ====== ЛЕВОЕ МЕНЮ IIKO WEB (SCREENSHOT 3) ======
+    function toggleLeftNavDrawer() {
+      const backdrop = document.getElementById('iiko-left-drawer-backdrop');
+      if (backdrop) backdrop.classList.toggle('open');
+    }
+
+    function closeLeftNavDrawer(e, force) {
+      const backdrop = document.getElementById('iiko-left-drawer-backdrop');
+      if (!backdrop) return;
+      if (force || (e && e.target === backdrop)) {
+        backdrop.classList.remove('open');
+      }
+    }
+
+    function toggleLeftNavSub(id) {
+      const sub = document.getElementById(id);
+      if (!sub) return;
+      sub.style.display = (sub.style.display === 'none' || !sub.style.display) ? 'block' : 'none';
+    }
+
+    let filterHideZero = false;
+    function toggleZeroDiffFilter(checked) {
+      filterHideZero = checked;
+      renderItemsCards();
+      showToast(checked ? 'Скрыты нулевые результаты' : 'Показаны все результаты');
+    }
+
+    function handleRefreshData() {
+      showToast('Синхронизация с iikoChain...');
+      setTimeout(function() {
+        renderItemsCards();
+        showToast('Данные iikoChain актуальны ✓');
+      }, 400);
+    }
+
     window.addEventListener('DOMContentLoaded', function() {
       try {
         const storeSelect = document.getElementById('select-store');
@@ -6407,6 +4360,53 @@
     });
 
   </script>
+
+    
+    <!-- ВЫДВИЖНОЕ ЛЕВОЕ МЕНЮ IIKO WEB (SCREENSHOT 3) -->
+    <div class="iiko-left-drawer-backdrop" id="iiko-left-drawer-backdrop" onclick="closeLeftNavDrawer(event)">
+      <div class="iiko-left-drawer" id="iiko-left-drawer" onclick="event.stopPropagation()">
+        <div class="left-drawer-header">
+          <button type="button" class="btn-iiko-hamburger" onclick="closeLeftNavDrawer(null, true)">←</button>
+          <span class="left-drawer-title">Ежедневные операции...</span>
+          <button type="button" class="btn-iiko-hamburger" onclick="closeLeftNavDrawer(null, true)">✕</button>
+        </div>
+        <div class="left-drawer-menu">
+          <div class="left-nav-item" onclick="showToast('Раздел: Прогноз')">
+            <span>Прогноз</span>
+            <span class="nav-chevron">⌵</span>
+          </div>
+          <div class="left-nav-item" onclick="toggleLeftNavSub('sub-wh')">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span>Управление складом</span>
+              <span class="nav-count-badge">4</span>
+            </div>
+            <span class="nav-chevron">⌵</span>
+          </div>
+          <div class="left-nav-submenu" id="sub-wh">
+            <div class="left-nav-sub-item active" onclick="openModule('inv'); closeLeftNavDrawer(null, true);">
+              <span>📋 Инвентаризация</span>
+            </div>
+            <div class="left-nav-sub-item" onclick="openModule('ord'); closeLeftNavDrawer(null, true);">
+              <span>📦 Вечерняя заявка</span>
+            </div>
+          </div>
+          <div class="left-nav-item" onclick="openModule('inv'); setTimeout(toggleShiftAccordion, 200); closeLeftNavDrawer(null, true);">
+            <span>Персонал</span>
+            <span class="nav-chevron">⌵</span>
+          </div>
+          <div class="left-nav-item" onclick="openModule('inv'); closeLeftNavDrawer(null, true);">
+            <span>Кассовые смены</span>
+            <span class="nav-chevron">⌵</span>
+          </div>
+        </div>
+        <div class="left-drawer-footer">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span class="iiko-logo-text" style="font-size: 16px;">iiko<span class="iiko-tm">™</span></span>
+            <span style="font-size: 11px; color: #757575; font-weight: 600;">BURЖУЙ Chain</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ШТОРКА ВЫБОРА ТОЧКИ (IIKOWEB STYLE) -->
     <div class="store-drawer-backdrop" id="store-drawer-backdrop" onclick="closeStoreDrawer(event)">
