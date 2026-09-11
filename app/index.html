@@ -3090,6 +3090,229 @@
       color: #166534;
     }
 
+  
+    /* ЭТАП 1: ЛАУНЧЕР МОДУЛЕЙ */
+    .modules-launcher-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(85vh - 70px);
+      padding: 20px 14px;
+      animation: fadeIn 0.22s ease-out;
+    }
+
+    .launcher-header-box {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .launcher-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+
+    .launcher-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .launcher-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      width: 100%;
+      max-width: 390px;
+      margin: 0 auto;
+    }
+
+    .launcher-tile {
+      aspect-ratio: 1 / 1;
+      min-height: 130px;
+      background: #FFFFFF;
+      border: 2px solid var(--border-light);
+      border-radius: 16px;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    .launcher-tile:hover {
+      transform: translateY(-4px);
+      border-color: #0F172A;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    .launcher-tile:active {
+      transform: scale(0.97);
+    }
+
+    .launcher-tile.disabled {
+      background: #F8FAFC;
+      opacity: 0.75;
+      border-style: dashed;
+    }
+
+    .launcher-tile.disabled:hover {
+      transform: none;
+      box-shadow: none;
+      border-color: var(--border-light);
+    }
+
+    .launcher-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: #0F172A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
+      transition: transform 0.2s;
+    }
+
+    .launcher-tile:hover .launcher-icon-box {
+      transform: scale(1.06);
+    }
+
+    .launcher-tile.disabled .launcher-icon-box {
+      background: #E2E8F0;
+      box-shadow: none;
+    }
+
+    .launcher-emoji {
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .launcher-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 3px;
+    }
+
+    .launcher-desc {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .launcher-tag {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .launcher-tag.action {
+      background: #0F172A;
+      color: #FFFFFF;
+    }
+
+    .launcher-tag.soon {
+      background: #E2E8F0;
+      color: #64748B;
+    }
+
+    /* ВЕРХНЯЯ НАВИГАЦИЯ РАЗДЕЛА (ЭТАП 2) */
+    .section-top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .btn-nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #F1F5F9;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: all 0.15s;
+    }
+
+    .btn-nav-back:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+
+    .section-current-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0F172A;
+      background: #EFF6FF;
+      border: 1px solid #DBEAFE;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .btn-back-modules {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #F1F5F9;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      margin-left: 8px;
+      transition: all 0.15s;
+    }
+
+    .btn-back-modules:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+
+    .orders-placeholder-box {
+      text-align: center;
+      padding: 40px 20px;
+      background: #FFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-top: 10px;
+    }
+
+    .btn-orders-return {
+      background: #0F172A;
+      color: #FFF;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font);
+    }
+
   </style>
 </head>
 <body>
@@ -3139,7 +3362,8 @@
           <div class="logo-text">BURЖУЙ</div>
         </div>
         <div class="header-user-actions">
-          <button type="button" class="header-store-btn" id="header-store-btn" onclick="openStoreDrawer()" title="Выбрать торговую точку сети">
+          <button type="button" class="btn-back-modules" id="btn-back-modules" onclick="goToModulesScreen()" style="display: none;" title="Вернуться к выбору разделов">← Разделы</button>
+          <button type="button" class="header-store-btn" id="header-store-btn" onclick="openStoreDrawer()" style="display: none;" title="Выбрать торговую точку сети">
             <span class="store-pin">📍</span>
             <span id="header-store-name">В-2 (Точка P2)</span>
             <span class="store-chevron">▾</span>
@@ -3150,64 +3374,84 @@
 
       <div class="content-scroll">
         
-        <!-- 3 ШАГА -->
-        <!-- ВЫБОР РАЗДЕЛА: 2 КВАДРАТНЫХ БЛОКА (IIKOWEB STYLE) -->
-        <div class="iiko-modules-container">
-          <div class="iiko-modules-grid">
-            
-            <!-- Квадратный блок 1: Инвентаризация -->
-            <div class="iiko-tile-card active" id="btn-sec-inv" onclick="selectSection('inv')" role="button" tabindex="0">
-              <div class="iiko-tile-icon-box">
-                <span class="iiko-tile-emoji">📋</span>
+        <!-- ============================================== -->
+        <!-- ЭТАП 1: ТОЛЬКО 2 КВАДРАТНЫХ БЛОКА (ЛАУНЧЕР)     -->
+        <!-- Кроме этих двух блоков ничего не отображается!   -->
+        <!-- ============================================== -->
+        <div class="modules-launcher-screen" id="screen-launcher">
+          <div class="launcher-header-box">
+            <h2 class="launcher-title">Рабочие разделы</h2>
+            <p class="launcher-sub">Выберите нужный модуль для начала работы</p>
+          </div>
+
+          <div class="launcher-grid">
+            <!-- Блок 1: Инвентаризация -->
+            <div class="launcher-tile" id="btn-sec-inv" onclick="openModule('inv')" role="button" tabindex="0">
+              <div class="launcher-icon-box">
+                <span class="launcher-emoji">📋</span>
               </div>
-              <div class="iiko-tile-name">Инвентаризация</div>
-              <div class="iiko-tile-sub">Сведение и удержание</div>
-              <div class="iiko-tile-tag active">Активно</div>
+              <div class="launcher-name">Инвентаризация</div>
+              <div class="launcher-desc">Сведение излишков, недостач и удержания</div>
+              <div class="launcher-tag action">Открыть раздел →</div>
             </div>
 
-            <!-- Квадратный блок 2: Вечерняя заявка -->
-            <div class="iiko-tile-card disabled" id="btn-sec-ord" onclick="selectSection('ord')" role="button" tabindex="0">
-              <div class="iiko-tile-icon-box">
-                <span class="iiko-tile-emoji">📦</span>
+            <!-- Блок 2: Вечерняя заявка -->
+            <div class="launcher-tile disabled" id="btn-sec-ord" onclick="openModule('ord')" role="button" tabindex="0">
+              <div class="launcher-icon-box">
+                <span class="launcher-emoji">📦</span>
               </div>
-              <div class="iiko-tile-name">Вечерняя заявка</div>
-              <div class="iiko-tile-sub">Автозаказ на цех</div>
-              <div class="iiko-tile-tag soon">СКОРО</div>
+              <div class="launcher-name">Вечерняя заявка</div>
+              <div class="launcher-desc">Автозаказ полуфабрикатов на цех</div>
+              <div class="launcher-tag soon">СКОРО</div>
             </div>
-
           </div>
         </div>
 
-        <!-- СКРЫТЫЙ СЕЛЕКТОР ТОЧКИ ДЛЯ СОВМЕСТИМОСТИ JS -->
-        <div id="step-box-store" style="display: none;">
-          <select class="store-dropdown" id="select-store" onchange="onStoreChange()">
-            <option value="В-1">В-1</option>
-            <option value="В-2" selected>В-2 (Точка P2)</option>
-            <option value="В-3">В-3</option>
-            <option value="В-4">В-4</option>
-            <option value="В-5">В-5</option>
-            <option value="В-6">В-6</option>
-            <option value="В-7">В-7</option>
-            <option value="В-8">В-8</option>
-            <option value="В-9">В-9</option>
-            <option value="В-10">В-10</option>
-            <option value="В-11">В-11</option>
-            <option value="В-12">В-12</option>
-            <option value="В-13">В-13</option>
-            <option value="В-14">В-14</option>
-            <option value="В-15">В-15</option>
-            <option value="В-16">В-16</option>
-            <option value="В-17">В-17</option>
-            <option value="Б19(Батыр Молл)">Б19(Батыр Молл)</option>
-            <option value="В-20">В-20</option>
-            <option value="В-21">В-21</option>
-            <option value="В-22 (Баянтау)">В-22 (Баянтау)</option>
-            <option value="В-25">В-25</option>
-          </select>
-        </div>
+        <!-- ============================================== -->
+        <!-- ЭТАП 2: ФУНКЦИОНАЛ ИНВЕНТАРИЗАЦИИ               -->
+        <!-- Открывается только после выбора нужного блока!  -->
+        <!-- ============================================== -->
+        <div id="screen-inventory-workflow" style="display: none;">
+          
+          <!-- Верхняя полоска навигации раздела -->
+          <div class="section-top-nav">
+            <button type="button" class="btn-nav-back" onclick="goToModulesScreen()">
+              <span>←</span>
+              <span>Все разделы</span>
+            </button>
+            <div class="section-current-badge">📋 Инвентаризация iiko</div>
+          </div>
 
-        <!-- ПАРАМЕТРЫ СВЕДЕНИЯ: СЧЕТ И ПЕРИОД -->
-        <div class="workflow-card" id="step-box-surplus">
+          <!-- СКРЫТЫЙ СЕЛЕКТОР ТОЧКИ ДЛЯ СОВМЕСТИМОСТИ JS -->
+          <div id="step-box-store" style="display: none;">
+            <select class="store-dropdown" id="select-store" onchange="onStoreChange()">
+              <option value="В-1">В-1</option>
+              <option value="В-2" selected>В-2 (Точка P2)</option>
+              <option value="В-3">В-3</option>
+              <option value="В-4">В-4</option>
+              <option value="В-5">В-5</option>
+              <option value="В-6">В-6</option>
+              <option value="В-7">В-7</option>
+              <option value="В-8">В-8</option>
+              <option value="В-9">В-9</option>
+              <option value="В-10">В-10</option>
+              <option value="В-11">В-11</option>
+              <option value="В-12">В-12</option>
+              <option value="В-13">В-13</option>
+              <option value="В-14">В-14</option>
+              <option value="В-15">В-15</option>
+              <option value="В-16">В-16</option>
+              <option value="В-17">В-17</option>
+              <option value="Б19(Батыр Молл)">Б19(Батыр Молл)</option>
+              <option value="В-20">В-20</option>
+              <option value="В-21">В-21</option>
+              <option value="В-22 (Баянтау)">В-22 (Баянтау)</option>
+              <option value="В-25">В-25</option>
+            </select>
+          </div>
+
+          <!-- ПАРАМЕТРЫ СВЕДЕНИЯ (СЧЕТ И ПЕРИОД) -->
+          <div class="workflow-card" id="step-box-surplus">
           
           <!-- Счёт излишков (Штучный / Весовой) -->
           <div class="surplus-options">
@@ -3277,8 +3521,10 @@
           </div>
         </div>
 
-        <!-- РАЗДЕЛ ИНВЕНТАРИЗАЦИИ -->
-        <div id="section-inventory-content">
+        
+
+          <!-- РАЗДЕЛ ИНВЕНТАРИЗАЦИИ (РЕЗУЛЬТАТЫ) -->
+          <div id="section-inventory-content">
           
           <div class="empty-placeholder" id="placeholder-box">
             <div class="placeholder-icon">📋</div>
@@ -3372,13 +3618,32 @@
 
         </div>
 
-        <!-- РАЗДЕЛ ЗАЯВКИ (ЗАГЛУШКА) -->
-        <div style="display: none; text-align: center; padding: 40px 20px; background: #FFF; border: 1px solid var(--border); border-radius: 12px;" id="section-orders-content">
-          <div style="font-size: 36px; margin-bottom: 10px;">📦</div>
-          <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">Вечерняя заявка на цех</h3>
-          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; max-width: 290px; margin: 0 auto;">
-            Модуль автозаказа полуфабрикатов для фабрики-кухни находится на стадии разработки. Скоро будет доступен!
-          </p>
+        
+
+        </div>
+
+        <!-- ============================================== -->
+        <!-- ЭТАП 2: ФУНКЦИОНАЛ ВЕЧЕРНЕЙ ЗАЯВКИ (ЗАГЛУШКА)    -->
+        <!-- ============================================== -->
+        <div id="screen-orders-workflow" style="display: none;">
+          <div class="section-top-nav">
+            <button type="button" class="btn-nav-back" onclick="goToModulesScreen()">
+              <span>←</span>
+              <span>Все разделы</span>
+            </button>
+            <div class="section-current-badge">📦 Вечерняя заявка</div>
+          </div>
+
+          <div class="orders-placeholder-box">
+            <div style="font-size: 42px; margin-bottom: 12px;">📦</div>
+            <h3 style="font-size: 16px; font-weight: 800; color: #0F172A; margin-bottom: 8px;">Вечерняя заявка на цех</h3>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; max-width: 320px; margin: 0 auto 20px;">
+              Модуль автоматического заказа полуфабрикатов для фабрики-кухни находится на стадии разработки. Скоро будет доступен!
+            </p>
+            <button type="button" class="btn-orders-return" onclick="goToModulesScreen()">
+              ← Вернуться к выбору разделов
+            </button>
+          </div>
         </div>
 
       </div>
@@ -3757,6 +4022,7 @@
       try {
         document.getElementById('view-auth').style.display = 'none';
         document.getElementById('view-main').style.display = 'flex';
+        goToModulesScreen();
       } catch (e) {
         console.error('Session restore error:', e);
       }
@@ -3846,30 +4112,69 @@
       showToast('Вы вышли из системы');
     }
 
-    function selectSection(sec) {
+    // ====== 2-ЭТАПНАЯ НАВИГАЦИЯ ======
+    // ЭТАП 1: ТОЛЬКО 2 КВАДРАТНЫХ БЛОКА (ЛАУНЧЕР)
+    function goToModulesScreen() {
+      activeSection = 'none';
+      const launcher = document.getElementById('screen-launcher');
+      const invWorkflow = document.getElementById('screen-inventory-workflow');
+      const ordWorkflow = document.getElementById('screen-orders-workflow');
       const headerStoreBtn = document.getElementById('header-store-btn');
-      if (sec === 'ord') {
-        activeSection = 'ord';
-        document.getElementById('btn-sec-inv').classList.remove('active');
-        document.getElementById('btn-sec-ord').classList.add('active');
-        if (document.getElementById('step-box-store')) document.getElementById('step-box-store').style.display = 'none';
-        if (document.getElementById('step-box-surplus')) document.getElementById('step-box-surplus').style.display = 'none';
-        document.getElementById('section-inventory-content').style.display = 'none';
-        document.getElementById('section-orders-content').style.display = 'block';
-        document.getElementById('save-dock').style.display = 'none';
-        if (headerStoreBtn) headerStoreBtn.style.display = 'none';
-      } else {
+      const backBtn = document.getElementById('btn-back-modules');
+      const saveDock = document.getElementById('save-dock');
+
+      if (launcher) launcher.style.display = 'flex';
+      if (invWorkflow) invWorkflow.style.display = 'none';
+      if (ordWorkflow) ordWorkflow.style.display = 'none';
+      if (headerStoreBtn) headerStoreBtn.style.display = 'none';
+      if (backBtn) backBtn.style.display = 'none';
+      if (saveDock) saveDock.style.display = 'none';
+    }
+
+    // ЭТАП 2: ОТКРЫТИЕ ФУНКЦИОНАЛА ВЫБРАННОГО БЛОКА
+    function openModule(mod) {
+      const launcher = document.getElementById('screen-launcher');
+      const invWorkflow = document.getElementById('screen-inventory-workflow');
+      const ordWorkflow = document.getElementById('screen-orders-workflow');
+      const headerStoreBtn = document.getElementById('header-store-btn');
+      const backBtn = document.getElementById('btn-back-modules');
+      const saveDock = document.getElementById('save-dock');
+
+      if (mod === 'inv') {
         activeSection = 'inv';
-        document.getElementById('btn-sec-ord').classList.remove('active');
-        document.getElementById('btn-sec-inv').classList.add('active');
-        if (document.getElementById('step-box-surplus')) document.getElementById('step-box-surplus').style.display = 'block';
-        document.getElementById('section-orders-content').style.display = 'none';
-        document.getElementById('section-inventory-content').style.display = 'block';
+        if (launcher) launcher.style.display = 'none';
+        if (ordWorkflow) ordWorkflow.style.display = 'none';
+        if (invWorkflow) invWorkflow.style.display = 'block';
         if (headerStoreBtn) headerStoreBtn.style.display = 'inline-flex';
-        if (isDataLoaded) {
-          document.getElementById('save-dock').style.display = 'block';
-        }
+        if (backBtn) backBtn.style.display = 'inline-flex';
+        
+        // Загружаем данные для выбранной точки
+        isDataLoaded = true;
+        updateHeaderStoreButton(document.getElementById('select-store').value || 'В-2');
+        populateShiftDateSelect();
+        renderItemsCards();
+
+        const placeholder = document.getElementById('placeholder-box');
+        const results = document.getElementById('results-box');
+        if (placeholder) placeholder.style.display = 'none';
+        if (results) results.style.display = 'block';
+        if (saveDock) saveDock.style.display = 'block';
+
+        showToast('Раздел: Инвентаризация');
+      } else if (mod === 'ord') {
+        activeSection = 'ord';
+        if (launcher) launcher.style.display = 'none';
+        if (invWorkflow) invWorkflow.style.display = 'none';
+        if (ordWorkflow) ordWorkflow.style.display = 'block';
+        if (headerStoreBtn) headerStoreBtn.style.display = 'none';
+        if (backBtn) backBtn.style.display = 'inline-flex';
+        if (saveDock) saveDock.style.display = 'none';
+        showToast('Раздел: Вечерняя заявка (Скоро)');
       }
+    }
+
+    function selectSection(sec) {
+      openModule(sec);
     }
 
     let activeShiftDate = 'all';
@@ -5444,8 +5749,9 @@
         const storeSelect = document.getElementById('select-store');
         if (storeSelect) {
           storeSelect.value = 'В-2';
-          onStoreChange();
         }
+        // По умолчанию 1 этап: сначала только 2 блока!
+        goToModulesScreen();
       } catch (err) {
         console.error('Init error:', err);
       }
