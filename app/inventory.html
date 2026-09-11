@@ -404,7 +404,7 @@
 
     .content-scroll {
       flex: 1;
-      padding: 24px 20px 80px 20px;
+      padding: 12px 16px 80px 20px;
       max-width: 900px;
       width: 100%;
       margin: 0 auto;
@@ -416,13 +416,10 @@
     /* 3. ЭТАП 1: ЛАУНЧЕР МОДУЛЕЙ (ReUI Bento Cards)               */
     /* ============================================================ */
     .modules-launcher-screen {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 10px;
-      margin: auto 0;
       width: 100%;
+      padding: 8px 0 24px 0;
+      margin: 0;
+      display: block;
     }
 
     .launcher-header-box {
@@ -3746,7 +3743,8 @@
     /* ЛАУНЧЕР КВАДРАТНЫЕ ПЛИТКИ (SCREENSHOT 1) */
     .modules-launcher-screen {
       width: 100%;
-      padding: 4px 0 30px 0;
+      padding: 4px 0 24px 0;
+      margin: 0;
       display: block;
     }
 
@@ -4359,11 +4357,7 @@
             <div class="iiko-module-title">Инвентаризация</div>
             <div class="iiko-head-actions">
               <button type="button" class="btn-iiko-square" onclick="handleRefreshData()" title="Обновить данные">🔄</button>
-              <button type="button" class="btn-iiko-square blue" onclick="copyAuditReportForWhatsApp()" title="Печать / Экспорт">🖨️</button>
-              <button type="button" class="btn-iiko-outline-action" onclick="openBulkReconcileModal()">
-                <span>⚡</span>
-                <span>Свести недостачи</span>
-              </button>
+              
             </div>
           </div>
 
@@ -4408,14 +4402,7 @@
             </button>
           </div>
 
-          <!-- Свитч тумблер из скриншота 2 -->
-          <div class="iiko-toggle-row">
-            <label class="iiko-switch">
-              <input type="checkbox" id="chk-zero-diff" onchange="toggleZeroDiffFilter(this.checked)">
-              <span class="iiko-slider"></span>
-            </label>
-            <label for="chk-zero-diff" class="iiko-toggle-label">Не показывать нулевые и отрицательные результаты</label>
-          </div>
+          
 
           <!-- Обновление данных (интервал скрыт по требованию) -->
           <div class="period-action-wrap" style="padding-top: 4px;">
