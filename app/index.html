@@ -279,30 +279,7 @@
       overflow-y: auto;
     }
 
-    /* Золотое правило */
-    .golden-rule-card {
-      background: #EFF6FF;
-      border: 1px solid #BFDBFE;
-      border-radius: 10px;
-      padding: 10px 12px;
-      margin-bottom: 12px;
-      font-size: 12px;
-      line-height: 1.4;
-      color: #1E40AF;
-    }
-
-    .golden-rule-title {
-      font-weight: 800;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* 3 ШАГА */
+    /* МОДУЛИ И ПАРАМЕТРЫ */
     .workflow-card {
       background: #FFF;
       border: 1px solid var(--border);
@@ -2356,6 +2333,348 @@
       background: #1E293B;
     }
 
+  
+    /* БРЕНД И ЛОГОТИП */
+    .header-logo-img {
+      height: 32px;
+      width: auto;
+      border-radius: 6px;
+      object-fit: contain;
+      vertical-align: middle;
+    }
+
+    .auth-brand-logo {
+      height: 48px;
+      width: auto;
+      border-radius: 10px;
+      object-fit: contain;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* КНОПКА ТОЧКИ В ШАПКЕ */
+    .header-store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #F1F5F9;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #0F172A;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: var(--font);
+      white-space: nowrap;
+    }
+
+    .header-store-btn:hover {
+      background: #E2E8F0;
+      border-color: #94A3B8;
+    }
+
+    .header-store-btn .store-pin {
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .header-store-btn .store-chevron {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-left: 2px;
+    }
+
+    /* МОДУЛИ IIKOWEB (2 КВАДРАТНЫХ БЛОКА) */
+    .iiko-modules-container {
+      margin-bottom: 12px;
+    }
+
+    .iiko-modules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .iiko-tile-card {
+      aspect-ratio: 1 / 1;
+      min-height: 118px;
+      background: #FFFFFF;
+      border: 2px solid var(--border-light);
+      border-radius: 14px;
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      user-select: none;
+    }
+
+    .iiko-tile-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .iiko-tile-card.active {
+      border-color: #0F172A;
+      background: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    }
+
+    .iiko-tile-card.active::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--iiko-green);
+    }
+
+    .iiko-tile-card.disabled {
+      background: #F8FAFC;
+      border-style: dashed;
+      opacity: 0.8;
+    }
+
+    .iiko-tile-icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: #F1F5F9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+      transition: all 0.18s;
+    }
+
+    .iiko-tile-card.active .iiko-tile-icon-box {
+      background: #0F172A;
+    }
+
+    .iiko-tile-emoji {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .iiko-tile-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .iiko-tile-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .iiko-tile-tag {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .iiko-tile-tag.active {
+      background: #DCFCE7;
+      color: #166534;
+    }
+
+    .iiko-tile-tag.soon {
+      background: #E2E8F0;
+      color: #475569;
+    }
+
+    /* ШТОРКА ВЫБОРА ТОЧКИ (IIKOWEB STYLE) */
+    .store-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(2px);
+      z-index: 1050;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease-in-out;
+    }
+
+    .store-drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .store-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 330px;
+      max-width: 88vw;
+      background: #FFFFFF;
+      box-shadow: -8px 0 32px rgba(15, 23, 42, 0.18);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1051;
+    }
+
+    .store-drawer-backdrop.open .store-drawer {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #F8FAFC;
+    }
+
+    .drawer-title-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .drawer-icon {
+      font-size: 14px;
+    }
+
+    .drawer-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+
+    .drawer-count-badge {
+      font-size: 10px;
+      font-weight: 700;
+      background: #E2E8F0;
+      color: #475569;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    .drawer-close-btn {
+      width: 30px;
+      height: 30px;
+      background: #FFF;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748B;
+      transition: all 0.15s;
+    }
+
+    .drawer-close-btn:hover {
+      background: #F1F5F9;
+      color: #0F172A;
+    }
+
+    .drawer-search-box {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-light);
+      background: #FFF;
+    }
+
+    .drawer-search-input {
+      width: 100%;
+      height: 36px;
+      padding: 0 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: var(--font);
+      outline: none;
+      background: #F8FAFC;
+      transition: border-color 0.15s;
+    }
+
+    .drawer-search-input:focus {
+      border-color: #0F172A;
+      background: #FFF;
+    }
+
+    .drawer-stores-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .drawer-store-item {
+      padding: 9px 12px;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      background: #FFF;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s;
+      text-align: left;
+    }
+
+    .drawer-store-item:hover {
+      background: #F8FAFC;
+      border-color: var(--border);
+    }
+
+    .drawer-store-item.active {
+      background: #F0FDF4;
+      border-color: #86EFAC;
+    }
+
+    .drawer-store-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .drawer-store-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .drawer-store-dept {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .drawer-store-check {
+      font-size: 13px;
+      color: var(--iiko-green);
+      font-weight: 800;
+      opacity: 0;
+    }
+
+    .drawer-store-item.active .drawer-store-check {
+      opacity: 1;
+    }
+
   </style>
 </head>
 <body>
@@ -2365,7 +2684,7 @@
     <!-- АВТОРИЗАЦИЯ -->
     <div class="auth-view" id="view-auth">
       <div class="auth-brand">
-        <div class="brand-mark">B</div>
+        <img src="logo.png" class="auth-brand-logo" alt="BURЖУЙ">
         <div class="brand-title-wrap">
           <h1>BURЖУЙ</h1>
           <p>Операционная система сети</p>
@@ -2401,153 +2720,146 @@
       
       <header class="header-bar">
         <div class="header-logo">
-          <div class="logo-badge">B</div>
+          <img src="logo.png" class="header-logo-img" alt="BURЖУЙ">
           <div class="logo-text">BURЖУЙ</div>
         </div>
         <div class="header-user-actions">
-          <span class="user-pill" id="user-role-label">Управляющий</span>
-          <button class="btn-logout" onclick="handleLogout()">Выйти</button>
+          <button type="button" class="header-store-btn" id="header-store-btn" onclick="openStoreDrawer()" title="Выбрать торговую точку сети">
+            <span class="store-pin">📍</span>
+            <span id="header-store-name">В-2 (Точка P2)</span>
+            <span class="store-chevron">▾</span>
+          </button>
+          <button class="btn-logout" onclick="handleLogout()" title="Выйти из системы">Выйти</button>
         </div>
       </header>
 
       <div class="content-scroll">
         
-        <!-- Золотое правило -->
-        <div class="golden-rule-card">
-          <div class="golden-rule-title">
-            <span>⚖️</span>
-            <span>Регламент сведения iikoChain:</span>
+        <!-- 3 ШАГА -->
+        <!-- ВЫБОР РАЗДЕЛА: 2 КВАДРАТНЫХ БЛОКА (IIKOWEB STYLE) -->
+        <div class="iiko-modules-container">
+          <div class="iiko-modules-grid">
+            
+            <!-- Квадратный блок 1: Инвентаризация -->
+            <div class="iiko-tile-card active" id="btn-sec-inv" onclick="selectSection('inv')" role="button" tabindex="0">
+              <div class="iiko-tile-icon-box">
+                <span class="iiko-tile-emoji">📋</span>
+              </div>
+              <div class="iiko-tile-name">Инвентаризация</div>
+              <div class="iiko-tile-sub">Сведение и удержание</div>
+              <div class="iiko-tile-tag active">Активно</div>
+            </div>
+
+            <!-- Квадратный блок 2: Вечерняя заявка -->
+            <div class="iiko-tile-card disabled" id="btn-sec-ord" onclick="selectSection('ord')" role="button" tabindex="0">
+              <div class="iiko-tile-icon-box">
+                <span class="iiko-tile-emoji">📦</span>
+              </div>
+              <div class="iiko-tile-name">Вечерняя заявка</div>
+              <div class="iiko-tile-sub">Автозаказ на цех</div>
+              <div class="iiko-tile-tag soon">СКОРО</div>
+            </div>
+
           </div>
-          <div>Недостача уменьшается на количество выявленного излишка. <strong>Если встречного излишка в последующих инвентаризациях нет — позиция не корректируется и остаётся реальной недостачей.</strong></div>
         </div>
 
-        <!-- 3 ШАГА -->
-        <div class="workflow-card">
+        <!-- СКРЫТЫЙ СЕЛЕКТОР ТОЧКИ ДЛЯ СОВМЕСТИМОСТИ JS -->
+        <div id="step-box-store" style="display: none;">
+          <select class="store-dropdown" id="select-store" onchange="onStoreChange()">
+            <option value="В-1">В-1</option>
+            <option value="В-2" selected>В-2 (Точка P2)</option>
+            <option value="В-3">В-3</option>
+            <option value="В-4">В-4</option>
+            <option value="В-5">В-5</option>
+            <option value="В-6">В-6</option>
+            <option value="В-7">В-7</option>
+            <option value="В-8">В-8</option>
+            <option value="В-9">В-9</option>
+            <option value="В-10">В-10</option>
+            <option value="В-11">В-11</option>
+            <option value="В-12">В-12</option>
+            <option value="В-13">В-13</option>
+            <option value="В-14">В-14</option>
+            <option value="В-15">В-15</option>
+            <option value="В-16">В-16</option>
+            <option value="В-17">В-17</option>
+            <option value="Б19(Батыр Молл)">Б19(Батыр Молл)</option>
+            <option value="В-20">В-20</option>
+            <option value="В-21">В-21</option>
+            <option value="В-22 (Баянтау)">В-22 (Баянтау)</option>
+            <option value="В-25">В-25</option>
+          </select>
+        </div>
+
+        <!-- ПАРАМЕТРЫ СВЕДЕНИЯ: СЧЕТ И ПЕРИОД -->
+        <div class="workflow-card" id="step-box-surplus">
           
-          <!-- ШАГ 1 -->
-          <div class="step-box">
-            <div class="step-title-row">
-              <span class="step-num">1</span>
-              <span class="step-heading">1 шаг: Выбрать раздел</span>
-            </div>
-            <div class="section-selector">
-              <button type="button" class="section-btn active" id="btn-sec-inv" onclick="selectSection('inv')">
-                <span>📋 Инвентаризация</span>
-              </button>
-              <button type="button" class="section-btn disabled" id="btn-sec-ord" onclick="selectSection('ord')">
-                <span>📦 Вечерняя заявка</span>
-                <span class="badge-soon">Скоро</span>
-              </button>
-            </div>
+          <!-- Счёт излишков (Штучный / Весовой) -->
+          <div class="surplus-options">
+            <button type="button" class="surplus-card-btn active" id="btn-surplus-piece" onclick="selectSurplusType('piece')">
+              <span class="surplus-icon">📦</span>
+              <div>
+                <div class="surplus-name">Штучный товар</div>
+                <div class="surplus-desc">Булочки, тара, соусы (шт)</div>
+              </div>
+            </button>
+            <button type="button" class="surplus-card-btn" id="btn-surplus-weight" onclick="selectSurplusType('weight')">
+              <span class="surplus-icon">⚖️</span>
+              <div>
+                <div class="surplus-name">Весовой товар</div>
+                <div class="surplus-desc">Фарш, сыр, овощи (кг)</div>
+              </div>
+            </button>
           </div>
 
-          <!-- ШАГ 2 -->
-          <div class="step-box" id="step-box-store">
-            <div class="step-title-row">
-              <span class="step-num">2</span>
-              <span class="step-heading">2 шаг: Выбрать торговую точку</span>
+          <!-- Выбор периода и обновление данных -->
+          <div class="period-action-wrap">
+            <div class="period-header-row">
+              <div class="period-title-group">
+                <span class="period-label">Интервал времени:</span>
+                <span class="period-range" id="display-period-range">01.09.2026 — 10.09.2026</span>
+              </div>
+              <span class="period-days-badge" id="period-days-badge">10 дней</span>
             </div>
-            <div class="store-dropdown-wrap">
-              <select class="store-dropdown" id="select-store" onchange="onStoreChange()">
-                <option value="В-3">В-3</option>
-                <option value="В-4">В-4</option>
-                <option value="В-20">В-20</option>
-                <option value="В-10">В-10</option>
-                <option value="Б19(Батыр Молл)">Б19(Батыр Молл)</option>
-                <option value="В-5">В-5</option>
-                <option value="В-22 (Баянтау)">В-22 (Баянтау)</option>
-                <option value="В-25">В-25</option>
-                <option value="В-13">В-13</option>
-                <option value="В-15">В-15</option>
-                <option value="В-1">В-1</option>
-                <option value="В-7">В-7</option>
-                <option value="В-9">В-9</option>
-                <option value="В-11">В-11</option>
-                <option value="В-16">В-16</option>
-                <option value="В-2" selected>В-2 (Точка P2)</option>
-                <option value="В-21">В-21</option>
-                <option value="В-14">В-14</option>
-                <option value="В-12">В-12</option>
-              </select>
+
+            <!-- Быстрые пресеты периодов -->
+            <div class="interval-presets">
+              <button type="button" class="preset-btn active" data-preset="dec1" onclick="selectIntervalPreset('dec1')">01–10 сент</button>
+              <button type="button" class="preset-btn" data-preset="dec2" onclick="selectIntervalPreset('dec2')">11–20 сент</button>
+              <button type="button" class="preset-btn" data-preset="dec3" onclick="selectIntervalPreset('dec3')">21–30 сент</button>
+              <button type="button" class="preset-btn" data-preset="month" onclick="selectIntervalPreset('month')">Весь месяц</button>
+              <button type="button" class="preset-btn" data-preset="custom" onclick="selectIntervalPreset('custom')">📅 Свой период</button>
             </div>
+
+            <!-- Выбор точных дат -->
+            <div class="interval-dates-row" id="custom-dates-row">
+              <div class="date-field">
+                <span class="date-field-label">С:</span>
+                <input type="date" id="input-date-from" class="date-input" value="2026-09-01" onchange="onCustomDateRangeChange()">
+              </div>
+              <span class="date-sep">➔</span>
+              <div class="date-field">
+                <span class="date-field-label">По:</span>
+                <input type="date" id="input-date-to" class="date-input" value="2026-09-10" onchange="onCustomDateRangeChange()">
+              </div>
+            </div>
+
+            <button type="button" class="btn-update-data" id="btn-update" onclick="handleRefreshData()">
+              <span>🔄</span>
+              <span id="btn-update-text">Обновить данные iiko за выбранный период</span>
+            </button>
           </div>
 
-          <!-- ШАГ 3 -->
-          <div class="step-box" id="step-box-surplus">
-            <div class="step-title-row">
-              <span class="step-num">3</span>
-              <span class="step-heading">3 шаг: Выбрать счёт излишков</span>
+          <!-- ФИЛЬТР ПО СМЕНАМ И ДАТАМ ВНУТРИ ПЕРИОДА -->
+          <div class="shift-filter-panel" style="margin-top: 10px; padding: 10px 12px; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Смена / дата периода:</span>
+              <span id="shift-count-badge" style="font-size: 11px; font-weight: 700; color: var(--accent); background: #EFF6FF; padding: 2px 8px; border-radius: 10px;">Весь период (10 дней)</span>
             </div>
-            <div class="surplus-options">
-              <button type="button" class="surplus-card-btn active" id="btn-surplus-piece" onclick="selectSurplusType('piece')">
-                <span class="surplus-icon">📦</span>
-                <div>
-                  <div class="surplus-name">Штучный товар</div>
-                  <div class="surplus-desc">Булочки, тара, соусы (шт)</div>
-                </div>
-              </button>
-              <button type="button" class="surplus-card-btn" id="btn-surplus-weight" onclick="selectSurplusType('weight')">
-                <span class="surplus-icon">⚖️</span>
-                <div>
-                  <div class="surplus-name">Весовой товар</div>
-                  <div class="surplus-desc">Фарш, сыр, овощи (кг)</div>
-                </div>
-              </button>
-            </div>
-
-            <div class="penalty-rule-hint" id="penalty-rule-hint">
-              <strong>Правило штрафа для штучного товара:</strong> Штраф начисляется на стоимостную сумму выявленных излишков (так как излишек в штучном товаре означает непробитый чек или недовложение).
-            </div>
-
-            <div class="period-action-wrap">
-              <div class="period-header-row">
-                <div class="period-title-group">
-                  <span class="period-label">Интервал времени iikoChain:</span>
-                  <span class="period-range" id="display-period-range">01.09.2026 — 10.09.2026</span>
-                </div>
-                <span class="period-days-badge" id="period-days-badge">10 дней</span>
-              </div>
-
-              <!-- Быстрые пресеты периодов -->
-              <div class="interval-presets">
-                <button type="button" class="preset-btn active" data-preset="dec1" onclick="selectIntervalPreset('dec1')">01–10 сент</button>
-                <button type="button" class="preset-btn" data-preset="dec2" onclick="selectIntervalPreset('dec2')">11–20 сент</button>
-                <button type="button" class="preset-btn" data-preset="dec3" onclick="selectIntervalPreset('dec3')">21–30 сент</button>
-                <button type="button" class="preset-btn" data-preset="month" onclick="selectIntervalPreset('month')">Весь месяц</button>
-                <button type="button" class="preset-btn" data-preset="custom" onclick="selectIntervalPreset('custom')">📅 Свой период</button>
-              </div>
-
-              <!-- Выбор точных дат -->
-              <div class="interval-dates-row" id="custom-dates-row">
-                <div class="date-field">
-                  <span class="date-field-label">С:</span>
-                  <input type="date" id="input-date-from" class="date-input" value="2026-09-01" onchange="onCustomDateRangeChange()">
-                </div>
-                <span class="date-sep">➔</span>
-                <div class="date-field">
-                  <span class="date-field-label">По:</span>
-                  <input type="date" id="input-date-to" class="date-input" value="2026-09-10" onchange="onCustomDateRangeChange()">
-                </div>
-              </div>
-
-              <button type="button" class="btn-update-data" id="btn-update" onclick="handleRefreshData()">
-                <span>🔄</span>
-                <span id="btn-update-text">Обновить данные iiko за выбранный период</span>
-              </button>
-            </div>
-
-            <!-- ФИЛЬТР ПО СМЕНАМ И ДАТАМ ВНУТРИ ПЕРИОДА -->
-            <div class="shift-filter-panel" style="margin-top: 12px; padding: 10px 12px; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 10px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Выбор смены / даты периода:</span>
-                <span id="shift-count-badge" style="font-size: 11px; font-weight: 700; color: var(--accent); background: #EFF6FF; padding: 2px 8px; border-radius: 10px;">Весь период (10 дней)</span>
-              </div>
-              <select id="select-shift-date" class="store-dropdown" style="width: 100%; font-size: 13px; font-weight: 600; padding: 8px 10px; border-radius: 8px; background: #FFF;" onchange="onShiftDateChange()">
-                <option value="all" selected>📅 Сводно: Весь период 01.09 — 10.09 (Все смены)</option>
-              </select>
-            </div>
+            <select id="select-shift-date" class="store-dropdown" style="width: 100%; font-size: 13px; font-weight: 600; padding: 8px 10px; border-radius: 8px; background: #FFF;" onchange="onShiftDateChange()">
+              <option value="all" selected>📅 Сводно: Весь период 01.09 — 10.09 (Все смены)</option>
+            </select>
           </div>
-
         </div>
 
         <!-- РАЗДЕЛ ИНВЕНТАРИЗАЦИИ -->
@@ -2557,7 +2869,7 @@
             <div class="placeholder-icon">📋</div>
             <div class="placeholder-title">Данные не сформированы</div>
             <div class="placeholder-sub">
-              Выберите торговую точку в шаге 2 и нажмите <strong>«Обновить данные iiko»</strong> для загрузки инвентаризации за 01.09.
+              Выберите торговую точку в правом верхнем углу 📍 и нажмите <strong>«Обновить данные iiko»</strong> для загрузки периода.
             </div>
           </div>
 
@@ -2632,7 +2944,7 @@
       <div class="save-dock" id="save-dock">
         <div class="save-dock-inner">
           <button class="btn-save-doc" id="btn-save-doc" disabled onclick="openStep3Modal()">
-            ⚖️ Шаг 3: Начислить штрафы и провести в iiko
+            ⚖️ Начислить штрафы и провести в iiko
           </button>
         </div>
       </div>
@@ -2760,7 +3072,7 @@
               <span>iikoChain • Завершение инвентаризации</span>
               <span class="step3-badge-pill" id="step3-store-badge">В-2</span>
             </div>
-            <div class="step3-subtitle">Шаг 3: Начисление штрафов ответственным лицам по журналу явок</div>
+            <div class="step3-subtitle">Начисление штрафов ответственным лицам по журналу явок</div>
           </div>
           <button type="button" class="step3-close-btn" onclick="closeStep3Modal()" title="Закрыть (Esc)">✕</button>
         </div>
@@ -2984,7 +3296,7 @@
               Закрыть
             </button>
             <button type="button" class="btn-step3-quick" onclick="closeAuditModal(); openStep3Modal();" style="height: 38px; padding: 0 14px;">
-              <span>⚖️ Шаг 3: Провести штрафы</span>
+              <span>⚖️ Провести штрафы</span>
             </button>
           </div>
         </div>
@@ -3092,23 +3404,25 @@
     }
 
     function selectSection(sec) {
+      const headerStoreBtn = document.getElementById('header-store-btn');
       if (sec === 'ord') {
         activeSection = 'ord';
         document.getElementById('btn-sec-inv').classList.remove('active');
         document.getElementById('btn-sec-ord').classList.add('active');
-        document.getElementById('step-box-store').style.display = 'none';
-        document.getElementById('step-box-surplus').style.display = 'none';
+        if (document.getElementById('step-box-store')) document.getElementById('step-box-store').style.display = 'none';
+        if (document.getElementById('step-box-surplus')) document.getElementById('step-box-surplus').style.display = 'none';
         document.getElementById('section-inventory-content').style.display = 'none';
         document.getElementById('section-orders-content').style.display = 'block';
         document.getElementById('save-dock').style.display = 'none';
+        if (headerStoreBtn) headerStoreBtn.style.display = 'none';
       } else {
         activeSection = 'inv';
         document.getElementById('btn-sec-ord').classList.remove('active');
         document.getElementById('btn-sec-inv').classList.add('active');
-        document.getElementById('step-box-store').style.display = 'block';
-        document.getElementById('step-box-surplus').style.display = 'block';
+        if (document.getElementById('step-box-surplus')) document.getElementById('step-box-surplus').style.display = 'block';
         document.getElementById('section-orders-content').style.display = 'none';
         document.getElementById('section-inventory-content').style.display = 'block';
+        if (headerStoreBtn) headerStoreBtn.style.display = 'inline-flex';
         if (isDataLoaded) {
           document.getElementById('save-dock').style.display = 'block';
         }
@@ -3174,7 +3488,9 @@
     function onStoreChange() {
       const store = document.getElementById('select-store').value;
       if (!store) return;
-      document.getElementById('user-role-label').textContent = store + ' • Управляющий';
+      updateHeaderStoreButton(store);
+      const roleLabel = document.getElementById('user-role-label');
+      if (roleLabel) roleLabel.textContent = store + ' • Управляющий';
       isDataLoaded = true;
       isReconciled = false;
       populateShiftDateSelect();
@@ -3187,17 +3503,14 @@
 
     function selectSurplusType(type) {
       activeSurplus = type;
-      const hint = document.getElementById('penalty-rule-hint');
 
       if (type === 'piece') {
         document.getElementById('btn-surplus-piece').classList.add('active');
         document.getElementById('btn-surplus-weight').classList.remove('active');
-        hint.innerHTML = '<strong>Правило штрафа для штучного товара:</strong> До 1 000 ₸ штраф закрепляется за сотрудником <strong>Су-шеф</strong> 👨‍🍳. После 1 000 ₸ штраф ложится на <strong>сотрудника смены</strong> (кассир/сборщик по Журналу явок iiko).';
         showToast('Счёт: Излишки — штучный товар');
       } else {
         document.getElementById('btn-surplus-weight').classList.add('active');
         document.getElementById('btn-surplus-piece').classList.remove('active');
-        hint.innerHTML = '<strong>Регламент весовой инвентаризации:</strong><br>• До 1 000 ₸: штраф начисляется на <strong>Су-шефа</strong> в размере <strong>0,001%</strong>.<br>• Свыше 1 000 ₸: <strong>Сумма штрафа = Сумма недостачи − 1 000 ₸</strong> (начисляется на сотрудников смены: <em>кассир-универсал, кассир-универсал2, кассир-фастфуда</em>).<br><em>Пример: при недостаче 1 560 ₸ в графе «Сумма штрафа» указывается 560 ₸.</em>';
         showToast('Счёт: Излишки — весовой товар');
       }
       isReconciled = false;
@@ -3209,8 +3522,8 @@
     function handleRefreshData() {
       const store = document.getElementById('select-store').value;
       if (!store) {
-        showToast('⚠️ Сначала выберите торговую точку в шаге 2');
-        document.getElementById('select-store').focus();
+        openStoreDrawer();
+        showToast('⚠️ Выберите торговую точку сети');
         return;
       }
       const btn = document.getElementById('btn-update');
@@ -4219,7 +4532,7 @@
         desc.textContent = '✓ Начисление подтверждено! Нажмите «Сохранить в iiko»';
         desc.style.color = 'var(--iiko-green)';
       } else {
-        desc.textContent = 'Шаг 3: Нажмите «Подтвердить» для фиксации сумм';
+        desc.textContent = 'Нажмите «Подтвердить» для фиксации сумм в iiko';
         desc.style.color = 'var(--text-dim)';
       }
     }
@@ -4699,6 +5012,141 @@
         console.error('Init error:', err);
       }
     });
-</script>
+
+    // ====== ШТОРКА ВЫБОРА ТОЧКИ (IIKOWEB) ======
+    const STORES_LIST_DRAWER = [
+      { key: 'В-1', label: 'В-1', dept: 'Отдел B-1' },
+      { key: 'В-2', label: 'В-2 (Точка P2)', dept: 'Отдел B-2 • iikoChain' },
+      { key: 'В-3', label: 'В-3', dept: 'Отдел B-3' },
+      { key: 'В-4', label: 'В-4', dept: 'Отдел B-4' },
+      { key: 'В-5', label: 'В-5', dept: 'Отдел B-5' },
+      { key: 'В-6', label: 'В-6', dept: 'Отдел B-6' },
+      { key: 'В-7', label: 'В-7', dept: 'Отдел B-7' },
+      { key: 'В-8', label: 'В-8', dept: 'Отдел B-8' },
+      { key: 'В-9', label: 'В-9', dept: 'Отдел B-9' },
+      { key: 'В-10', label: 'В-10', dept: 'Отдел В-10' },
+      { key: 'В-11', label: 'В-11', dept: 'Отдел В-11' },
+      { key: 'В-12', label: 'В-12', dept: 'Отдел В-12' },
+      { key: 'В-13', label: 'В-13', dept: 'Отдел В-13' },
+      { key: 'В-14', label: 'В-14', dept: 'Отдел В-14' },
+      { key: 'В-15', label: 'В-15', dept: 'Отдел В-15' },
+      { key: 'В-16', label: 'В-16', dept: 'Отдел В-16' },
+      { key: 'В-17', label: 'В-17', dept: 'Отдел В-17' },
+      { key: 'Б19(Батыр Молл)', label: 'Б19 (Батыр Молл)', dept: 'ТРЦ Batyr Mall' },
+      { key: 'В-20', label: 'В-20', dept: 'Отдел В-20' },
+      { key: 'В-21', label: 'В-21', dept: 'Отдел В-21' },
+      { key: 'В-22 (Баянтау)', label: 'В-22 (Баянтау)', dept: 'Отдел В-22' },
+      { key: 'В-25', label: 'В-25', dept: 'Отдел В-25' }
+    ];
+
+    function renderDrawerStores(filterQuery) {
+      const container = document.getElementById('drawer-stores-list');
+      if (!container) return;
+      const currentStore = document.getElementById('select-store') ? document.getElementById('select-store').value : 'В-2';
+      const q = (filterQuery || '').trim().toLowerCase();
+
+      const filtered = STORES_LIST_DRAWER.filter(function(s) {
+        if (!q) return true;
+        return s.key.toLowerCase().includes(q) || s.label.toLowerCase().includes(q) || s.dept.toLowerCase().includes(q);
+      });
+
+      const countBadge = document.getElementById('drawer-stores-count');
+      if (countBadge) countBadge.textContent = filtered.length + ' точек';
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="padding: 24px; text-align: center; color: #94A3B8; font-size: 13px;">Ничего не найдено</div>';
+        return;
+      }
+
+      let html = '';
+      filtered.forEach(function(s) {
+        const isAct = (s.key === currentStore || (currentStore === 'В-2' && s.key.startsWith('В-2')));
+        html += '<div class="drawer-store-item ' + (isAct ? 'active' : '') + '" onclick="selectDrawerStore(\'' + s.key + '\')">' +
+          '<div class="drawer-store-info">' +
+            '<div class="drawer-store-name">' + s.label + '</div>' +
+            '<div class="drawer-store-dept">' + s.dept + '</div>' +
+          '</div>' +
+          '<div class="drawer-store-check">✓</div>' +
+        '</div>';
+      });
+      container.innerHTML = html;
+    }
+
+    function openStoreDrawer() {
+      const backdrop = document.getElementById('store-drawer-backdrop');
+      if (!backdrop) return;
+      renderDrawerStores();
+      backdrop.classList.add('open');
+      const searchInput = document.getElementById('drawer-search-input');
+      if (searchInput) {
+        searchInput.value = '';
+        setTimeout(function() { searchInput.focus(); }, 150);
+      }
+    }
+
+    function closeStoreDrawer(e, force) {
+      const backdrop = document.getElementById('store-drawer-backdrop');
+      if (!backdrop) return;
+      if (force || !e || e.target === backdrop) {
+        backdrop.classList.remove('open');
+      }
+    }
+
+    function selectDrawerStore(storeKey) {
+      const select = document.getElementById('select-store');
+      if (select) {
+        select.value = storeKey;
+      }
+      updateHeaderStoreButton(storeKey);
+      closeStoreDrawer(null, true);
+      onStoreChange();
+    }
+
+    function filterDrawerStores(val) {
+      renderDrawerStores(val);
+    }
+
+    function updateHeaderStoreButton(storeKey) {
+      const label = document.getElementById('header-store-name');
+      if (!label) return;
+      const found = STORES_LIST_DRAWER.find(function(s) { return s.key === storeKey; });
+      label.textContent = found ? found.label : storeKey;
+    }
+
+    // Keyboard navigation (Esc to close drawer and modals)
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeStoreDrawer(null, true);
+        if (typeof closeReportModal === 'function') closeReportModal();
+        if (typeof closeStep3Modal === 'function') closeStep3Modal();
+        if (typeof closeWarningModal === 'function') closeWarningModal();
+        if (typeof closeAuditModal === 'function') closeAuditModal();
+      }
+    });
+
+  </script>
+
+    <!-- ШТОРКА ВЫБОРА ТОЧКИ (IIKOWEB STYLE) -->
+    <div class="store-drawer-backdrop" id="store-drawer-backdrop" onclick="closeStoreDrawer(event)">
+      <div class="store-drawer" id="store-drawer" onclick="event.stopPropagation()">
+        <div class="drawer-header">
+          <div class="drawer-title-group">
+            <span class="drawer-icon">📍</span>
+            <span class="drawer-title">Торговая точка</span>
+            <span class="drawer-count-badge" id="drawer-stores-count">22 точки</span>
+          </div>
+          <button type="button" class="drawer-close-btn" onclick="closeStoreDrawer(null, true)" title="Закрыть (Esc)">✕</button>
+        </div>
+
+        <div class="drawer-search-box">
+          <input type="text" id="drawer-search-input" class="drawer-search-input" placeholder="🔍 Поиск по номеру или названию..." oninput="filterDrawerStores(this.value)" autocomplete="off">
+        </div>
+
+        <div class="drawer-stores-list" id="drawer-stores-list">
+          <!-- Заполняется динамически -->
+        </div>
+      </div>
+    </div>
+
 </body>
 </html>
