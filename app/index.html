@@ -1428,7 +1428,7 @@
             </div>
             <div class="store-dropdown-wrap">
               <select class="store-dropdown" id="select-store" onchange="onStoreChange()">
-                <option value="В-3" selected>В-3</option>
+                <option value="В-3">В-3</option>
                 <option value="В-4">В-4</option>
                 <option value="В-20">В-20</option>
                 <option value="В-10">В-10</option>
@@ -1443,7 +1443,7 @@
                 <option value="В-9">В-9</option>
                 <option value="В-11">В-11</option>
                 <option value="В-16">В-16</option>
-                <option value="В-2">В-2 (Точка P2)</option>
+                <option value="В-2" selected>В-2 (Точка P2)</option>
                 <option value="В-21">В-21</option>
                 <option value="В-14">В-14</option>
                 <option value="В-12">В-12</option>
@@ -2619,7 +2619,7 @@
       try {
         const storeSelect = document.getElementById('select-store');
         if (storeSelect) {
-          storeSelect.value = 'В-3';
+          storeSelect.value = 'В-2';
           onStoreChange();
         }
       } catch (err) {
