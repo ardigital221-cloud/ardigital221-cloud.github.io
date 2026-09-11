@@ -1936,6 +1936,426 @@
       border-color: #F59E0B;
     }
 
+  
+    /* --- ДИЗАЙН БЕЗ ШУМА: ВЫБОР ИНТЕРВАЛА И АКТ АУДИТА --- */
+    
+    /* Typography & Tabular Numbers */
+    .inv-sum-val, .item-cost-badge, .step3-total-num, .meta-item-value, .audit-val {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Period Selector Styling */
+    .period-action-wrap {
+      margin-top: 12px;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .period-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .period-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .period-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .period-range {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .period-days-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      background: #EFF6FF;
+      border: 1px solid #DBEAFE;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+
+    .interval-presets {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .preset-btn {
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.12s ease;
+    }
+    .preset-btn:hover {
+      background: #F1F5F9;
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .preset-btn.active {
+      background: #0F172A;
+      color: #FFF;
+      border-color: #0F172A;
+    }
+
+    .interval-dates-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+
+    .date-field {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .date-field-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .date-input {
+      width: 100%;
+      height: 32px;
+      padding: 0 8px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #FFF;
+      font-size: 12px;
+      font-family: var(--mono);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .date-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+    }
+
+    .date-sep {
+      color: var(--text-dim);
+      font-size: 12px;
+    }
+
+    /* МОДАЛКА АУДИТА (ПРОВЕРКА БЕЗ ШУМА) */
+    .audit-modal {
+      background: #FFFFFF;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 48px rgba(15, 23, 42, 0.25);
+      animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .audit-head {
+      background: #0F172A;
+      color: #FFF;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1E293B;
+      flex-shrink: 0;
+    }
+
+    .audit-head-title {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .audit-status-badge {
+      background: #166534;
+      color: #DCFCE7;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+      border: 1px solid #22C55E;
+    }
+
+    .audit-body {
+      padding: 16px 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      font-size: 12px;
+      color: #1E293B;
+    }
+
+    /* Блок 1: Что сделано роботом */
+    .audit-section-box {
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .audit-section-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .audit-metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .audit-metric-card {
+      background: #FFF;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .audit-metric-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .audit-metric-num {
+      font-size: 14px;
+      font-weight: 800;
+      font-family: var(--mono);
+    }
+    .audit-metric-num.danger { color: var(--danger); }
+    .audit-metric-num.ok { color: var(--iiko-green); }
+    .audit-metric-num.neutral { color: var(--text); }
+
+    /* Блок 2: Начисление штрафов */
+    .audit-penalty-card {
+      background: #FFF;
+      border: 1.5px solid var(--border-light);
+      border-radius: 8px;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .audit-penalty-card.active-penalty {
+      border-left: 4px solid var(--danger);
+    }
+    .audit-penalty-card.sous-penalty {
+      border-left: 4px solid #F59E0B;
+    }
+
+    .audit-penalty-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .audit-emp-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .audit-emp-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .audit-emp-role {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: #E2E8F0;
+      color: #334155;
+    }
+
+    .audit-penalty-reason {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .audit-penalty-sum {
+      font-size: 14px;
+      font-weight: 800;
+      font-family: var(--mono);
+      color: var(--danger);
+      white-space: nowrap;
+    }
+
+    /* Блок 3: Ручная проверка */
+    .audit-manual-box {
+      background: #FFFBEB;
+      border: 1.5px solid #FDE68A;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .audit-manual-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .audit-manual-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #92400E;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .audit-manual-count {
+      font-size: 10.5px;
+      font-weight: 700;
+      background: #FEF3C7;
+      color: #B45309;
+      padding: 2px 7px;
+      border-radius: 10px;
+      border: 1px solid #FDE68A;
+    }
+
+    .audit-manual-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .audit-manual-item {
+      background: #FFF;
+      border: 1px solid #FDE68A;
+      border-radius: 6px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .audit-manual-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .audit-manual-item-title {
+      font-weight: 700;
+      font-size: 12px;
+      color: #0F172A;
+    }
+
+    .audit-manual-item-desc {
+      font-size: 10.5px;
+      color: #78350F;
+    }
+
+    .audit-manual-action-btn {
+      background: #F1F5F9;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.12s;
+    }
+    .audit-manual-action-btn:hover {
+      background: #E2E8F0;
+    }
+
+    .audit-foot {
+      padding: 12px 18px;
+      background: #F8FAFC;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-audit-view {
+      height: 34px;
+      padding: 0 12px;
+      background: #0F172A;
+      color: #FFF;
+      border: none;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+      transition: background 0.12s;
+    }
+    .btn-audit-view:hover {
+      background: #1E293B;
+    }
+
   </style>
 </head>
 <body>
@@ -2080,13 +2500,39 @@
             </div>
 
             <div class="period-action-wrap">
-              <div class="period-fields">
-                <span class="period-label">Период инвентаризации:</span>
-                <span class="period-range">с 01.09 по 10.09</span>
+              <div class="period-header-row">
+                <div class="period-title-group">
+                  <span class="period-label">Интервал времени iikoChain:</span>
+                  <span class="period-range" id="display-period-range">01.09.2026 — 10.09.2026</span>
+                </div>
+                <span class="period-days-badge" id="period-days-badge">10 дней</span>
               </div>
+
+              <!-- Быстрые пресеты периодов -->
+              <div class="interval-presets">
+                <button type="button" class="preset-btn active" data-preset="dec1" onclick="selectIntervalPreset('dec1')">01–10 сент</button>
+                <button type="button" class="preset-btn" data-preset="dec2" onclick="selectIntervalPreset('dec2')">11–20 сент</button>
+                <button type="button" class="preset-btn" data-preset="dec3" onclick="selectIntervalPreset('dec3')">21–30 сент</button>
+                <button type="button" class="preset-btn" data-preset="month" onclick="selectIntervalPreset('month')">Весь месяц</button>
+                <button type="button" class="preset-btn" data-preset="custom" onclick="selectIntervalPreset('custom')">📅 Свой период</button>
+              </div>
+
+              <!-- Выбор точных дат -->
+              <div class="interval-dates-row" id="custom-dates-row">
+                <div class="date-field">
+                  <span class="date-field-label">С:</span>
+                  <input type="date" id="input-date-from" class="date-input" value="2026-09-01" onchange="onCustomDateRangeChange()">
+                </div>
+                <span class="date-sep">➔</span>
+                <div class="date-field">
+                  <span class="date-field-label">По:</span>
+                  <input type="date" id="input-date-to" class="date-input" value="2026-09-10" onchange="onCustomDateRangeChange()">
+                </div>
+              </div>
+
               <button type="button" class="btn-update-data" id="btn-update" onclick="handleRefreshData()">
                 <span>🔄</span>
-                <span id="btn-update-text">Обновить данные iiko</span>
+                <span id="btn-update-text">Обновить данные iiko за выбранный период</span>
               </button>
             </div>
 
@@ -2435,6 +2881,112 @@
             <span>💾</span>
             <span>Сохранить в iiko</span>
           </button>
+        </div>
+
+      </div>
+    </div>
+
+    
+    <!-- МОДАЛКА АКТА АУДИТА: ЧТО СДЕЛАНО И ЧТО ПРОВЕРИТЬ ВРУЧНУЮ -->
+    <div class="modal-backdrop" id="modal-audit" onclick="if(event.target === this) closeAuditModal()">
+      <div class="audit-modal">
+        <div class="audit-head">
+          <div class="audit-head-title">
+            <span>BURЖУЙ • Акт проверки и аудита сведений iikoChain</span>
+            <span class="audit-status-badge" id="audit-status-badge">● Сведено роботом</span>
+          </div>
+          <button type="button" class="modal-close-btn" onclick="closeAuditModal()" style="color:#FFF;" title="Закрыть (Esc)">✕</button>
+        </div>
+
+        <div class="audit-body">
+          
+          <!-- Метаданные точки и интервала -->
+          <div class="report-meta-grid" style="margin-bottom: 0;">
+            <div>
+              <div class="meta-item-label">Торговая точка</div>
+              <div class="meta-item-value" id="audit-store-label">P2 (В-2)</div>
+            </div>
+            <div>
+              <div class="meta-item-label">Интервал проверки</div>
+              <div class="meta-item-value" id="audit-interval-label">01.09 — 10.09 (10 дней)</div>
+            </div>
+            <div>
+              <div class="meta-item-label">Счёт излишков</div>
+              <div class="meta-item-value" id="audit-surplus-label">Штучный товар</div>
+            </div>
+            <div>
+              <div class="meta-item-label">Статус проверки</div>
+              <div class="meta-item-value" style="color: var(--iiko-green); font-weight: 700;">✓ Автоматически сведено</div>
+            </div>
+          </div>
+
+          <!-- БЛОК 1: ЧТО СДЕЛАНО РОБОТОМ -->
+          <div class="audit-section-box">
+            <div class="audit-section-title">
+              <span>🤖</span>
+              <span>1. Что сделано роботом автоматически (Без шума):</span>
+            </div>
+            <div class="audit-metrics-grid">
+              <div class="audit-metric-card">
+                <span class="audit-metric-label">Было недостач (на 01.09):</span>
+                <span class="audit-metric-num danger" id="audit-before-val">-18 041 ₸</span>
+              </div>
+              <div class="audit-metric-card">
+                <span class="audit-metric-label">Зачтено излишками:</span>
+                <span class="audit-metric-num ok" id="audit-covered-val">+12 558 ₸</span>
+              </div>
+              <div class="audit-metric-card">
+                <span class="audit-metric-label">Остаток к удержанию:</span>
+                <span class="audit-metric-num danger" id="audit-rem-val">-5 483 ₸</span>
+              </div>
+            </div>
+            <div style="font-size: 11px; color: #475569; line-height: 1.45; margin-top: 4px;" id="audit-summary-note">
+              ✓ <strong>13 позиций со 100% зачётом</strong> списаны в 0 ₸. Книжные остатки пересчитаны, предупреждения об отрицательных остатках подтверждены.
+            </div>
+          </div>
+
+          <!-- БЛОК 2: ЧТО КОМУ НАЧИСЛИЛОСЬ -->
+          <div class="audit-section-box">
+            <div class="audit-section-title">
+              <span>👥</span>
+              <span>2. Что кому начислено по табелю явок (Персональные штрафы):</span>
+            </div>
+            <div id="audit-penalties-list" style="display: flex; flex-direction: column; gap: 6px;">
+              <!-- Заполняется динамически -->
+            </div>
+          </div>
+
+          <!-- БЛОК 3: ПОЗИЦИИ, КОТОРЫЕ СТОИТ ПРОВЕРИТЬ ВРУЧНУЮ -->
+          <div class="audit-manual-box">
+            <div class="audit-manual-head">
+              <div class="audit-manual-title">
+                <span>⚠️</span>
+                <span>3. Позиции, которые стоит проверить вручную (Ручной контроль):</span>
+              </div>
+              <span class="audit-manual-count" id="audit-manual-count">5 позиций</span>
+            </div>
+            <div style="font-size: 11px; color: #92400E; line-height: 1.4;">
+              По этим позициям <strong>встречных излишков в выбранном периоде не обнаружено</strong>. Проверьте фактическое наличие на складе или непринятые приходные накладные.
+            </div>
+            <div class="audit-manual-list" id="audit-manual-list">
+              <!-- Заполняется динамически позициями без встречных излишков -->
+            </div>
+          </div>
+
+        </div>
+
+        <div class="audit-foot">
+          <button type="button" class="btn-foot-copy" onclick="copyAuditReportForWhatsApp()">
+            <span>📲 Скопировать отчёт для WhatsApp</span>
+          </button>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="btn-foot-close" onclick="closeAuditModal()">
+              Закрыть
+            </button>
+            <button type="button" class="btn-step3-quick" onclick="closeAuditModal(); openStep3Modal();" style="height: 38px; padding: 0 14px;">
+              <span>⚖️ Шаг 3: Провести штрафы</span>
+            </button>
+          </div>
         </div>
 
       </div>
@@ -3175,6 +3727,10 @@
       isReconciled = true;
       renderItemsCards();
       showToast('✓ Сведено то, по чему найдены излишки');
+      // Автоматически открываем чистый отчет аудита («без шума»)
+      setTimeout(function() {
+        openAuditModal();
+      }, 350);
     }
 
     function revertReconciliation() {
@@ -3808,6 +4364,296 @@
         showToast('✓ Реестр штрафов скопирован для WhatsApp');
       }).catch(function() {
         showToast('Реестр готов');
+      });
+    }
+
+
+    
+    // --- УПРАВЛЕНИЕ ИНТЕРВАЛОМ ВРЕМЕНИ И АКТ АУДИТА (БЕЗ ШУМА) ---
+    let currentInterval = {
+      preset: 'dec1',
+      from: '2026-09-01',
+      to: '2026-09-10',
+      label: '01.09.2026 — 10.09.2026',
+      days: 10
+    };
+
+    function selectIntervalPreset(preset) {
+      currentInterval.preset = preset;
+
+      if (preset === 'dec1') {
+        currentInterval.from = '2026-09-01';
+        currentInterval.to = '2026-09-10';
+      } else if (preset === 'dec2') {
+        currentInterval.from = '2026-09-11';
+        currentInterval.to = '2026-09-20';
+      } else if (preset === 'dec3') {
+        currentInterval.from = '2026-09-21';
+        currentInterval.to = '2026-09-30';
+      } else if (preset === 'month') {
+        currentInterval.from = '2026-09-01';
+        currentInterval.to = '2026-09-30';
+      }
+
+      document.querySelectorAll('.preset-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-preset') === preset);
+      });
+
+      const inputFrom = document.getElementById('input-date-from');
+      const inputTo = document.getElementById('input-date-to');
+      if (inputFrom) inputFrom.value = currentInterval.from;
+      if (inputTo) inputTo.value = currentInterval.to;
+
+      updateIntervalDisplay();
+      handleRefreshData();
+      showToast('Период проверки: ' + currentInterval.label);
+    }
+
+    function onCustomDateRangeChange() {
+      const fromVal = document.getElementById('input-date-from').value;
+      const toVal = document.getElementById('input-date-to').value;
+
+      if (fromVal && toVal) {
+        currentInterval.from = fromVal;
+        currentInterval.to = toVal;
+        currentInterval.preset = 'custom';
+
+        document.querySelectorAll('.preset-btn').forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-preset') === 'custom');
+        });
+
+        updateIntervalDisplay();
+        handleRefreshData();
+        showToast('Выбран период: ' + currentInterval.label);
+      }
+    }
+
+    function updateIntervalDisplay() {
+      const d1 = new Date(currentInterval.from);
+      const d2 = new Date(currentInterval.to);
+      const diffMs = Math.max(0, d2 - d1);
+      const days = Math.round(diffMs / (1000 * 60 * 60 * 24)) + 1;
+      currentInterval.days = days;
+
+      const fFrom = formatDateRu(currentInterval.from);
+      const fTo = formatDateRu(currentInterval.to);
+      currentInterval.label = fFrom + ' — ' + fTo;
+
+      const displayRange = document.getElementById('display-period-range');
+      if (displayRange) displayRange.textContent = currentInterval.label;
+
+      const daysBadge = document.getElementById('period-days-badge');
+      if (daysBadge) daysBadge.textContent = days + ' дн.';
+    }
+
+    function formatDateRu(dateStr) {
+      const parts = dateStr.split('-');
+      if (parts.length === 3) return parts[2] + '.' + parts[1] + '.' + parts[0];
+      return dateStr;
+    }
+
+    // --- МОДАЛКА ПРОВЕРКИ И АУДИТА («БЕЗ ШУМА») ---
+    function openAuditModal() {
+      const storeData = getActiveStoreData();
+      const storeKey = storeData ? storeData.storeLabel : document.getElementById('select-store').value;
+      const isPiece = activeSurplus === 'piece';
+      const items = getItemsForActiveStore(isPiece);
+      const roster = storeData ? (storeData.roster || []) : [];
+      const calc = calculateStoreReconciliation(items, roster);
+
+      // Шапка
+      document.getElementById('audit-store-label').textContent = storeKey + ' (P2)';
+      document.getElementById('audit-interval-label').textContent = currentInterval.label + ' (' + currentInterval.days + ' дней)';
+      document.getElementById('audit-surplus-label').textContent = isPiece ? 'Штучный товар' : 'Весовой товар';
+
+      // Блок 1: Метрики
+      document.getElementById('audit-before-val').textContent = '-' + calc.totalBefore.toLocaleString('ru-RU') + ' ₸';
+      document.getElementById('audit-covered-val').textContent = '+' + calc.totalCovered.toLocaleString('ru-RU') + ' ₸';
+      document.getElementById('audit-rem-val').textContent = '-' + calc.totalResidual.toLocaleString('ru-RU') + ' ₸';
+
+      // Посчитать сколько позиций зачтено на 100%
+      const fullyCoveredCount = items.filter(function(it) {
+        return it.hasSurplus && Math.abs(it.remCost) === 0;
+      }).length;
+
+      document.getElementById('audit-summary-note').innerHTML = 
+        '✓ <strong>' + fullyCoveredCount + ' позиций со 100% зачётом</strong> полностью закрыты излишками в 0 ₸. ' +
+        'Сэкономлено <strong>+' + calc.totalCovered.toLocaleString('ru-RU') + ' ₸</strong>. Книжные остатки скорректированы.';
+
+      // Блок 2: Начисление штрафов
+      const penList = document.getElementById('audit-penalties-list');
+      penList.innerHTML = '';
+
+      let hasAnyFine = false;
+
+      // Су-шеф
+      if (calc.sousFines > 0) {
+        hasAnyFine = true;
+        const sousCard = document.createElement('div');
+        sousCard.className = 'audit-penalty-card sous-penalty';
+        const sousItemsList = (calc.fineItemsByPerson && calc.fineItemsByPerson[calc.sousPerson.name]) || [];
+        sousCard.innerHTML = 
+          '<div class="audit-penalty-left">' +
+            '<div class="audit-emp-header">' +
+              '<span style="font-size: 14px;">👨‍🍳</span>' +
+              '<span class="audit-emp-name">' + calc.sousPerson.name + '</span>' +
+              '<span class="audit-emp-role" style="background: #FEF3C7; color: #92400E;">Су-шеф кухни</span>' +
+            '</div>' +
+            '<div class="audit-penalty-reason">' +
+              (isPiece 
+                ? ('Закреплено ' + sousItemsList.length + ' мелких хоз. позиций (недостача ≤ 1 000 ₸)')
+                : ('Учётная ставка 0,001% по позициям ≤ 1 000 ₸')) +
+            '</div>' +
+          '</div>' +
+          '<div class="audit-penalty-sum" style="color: #B45309;">' + calc.sousFines.toLocaleString('ru-RU') + ' ₸</div>';
+        penList.appendChild(sousCard);
+      }
+
+      // Кассиры смены
+      for (const [pName, fAmt] of Object.entries(calc.finesByPerson)) {
+        if (pName !== calc.sousPerson.name && fAmt > 0) {
+          hasAnyFine = true;
+          const empInfo = roster.find(function(r) { return r.name === pName; }) || { role: 'Кассир-универсал' };
+          const itemsList = (calc.fineItemsByPerson && calc.fineItemsByPerson[pName]) || [];
+          const reasonStr = itemsList.map(function(it) {
+            return it.title + ' (' + (it.note || (it.amount + ' ₸')) + ')';
+          }).join(', ');
+
+          const card = document.createElement('div');
+          card.className = 'audit-penalty-card active-penalty';
+          card.innerHTML = 
+            '<div class="audit-penalty-left">' +
+              '<div class="audit-emp-header">' +
+                '<span style="font-size: 14px;">🚨</span>' +
+                '<span class="audit-emp-name">' + pName + '</span>' +
+                '<span class="audit-emp-role" style="background: #EFF6FF; color: #1D4ED8;">' + empInfo.role + '</span>' +
+              '</div>' +
+              '<div class="audit-penalty-reason">' +
+                'Смена: ' + (itemsList[0] ? itemsList[0].date : '01.09') + ' • ' + reasonStr +
+              '</div>' +
+            '</div>' +
+            '<div class="audit-penalty-sum">' + fAmt.toLocaleString('ru-RU') + ' ₸</div>';
+          penList.appendChild(card);
+        }
+      }
+
+      if (!hasAnyFine) {
+        penList.innerHTML = '<div style="color: var(--iiko-green); font-weight: 600; padding: 6px 0;">✓ Штрафов нет. Все расхождения полностью закрыты встречными излишками.</div>';
+      }
+
+      // Блок 3: Позиции, которые стоит проверить вручную (Ручной контроль)
+      const manualList = document.getElementById('audit-manual-list');
+      manualList.innerHTML = '';
+
+      // Критерии ручной проверки:
+      // 1. Позиции без излишков (hasSurplus === false)
+      // 2. Позиции с остаточным убытком > 1000 ₸
+      const manualCheckItems = items.filter(function(it) {
+        const rem = Math.abs(it.hasSurplus ? it.remCost : it.costBefore);
+        return !it.hasSurplus || rem > 1000;
+      });
+
+      document.getElementById('audit-manual-count').textContent = manualCheckItems.length + ' позиций';
+
+      if (manualCheckItems.length === 0) {
+        manualList.innerHTML = '<div style="color: var(--iiko-green); font-weight: 600; padding: 4px 0;">✓ Все позиции сведены. Позиций для ручной проверки нет.</div>';
+      } else {
+        manualCheckItems.forEach(function(it) {
+          const rem = Math.abs(it.hasSurplus ? it.remCost : it.costBefore);
+          const itemRow = document.createElement('div');
+          itemRow.className = 'audit-manual-item';
+          
+          let causeNote = '';
+          if (!it.hasSurplus) {
+            causeNote = '⚠️ Излишков в периоде ' + currentInterval.label + ' НЕТ. Проверьте фактический остаток или непринятую накладную.';
+          } else {
+            causeNote = 'Частичный зачёт (излишек +' + it.surplusQty + ' ' + it.unit + '). Остаток к удержанию: ' + rem + ' ₸.';
+          }
+
+          itemRow.innerHTML = 
+            '<div class="audit-manual-left">' +
+              '<div class="audit-manual-item-title">' + it.title + ' — <span style="color: var(--danger);">' + it.diffBefore + ' ' + it.unit + ' (' + rem.toLocaleString('ru-RU') + ' ₸)</span></div>' +
+              '<div class="audit-manual-item-desc">' + causeNote + '</div>' +
+            '</div>' +
+            '<button type="button" class="audit-manual-action-btn" onclick="inspectManualItem(\'' + it.id + '\')">' +
+              '<span>📊 Движение</span>' +
+            '</button>';
+          manualList.appendChild(itemRow);
+        });
+      }
+
+      document.getElementById('modal-audit').style.display = 'flex';
+    }
+
+    function closeAuditModal() {
+      document.getElementById('modal-audit').style.display = 'none';
+    }
+
+    function inspectManualItem(itemId) {
+      closeAuditModal();
+      const moveBox = document.getElementById('move-' + itemId);
+      const card = document.getElementById('card-' + itemId);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (moveBox) {
+          moveBox.style.display = 'block';
+          const arrow = document.getElementById('arrow-' + itemId);
+          if (arrow) arrow.textContent = '▴';
+        }
+      }
+    }
+
+    function copyAuditReportForWhatsApp() {
+      const storeData = getActiveStoreData();
+      const storeKey = storeData ? storeData.storeLabel : document.getElementById('select-store').value;
+      const isPiece = activeSurplus === 'piece';
+      const items = getItemsForActiveStore(isPiece);
+      const roster = storeData ? (storeData.roster || []) : [];
+      const calc = calculateStoreReconciliation(items, roster);
+
+      const lines = [
+        '📋 *АКТ ПРОВЕРКИ И АУДИТА СВЕДЕНИЯ IIKOCHAIN*',
+        '📍 *Точка:* ' + storeKey + ' (P2)',
+        '📅 *Интервал:* ' + currentInterval.label + ' (' + currentInterval.days + ' дней)',
+        '📦 *Счёт:* ' + (isPiece ? 'Штучный товар' : 'Весовой товар'),
+        '--------------------------------',
+        '• *Было недостач (на 01.09):* -' + calc.totalBefore.toLocaleString('ru-RU') + ' ₸',
+        '• *Зачтено излишками:* +' + calc.totalCovered.toLocaleString('ru-RU') + ' ₸',
+        '• *РЕАЛЬНЫЙ ОСТАТОК К УДЕРЖАНИЮ:* -' + calc.totalResidual.toLocaleString('ru-RU') + ' ₸',
+        '--------------------------------',
+        '*ЧТО КОМУ НАЧИСЛЕНО (ШТРАФЫ СМЕНЫ):*'
+      ];
+
+      for (const [pName, fAmt] of Object.entries(calc.finesByPerson)) {
+        if (fAmt > 0) {
+          const isSous = (pName === calc.sousPerson.name);
+          const empInfo = roster.find(function(r) { return r.name === pName; }) || { role: isSous ? 'Су-шеф' : 'Кассир' };
+          lines.push((isSous ? '👨‍🍳 ' : '🚨 ') + '*' + pName + '* (' + empInfo.role + '): *' + fAmt.toLocaleString('ru-RU') + ' ₸*');
+        }
+      }
+
+      // Позиции для ручной проверки
+      const manualCheckItems = items.filter(function(it) {
+        return !it.hasSurplus;
+      });
+
+      if (manualCheckItems.length > 0) {
+        lines.push('--------------------------------');
+        lines.push('⚠️ *ПОЗИЦИИ БЕЗ ИЗЛИШКОВ (ПРОВЕРИТЬ ВРУЧНУЮ):*');
+        manualCheckItems.slice(0, 7).forEach(function(it) {
+          const rem = Math.abs(it.hasSurplus ? it.remCost : it.costBefore);
+          lines.push('• ' + it.title + ': ' + it.diffBefore + ' ' + it.unit + ' (-' + rem + ' ₸) — излишков нет!');
+        });
+      }
+
+      lines.push('--------------------------------');
+      lines.push('✅ *Сведено роботом по мастер-протоколу Burzhui.*');
+
+      const text = lines.join('\n');
+      navigator.clipboard.writeText(text).then(function() {
+        showToast('✓ Акт аудита скопирован для WhatsApp');
+      }).catch(function() {
+        showToast('Акт готов');
       });
     }
 
