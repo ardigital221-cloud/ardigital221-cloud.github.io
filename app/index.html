@@ -5094,9 +5094,7 @@
               <option value="В-21">В-21</option>
               <option value="В-22 (Баянтау)">В-22 (Баянтау)</option>
               <option value="В-25">В-25</option>
-              <option value="В-2" style="color: #EF4444;">В-2 (Чокина 38/1 — ЗАКРЫТА)</option>
-              <option value="В-3" style="color: #EF4444;">В-3 (Сатпаева 250 — ЗАКРЫТА)</option>
-              <option value="В-15" style="color: #EF4444;">В-15 (Назарбаева 89/4 — ЗАКРЫТА)</option>
+
             </select>
           </div>
 
@@ -5421,7 +5419,7 @@
                   </h2>
                   <div class="delivery-subtitle">
                     <span>Сводная аналитика: Яндекс Еда, Wolt, Glovo и Call-центр</span>
-                    <span class="status-pill-red" style="font-size:10px;"><span class="status-badge-dot red"></span>4 закрыты (исключены)</span>
+                    
                   </div>
                 </div>
                 <div style="display: flex; gap: 6px; flex-wrap: wrap;">
@@ -5456,18 +5454,12 @@
                   <option value="В-11">В-11</option>
                   <option value="В-4">В-4 (ул. Ломова, 157)</option>
                   <option value="Б19(Батыр Молл)">Б19 (ТРЦ Батыр Молл)</option>
-                  <option value="CLOSED_NOTICE" style="color: #EF4444;" disabled>── 4 закрытые точки (исключены) ──</option>
-                  <option value="В-2" style="color: #EF4444;">В-2 (Чокина 38/1 — ЗАКРЫТА)</option>
-                  <option value="В-15" style="color: #EF4444;">В-15 (Назарбаева 89/4 — ЗАКРЫТА)</option>
-                  <option value="В-3" style="color: #EF4444;">В-3 (Сатпаева 250 — ЗАКРЫТА)</option>
+
                 </select>
               </div>
             </div>
 
-            <!-- Предупреждение о закрытой точке, если выбрана -->
-            <div id="del-closed-warning" style="display:none; padding:12px 14px; background:#FEF2F2; border:1px solid #FCA5A5; border-radius:8px; margin-bottom:14px; color:#991B1B; font-size:12px;">
-              <strong>Внимание:</strong> Данный филиал официально закрыт по указанию руководства сети. Все заказы (-928 662 ₸) и чеки исключены из действующей аналитики сети «BURЖУЙ».
-            </div>
+
 
             <!-- Сетка KPI-дашбордиков -->
             <div class="del-kpi-grid">
@@ -5629,9 +5621,7 @@
                     </tr>
                   </table>
 
-                  <div class="aggr-notice-box" style="border-left: 3px solid #FC3F1D;">
-                    <strong>Замечание:</strong> 53 открытых тикета поддержки. Необходимо отвязать 4 закрытые точки, чтобы восстановить выдачу с 78% до 96%+.
-                  </div>
+
                 </div>
 
                 <!-- Wolt -->
@@ -5678,9 +5668,7 @@
                     </tr>
                   </table>
 
-                  <div class="aggr-notice-box" style="border-left: 3px solid #00C2E8;">
-                    <strong>Внимание:</strong> 258 ч оффлайн-простоя планшетов на точках за неделю! Из-за этого просели заказы на 26%. Введен строгий KPI для кассиров.
-                  </div>
+
                 </div>
 
                 <!-- Glovo -->
@@ -5727,28 +5715,12 @@
                     </tr>
                   </table>
 
-                  <div class="aggr-notice-box" style="border-left: 3px solid #00A082;">
-                    <strong>Точка роста:</strong> Подключить Glovo на точке Б19 (Батыр Молл) — расчетный прирост +250 000 – 300 000 ₸ выручки в месяц.
-                  </div>
+
                 </div>
 
               </div>
 
-              <!-- Своя доставка: потенциал экономии -->
-              <div style="background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%); border: 1px solid #FECDD3; border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                <div>
-                  <div style="font-size: 13px; font-weight: 800; color: #9F1239; margin-bottom: 2px;">
-                    Своя доставка 2.0 (Хабы В-5, В-1, В-12, Б19)
-                  </div>
-                  <div style="font-size: 11px; color: #881337;">
-                    При переходе заказов на свою курьерскую службу сеть сохраняет <strong>30% комиссии агрегаторов</strong>.
-                  </div>
-                </div>
-                <div style="text-align: right;">
-                  <div style="font-size: 10px; color: #9F1239; font-weight: 600;">Потенциал экономии:</div>
-                  <div style="font-size: 16px; font-weight: 900; color: #E11D48;">+1 869 000 ₸ / мес</div>
-                </div>
-              </div>
+
 
             </div>
 
@@ -5762,7 +5734,7 @@
                     <span>Рейтинг филиалов по доставке</span>
                     <span style="font-size: 11px; color: #64748B;">ТОП-12 действующих точек</span>
                   </h3>
-                  <span style="font-size: 11px; color: #64748B;">Август 2026</span>
+                  <span style="font-size: 12px; font-weight: 700; color: #0284C7;" id="branches-table-period-tag">Август 2026 (месяц)</span>
                 </div>
 
                 <div class="del-table-wrap">
@@ -5813,6 +5785,21 @@
             </div>
 
             <!-- Стоп-листы и Журнал отмен -->
+            
+            <!-- Модальное окно подтверждения снятия со стоп-листа -->
+            <div id="modal-stop-confirm" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.55); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); z-index:9999; align-items:center; justify-content:center; padding:16px;">
+              <div style="background:#FFFFFF; border-radius:12px; border:1px solid #E2E8F0; padding:20px; max-width:420px; width:100%; box-shadow:0 12px 30px rgba(0,0,0,0.15);">
+                <div style="font-size:16px; font-weight:800; color:#0F172A; margin-bottom:8px;">Снять позицию со стоп-листа?</div>
+                <div style="font-size:13px; color:#475569; margin-bottom:20px; line-height:1.5;" id="stop-confirm-text">
+                  Вы действительно хотите снять позицию со стоп-листа в iiko и агрегаторах доставки?
+                </div>
+                <div style="display:flex; justify-content:flex-end; gap:8px;">
+                  <button type="button" class="btn-quick-action btn-action-outline" onclick="closeStopConfirmModal()">Отмена</button>
+                  <button type="button" class="btn-quick-action btn-action-green" onclick="executeStopItemRemoval()">Да, снять со стопа</button>
+                </div>
+              </div>
+            </div>
+
             <div class="stops-cancels-grid">
               
               <!-- Стоп-листы -->
@@ -5828,7 +5815,7 @@
                 <div id="stops-list-container">
                   <div class="stop-item-row" id="stop-item-1">
                     <div>
-                      <div style="font-size: 13px; font-weight: 700; color: #991B1B;">Пита сырная M</div>
+                      <div class="stop-item-title" style="font-size: 13px; font-weight: 700; color: #991B1B;">Пита сырная M</div>
                       <div style="font-size: 11px; color: #7F1D1D;">Точка: В-4 (ул. Ломова, 157) • 1ч 45мин в стопе</div>
                       <div style="font-size: 10px; color: #B91C1C; margin-top: 2px;">Причина: закончился сыр сулугуни (поставка в 14:00)</div>
                     </div>
@@ -5837,7 +5824,7 @@
 
                   <div class="stop-item-row" id="stop-item-2">
                     <div>
-                      <div style="font-size: 13px; font-weight: 700; color: #991B1B;">Соус Тар-тар фирменный</div>
+                      <div class="stop-item-title" style="font-size: 13px; font-weight: 700; color: #991B1B;">Соус Тар-тар фирменный</div>
                       <div style="font-size: 11px; color: #7F1D1D;">Точка: В-10 (пр. Назарбаева, 283/1) • 3ч 10мин в стопе</div>
                       <div style="font-size: 10px; color: #B91C1C; margin-top: 2px;">Причина: брак упаковки порционного соуса (цех)</div>
                     </div>
@@ -9397,9 +9384,6 @@
       { key: 'В-21', label: 'В-21', dept: 'Отдел В-21', isClosed: false },
       { key: 'В-22 (Баянтау)', label: 'В-22 (Баянтау)', dept: 'Отдел В-22', isClosed: false },
       { key: 'В-25', label: 'В-25', dept: 'Отдел В-25', isClosed: false },
-      { key: 'В-2', label: 'В-2 (Чокина, 38/1)', dept: 'НЕ РАБОТАЕТ (ЗАКРЫТА)', isClosed: true },
-      { key: 'В-3', label: 'В-3 (Сатпаева, 250)', dept: 'НЕ РАБОТАЕТ (ЗАКРЫТА)', isClosed: true },
-      { key: 'В-15', label: 'В-15 (Назарбаева, 89/4)', dept: 'НЕ РАБОТАЕТ (ЗАКРЫТА)', isClosed: true }
     ];
 
     function renderDrawerStores(filterQuery) {
@@ -9460,10 +9444,6 @@
       if (select) {
         select.value = storeKey;
       }
-      const item = STORES_LIST_DRAWER.find(function(s) { return s.key === storeKey; });
-      if (item && item.isClosed) {
-        showToast(' Точка ' + storeKey + ' закрыта. Статистика исключена из сети.');
-      }
       updateHeaderStoreButton(storeKey);
       closeStoreDrawer(null, true);
       onStoreChange();
@@ -9477,11 +9457,7 @@
       const label = document.getElementById('header-store-name');
       if (!label) return;
       const found = STORES_LIST_DRAWER.find(function(s) { return s.key === storeKey; });
-      if (found) {
-        label.textContent = found.isClosed ? (' ' + found.label + ' (Закрыта)') : found.label;
-      } else {
-        label.textContent = 'Филиал ' + storeKey;
-      }
+      label.textContent = found ? found.label : ('Филиал ' + storeKey);
     }
 
     // Keyboard navigation (Esc to close drawer and modals)
@@ -9513,6 +9489,53 @@
       { rank: 12, key: 'Б19(Батыр Молл)', name: 'Б19 (ТРЦ Батыр Молл)', yandex: 47040, wolt: 0, glovo: 0, total: 47040, orders: 11, avgCheck: 4276 }
     ];
 
+    // Коэффициенты и специфические данные по периодам
+    const PERIOD_BRANCHES_DATA = {
+      today: [
+        { key: 'В-5', name: 'В-5 (ул. Толстого, 90А)', yandex: 31400, wolt: 9600, glovo: 4400, total: 45400, orders: 12, avgCheck: 3783 },
+        { key: 'В-1', name: 'В-1 (ул. Лермонтова, 100)', yandex: 25100, wolt: 11900, glovo: 0, total: 37000, orders: 10, avgCheck: 3700 },
+        { key: 'В-16', name: 'В-16 (г. Экибастуз, ул. Ауэзова)', yandex: 20200, wolt: 13700, glovo: 0, total: 33900, orders: 8, avgCheck: 4238 },
+        { key: 'В-14', name: 'В-14 (ул. Торайгырова, 36)', yandex: 16800, wolt: 6300, glovo: 3900, total: 27000, orders: 7, avgCheck: 3857 },
+        { key: 'В-12', name: 'В-12 (пр. Назарбаева, 283)', yandex: 15600, wolt: 4300, glovo: 1700, total: 21600, orders: 6, avgCheck: 3600 },
+        { key: 'В-9', name: 'В-9 (ул. Нуркина, 57/1)', yandex: 12200, wolt: 3300, glovo: 2700, total: 18200, orders: 5, avgCheck: 3640 },
+        { key: 'В-7', name: 'В-7 (Привокзальная пл., 1Е)', yandex: 8800, wolt: 2500, glovo: 3500, total: 14800, orders: 4, avgCheck: 3700 },
+        { key: 'В-10', name: 'В-10 (пр. Назарбаева, 283/1)', yandex: 7100, wolt: 4400, glovo: 1600, total: 13100, orders: 4, avgCheck: 3275 },
+        { key: 'В-21', name: 'В-21 (Павлодар)', yandex: 5100, wolt: 2400, glovo: 1200, total: 8700, orders: 2, avgCheck: 4350 },
+        { key: 'В-11', name: 'В-11 (Павлодар)', yandex: 0, wolt: 0, glovo: 0, total: 0, orders: 0, avgCheck: 0 },
+        { key: 'В-4', name: 'В-4 (ул. Ломова, 157)', yandex: 0, wolt: 0, glovo: 0, total: 0, orders: 0, avgCheck: 0 },
+        { key: 'Б19(Батыр Молл)', name: 'Б19 (ТРЦ Батыр Молл)', yandex: 0, wolt: 0, glovo: 0, total: 0, orders: 0, avgCheck: 0 }
+      ],
+      yesterday: [
+        { key: 'В-5', name: 'В-5 (ул. Толстого, 90А)', yandex: 27200, wolt: 8300, glovo: 3800, total: 39300, orders: 11, avgCheck: 3573 },
+        { key: 'В-1', name: 'В-1 (ул. Лермонтова, 100)', yandex: 21100, wolt: 10100, glovo: 0, total: 31200, orders: 9, avgCheck: 3467 },
+        { key: 'В-16', name: 'В-16 (г. Экибастуз, ул. Ауэзова)', yandex: 16900, wolt: 11500, glovo: 0, total: 28400, orders: 7, avgCheck: 4057 },
+        { key: 'В-14', name: 'В-14 (ул. Торайгырова, 36)', yandex: 14100, wolt: 5300, glovo: 3400, total: 22800, orders: 6, avgCheck: 3800 },
+        { key: 'В-12', name: 'В-12 (пр. Назарбаева, 283)', yandex: 13400, wolt: 3600, glovo: 1500, total: 18500, orders: 5, avgCheck: 3700 },
+        { key: 'В-9', name: 'В-9 (ул. Нуркина, 57/1)', yandex: 9500, wolt: 2600, glovo: 2100, total: 14200, orders: 4, avgCheck: 3550 },
+        { key: 'В-7', name: 'В-7 (Привокзальная пл., 1Е)', yandex: 7100, wolt: 2000, glovo: 2800, total: 11900, orders: 3, avgCheck: 3967 },
+        { key: 'В-10', name: 'В-10 (пр. Назарбаева, 283/1)', yandex: 5200, wolt: 3100, glovo: 1300, total: 9600, orders: 3, avgCheck: 3200 },
+        { key: 'В-21', name: 'В-21 (Павлодар)', yandex: 5090, wolt: 710, glovo: 2500, total: 8300, orders: 3, avgCheck: 2767 },
+        { key: 'В-11', name: 'В-11 (Павлодар)', yandex: 0, wolt: 0, glovo: 0, total: 0, orders: 0, avgCheck: 0 },
+        { key: 'В-4', name: 'В-4 (ул. Ломова, 157)', yandex: 0, wolt: 0, glovo: 0, total: 0, orders: 0, avgCheck: 0 },
+        { key: 'Б19(Батыр Молл)', name: 'Б19 (ТРЦ Батыр Молл)', yandex: 0, wolt: 0, glovo: 0, total: 0, orders: 0, avgCheck: 0 }
+      ],
+      '7days': [
+        { key: 'В-5', name: 'В-5 (ул. Толстого, 90А)', yandex: 187200, wolt: 56900, glovo: 26300, total: 270400, orders: 74, avgCheck: 3654 },
+        { key: 'В-1', name: 'В-1 (ул. Лермонтова, 100)', yandex: 136800, wolt: 65200, glovo: 0, total: 202000, orders: 55, avgCheck: 3673 },
+        { key: 'В-16', name: 'В-16 (г. Экибастуз, ул. Ауэзова)', yandex: 118000, wolt: 79800, glovo: 0, total: 197800, orders: 48, avgCheck: 4121 },
+        { key: 'В-14', name: 'В-14 (ул. Торайгырова, 36)', yandex: 91600, wolt: 34400, glovo: 21600, total: 147600, orders: 41, avgCheck: 3600 },
+        { key: 'В-12', name: 'В-12 (пр. Назарбаева, 283)', yandex: 85200, wolt: 23300, glovo: 9500, total: 118000, orders: 32, avgCheck: 3688 },
+        { key: 'В-9', name: 'В-9 (ул. Нуркина, 57/1)', yandex: 66700, wolt: 18200, glovo: 14900, total: 99800, orders: 28, avgCheck: 3564 },
+        { key: 'В-7', name: 'В-7 (Привокзальная пл., 1Е)', yandex: 48100, wolt: 13500, glovo: 19200, total: 80800, orders: 19, avgCheck: 4253 },
+        { key: 'В-10', name: 'В-10 (пр. Назарбаева, 283/1)', yandex: 38800, wolt: 23800, glovo: 9000, total: 71600, orders: 23, avgCheck: 3113 },
+        { key: 'В-21', name: 'В-21 (Павлодар)', yandex: 43100, wolt: 5800, glovo: 15700, total: 64600, orders: 18, avgCheck: 3589 },
+        { key: 'В-11', name: 'В-11 (Павлодар)', yandex: 31100, wolt: 15100, glovo: 10400, total: 56600, orders: 15, avgCheck: 3773 },
+        { key: 'В-4', name: 'В-4 (ул. Ломова, 157)', yandex: 26400, wolt: 7800, glovo: 900, total: 35100, orders: 10, avgCheck: 3510 },
+        { key: 'Б19(Батыр Молл)', name: 'Б19 (ТРЦ Батыр Молл)', yandex: 10930, wolt: 0, glovo: 0, total: 10930, orders: 3, avgCheck: 3643 }
+      ],
+      month: BRANCHES_DELIVERY_DATA
+    };
+
     const HOURLY_ORDERS = [
       { hour: '09:00', orders: 12, sum: 42000 },
       { hour: '10:00', orders: 24, sum: 86000 },
@@ -9535,17 +9558,30 @@
     let currentDelStoreKey = 'ALL';
 
     function initDeliveryDashboard() {
-      renderBranchesTable();
+      renderBranchesTable('month');
       renderHourlyChart();
     }
 
-    function renderBranchesTable() {
+    function getPeriodBranches(period) {
+      let data = PERIOD_BRANCHES_DATA[period] || PERIOD_BRANCHES_DATA.month;
+      // create a shallow copy with ranks
+      let list = data.slice().sort(function(a, b) { return b.total - a.total; });
+      return list.map(function(item, idx) {
+        return Object.assign({}, item, { rank: idx + 1 });
+      });
+    }
+
+    function renderBranchesTable(period) {
       const tbody = document.getElementById('del-branches-tbody');
       if (!tbody) return;
+      const periodKey = period || currentDelPeriodKey || 'month';
+      const branches = getPeriodBranches(periodKey);
+
       let html = '';
-      BRANCHES_DELIVERY_DATA.forEach(function(b) {
+      branches.forEach(function(b) {
         let rankCls = b.rank === 1 ? 'rank-top1' : (b.rank === 2 ? 'rank-top2' : (b.rank === 3 ? 'rank-top3' : ''));
-        html += '<tr>' +
+        let highlightStyle = (currentDelStoreKey !== 'ALL' && currentDelStoreKey === b.key) ? 'style="background:#EFF6FF;"' : '';
+        html += '<tr ' + highlightStyle + '>' +
           '<td><span class="branch-rank-badge ' + rankCls + '">' + b.rank + '</span><strong>' + b.key + '</strong></td>' +
           '<td style="color:#64748B;">' + b.name + '</td>' +
           '<td style="text-align:right;">' + formatTenge(b.yandex) + '</td>' +
@@ -9557,6 +9593,15 @@
         '</tr>';
       });
       tbody.innerHTML = html;
+
+      // Update subtitle of table
+      const tag = document.getElementById('branches-table-period-tag');
+      if (tag) {
+        if (periodKey === 'today') tag.textContent = 'Период: Сегодня';
+        else if (periodKey === 'yesterday') tag.textContent = 'Период: Вчера';
+        else if (periodKey === '7days') tag.textContent = 'Период: 7 дней';
+        else tag.textContent = 'Период: Август 2026 (месяц)';
+      }
     }
 
     function renderHourlyChart() {
@@ -9594,6 +9639,9 @@
         if (tag) tag.textContent = 'Август 2026 (месяц)';
         updateDelKPIs('6 339 684 ₸', '1 712', '3 703 ₸', '29 (1.7%)', '108 358 ₸', '4 133 620 ₸', '1 609 844 ₸', '596 220 ₸', '65.2%', '25.4%', '9.4%');
       }
+
+      // Dynamic branch ranking update for chosen period!
+      renderBranchesTable(period);
       showToast('Период доставки обновлен');
     }
 
@@ -9610,7 +9658,7 @@
       if (elCan) elCan.textContent = can;
       if (elCanSum) elCanSum.textContent = canSum;
 
-      // Update aggregators card
+      // Update aggregators market share bar
       const barY = document.getElementById('bar-yandex');
       const barW = document.getElementById('bar-wolt');
       const barG = document.getElementById('bar-glovo');
@@ -9627,6 +9675,14 @@
       if (legW) legW.textContent = wRev;
       if (legG) legG.textContent = gRev;
 
+      const legYPct = document.getElementById('legend-yandex-pct');
+      const legWPct = document.getElementById('legend-wolt-pct');
+      const legGPct = document.getElementById('legend-glovo-pct');
+
+      if (legYPct) legYPct.textContent = yPct;
+      if (legWPct) legWPct.textContent = wPct;
+      if (legGPct) legGPct.textContent = gPct;
+
       const cardYRev = document.getElementById('card-yandex-rev');
       const cardWRev = document.getElementById('card-wolt-rev');
       const cardGRev = document.getElementById('card-glovo-rev');
@@ -9638,51 +9694,76 @@
 
     function setDelStore(storeKey) {
       currentDelStoreKey = storeKey;
-      const closedWarn = document.getElementById('del-closed-warning');
-      if (storeKey === 'В-2' || storeKey === 'В-15' || storeKey === 'В-3') {
-        if (closedWarn) closedWarn.style.display = 'block';
-        showToast(' Внимание: точка ' + storeKey + ' закрыта. Данные исключены из сети.');
-      } else {
-        if (closedWarn) closedWarn.style.display = 'none';
-        if (storeKey !== 'ALL') {
-          const found = BRANCHES_DELIVERY_DATA.find(function(b) { return b.key === storeKey; });
-          if (found) {
-            updateDelKPIs(
-              formatTenge(found.total),
-              found.orders.toString(),
-              formatTenge(found.avgCheck),
-              '0 (0%)',
-              '0 ₸',
-              formatTenge(found.yandex),
-              formatTenge(found.wolt),
-              formatTenge(found.glovo),
-              Math.round((found.yandex / found.total) * 100) + '%',
-              Math.round((found.wolt / found.total) * 100) + '%',
-              Math.round((found.glovo / found.total) * 100) + '%'
-            );
-            showToast('Статистика точки: ' + found.name);
-            return;
-          }
-        } else {
-          setDelPeriod(currentDelPeriodKey);
+      if (storeKey !== 'ALL') {
+        const branches = getPeriodBranches(currentDelPeriodKey);
+        const found = branches.find(function(b) { return b.key === storeKey; });
+        if (found) {
+          updateDelKPIs(
+            formatTenge(found.total),
+            found.orders.toString(),
+            formatTenge(found.avgCheck),
+            '0 (0%)',
+            '0 ₸',
+            formatTenge(found.yandex),
+            formatTenge(found.wolt),
+            formatTenge(found.glovo),
+            found.total > 0 ? Math.round((found.yandex / found.total) * 100) + '%' : '0%',
+            found.total > 0 ? Math.round((found.wolt / found.total) * 100) + '%' : '0%',
+            found.total > 0 ? Math.round((found.glovo / found.total) * 100) + '%' : '0%'
+          );
+          renderBranchesTable(currentDelPeriodKey);
+          showToast('Точка ' + found.name);
+          return;
         }
       }
+      setDelPeriod(currentDelPeriodKey);
+      renderBranchesTable(currentDelPeriodKey);
     }
 
+    // Confirmation modal for stop-list removal
+    let pendingStopRemoveId = null;
+    let pendingStopItemName = '';
+
     function removeStopItem(id) {
+      pendingStopRemoveId = id;
       const el = document.getElementById('stop-item-' + id);
       if (el) {
-        el.style.opacity = '0.3';
-        setTimeout(function() { 
-          el.remove(); 
-          const badge = document.getElementById('stops-count-badge');
-          const remaining = document.querySelectorAll('#stops-list-container .stop-item-row').length;
-          if (badge) badge.textContent = remaining + ' ' + (remaining === 1 ? 'позиция' : 'позиций');
-          const kpiStops = document.getElementById('kpi-del-stops');
-          if (kpiStops) kpiStops.textContent = remaining + ' ' + (remaining === 1 ? 'позиция' : 'позиции');
-        }, 250);
+        const titleEl = el.querySelector('.stop-item-title') || (el.firstElementChild && el.firstElementChild.firstElementChild);
+        pendingStopItemName = titleEl ? titleEl.textContent.trim() : 'позицию';
+      } else {
+        pendingStopItemName = 'позицию';
       }
-      showToast('Позиция снята со стопа в iiko и агрегаторах');
+      const textEl = document.getElementById('stop-confirm-text');
+      if (textEl) {
+        textEl.textContent = 'Вы уверены, что хотите снять «' + pendingStopItemName + '» со стоп-листа? Блюдо снова станет доступно для заказов в зале, iiko и во всех агрегаторах (Яндекс Еда, Wolt, Glovo).';
+      }
+      const modal = document.getElementById('modal-stop-confirm');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeStopConfirmModal() {
+      const modal = document.getElementById('modal-stop-confirm');
+      if (modal) modal.style.display = 'none';
+      pendingStopRemoveId = null;
+    }
+
+    function executeStopItemRemoval() {
+      if (pendingStopRemoveId) {
+        const el = document.getElementById('stop-item-' + pendingStopRemoveId);
+        if (el) {
+          el.style.opacity = '0.3';
+          setTimeout(function() { 
+            el.remove(); 
+            const badge = document.getElementById('stops-count-badge');
+            const remaining = document.querySelectorAll('#stops-list-container .stop-item-row').length;
+            if (badge) badge.textContent = remaining + ' ' + (remaining === 1 ? 'позиция' : (remaining >= 2 && remaining <= 4 ? 'позиции' : 'позиций'));
+            const kpiStops = document.getElementById('kpi-del-stops');
+            if (kpiStops) kpiStops.textContent = remaining + ' ' + (remaining === 1 ? 'позиция' : (remaining >= 2 && remaining <= 4 ? 'позиции' : 'позиций'));
+          }, 250);
+          showToast('Позиция «' + pendingStopItemName + '» снята со стоп-листа');
+        }
+      }
+      closeStopConfirmModal();
     }
 
     function addQuickStop() {
@@ -9692,41 +9773,57 @@
       if (container) {
         const div = document.createElement('div');
         div.className = 'stop-item-row';
+        const newId = Date.now();
+        div.id = 'stop-item-' + newId;
         div.innerHTML = '<div>' +
           '<div style="font-size: 13px; font-weight: 700; color: #991B1B;">' + escapeHtml(name) + '</div>' +
           '<div style="font-size: 11px; color: #7F1D1D;">Точка: Текущий филиал • только что</div>' +
           '<div style="font-size: 10px; color: #B91C1C; margin-top: 2px;">Причина: ручная постановка управляющим</div>' +
         '</div>' +
-        '<button class="btn-quick-action btn-action-green" style="font-size: 10px; padding: 4px 8px;" onclick="this.parentElement.remove(); showToast(\'Снято со стопа\');">Снять</button>';
+        '<button class="btn-quick-action btn-action-green" style="font-size: 10px; padding: 4px 8px;" onclick="removeStopItem(' + newId + ')">Снять</button>';
         container.prepend(div);
+        const badge = document.getElementById('stops-count-badge');
+        const count = document.querySelectorAll('#stops-list-container .stop-item-row').length;
+        if (badge) badge.textContent = count + ' ' + (count === 1 ? 'позиция' : (count >= 2 && count <= 4 ? 'позиции' : 'позиций'));
         showToast('Блюдо «' + name + '» добавлено в стоп-лист');
       }
     }
 
     function shareDeliveryWhatsApp() {
-      const text = encodeURIComponent('Сводка Доставки BURЖУЙ (Август 2026):\n\n' +
-        ' Выручка: 6 339 684 ₸ (1 712 заказов)\n' +
-        'Средний чек: 3 703 ₸ (+68% к залу)\n' +
-        'Яндекс Еда: 4 133 620 ₸ (65.2%)\n' +
-        '<span class="agg-legend-dot dot-wolt"></span> Wolt: 1 609 844 ₸ (25.4%)\n' +
-        '<span class="agg-legend-dot dot-glovo"></span> Glovo: 596 220 ₸ (9.4%)\n' +
+      let periodLabel = 'Август 2026 (месяц)';
+      if (currentDelPeriodKey === 'today') periodLabel = 'Сегодня';
+      else if (currentDelPeriodKey === 'yesterday') periodLabel = 'Вчера';
+      else if (currentDelPeriodKey === '7days') periodLabel = 'За 7 дней';
+
+      const elRev = document.getElementById('kpi-del-revenue') ? document.getElementById('kpi-del-revenue').textContent : '';
+      const elOrd = document.getElementById('kpi-del-orders') ? document.getElementById('kpi-del-orders').textContent : '';
+      const elChk = document.getElementById('kpi-del-avgcheck') ? document.getElementById('kpi-del-avgcheck').textContent : '';
+      const elY = document.getElementById('legend-yandex-val') ? document.getElementById('legend-yandex-val').textContent : '';
+      const elW = document.getElementById('legend-wolt-val') ? document.getElementById('legend-wolt-val').textContent : '';
+      const elG = document.getElementById('legend-glovo-val') ? document.getElementById('legend-glovo-val').textContent : '';
+
+      const text = encodeURIComponent('Сводка: Доставка BURЖУЙ (' + periodLabel + '):\n\n' +
+        'Выручка: ' + elRev + ' (' + elOrd + ' заказов)\n' +
+        'Средний чек: ' + elChk + '\n' +
+        'Яндекс Еда: ' + elY + '\n' +
+        'Wolt: ' + elW + '\n' +
+        'Glovo: ' + elG + '\n' +
         'Время кухни: 11.4 мин\n' +
-        'Отмены: 29 заказов (108 358 ₸)\n' +
-        ' В стопе: 2 позиции (В-4, В-10)\n' +
-        ' Wolt: 258 ч оффлайн-простоя планшетов!');
+        'Активных стоп-листов: ' + (document.querySelectorAll('#stops-list-container .stop-item-row').length));
       window.open('https://wa.me/?text=' + text, '_blank');
     }
 
     function exportDeliveryReport() {
+      const branches = getPeriodBranches(currentDelPeriodKey);
       let csv = 'Точка;Адрес;Яндекс Еда;Wolt;Glovo;ИТОГО;Заказов;Средний чек\n';
-      BRANCHES_DELIVERY_DATA.forEach(function(b) {
+      branches.forEach(function(b) {
         csv += b.key + ';' + b.name + ';' + b.yandex + ';' + b.wolt + ';' + b.glovo + ';' + b.total + ';' + b.orders + ';' + b.avgCheck + '\n';
       });
       const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'burzhui_delivery_aggregators_report.csv';
+      a.download = 'burzhui_delivery_' + currentDelPeriodKey + '.csv';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
