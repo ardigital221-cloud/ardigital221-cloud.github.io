@@ -4269,6 +4269,617 @@
       display: none;
     }
 
+
+
+    /* ============================================================ */
+    /* 12. РАЗДЕЛ ДОСТАВКА И АГРЕГАТОРЫ (ReUI Design System)        */
+    /* ============================================================ */
+    .delivery-container {
+      padding: 0 0 40px;
+    }
+
+    .delivery-header-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .delivery-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .delivery-title-wrap h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0F172A;
+      margin: 0 0 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .delivery-subtitle {
+      font-size: 12px;
+      color: #64748B;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-pill-green {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: #DCFCE7;
+      color: #15803D;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .status-pill-red {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: #FEE2E2;
+      color: #B91C1C;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Селектор периодов и филиалов */
+    .delivery-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid #F1F5F9;
+    }
+
+    .delivery-periods-row {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      max-width: 100%;
+    }
+
+    .del-period-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #E2E8F0;
+      background: #F8FAFC;
+      color: #475569;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .del-period-btn:hover {
+      background: #EDF2F7;
+      border-color: #CBD5E1;
+    }
+
+    .del-period-btn.active {
+      background: #0284C7;
+      color: #FFFFFF;
+      border-color: #0284C7;
+      box-shadow: 0 1px 2px rgba(2,132,199,0.25);
+    }
+
+    .del-store-select {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #CBD5E1;
+      background: #FFFFFF;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1E293B;
+      cursor: pointer;
+      max-width: 200px;
+    }
+
+    /* Сетка KPI-дашбордов */
+    .del-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .del-kpi-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .del-kpi-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    .del-kpi-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .del-kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #0284C7;
+    }
+
+    .del-kpi-card.kpi-amber::before { background: #D97706; }
+    .del-kpi-card.kpi-green::before { background: #16A34A; }
+    .del-kpi-card.kpi-red::before { background: #DC2626; }
+    .del-kpi-card.kpi-purple::before { background: #9333EA; }
+
+    .del-kpi-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748B;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .del-kpi-val {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .del-kpi-sub {
+      font-size: 11px;
+      color: #64748B;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .del-badge-up {
+      color: #16A34A;
+      font-weight: 700;
+      background: #DCFCE7;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 10px;
+    }
+
+    .del-badge-warn {
+      color: #B45309;
+      font-weight: 700;
+      background: #FEF3C7;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 10px;
+    }
+
+    /* Блок «Отчет об агрегаторах» */
+    .del-section-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .del-section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .del-section-head h3 {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0F172A;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Диаграмма долей рынка агрегаторов */
+    .market-share-bar {
+      display: flex;
+      height: 28px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.08);
+    }
+
+    .share-seg-yandex {
+      background: #FC3F1D;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 800;
+      transition: width 0.3s ease;
+      cursor: pointer;
+    }
+
+    .share-seg-wolt {
+      background: #00C2E8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 800;
+      transition: width 0.3s ease;
+      cursor: pointer;
+    }
+
+    .share-seg-glovo {
+      background: #00A082;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 800;
+      transition: width 0.3s ease;
+      cursor: pointer;
+    }
+
+    .market-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* Карточки агрегаторов */
+    .aggregators-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .aggregators-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .aggr-card {
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 14px;
+      background: #FAFAFA;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+    }
+
+    .aggr-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .aggr-card.card-yandex {
+      border-color: #FED7AA;
+      background: #FFFAF5;
+    }
+
+    .aggr-card.card-wolt {
+      border-color: #BAE6FD;
+      background: #F8FCFF;
+    }
+
+    .aggr-card.card-glovo {
+      border-color: #BBF7D0;
+      background: #F7FEFA;
+    }
+
+    .aggr-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .aggr-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .aggr-logo-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 13px;
+      color: #FFFFFF;
+    }
+
+    .logo-yandex { background: #FC3F1D; }
+    .logo-wolt { background: #00C2E8; }
+    .logo-glovo { background: #00A082; }
+
+    .aggr-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+
+    .aggr-share-badge {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .badge-yandex { background: #FEF3C7; color: #B45309; }
+    .badge-wolt { background: #E0F2FE; color: #0284C7; }
+    .badge-glovo { background: #DCFCE7; color: #15803D; }
+
+    .aggr-metrics-table {
+      width: 100%;
+      margin-bottom: 10px;
+      font-size: 12px;
+      border-collapse: collapse;
+    }
+
+    .aggr-metrics-table tr td {
+      padding: 4px 0;
+      border-bottom: 1px dashed #E2E8F0;
+    }
+
+    .aggr-metrics-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .aggr-metrics-table td:first-child {
+      color: #64748B;
+    }
+
+    .aggr-metrics-table td:last-child {
+      text-align: right;
+      font-weight: 700;
+      color: #0F172A;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .aggr-notice-box {
+      font-size: 11px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      line-height: 1.4;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      color: #475569;
+    }
+
+    .aggr-notice-box strong {
+      color: #0F172A;
+    }
+
+    /* Таблица рейтинга филиалов */
+    .del-table-wrap {
+      overflow-x: auto;
+      margin-bottom: 14px;
+    }
+
+    .del-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    .del-table th {
+      background: #F8FAFC;
+      color: #64748B;
+      font-weight: 700;
+      padding: 8px 10px;
+      border-bottom: 2px solid #E2E8F0;
+      white-space: nowrap;
+    }
+
+    .del-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #F1F5F9;
+      color: #334155;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .del-table tr:hover td {
+      background: #F8FAFC;
+    }
+
+    .branch-rank-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #F1F5F9;
+      color: #475569;
+      font-size: 10px;
+      font-weight: 800;
+      margin-right: 6px;
+    }
+
+    .rank-top1 { background: #FEF3C7; color: #B45309; }
+    .rank-top2 { background: #E2E8F0; color: #334155; }
+    .rank-top3 { background: #FFEDD5; color: #C2410C; }
+
+    /* Почасовая гистограмма */
+    .hourly-chart-container {
+      margin-top: 10px;
+      padding: 10px 0;
+    }
+
+    .hourly-bars-row {
+      display: flex;
+      align-items: flex-end;
+      height: 120px;
+      gap: 6px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .hourly-bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+      cursor: pointer;
+    }
+
+    .hourly-bar {
+      width: 100%;
+      max-width: 24px;
+      background: #93C5FD;
+      border-radius: 4px 4px 0 0;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .hourly-bar:hover {
+      background: #0284C7;
+      transform: scaleY(1.04);
+    }
+
+    .hourly-bar.peak {
+      background: #F97316;
+    }
+
+    .hourly-label {
+      font-size: 10px;
+      color: #94A3B8;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    /* Блоки Стопов и Отмен */
+    .stops-cancels-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .stops-cancels-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .stops-card, .cancels-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .stop-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: #FFF1F2;
+      border: 1px solid #FECDD3;
+      margin-bottom: 8px;
+    }
+
+    .cancel-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      margin-bottom: 8px;
+    }
+
+    .btn-quick-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s ease;
+    }
+
+    .btn-action-green {
+      background: #16A34A;
+      color: #FFFFFF;
+    }
+    .btn-action-green:hover { background: #15803D; }
+
+    .btn-action-outline {
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      color: #334155;
+    }
+    .btn-action-outline:hover { background: #F8FAFC; }
+
 </style>
 </head>
 <body>
@@ -4364,6 +4975,12 @@
             <div class="iiko-tile iiko-tile-green" id="btn-sec-ord" onclick="openModule('ord')" role="button" tabindex="0">
               <div class="iiko-tile-title">Вечерняя заявка</div>
               <div class="iiko-tile-glyph">📦</div>
+            </div>
+
+            <!-- Плитка 3: Доставка -->
+            <div class="iiko-tile iiko-tile-green" id="btn-sec-del" onclick="openModule('del')" role="button" tabindex="0">
+              <div class="iiko-tile-title">Доставка</div>
+              <div class="iiko-tile-glyph">🛵</div>
             </div>
           </div>
 
@@ -4716,7 +5333,499 @@
           </div>
         </div>
 
-      </div>
+      
+        <!-- ============================================== -->
+        <!-- ЭТАП 3: ФУНКЦИОНАЛ ДОСТАВКИ И АГРЕГАТОРОВ       -->
+        <!-- ============================================== -->
+        <div id="screen-delivery-workflow" style="display: none;">
+          <div class="delivery-container">
+            
+            <!-- Карточка заголовка и фильтров -->
+            <div class="delivery-header-card">
+              <div class="delivery-header-top">
+                <div class="delivery-title-wrap">
+                  <h2>
+                    <span>🛵 Доставка и Агрегаторы</span>
+                    <span class="status-pill-green">🟢 12 точек Онлайн</span>
+                  </h2>
+                  <div class="delivery-subtitle">
+                    <span>Сводная аналитика: Яндекс Еда, Wolt, Glovo и Call-центр</span>
+                    <span class="status-pill-red" style="font-size:10px;">4 закрыты (исключены)</span>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <button type="button" class="btn-quick-action btn-action-green" onclick="shareDeliveryWhatsApp()">
+                    <span>📲 WhatsApp сводка</span>
+                  </button>
+                  <button type="button" class="btn-quick-action btn-action-outline" onclick="exportDeliveryReport()">
+                    <span>📥 Экспорт XLS</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="delivery-filter-bar">
+                <div class="delivery-periods-row">
+                  <button type="button" class="del-period-btn" id="btn-period-today" onclick="setDelPeriod('today')">Сегодня</button>
+                  <button type="button" class="del-period-btn" id="btn-period-yesterday" onclick="setDelPeriod('yesterday')">Вчера</button>
+                  <button type="button" class="del-period-btn" id="btn-period-7days" onclick="setDelPeriod('7days')">7 дней</button>
+                  <button type="button" class="del-period-btn active" id="btn-period-month" onclick="setDelPeriod('month')">Август (месяц)</button>
+                </div>
+
+                <select class="del-store-select" id="select-del-store" onchange="setDelStore(this.value)">
+                  <option value="ALL" selected>📍 Вся сеть (12 работающих точек)</option>
+                  <option value="В-5">🟢 В-5 (ул. Толстого, 90А — ТОП-1)</option>
+                  <option value="В-1">🟢 В-1 (ул. Лермонтова, 100)</option>
+                  <option value="В-16">🟢 В-16 (г. Экибастуз, ул. Ауэзова)</option>
+                  <option value="В-14">🟢 В-14 (ул. Торайгырова, 36)</option>
+                  <option value="В-12">🟢 В-12 (пр. Назарбаева, 283)</option>
+                  <option value="В-9">🟢 В-9 (ул. Нуркина, 57/1)</option>
+                  <option value="В-7">🟢 В-7 (Привокзальная пл., 1Е)</option>
+                  <option value="В-10">🟢 В-10 (пр. Назарбаева, 283/1)</option>
+                  <option value="В-21">🟢 В-21</option>
+                  <option value="В-11">🟢 В-11</option>
+                  <option value="В-4">🟢 В-4 (ул. Ломова, 157)</option>
+                  <option value="Б19(Батыр Молл)">🟢 Б19 (ТРЦ Батыр Молл)</option>
+                  <option value="CLOSED_NOTICE" style="color: #EF4444;" disabled>── 4 закрытые точки (исключены) ──</option>
+                  <option value="В-2" style="color: #EF4444;">🔴 В-2 (Чокина 38/1 — ЗАКРЫТА)</option>
+                  <option value="В-15" style="color: #EF4444;">🔴 В-15 (Назарбаева 89/4 — ЗАКРЫТА)</option>
+                  <option value="В-3" style="color: #EF4444;">🔴 В-3 (Сатпаева 250 — ЗАКРЫТА)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Предупреждение о закрытой точке, если выбрана -->
+            <div id="del-closed-warning" style="display:none; padding:12px 14px; background:#FEF2F2; border:1px solid #FCA5A5; border-radius:8px; margin-bottom:14px; color:#991B1B; font-size:12px;">
+              <strong>⛔ Внимание:</strong> Данный филиал официально закрыт по указанию руководства сети. Все заказы (-928 662 ₸) и чеки исключены из действующей аналитики сети «BURЖУЙ».
+            </div>
+
+            <!-- Сетка KPI-дашбордиков -->
+            <div class="del-kpi-grid">
+              <div class="del-kpi-card kpi-green">
+                <div class="del-kpi-label">
+                  <span>Выручка доставки</span>
+                  <span>💰</span>
+                </div>
+                <div class="del-kpi-val" id="kpi-del-revenue">6 339 684 ₸</div>
+                <div class="del-kpi-sub">
+                  <span class="del-badge-up">▲ +14.2%</span>
+                  <span>8.5% сети</span>
+                </div>
+              </div>
+
+              <div class="del-kpi-card kpi-amber">
+                <div class="del-kpi-label">
+                  <span>Средний чек</span>
+                  <span>🧾</span>
+                </div>
+                <div class="del-kpi-val" id="kpi-del-avgcheck">3 703 ₸</div>
+                <div class="del-kpi-sub">
+                  <span class="del-badge-up">+68% к залу</span>
+                  <span>(в зале 2 150 ₸)</span>
+                </div>
+              </div>
+
+              <div class="del-kpi-card">
+                <div class="del-kpi-label">
+                  <span>Всего заказов</span>
+                  <span>📦</span>
+                </div>
+                <div class="del-kpi-val" id="kpi-del-orders">1 712</div>
+                <div class="del-kpi-sub">
+                  <span style="color:#16A34A; font-weight:700;">96.8%</span>
+                  <span>доставлено</span>
+                </div>
+              </div>
+
+              <div class="del-kpi-card kpi-purple">
+                <div class="del-kpi-label">
+                  <span>Время готовки (КТО)</span>
+                  <span>⏱️</span>
+                </div>
+                <div class="del-kpi-val" id="kpi-del-cooktime">11.4 мин</div>
+                <div class="del-kpi-sub">
+                  <span style="color:#16A34A; font-weight:700;">Норма &lt; 15м</span>
+                  <span id="kpi-del-deliverytime">• Дост: 28.2м</span>
+                </div>
+              </div>
+
+              <div class="del-kpi-card kpi-red">
+                <div class="del-kpi-label">
+                  <span>Отмены заказов</span>
+                  <span>🚫</span>
+                </div>
+                <div class="del-kpi-val" id="kpi-del-cancels">29 (1.7%)</div>
+                <div class="del-kpi-sub">
+                  <span id="kpi-del-cancelsum">108 358 ₸</span>
+                  <span>потери</span>
+                </div>
+              </div>
+
+              <div class="del-kpi-card kpi-amber">
+                <div class="del-kpi-label">
+                  <span>Стоп-листы (Live)</span>
+                  <span>⛔</span>
+                </div>
+                <div class="del-kpi-val" id="kpi-del-stops">2 позиции</div>
+                <div class="del-kpi-sub">
+                  <span class="del-badge-warn">В-4, В-10</span>
+                  <span>на паузе</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Блок «Отчет об агрегаторах» -->
+            <div class="del-section-card">
+              <div class="del-section-head">
+                <h3>
+                  <span>📊 Отчет об агрегаторах</span>
+                  <span style="font-size:11px; font-weight:600; color:#64748B;">Яндекс Еда • Wolt • Glovo • Своя</span>
+                </h3>
+                <div style="font-size:12px; font-weight:700; color:#0284C7;" id="aggr-period-tag">Август 2026 (месяц)</div>
+              </div>
+
+              <!-- Визуальная полоса долей рынка -->
+              <div class="market-share-bar">
+                <div class="share-seg-yandex" id="bar-yandex" style="width: 65.2%;" title="Яндекс Еда: 65.2%">
+                  Яндекс 65.2%
+                </div>
+                <div class="share-seg-wolt" id="bar-wolt" style="width: 25.4%;" title="Wolt: 25.4%">
+                  Wolt 25.4%
+                </div>
+                <div class="share-seg-glovo" id="bar-glovo" style="width: 9.4%;" title="Glovo: 9.4%">
+                  Glovo 9.4%
+                </div>
+              </div>
+
+              <div class="market-legend">
+                <div class="legend-item">
+                  <div class="legend-dot" style="background:#FC3F1D;"></div>
+                  <span>Яндекс Еда: <strong id="legend-yandex-val">4 133 620 ₸</strong> (<span id="legend-yandex-pct">65.2%</span>)</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-dot" style="background:#00C2E8;"></div>
+                  <span>Wolt: <strong id="legend-wolt-val">1 609 844 ₸</strong> (<span id="legend-wolt-pct">25.4%</span>)</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-dot" style="background:#00A082;"></div>
+                  <span>Glovo: <strong id="legend-glovo-val">596 220 ₸</strong> (<span id="legend-glovo-pct">9.4%</span>)</span>
+                </div>
+              </div>
+
+              <!-- Карточки 3 агрегаторов -->
+              <div class="aggregators-grid">
+                
+                <!-- Яндекс Еда -->
+                <div class="aggr-card card-yandex">
+                  <div class="aggr-top-row">
+                    <div class="aggr-brand">
+                      <div class="aggr-logo-icon logo-yandex">Я</div>
+                      <div>
+                        <div class="aggr-name">Яндекс Еда</div>
+                        <div style="font-size:10px; color:#64748B;">Абсолютный лидер сети</div>
+                      </div>
+                    </div>
+                    <span class="aggr-share-badge badge-yandex" id="card-yandex-share">65.2%</span>
+                  </div>
+
+                  <table class="aggr-metrics-table">
+                    <tr>
+                      <td>Выручка:</td>
+                      <td id="card-yandex-rev">4 133 620 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Заказов:</td>
+                      <td id="card-yandex-orders">1 075 шт</td>
+                    </tr>
+                    <tr>
+                      <td>Средний чек:</td>
+                      <td id="card-yandex-check">3 845 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Комиссия (30%):</td>
+                      <td style="color:#DC2626;" id="card-yandex-comm">-1 240 086 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Чистая выручка:</td>
+                      <td style="color:#15803D;" id="card-yandex-net">2 893 534 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Отмены (1.8%):</td>
+                      <td id="card-yandex-cancels">20 заказов</td>
+                    </tr>
+                    <tr>
+                      <td>Рейтинг:</td>
+                      <td>4.7 ★ (Павлодар)</td>
+                    </tr>
+                  </table>
+
+                  <div class="aggr-notice-box" style="border-left: 3px solid #FC3F1D;">
+                    <strong>⚠️ Замечание:</strong> 53 открытых тикета поддержки. Необходимо отвязать 4 закрытые точки, чтобы восстановить выдачу с 78% до 96%+.
+                  </div>
+                </div>
+
+                <!-- Wolt -->
+                <div class="aggr-card card-wolt">
+                  <div class="aggr-top-row">
+                    <div class="aggr-brand">
+                      <div class="aggr-logo-icon logo-wolt">W</div>
+                      <div>
+                        <div class="aggr-name">Wolt</div>
+                        <div style="font-size:10px; color:#64748B;">ТОО «BURЖУЙ»</div>
+                      </div>
+                    </div>
+                    <span class="aggr-share-badge badge-wolt" id="card-wolt-share">25.4%</span>
+                  </div>
+
+                  <table class="aggr-metrics-table">
+                    <tr>
+                      <td>Выручка:</td>
+                      <td id="card-wolt-rev">1 609 844 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Заказов:</td>
+                      <td id="card-wolt-orders">471 шт</td>
+                    </tr>
+                    <tr>
+                      <td>Средний чек:</td>
+                      <td id="card-wolt-check">3 418 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Комиссия (28%):</td>
+                      <td style="color:#DC2626;" id="card-wolt-comm">-450 756 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Чистая выручка:</td>
+                      <td style="color:#15803D;" id="card-wolt-net">1 159 088 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Время кухни:</td>
+                      <td>11 мин 🟢</td>
+                    </tr>
+                    <tr>
+                      <td>Рейтинг:</td>
+                      <td>7.8 / 10</td>
+                    </tr>
+                  </table>
+
+                  <div class="aggr-notice-box" style="border-left: 3px solid #00C2E8;">
+                    <strong>⚠️ Критично:</strong> 258 ч оффлайн-простоя планшетов на точках за неделю! Из-за этого просели заказы на 26%. Введен строгий KPI для кассиров.
+                  </div>
+                </div>
+
+                <!-- Glovo -->
+                <div class="aggr-card card-glovo">
+                  <div class="aggr-top-row">
+                    <div class="aggr-brand">
+                      <div class="aggr-logo-icon logo-glovo">G</div>
+                      <div>
+                        <div class="aggr-name">Glovo</div>
+                        <div style="font-size:10px; color:#64748B;">Партнерский портал</div>
+                      </div>
+                    </div>
+                    <span class="aggr-share-badge badge-glovo" id="card-glovo-share">9.4%</span>
+                  </div>
+
+                  <table class="aggr-metrics-table">
+                    <tr>
+                      <td>Выручка:</td>
+                      <td id="card-glovo-rev">596 220 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Заказов:</td>
+                      <td id="card-glovo-orders">166 шт</td>
+                    </tr>
+                    <tr>
+                      <td>Средний чек:</td>
+                      <td id="card-glovo-check">3 592 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Комиссия (30%):</td>
+                      <td style="color:#DC2626;" id="card-glovo-comm">-178 866 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Чистая выручка:</td>
+                      <td style="color:#15803D;" id="card-glovo-net">417 354 ₸</td>
+                    </tr>
+                    <tr>
+                      <td>Статус точек:</td>
+                      <td>4 Онлайн / 4 Оффлайн</td>
+                    </tr>
+                    <tr>
+                      <td>Рейтинг:</td>
+                      <td>4.6 ★</td>
+                    </tr>
+                  </table>
+
+                  <div class="aggr-notice-box" style="border-left: 3px solid #00A082;">
+                    <strong>🚀 Точка роста:</strong> Подключить Glovo на точке Б19 (Батыр Молл) — расчетный прирост +250 000 – 300 000 ₸ выручки в месяц.
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Своя доставка: потенциал экономии -->
+              <div style="background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%); border: 1px solid #FECDD3; border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div>
+                  <div style="font-size: 13px; font-weight: 800; color: #9F1239; margin-bottom: 2px;">
+                    🛵 Своя доставка 2.0 (Хабы В-5, В-1, В-12, Б19)
+                  </div>
+                  <div style="font-size: 11px; color: #881337;">
+                    При переходе заказов на свою курьерскую службу сеть сохраняет <strong>30% комиссии агрегаторов</strong>.
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-size: 10px; color: #9F1239; font-weight: 600;">Потенциал экономии:</div>
+                  <div style="font-size: 16px; font-weight: 900; color: #E11D48;">+1 869 000 ₸ / мес</div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Графики: Рейтинг филиалов и Почасовая загрузка -->
+            <div style="display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 16px;">
+              
+              <!-- Рейтинг филиалов -->
+              <div class="del-section-card">
+                <div class="del-section-head">
+                  <h3>
+                    <span>🏆 Рейтинг филиалов по доставке</span>
+                    <span style="font-size: 11px; color: #64748B;">ТОП-12 действующих точек</span>
+                  </h3>
+                  <span style="font-size: 11px; color: #64748B;">Август 2026</span>
+                </div>
+
+                <div class="del-table-wrap">
+                  <table class="del-table" id="del-branches-table">
+                    <thead>
+                      <tr>
+                        <th>№ Точка</th>
+                        <th>Адрес</th>
+                        <th style="text-align:right;">Яндекс Еда</th>
+                        <th style="text-align:right;">Wolt</th>
+                        <th style="text-align:right;">Glovo</th>
+                        <th style="text-align:right;">ИТОГО</th>
+                        <th style="text-align:center;">Заказов</th>
+                        <th style="text-align:right;">Ср. чек</th>
+                      </tr>
+                    </thead>
+                    <tbody id="del-branches-tbody">
+                      <!-- Заполняется динамически -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Почасовая загрузка -->
+              <div class="del-section-card">
+                <div class="del-section-head">
+                  <h3>
+                    <span>⏱️ Почасовая загрузка доставки</span>
+                    <span style="font-size: 11px; color: #64748B;">Распределение заказов по времени суток</span>
+                  </h3>
+                  <span style="font-size: 11px; color: #F97316; font-weight: 700;">Пики: 13:00 и 20:00</span>
+                </div>
+
+                <div class="hourly-chart-container">
+                  <div class="hourly-bars-row" id="hourly-bars">
+                    <!-- Заполняется динамически -->
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 10px; color: #94A3B8; margin-top: 6px;">
+                    <span>09:00 Утро</span>
+                    <span>13:00 Обед (Пик 1)</span>
+                    <span>17:00 Полдник</span>
+                    <span>20:00 Ужин (Пик 2)</span>
+                    <span>23:00 Ночь</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Стоп-листы и Журнал отмен -->
+            <div class="stops-cancels-grid">
+              
+              <!-- Стоп-листы -->
+              <div class="stops-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <div style="font-size: 14px; font-weight: 800; color: #0F172A; display: flex; align-items: center; gap: 6px;">
+                    <span>⛔ Стоп-листы на точках</span>
+                    <span class="status-pill-red" id="stops-count-badge">2 блюда</span>
+                  </div>
+                  <button class="btn-quick-action btn-action-outline" style="font-size: 11px; padding: 4px 8px;" onclick="addQuickStop()">+ В стоп</button>
+                </div>
+
+                <div id="stops-list-container">
+                  <div class="stop-item-row" id="stop-item-1">
+                    <div>
+                      <div style="font-size: 13px; font-weight: 700; color: #991B1B;">Пита сырная M</div>
+                      <div style="font-size: 11px; color: #7F1D1D;">Точка: В-4 (ул. Ломова, 157) • 1ч 45мин в стопе</div>
+                      <div style="font-size: 10px; color: #B91C1C; margin-top: 2px;">Причина: закончился сыр сулугуни (поставка в 14:00)</div>
+                    </div>
+                    <button class="btn-quick-action btn-action-green" style="font-size: 10px; padding: 4px 8px;" onclick="removeStopItem(1)">Снять</button>
+                  </div>
+
+                  <div class="stop-item-row" id="stop-item-2">
+                    <div>
+                      <div style="font-size: 13px; font-weight: 700; color: #991B1B;">Соус Тар-тар фирменный</div>
+                      <div style="font-size: 11px; color: #7F1D1D;">Точка: В-10 (пр. Назарбаева, 283/1) • 3ч 10мин в стопе</div>
+                      <div style="font-size: 10px; color: #B91C1C; margin-top: 2px;">Причина: брак упаковки порционного соуса (цех)</div>
+                    </div>
+                    <button class="btn-quick-action btn-action-green" style="font-size: 10px; padding: 4px 8px;" onclick="removeStopItem(2)">Снять</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Журнал последних отмен -->
+              <div class="cancels-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <div style="font-size: 14px; font-weight: 800; color: #0F172A; display: flex; align-items: center; gap: 6px;">
+                    <span>🚫 Журнал отмен заказов</span>
+                    <span style="font-size: 11px; color: #DC2626; font-weight: 700;">Потери: 108 358 ₸</span>
+                  </div>
+                </div>
+
+                <div id="cancels-list-container">
+                  <div class="cancel-item-row">
+                    <div>
+                      <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+                        <span class="aggr-share-badge badge-yandex" style="font-size:9px; padding:1px 5px;">Яндекс</span>
+                        <span style="font-weight: 700; font-size: 12px;">Заказ #4821 • 4 200 ₸</span>
+                      </div>
+                      <div style="font-size: 11px; color: #64748B;">Филиал: В-5 (Толстого) • 10 сен, 21:14</div>
+                      <div style="font-size: 11px; color: #DC2626; margin-top: 2px;">Причина: Опоздание курьера (+35 мин, отказ гостя)</div>
+                    </div>
+                  </div>
+
+                  <div class="cancel-item-row">
+                    <div>
+                      <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+                        <span class="aggr-share-badge badge-wolt" style="font-size:9px; padding:1px 5px;">Wolt</span>
+                        <span style="font-weight: 700; font-size: 12px;">Заказ #4809 • 3 650 ₸</span>
+                      </div>
+                      <div style="font-size: 11px; color: #64748B;">Филиал: В-16 (Экибастуз) • 10 сен, 19:42</div>
+                      <div style="font-size: 11px; color: #DC2626; margin-top: 2px;">Причина: Блюдо ушло в стоп во время оформления</div>
+                    </div>
+                  </div>
+
+                  <div class="cancel-item-row">
+                    <div>
+                      <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+                        <span class="aggr-share-badge badge-glovo" style="font-size:9px; padding:1px 5px;">Glovo</span>
+                        <span style="font-weight: 700; font-size: 12px;">Заказ #4765 • 2 850 ₸</span>
+                      </div>
+                      <div style="font-size: 11px; color: #64748B;">Филиал: В-14 (Торайгырова) • 10 сен, 14:15</div>
+                      <div style="font-size: 11px; color: #DC2626; margin-top: 2px;">Причина: Отказ гостя (ошибочный адрес)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        </div>
 
       <!-- Сохранение -->
       <div class="save-dock" id="save-dock" style="display: none;">
@@ -6246,10 +7355,17 @@
     // ====== 2-ЭТАПНАЯ НАВИГАЦИЯ ======
     // ЭТАП 1: ТОЛЬКО 2 КВАДРАТНЫХ БЛОКА (ЛАУНЧЕР)
     function goToModulesScreen() {
+      const dInv = document.getElementById('drawer-item-inv');
+      const dOrd = document.getElementById('drawer-item-ord');
+      const dDel = document.getElementById('drawer-item-del');
+      if (dInv) dInv.classList.remove('active');
+      if (dOrd) dOrd.classList.remove('active');
+      if (dDel) dDel.classList.remove('active');
       activeSection = 'none';
       const launcher = document.getElementById('screen-launcher');
       const invWorkflow = document.getElementById('screen-inventory-workflow');
       const ordWorkflow = document.getElementById('screen-orders-workflow');
+      const delWorkflow = document.getElementById('screen-delivery-workflow');
       const repScreen = document.getElementById('screen-report-view');
       const headerStoreBtn = document.getElementById('header-store-btn');
       const backBtn = document.getElementById('btn-back-modules');
@@ -6258,6 +7374,7 @@
       if (launcher) launcher.style.display = 'block';
       if (invWorkflow) invWorkflow.style.display = 'none';
       if (ordWorkflow) ordWorkflow.style.display = 'none';
+      if (delWorkflow) delWorkflow.style.display = 'none';
       if (repScreen) repScreen.style.display = 'none';
       if (headerStoreBtn) headerStoreBtn.style.display = 'none';
       if (backBtn) backBtn.style.display = 'none';
@@ -6266,9 +7383,16 @@
 
     // ЭТАП 2: ОТКРЫТИЕ ФУНКЦИОНАЛА ВЫБРАННОГО БЛОКА
     function openModule(mod) {
+      const dInv = document.getElementById('drawer-item-inv');
+      const dOrd = document.getElementById('drawer-item-ord');
+      const dDel = document.getElementById('drawer-item-del');
+      if (dInv) dInv.classList.toggle('active', mod === 'inv');
+      if (dOrd) dOrd.classList.toggle('active', mod === 'ord');
+      if (dDel) dDel.classList.toggle('active', mod === 'del');
       const launcher = document.getElementById('screen-launcher');
       const invWorkflow = document.getElementById('screen-inventory-workflow');
       const ordWorkflow = document.getElementById('screen-orders-workflow');
+      const delWorkflow = document.getElementById('screen-delivery-workflow');
       const headerStoreBtn = document.getElementById('header-store-btn');
       const backBtn = document.getElementById('btn-back-modules');
       const saveDock = document.getElementById('save-dock');
@@ -6277,6 +7401,7 @@
         activeSection = 'inv';
         if (launcher) launcher.style.display = 'none';
         if (ordWorkflow) ordWorkflow.style.display = 'none';
+        if (delWorkflow) delWorkflow.style.display = 'none';
         if (invWorkflow) invWorkflow.style.display = 'block';
         if (headerStoreBtn) headerStoreBtn.style.display = 'inline-flex';
         if (backBtn) backBtn.style.display = 'inline-flex';
@@ -6298,11 +7423,23 @@
         activeSection = 'ord';
         if (launcher) launcher.style.display = 'none';
         if (invWorkflow) invWorkflow.style.display = 'none';
+        if (delWorkflow) delWorkflow.style.display = 'none';
         if (ordWorkflow) ordWorkflow.style.display = 'block';
         if (headerStoreBtn) headerStoreBtn.style.display = 'none';
         if (backBtn) backBtn.style.display = 'inline-flex';
         if (saveDock) saveDock.style.display = 'none';
         showToast('Раздел: Вечерняя заявка (Скоро)');
+      } else if (mod === 'del') {
+        activeSection = 'del';
+        if (launcher) launcher.style.display = 'none';
+        if (invWorkflow) invWorkflow.style.display = 'none';
+        if (ordWorkflow) ordWorkflow.style.display = 'none';
+        if (delWorkflow) delWorkflow.style.display = 'block';
+        if (headerStoreBtn) headerStoreBtn.style.display = 'inline-flex';
+        if (backBtn) backBtn.style.display = 'inline-flex';
+        if (saveDock) saveDock.style.display = 'none';
+        initDeliveryDashboard();
+        showToast('Раздел: Доставка и Агрегаторы');
       }
     }
 
@@ -8287,6 +9424,244 @@
       }
     });
 
+  
+
+    // ====== ДАННЫЕ И ФУНКЦИОНАЛ МОДУЛЯ ДОСТАВКИ И АГРЕГАТОРОВ ======
+    const BRANCHES_DELIVERY_DATA = [
+      { rank: 1, key: 'В-5', name: 'В-5 (ул. Толстого, 90А)', yandex: 876360, wolt: 266322, glovo: 122960, total: 1265642, orders: 350, avgCheck: 3616 },
+      { rank: 2, key: 'В-1', name: 'В-1 (ул. Лермонтова, 100)', yandex: 640180, wolt: 305127, glovo: 0, total: 945307, orders: 256, avgCheck: 3693 },
+      { rank: 3, key: 'В-16', name: 'В-16 (г. Экибастуз, ул. Ауэзова)', yandex: 552410, wolt: 373777, glovo: 0, total: 926187, orders: 223, avgCheck: 4153 },
+      { rank: 4, key: 'В-14', name: 'В-14 (ул. Торайгырова, 36)', yandex: 428910, wolt: 161054, glovo: 101000, total: 690964, orders: 190, avgCheck: 3637 },
+      { rank: 5, key: 'В-12', name: 'В-12 (пр. Назарбаева, 283)', yandex: 398840, wolt: 109148, glovo: 44500, total: 552488, orders: 151, avgCheck: 3659 },
+      { rank: 6, key: 'В-9', name: 'В-9 (ул. Нуркина, 57/1)', yandex: 312260, wolt: 85146, glovo: 69660, total: 467066, orders: 132, avgCheck: 3538 },
+      { rank: 7, key: 'В-7', name: 'В-7 (Привокзальная пл., 1Е)', yandex: 225360, wolt: 63078, glovo: 89700, total: 378138, orders: 91, avgCheck: 4155 },
+      { rank: 8, key: 'В-10', name: 'В-10 (пр. Назарбаева, 283/1)', yandex: 181490, wolt: 111490, glovo: 41980, total: 334960, orders: 107, avgCheck: 3130 },
+      { rank: 9, key: 'В-21', name: 'В-21 (Павлодар)', yandex: 201620, wolt: 27358, glovo: 73670, total: 302648, orders: 83, avgCheck: 3646 },
+      { rank: 10, key: 'В-11', name: 'В-11 (Павлодар)', yandex: 145380, wolt: 70782, glovo: 48650, total: 264812, orders: 72, avgCheck: 3678 },
+      { rank: 11, key: 'В-4', name: 'В-4 (ул. Ломова, 157)', yandex: 123770, wolt: 36562, glovo: 4100, total: 164432, orders: 46, avgCheck: 3575 },
+      { rank: 12, key: 'Б19(Батыр Молл)', name: 'Б19 (ТРЦ Батыр Молл)', yandex: 47040, wolt: 0, glovo: 0, total: 47040, orders: 11, avgCheck: 4276 }
+    ];
+
+    const HOURLY_ORDERS = [
+      { hour: '09:00', orders: 12, sum: 42000 },
+      { hour: '10:00', orders: 24, sum: 86000 },
+      { hour: '11:00', orders: 48, sum: 172000 },
+      { hour: '12:00', orders: 96, sum: 355000 },
+      { hour: '13:00', orders: 184, sum: 695000, peak: true },
+      { hour: '14:00', orders: 142, sum: 525000 },
+      { hour: '15:00', orders: 92, sum: 335000 },
+      { hour: '16:00', orders: 84, sum: 310000 },
+      { hour: '17:00', orders: 115, sum: 420000 },
+      { hour: '18:00', orders: 168, sum: 625000 },
+      { hour: '19:00', orders: 210, sum: 790000 },
+      { hour: '20:00', orders: 235, sum: 910000, peak: true },
+      { hour: '21:00', orders: 165, sum: 625000 },
+      { hour: '22:00', orders: 78, sum: 295000 },
+      { hour: '23:00', orders: 32, sum: 118000 }
+    ];
+
+    let currentDelPeriodKey = 'month';
+    let currentDelStoreKey = 'ALL';
+
+    function initDeliveryDashboard() {
+      renderBranchesTable();
+      renderHourlyChart();
+    }
+
+    function renderBranchesTable() {
+      const tbody = document.getElementById('del-branches-tbody');
+      if (!tbody) return;
+      let html = '';
+      BRANCHES_DELIVERY_DATA.forEach(function(b) {
+        let rankCls = b.rank === 1 ? 'rank-top1' : (b.rank === 2 ? 'rank-top2' : (b.rank === 3 ? 'rank-top3' : ''));
+        html += '<tr>' +
+          '<td><span class="branch-rank-badge ' + rankCls + '">' + b.rank + '</span><strong>' + b.key + '</strong></td>' +
+          '<td style="color:#64748B;">' + b.name + '</td>' +
+          '<td style="text-align:right;">' + formatTenge(b.yandex) + '</td>' +
+          '<td style="text-align:right;">' + formatTenge(b.wolt) + '</td>' +
+          '<td style="text-align:right;">' + formatTenge(b.glovo) + '</td>' +
+          '<td style="text-align:right; font-weight:800; color:#0F172A;">' + formatTenge(b.total) + '</td>' +
+          '<td style="text-align:center; font-weight:700;">' + b.orders + '</td>' +
+          '<td style="text-align:right; color:#0284C7; font-weight:700;">' + formatTenge(b.avgCheck) + '</td>' +
+        '</tr>';
+      });
+      tbody.innerHTML = html;
+    }
+
+    function renderHourlyChart() {
+      const container = document.getElementById('hourly-bars');
+      if (!container) return;
+      const maxOrders = Math.max.apply(null, HOURLY_ORDERS.map(function(h) { return h.orders; }));
+      let html = '';
+      HOURLY_ORDERS.forEach(function(h) {
+        const heightPct = Math.round((h.orders / maxOrders) * 100);
+        html += '<div class="hourly-bar-col" title="' + h.hour + ': ' + h.orders + ' заказов (' + formatTenge(h.sum) + ')">' +
+          '<div class="hourly-bar ' + (h.peak ? 'peak' : '') + '" style="height: ' + heightPct + '%;"></div>' +
+          '<div class="hourly-label">' + h.hour.slice(0, 2) + '</div>' +
+        '</div>';
+      });
+      container.innerHTML = html;
+    }
+
+    function setDelPeriod(period) {
+      currentDelPeriodKey = period;
+      document.querySelectorAll('.del-period-btn').forEach(function(b) { b.classList.remove('active'); });
+      const activeBtn = document.getElementById('btn-period-' + period);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const tag = document.getElementById('aggr-period-tag');
+      if (period === 'today') {
+        if (tag) tag.textContent = 'Сегодня (оперативные данные)';
+        updateDelKPIs('215 400 ₸', '58', '3 714 ₸', '1 (1.7%)', '3 850 ₸', '142 300 ₸', '54 100 ₸', '19 000 ₸', '66.1%', '25.1%', '8.8%');
+      } else if (period === 'yesterday') {
+        if (tag) tag.textContent = 'Вчера (09.09.2026)';
+        updateDelKPIs('184 200 ₸', '51', '3 612 ₸', '1 (2.0%)', '4 200 ₸', '119 590 ₸', '47 210 ₸', '17 400 ₸', '64.9%', '25.6%', '9.5%');
+      } else if (period === '7days') {
+        if (tag) tag.textContent = 'Последние 7 дней (03.09 – 09.09)';
+        updateDelKPIs('1 354 800 ₸', '368', '3 681 ₸', '6 (1.6%)', '22 100 ₸', '877 830 ₸', '351 220 ₸', '125 750 ₸', '64.8%', '25.9%', '9.3%');
+      } else {
+        if (tag) tag.textContent = 'Август 2026 (месяц)';
+        updateDelKPIs('6 339 684 ₸', '1 712', '3 703 ₸', '29 (1.7%)', '108 358 ₸', '4 133 620 ₸', '1 609 844 ₸', '596 220 ₸', '65.2%', '25.4%', '9.4%');
+      }
+      showToast('Период доставки обновлен');
+    }
+
+    function updateDelKPIs(rev, ord, chk, can, canSum, yRev, wRev, gRev, yPct, wPct, gPct) {
+      const elRev = document.getElementById('kpi-del-revenue');
+      const elOrd = document.getElementById('kpi-del-orders');
+      const elChk = document.getElementById('kpi-del-avgcheck');
+      const elCan = document.getElementById('kpi-del-cancels');
+      const elCanSum = document.getElementById('kpi-del-cancelsum');
+
+      if (elRev) elRev.textContent = rev;
+      if (elOrd) elOrd.textContent = ord;
+      if (elChk) elChk.textContent = chk;
+      if (elCan) elCan.textContent = can;
+      if (elCanSum) elCanSum.textContent = canSum;
+
+      // Update aggregators card
+      const barY = document.getElementById('bar-yandex');
+      const barW = document.getElementById('bar-wolt');
+      const barG = document.getElementById('bar-glovo');
+
+      if (barY) { barY.style.width = yPct; barY.textContent = 'Яндекс ' + yPct; }
+      if (barW) { barW.style.width = wPct; barW.textContent = 'Wolt ' + wPct; }
+      if (barG) { barG.style.width = gPct; barG.textContent = 'Glovo ' + gPct; }
+
+      const legY = document.getElementById('legend-yandex-val');
+      const legW = document.getElementById('legend-wolt-val');
+      const legG = document.getElementById('legend-glovo-val');
+
+      if (legY) legY.textContent = yRev;
+      if (legW) legW.textContent = wRev;
+      if (legG) legG.textContent = gRev;
+
+      const cardYRev = document.getElementById('card-yandex-rev');
+      const cardWRev = document.getElementById('card-wolt-rev');
+      const cardGRev = document.getElementById('card-glovo-rev');
+
+      if (cardYRev) cardYRev.textContent = yRev;
+      if (cardWRev) cardWRev.textContent = wRev;
+      if (cardGRev) cardGRev.textContent = gRev;
+    }
+
+    function setDelStore(storeKey) {
+      currentDelStoreKey = storeKey;
+      const closedWarn = document.getElementById('del-closed-warning');
+      if (storeKey === 'В-2' || storeKey === 'В-15' || storeKey === 'В-3') {
+        if (closedWarn) closedWarn.style.display = 'block';
+        showToast('⚠️ Внимание: точка ' + storeKey + ' закрыта. Данные исключены из сети.');
+      } else {
+        if (closedWarn) closedWarn.style.display = 'none';
+        if (storeKey !== 'ALL') {
+          const found = BRANCHES_DELIVERY_DATA.find(function(b) { return b.key === storeKey; });
+          if (found) {
+            updateDelKPIs(
+              formatTenge(found.total),
+              found.orders.toString(),
+              formatTenge(found.avgCheck),
+              '0 (0%)',
+              '0 ₸',
+              formatTenge(found.yandex),
+              formatTenge(found.wolt),
+              formatTenge(found.glovo),
+              Math.round((found.yandex / found.total) * 100) + '%',
+              Math.round((found.wolt / found.total) * 100) + '%',
+              Math.round((found.glovo / found.total) * 100) + '%'
+            );
+            showToast('Статистика точки: ' + found.name);
+            return;
+          }
+        } else {
+          setDelPeriod(currentDelPeriodKey);
+        }
+      }
+    }
+
+    function removeStopItem(id) {
+      const el = document.getElementById('stop-item-' + id);
+      if (el) {
+        el.style.opacity = '0.3';
+        setTimeout(function() { 
+          el.remove(); 
+          const badge = document.getElementById('stops-count-badge');
+          const remaining = document.querySelectorAll('#stops-list-container .stop-item-row').length;
+          if (badge) badge.textContent = remaining + ' ' + (remaining === 1 ? 'позиция' : 'позиций');
+          const kpiStops = document.getElementById('kpi-del-stops');
+          if (kpiStops) kpiStops.textContent = remaining + ' ' + (remaining === 1 ? 'позиция' : 'позиции');
+        }, 250);
+      }
+      showToast('Позиция снята со стопа в iiko и агрегаторах ✓');
+    }
+
+    function addQuickStop() {
+      const name = prompt('Введите наименование блюда для постановки в стоп-лист:');
+      if (!name) return;
+      const container = document.getElementById('stops-list-container');
+      if (container) {
+        const div = document.createElement('div');
+        div.className = 'stop-item-row';
+        div.innerHTML = '<div>' +
+          '<div style="font-size: 13px; font-weight: 700; color: #991B1B;">' + escapeHtml(name) + '</div>' +
+          '<div style="font-size: 11px; color: #7F1D1D;">Точка: Текущий филиал • только что</div>' +
+          '<div style="font-size: 10px; color: #B91C1C; margin-top: 2px;">Причина: ручная постановка управляющим</div>' +
+        '</div>' +
+        '<button class="btn-quick-action btn-action-green" style="font-size: 10px; padding: 4px 8px;" onclick="this.parentElement.remove(); showToast(\'Снято со стопа\');">Снять</button>';
+        container.prepend(div);
+        showToast('Блюдо «' + name + '» добавлено в стоп-лист ✓');
+      }
+    }
+
+    function shareDeliveryWhatsApp() {
+      const text = encodeURIComponent('📊 Сводка Доставки BURЖУЙ (Август 2026):\n\n' +
+        '💰 Выручка: 6 339 684 ₸ (1 712 заказов)\n' +
+        '🧾 Средний чек: 3 703 ₸ (+68% к залу)\n' +
+        '🟡 Яндекс Еда: 4 133 620 ₸ (65.2%)\n' +
+        '🔵 Wolt: 1 609 844 ₸ (25.4%)\n' +
+        '🟢 Glovo: 596 220 ₸ (9.4%)\n' +
+        '⏱️ Время кухни: 11.4 мин\n' +
+        '🚫 Отмены: 29 заказов (108 358 ₸)\n' +
+        '⛔ В стопе: 2 позиции (В-4, В-10)\n' +
+        '⚠️ Wolt: 258 ч оффлайн-простоя планшетов!');
+      window.open('https://wa.me/?text=' + text, '_blank');
+    }
+
+    function exportDeliveryReport() {
+      let csv = 'Точка;Адрес;Яндекс Еда;Wolt;Glovo;ИТОГО;Заказов;Средний чек\n';
+      BRANCHES_DELIVERY_DATA.forEach(function(b) {
+        csv += b.key + ';' + b.name + ';' + b.yandex + ';' + b.wolt + ';' + b.glovo + ';' + b.total + ';' + b.orders + ';' + b.avgCheck + '\n';
+      });
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'burzhui_delivery_aggregators_report.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('Отчет выгружен в CSV ✓');
+    }
+
   </script>
 
     
@@ -8301,17 +9676,20 @@
         <div class="left-drawer-menu">
           <div class="left-nav-item" onclick="toggleLeftNavSub('sub-wh')">
             <div style="display:flex; align-items:center; gap:8px;">
-              <span>Управление складом</span>
-              <span class="nav-count-badge">2</span>
+              <span>Управление складом и доставкой</span>
+              <span class="nav-count-badge">3</span>
             </div>
             <span class="nav-chevron">⌵</span>
           </div>
           <div class="left-nav-submenu" id="sub-wh">
-            <div class="left-nav-sub-item active" onclick="openModule('inv'); closeLeftNavDrawer(null, true);">
+            <div class="left-nav-sub-item active" id="drawer-item-inv" onclick="openModule('inv'); closeLeftNavDrawer(null, true);">
               <span>📋 Инвентаризация</span>
             </div>
-            <div class="left-nav-sub-item" onclick="openModule('ord'); closeLeftNavDrawer(null, true);">
+            <div class="left-nav-sub-item" id="drawer-item-ord" onclick="openModule('ord'); closeLeftNavDrawer(null, true);">
               <span>📦 Вечерняя заявка</span>
+            </div>
+            <div class="left-nav-sub-item" id="drawer-item-del" onclick="openModule('del'); closeLeftNavDrawer(null, true);">
+              <span>🛵 Доставка и Агрегаторы</span>
             </div>
           </div>
         </div>
