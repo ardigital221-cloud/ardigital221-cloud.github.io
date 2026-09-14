@@ -8684,7 +8684,7 @@
 
     // ====== IIKO LIVE INTEGRATION SERVICE ======
     const IikoSync = {
-      bridgeUrl: 'http://localhost:3001',
+      bridgeUrl: (window.location.origin && window.location.origin.includes('vercel.app')) ? '' : 'http://localhost:3001',
       lastXml: null,
       lastDocNum: null,
 
