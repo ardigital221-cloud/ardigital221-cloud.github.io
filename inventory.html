@@ -7512,7 +7512,8 @@
       if (!select) return;
       const storeData = getActiveStoreData();
       const currentVal = activeShiftDate;
-      select.innerHTML = '<option value="all">Сводно: Весь период 01.09 — 14.09 (Все смены)</option>';
+      const dynD = getDynamicCalendar();
+      select.innerHTML = '<option value="all">Сводно: Весь период ' + dynD.shortPeriod + ' (Все смены)</option>';
       if (storeData && storeData.availableDates) {
         storeData.availableDates.forEach(function(d) {
           const opt = document.createElement('option');
@@ -7539,7 +7540,8 @@
       const storeData = getActiveStoreData();
       if (activeShiftDate === 'all') {
         const count = storeData ? (storeData.roster ? storeData.roster.length : 0) : 0;
-        badge.textContent = 'Весь период (14 дней, ' + count + ' сотр.)';
+        const dynB = getDynamicCalendar();
+        badge.textContent = 'Весь период (' + dynB.daysCount + ' дней, ' + count + ' сотр.)';
         badge.style.color = 'var(--accent)';
         badge.style.background = '#EFF6FF';
       } else {
@@ -7562,6 +7564,7 @@
     }
 
     function onStoreChange() {
+      applyDynamicDatesToUI();
       const store = document.getElementById('select-store').value;
       if (!store) return;
       updateHeaderStoreButton(store);
@@ -9558,6 +9561,7 @@
     let currentDelStoreKey = 'ALL';
 
     function initDeliveryDashboard() {
+      applyDynamicDatesToUI();
       renderBranchesTable('month');
       renderHourlyChart();
     }
@@ -9619,25 +9623,96 @@
       container.innerHTML = html;
     }
 
+    
+    // Автоматический динамический календарный расчет дат
+    function getDynamicCalendar() {
+      const now = new Date();
+      const pad = function(n) { return (n < 10 ? '0' : '') + n; };
+      
+      const day = now.getDate();
+      const month = now.getMonth() + 1;
+      const year = now.getFullYear();
+
+      const todayStr = pad(day) + '.' + pad(month) + '.' + year;
+
+      const yDate = new Date(now);
+      yDate.setDate(now.getDate() - 1);
+      const yesterdayStr = pad(yDate.getDate()) + '.' + pad(yDate.getMonth() + 1) + '.' + yDate.getFullYear();
+
+      const d7 = new Date(now);
+      d7.setDate(now.getDate() - 7);
+      const sevenDaysStr = pad(d7.getDate()) + '.' + pad(d7.getMonth() + 1) + ' – ' + pad(yDate.getDate()) + '.' + pad(yDate.getMonth() + 1);
+
+      const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+      const curMonthName = monthNames[now.getMonth()];
+
+      const monthStartStr = '01.' + pad(month) + '.' + year;
+      const monthEndStr = pad(day) + '.' + pad(month) + '.' + year;
+      const shortPeriod = '01.' + pad(month) + ' — ' + pad(day) + '.' + pad(month);
+
+      return {
+        now: now,
+        today: todayStr,
+        yesterday: yesterdayStr,
+        sevenDays: sevenDaysStr,
+        monthName: curMonthName,
+        monthStart: monthStartStr,
+        monthEnd: monthEndStr,
+        daysCount: day,
+        fullPeriod: monthStartStr + ' — ' + monthEndStr,
+        shortPeriod: shortPeriod,
+        btnMonthText: curMonthName + ' (1–' + day + ')'
+      };
+    }
+
+    function applyDynamicDatesToUI() {
+      const d = getDynamicCalendar();
+      
+      // Шапка инвентаризации
+      const dispRange = document.getElementById('display-period-range');
+      if (dispRange) dispRange.textContent = d.fullPeriod;
+
+      const daysBadge = document.getElementById('period-days-badge');
+      if (daysBadge) daysBadge.textContent = d.daysCount + ' дней';
+
+      const sumTag = document.getElementById('sum-date-tag');
+      if (sumTag) sumTag.textContent = d.shortPeriod;
+
+      const reportPageInterval = document.getElementById('report-page-interval');
+      if (reportPageInterval) reportPageInterval.textContent = d.shortPeriod + ' (' + d.daysCount + ' дней)';
+
+      const auditInterval = document.getElementById('audit-interval-label');
+      if (auditInterval) auditInterval.textContent = d.shortPeriod + ' (' + d.daysCount + ' дней)';
+
+      // Кнопка месяца в доставке
+      const btnMonth = document.getElementById('btn-period-month');
+      if (btnMonth) btnMonth.textContent = d.btnMonthText;
+
+      const branchesTableTag = document.getElementById('branches-table-period-tag');
+      if (branchesTableTag && currentDelPeriodKey === 'month') {
+        branchesTableTag.textContent = d.monthName + ' ' + d.now.getFullYear() + ' (01.' + (d.now.getMonth() + 1 < 10 ? '0' : '') + (d.now.getMonth() + 1) + ' – ' + (d.now.getDate() < 10 ? '0' : '') + d.now.getDate() + ')';
+      }
+    }
+
     function setDelPeriod(period) {
       currentDelPeriodKey = period;
       document.querySelectorAll('.del-period-btn').forEach(function(b) { b.classList.remove('active'); });
       const activeBtn = document.getElementById('btn-period-' + period);
       if (activeBtn) activeBtn.classList.add('active');
 
+      const dyn = getDynamicCalendar();
       const tag = document.getElementById('aggr-period-tag');
       if (period === 'today') {
-        if (tag) tag.textContent = 'Сегодня (14.09.2026)';
-        if (tag) tag.textContent = 'Сегодня (14.09.2026)';
+        if (tag) tag.textContent = 'Сегодня (' + dyn.today + ')';
         updateDelKPIs('215 400 ₸', '58', '3 714 ₸', '1 (1.7%)', '3 850 ₸', '142 300 ₸', '54 100 ₸', '19 000 ₸', '66.1%', '25.1%', '8.8%');
       } else if (period === 'yesterday') {
-        if (tag) tag.textContent = 'Вчера (13.09.2026)';
+        if (tag) tag.textContent = 'Вчера (' + dyn.yesterday + ')';
         updateDelKPIs('184 200 ₸', '51', '3 612 ₸', '1 (2.0%)', '4 200 ₸', '119 590 ₸', '47 210 ₸', '17 400 ₸', '64.9%', '25.6%', '9.5%');
       } else if (period === '7days') {
-        if (tag) tag.textContent = 'Последние 7 дней (07.09 – 13.09)';
+        if (tag) tag.textContent = 'Последние 7 дней (' + dyn.sevenDays + ')';
         updateDelKPIs('1 354 800 ₸', '368', '3 681 ₸', '6 (1.6%)', '22 100 ₸', '877 830 ₸', '351 220 ₸', '125 750 ₸', '64.8%', '25.9%', '9.3%');
       } else {
-        if (tag) tag.textContent = 'Сентябрь 2026 (01.09 – 14.09)';
+        if (tag) tag.textContent = dyn.monthName + ' ' + dyn.now.getFullYear() + ' (' + dyn.monthStart + ' – ' + dyn.monthEnd + ')';
         updateDelKPIs('6 339 684 ₸', '1 712', '3 703 ₸', '29 (1.7%)', '108 358 ₸', '4 133 620 ₸', '1 609 844 ₸', '596 220 ₸', '65.2%', '25.4%', '9.4%');
       }
 
