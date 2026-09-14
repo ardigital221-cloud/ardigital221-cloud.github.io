@@ -5371,7 +5371,7 @@
                 <span>Скопировать отчёт для WhatsApp</span>
               </button>
               <button type="button" class="btn-report-action save" onclick="openStep3Modal()">
-                <span>Провести штрафы в iiko</span>
+                <span>Зафиксировать акт удержаний</span>
               </button>
               <button type="button" class="btn-report-action return" onclick="closeReportScreen()">
                 <span>← Вернуться к настройкам</span>
@@ -5791,7 +5791,7 @@
               <div style="background:#FFFFFF; border-radius:12px; border:1px solid #E2E8F0; padding:20px; max-width:420px; width:100%; box-shadow:0 12px 30px rgba(0,0,0,0.15);">
                 <div style="font-size:16px; font-weight:800; color:#0F172A; margin-bottom:8px;">Снять позицию со стоп-листа?</div>
                 <div style="font-size:13px; color:#475569; margin-bottom:20px; line-height:1.5;" id="stop-confirm-text">
-                  Вы действительно хотите снять позицию со стоп-листа в iiko и агрегаторах доставки?
+                  Вы уверены, что хотите снять позицию со стоп-листа текущей смены?
                 </div>
                 <div style="display:flex; justify-content:flex-end; gap:8px;">
                   <button type="button" class="btn-quick-action btn-action-outline" onclick="closeStopConfirmModal()">Отмена</button>
@@ -5889,7 +5889,7 @@
       <div class="save-dock" id="save-dock" style="display: none;">
         <div class="save-dock-inner">
           <button class="btn-save-doc" id="btn-save-doc" disabled onclick="openStep3Modal()">
-            Начислить штрафы и провести в iiko
+            Сформировать акт удержаний
           </button>
         </div>
       </div>
@@ -6113,7 +6113,7 @@
         <div class="step3-body" id="step3-body-success" style="display: none;">
           <div class="step3-success-card" style="display: flex;">
             <div class="step3-success-icon">&#10003;</div>
-            <div class="step3-success-title">Штрафы успешно начислены и проведены в iikoChain!</div>
+            <div class="step3-success-title">Акт удержаний успешно сформирован и сохранен!</div>
             <div class="step3-success-sub">
               Акт сведения инвентаризации закрыт со списанием встречных излишков и фиксацией штрафов в расчетных листах сотрудников.
             </div>
@@ -6136,7 +6136,7 @@
           </button>
           <button type="button" class="btn-step3-save" id="btn-step3-save" onclick="saveStep3ToIiko()" disabled>
             
-            <span>Сохранить в iiko</span>
+            <span>Зафиксировать результат</span>
           </button>
         </div>
 
@@ -8158,7 +8158,7 @@
       document.getElementById('reconciled-bar').style.display = 'none';
       const saveBtn = document.getElementById('btn-save-doc');
       saveBtn.disabled = true;
-      saveBtn.textContent = 'Сохранить сведение в iikoChain';
+      saveBtn.textContent = 'Зафиксировать сведение смены';
       showToast('↩️ Сведение отменено. Исходные данные возвращены');
     }
 
@@ -8291,7 +8291,7 @@
       if (!hasAnyFine) {
         text += 'Все расхождения зачтены излишками (штрафов нет)\n';
       }
-      text += ' *Статус:* Документ скорректирован и проведён в iikoChain';
+      text += ' *Статус:* Сверка завершена, акт сформирован';
 
       navigator.clipboard.writeText(text).then(function() {
         showToast('Текст скопирован для WhatsApp');
@@ -8378,7 +8378,7 @@
 
       const saveBtn = document.getElementById('btn-step3-save');
       saveBtn.disabled = true;
-      saveBtn.innerHTML = '<span>Сохранить в iiko</span>';
+      saveBtn.innerHTML = '<span>Зафиксировать результат</span>';
 
       const confirmBtn = document.getElementById('btn-step3-confirm');
       confirmBtn.innerHTML = '<span>Подтвердить начисление</span>';
@@ -8638,10 +8638,10 @@
 
       const desc = document.getElementById('step3-status-desc');
       if (step3State.isConfirmed) {
-        desc.textContent = 'Начисление подтверждено! Нажмите «Сохранить в iiko»';
+        desc.textContent = 'Начисление подтверждено! Нажмите «Зафиксировать результат»';
         desc.style.color = 'var(--iiko-green)';
       } else {
-        desc.textContent = 'Нажмите «Подтвердить» для фиксации сумм в iiko';
+        desc.textContent = 'Нажмите «Подтвердить» для фиксации сумм к удержанию';
         desc.style.color = 'var(--text-dim)';
       }
     }
@@ -8679,7 +8679,7 @@
       saveBtn.disabled = false;
 
       updateStep3Totals();
-      showToast('Начисление подтверждено: ' + checkedCount + ' сотр. Нажмите «Сохранить в iiko»');
+      showToast('Начисление подтверждено: ' + checkedCount + ' сотр. Нажмите «Зафиксировать результат»');
     }
 
     function saveStep3ToIiko() {
@@ -8689,7 +8689,7 @@
 
       const saveBtn = document.getElementById('btn-step3-save');
       saveBtn.disabled = true;
-      saveBtn.innerHTML = '<span>⏳</span><span>Сохранение в iiko...</span>';
+      saveBtn.innerHTML = '<span>Фиксация акта...</span>';
 
       setTimeout(function() {
         step3State.isSaved = true;
@@ -8744,12 +8744,12 @@
         // Update main page save dock
         const dockSaveBtn = document.getElementById('btn-save-doc');
         if (dockSaveBtn) {
-          dockSaveBtn.textContent = 'Документ и штрафы проведены в iiko (' + totalFines.toLocaleString('ru-RU') + ' ₸)';
+          dockSaveBtn.textContent = 'Акт сформирован: к удержанию зафиксировано (' + totalFines.toLocaleString('ru-RU') + ' ₸)';
           dockSaveBtn.disabled = true;
           dockSaveBtn.style.background = 'var(--iiko-green)';
         }
 
-        showToast(' Акт сведения и штрафы успешно проведены в iikoChain!');
+        showToast('Акт сведения и суммы удержаний зафиксированы');
       }, 600);
     }
 
@@ -9086,11 +9086,11 @@
     function saveInventoryToIiko() {
       const btn = document.getElementById('btn-save-doc');
       btn.disabled = true;
-      btn.textContent = 'Сохранение в iikoChain...';
+      btn.textContent = 'Фиксация акта...';
       
       setTimeout(function() {
-        btn.textContent = 'Документ успешно проведен в iiko';
-        showToast('Инвентаризация проведена в iiko');
+        btn.textContent = 'Акт инвентаризации зафиксирован';
+        showToast('Сведение инвентаризации зафиксировано');
       }, 700);
     }
 
@@ -9811,7 +9811,7 @@
       }
       const textEl = document.getElementById('stop-confirm-text');
       if (textEl) {
-        textEl.textContent = 'Вы уверены, что хотите снять «' + pendingStopItemName + '» со стоп-листа? Блюдо снова станет доступно для заказов в зале, iiko и во всех агрегаторах (Яндекс Еда, Wolt, Glovo).';
+        textEl.textContent = 'Вы уверены, что хотите снять «' + pendingStopItemName + '» со стоп-листа? Позиция вернется в стандартное меню смены.';
       }
       const modal = document.getElementById('modal-stop-confirm');
       if (modal) modal.style.display = 'flex';
